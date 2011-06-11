@@ -23,8 +23,8 @@ A adams is an ass
     <tr>
     <table align="center">
       <td><input type="submit" name="Submit" value="Login" />
-	  <input type=button onClick="parent.location='http://cs.utsa.edu/~bsattler/register-form.php'" value='Create User'>
-	  <input type=button onClick="parent.location='http://cs.utsa.edu/~bsattler/register-form.php'" value='   Change Password  '>
+	  <input type=button onClick="parent.location='http://cs.utsa.edu/~aadams/register-form.php'" value='Create User'>
+	  <input type=button onClick="parent.location='http://cs.utsa.edu/~aadams/register-form.php'" value='   Change Password  '>
     </tr>
   </table>
   
