@@ -6,7 +6,7 @@
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<h1> Welcome, Please Login</h1>
+<h1 align="center">Welcome, EMIS Login</h1>
 <p>&nbsp;</p>
 <form id="loginForm" name="loginForm" method="post" action="login-exec.php">
 <form id="loginForm" name="loginForm" method="post" action="register-form.php">
@@ -22,8 +22,8 @@
     <tr>
     <table align="center">
       <td><input type="submit" name="Submit" value="Login" />
-          <input type=button onClick="parent.location='/register-form.php'" value='Create User'>
-          <input type=button onClick="parent.location='http://cs.utsa.edu/~aadams/emis/register-form.php'" value='   Change Password  '>
+          <a href="register-form.php"><input type=button value='Create User'/></a>
+          <a href="register-form.php"><input type=button value='   Change Password  '/></a>
     </tr>
   </table>
   
