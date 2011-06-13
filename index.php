@@ -1,3 +1,3 @@
 <html>
-	<h1> Welcome</h1>
+	<h1> Welcome to the B team</h1>
 </html>
