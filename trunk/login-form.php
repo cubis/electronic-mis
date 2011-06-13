@@ -10,7 +10,7 @@
 <p>&nbsp;</p>
 <form id="loginForm" name="loginForm" method="post" action="login-exec.php">
 <form id="loginForm" name="loginForm" method="post" action="register-form.php">
-  <table width="210" border="1" align="center" cellpadding="2" cellspacing="3">
+  <table width="210" border="0" align="center" cellpadding="2" cellspacing="3">
     <tr>
       <td width="112"><b>Login:</b></td>
       <td width="188"><input name="login" type="text" class="textfield" id="login" /></td>
@@ -22,12 +22,13 @@
     <tr>
     <table align="center">
       <td><input type="submit" name="Submit" value="Login" />
-          <a href="register-form.php"><input type=button value='Create User'/></a>
-          <a href="register-form.php"><input type=button value='   Change Password  '/></a>
+          <a href="register-form.php">Create User</a> | 
+          <a href="register-form.php">Change Password</a>
     </tr>
   </table>
   
 </form>
 </body>
+
 </html>
 
