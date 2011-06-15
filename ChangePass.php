@@ -6,7 +6,7 @@
     </head>
     <body>
         
-        <h1>ChangePassword</h1>
+        <h1>Change Password</h1>
         
         <form action="password.php" method="post">
             <p>
