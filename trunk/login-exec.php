@@ -60,7 +60,7 @@
 	$result=mysql_query($qry);
 	
 	//Check whether the query was successful or not
-	//if($result) {
+	if($result) {
 		if(mysql_num_rows($result) == 1) {
 			//Login Successful
 			session_regenerate_id();
@@ -78,5 +78,5 @@
 		}
 	//}else {
 	//	die("Query failed");
-	//}
+	}
 ?>
