@@ -9,7 +9,6 @@
 <h1 align="center">Welcome, EMIS Login</h1>
 <p>&nbsp;</p>
 <form id="loginForm" name="loginForm" method="post" action="login-exec.php">
-<form id="loginForm" name="loginForm" method="post" action="register-form.php">
   <table width="210" border="0" align="center" cellpadding="2" cellspacing="3">
     <tr>
       <td width="112"><b>Login:</b></td>
