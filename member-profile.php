@@ -10,7 +10,24 @@
 </head>
 <body>
 <h1>My Profile </h1>
+<?php
+if(!strcmp($_SESSION['SESS_TYPE'], "admin")
+?>
+<a href="member-index.php">Home</a> |
+View/Edit Members
+View/Approve/Deny Member Request
+Edit Profile
+Change Password
+<a href="logout.php">Logout</a>
+<?php
+else if(!strcmp($_SESSION['SESS_TYPE'], "user")
+?>
 <a href="member-index.php">Home</a> | <a href="logout.php">Logout</a>
+<?php
+else if(!strcmp($_SESSION['SESS_TYPE'], "user")
+<a href="member-index.php">Home</a> | <a href="logout.php">Logout</a>
+?>
+
 <p>This is another secure page. </p>
 </body>
 </html>
