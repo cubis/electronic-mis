@@ -60,7 +60,7 @@
 	$result=mysql_query($qry);
 	
 	//Check whether the query was successful or not
-	if($result) {
+	//if($result) {
 		if(mysql_num_rows($result) == 1) {
 			//Login Successful
 			session_regenerate_id();
@@ -76,7 +76,7 @@
 			header("location: login-failed.php");
 			exit();
 		}
-	}else {
-		die("Query failed");
-	}
+	//}else {
+	//	die("Query failed");
+	//}
 ?>
