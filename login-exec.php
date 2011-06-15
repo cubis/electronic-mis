@@ -76,7 +76,7 @@
 			header("location: login-failed.php");
 			exit();
 		}
-	//}else {
-	//	die("Query failed");
+	}else {
+		die("Query failed");
 	}
 ?>
