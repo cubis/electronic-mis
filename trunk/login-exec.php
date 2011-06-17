@@ -70,7 +70,7 @@
 			$_SESSION['SESS_LAST_NAME'] = $member['LastName'];
 			$_SESSION['SESS_TYPE'] = $member['Type'];
 			session_write_close();
-			header("location: member-index.php");
+			header("location: member-profile.php");
 			exit();
 		}else {
 			//Login failed
