@@ -3,7 +3,7 @@ $host = 'localhost';
 $user = 'root';
 $pass = ''; 
 $database = 'test'; 
-$table = 'members';
+$table = 'Users';
  
 mysql_connect($host, $user, $pass);
 mysql_select_db($database);

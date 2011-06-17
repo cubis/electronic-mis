@@ -9,6 +9,7 @@
 <h1 align="center">Welcome, EMIS Login</h1>
 <p>&nbsp;</p>
 <form id="loginForm" name="loginForm" method="post" action="login-exec.php">
+
   <table width="210" border="0" align="center" cellpadding="2" cellspacing="3">
     <tr>
       <td width="112"><b>Login:</b></td>
@@ -19,10 +20,15 @@
       <td><input name="password" type="password" class="textfield" id="password" /></td>
     </tr>
     <tr>
-    <table align="center">
-      <td><input type="submit" name="Submit" value="Login" />
-          <a href="register-form.php">Create User</a> | 
-          <a href="register-form.php">Change Password</a>
+      <td></td>
+      <td>
+          <input type="submit" name="Submit" value="Login" />
+      </td>
+    </tr>
+      <tr>
+          <td></td><td>
+          <a href="register-form.php">Register</a>
+      </td>
     </tr>
   </table>
   

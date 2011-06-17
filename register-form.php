@@ -8,7 +8,7 @@
 <title>Login Form</title>
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body bgcolor="#aaaaff">
 <?php
 	if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
 		echo '<ul class="err">';
