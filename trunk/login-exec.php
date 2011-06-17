@@ -56,7 +56,7 @@
 	}
 	
 	//Create query
-	$qry="SELECT * FROM members WHERE login='$login' AND passwd='".md5($_POST['password'])."'";
+	$qry="SELECT * FROM Users WHERE UserName='$login' AND Password='".md5($_POST['password'])."'";
 	$result=mysql_query($qry);
 	
 	//Check whether the query was successful or not
@@ -65,9 +65,9 @@
 			//Login Successful
 			session_regenerate_id();
 			$member = mysql_fetch_assoc($result);
-			$_SESSION['SESS_MEMBER_ID'] = $member['member_id'];
-			$_SESSION['SESS_FIRST_NAME'] = $member['firstname'];
-			$_SESSION['SESS_LAST_NAME'] = $member['lastname'];
+			$_SESSION['SESS_MEMBER_ID'] = $member['PK_member_id'];
+			$_SESSION['SESS_FIRST_NAME'] = $member['FirstName'];
+			$_SESSION['SESS_LAST_NAME'] = $member['LastName'];
 			session_write_close();
 			header("location: member-index.php");
 			exit();
