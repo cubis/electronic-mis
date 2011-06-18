@@ -39,6 +39,12 @@ You are a patient!<br />
 <a href="#">Set Up Appointment</a> |
 <a href="logout.php">Logout</a>
 
+<?php elseif($_SESSION['SESS_TYPE'] == 0): // Logged in user is waiting approval ?>
+You are a nobody!<br />
+You can not perform any actions as your account is waiting for admin approval.
+<a href="logout.php">Logout</a>
+
+
 <?php else: ?>
 I don't know what the fuck you are<br />
 <a href="member-index.php">Home</a> | <a href="logout.php">Logout</a>
