@@ -7,6 +7,6 @@
 </head>
 <body>
 <h1>Registration Successful</h1>
-<p><a href="login-form.php">Click here</a> to login to your account.</p>
+<p><a href="index.php">Click here</a> to login to your account.</p>
 </body>
 </html>
