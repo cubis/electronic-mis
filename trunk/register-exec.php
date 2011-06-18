@@ -90,10 +90,16 @@
 	}
 
 	if(strcmp($_POST['type'],"patient") == 0)
-	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, Password) VALUES('$fname','$lname','$login','1','".md5($_POST['password'])."')";
-	//Create INSERT query
-	else
-	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, Password) VALUES('$fname','$lname','$login','0','".md5($_POST['password'])."')";
+	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','1','0','" . md5($_POST['password']) . "')";
+
+	elseif(strcmp($_POST['type'],"nurse") == 0)
+	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','200','1','".md5($_POST['password'])."')";
+	
+	elseif(strcmp($_POST['type'],"doctor") == 0)
+	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','300','1','".md5($_POST['password'])."')";
+	
+	if(strcmp($_POST['type'],"admin") == 0)
+	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','400','1','".md5($_POST['password'])."')";
 	$result = @mysql_query($qry);
 	
 	//Check whether the query was successful or not
