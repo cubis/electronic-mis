@@ -13,7 +13,6 @@
 <h1>My Profile </h1>
 
 <?php if($_SESSION['SESS_TYPE'] >= 400): // Logged in user is an Admin ?>
-<a href="member-index.php">Home</a> |
 <a href="admin/edit_members.php">View/Edit Members</a> |
 <a href="admin/approve_requests.php">View/Approve/Deny Member Request</a> |
 <a href="#">Edit Profile</a> |
@@ -22,7 +21,6 @@
 
 <?php elseif($_SESSION['SESS_TYPE'] == 300): // Logged in user is a doctor ?>
 You are a doctor!<br />
-<a href="member-index.php">Home</a> |
 <a href="#">View/Cancel Upcoming Appointments</a> |
 <a href="#">View/Edit Availability</a> |
 <a href="#">View Patients</a> |
@@ -32,14 +30,12 @@ You are a doctor!<br />
 
 <?php elseif($_SESSION['SESS_TYPE'] == 200): // Logged in user is a nurse ?>
 You are a nurse!<br />
-<a href="member-index.php">Home</a> |
 <a href="#">Edit Profile</a> |
 <a href="#">Change Password</a> |
 <a href="logout.php">Logout</a>
 
 <?php elseif($_SESSION['SESS_TYPE'] == 1): // Logged in user is a patient ?>
 You are a patient!<br />
-<a href="member-index.php">Home</a> |
 <a href="#">Set Up Appointment</a> |
 <a href="logout.php">Logout</a>
 
