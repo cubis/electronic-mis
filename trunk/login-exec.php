@@ -69,6 +69,7 @@
 			$_SESSION['SESS_FIRST_NAME'] = $member['FirstName'];
 			$_SESSION['SESS_LAST_NAME'] = $member['LastName'];
 			$_SESSION['SESS_TYPE'] = $member['Type'];
+			$_SESSION['SESS_USERNAME'] = $member['UserName'];
 			session_write_close();
 			header("location: member-profile.php");
 			exit();
