@@ -41,6 +41,17 @@
       <th>Confirm Password </th>
       <td><input name="cpassword" type="password" class="textfield" id="cpassword" /></td>
     </tr>
+	<tr>
+     <th>Type</th>
+      <td>
+	  <select name="type">
+			<option value="patient">Patient</option>
+			<option value="nurse">Nurse</option>
+			<option value="doctor">Doctor</option>
+			<option value="admin">Admin</option>
+	</select>
+	</td>
+    </tr>
     <tr>
       <td>&nbsp;</td>
       <td><input type="submit" name="Submit" value="Register" /></td>

@@ -89,8 +89,11 @@
 		exit();
 	}
 
+	if(strcmp($_POST['type'],"patient") == 0)
+	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, Password) VALUES('$fname','$lname','$login','1','".md5($_POST['password'])."')";
 	//Create INSERT query
-	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Password) VALUES('$fname','$lname','$login','".md5($_POST['password'])."')";
+	else
+	$qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, Password) VALUES('$fname','$lname','$login','0','".md5($_POST['password'])."')";
 	$result = @mysql_query($qry);
 	
 	//Check whether the query was successful or not
