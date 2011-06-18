@@ -1,3 +1,9 @@
+<?php
+        require_once('auth.php');       
+        require_once('config.php');
+        require_once('bootstrap.php');
+        
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
@@ -27,7 +33,7 @@
             
         </form>
         
-        <?php
+        <?php  
         
         $old_pass = $_POST['oldpass'];
         
@@ -41,32 +47,31 @@
         
         echo "<p>New Password2: $new_pass2</p>";
         
-        $qry="SELECT * FROM Users WHERE UserName= {$SESSION['SESS_USERNAME']} AND Password='".md5($_POST['old_pass'])."'";
-        $result=mysql_query($qry);
-	
+        echo "<p>Session User is: {$_SESSION['SESS_USERNAME']} </p>";
+        
+        if(isset($old_pass))
+        {
+        $qry= "SELECT * FROM Users WHERE UserName={$_SESSION['SESS_USERNAME']} AND Password=".md5($_POST['oldpass'])."";
+        $result = mysql_query($qry);
+	echo "<p>qry $qry</p>";
+	echo "<p>result: ".mysql_num_rows($result)."</p>";
 	//Check whether the query was successful or not
 	if($result) {
 		if(mysql_num_rows($result) == 1) {
 			//Login Successful
-			session_regenerate_id();
-			$member = mysql_fetch_assoc($result);
-			$_SESSION['SESS_MEMBER_ID'] = $member['PK_member_id'];
-			$_SESSION['SESS_FIRST_NAME'] = $member['FirstName'];
-			$_SESSION['SESS_LAST_NAME'] = $member['LastName'];
-			$_SESSION['SESS_TYPE'] = $member['Type'];
-			$_SESSION['SESS_USERNAME'] = $member['UserName'];
-			session_write_close();
-			header("location: member-profile.php");
+			echo "<p>Works!</p>";
 			exit();
 		}else {
 			//Login failed
+		    echo "<p>FAIL!!</p>";
 			header("location: login-failed.php");
 			exit();
+        }
+     }
+        }
         
-        
-        
-        
-        
+    
         ?>
+      
     </body>
 </html>
