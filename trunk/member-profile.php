@@ -15,7 +15,7 @@
 <?php if($_SESSION['SESS_TYPE'] >= 400): // Logged in user is an Admin ?>
 <a href="member-index.php">Home</a> |
 <a href="admin/edit_members.php">View/Edit Members</a> |
-<a href="#">View/Approve/Deny Member Request</a> |
+<a href="admin/approve_requests.php">View/Approve/Deny Member Request</a> |
 <a href="#">Edit Profile</a> |
 <a href="#">Change Password</a> |
 <a href="logout.php">Logout</a>

@@ -2,7 +2,7 @@
         require_once('../auth.php');
 		require_once('../bootstrap.php');
 		
-		$qry="SELECT * FROM Users LIMIT 5";
+		$qry="SELECT * FROM Users";
 		$result=mysql_query($qry);
 ?>
 
@@ -32,7 +32,7 @@
 <table border="1">
 <tr>
 <td>First Name</td><td>Last Name</td><td>Sex</td><td>Username</td>
-<td>Email</td><td>Birthday</td><td>Phone Number</td><td>SSN</td>
+<td>Email</td><td>Birthday</td><td>Phone Number</td><td>SSN</td><td>Edit</td>
 </tr>
 <?php
 $numrows = mysql_num_rows($result);
@@ -48,6 +48,7 @@ while ($row = mysql_fetch_assoc($result))
 	echo "<td>",$row['Birthday'],"</td>\n";
 	echo "<td>",$row['PhoneNumber'],"</td>\n";
 	echo "<td>",$row['SSN'],"</td>\n";
+	echo "<td><a href='#'>Edit</a></td>\n";
 	echo "</tr>\n";
 }
 ?>
