@@ -10,7 +10,7 @@
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<h1>My Profile </h1>
+<h1>My Profile </h1>z
 
 <?php if($_SESSION['SESS_TYPE'] >= 400): // Logged in user is an Admin ?>
 <a href="admin/edit_members.php">View/Edit Members</a> |
@@ -52,5 +52,6 @@ I don't know what the fuck you are<br />
 <?php endif; ?>
 
 <p>This is another secure page. </p>
+<a href="change_pass.php">Change Password</a>
 </body>
 </html>

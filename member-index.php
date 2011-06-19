@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>Welcome <?php echo $_SESSION['SESS_FIRST_NAME'];?></h1>
-<a href="member-profile.php">My Profile</a> | <a href="logout.php">Logout</a>
+<a href="member-profile.php">My Profile</a> | <a href="logout.php">Logout</a> | <a href="change_pass.php">Change Password</a>
 <p>This is a password protected area only accessible to members. </p>
 </body>
 </html>
