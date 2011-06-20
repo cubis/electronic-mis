@@ -45,6 +45,6 @@ if(!mysql_query($query2)){
 <html>
 <body>
 <h1>Request Sent, Go back to site home</h1>
-<a href="index.html">Home</a>
+<a href="index.php">Home</a>
 </body>
 </html>
