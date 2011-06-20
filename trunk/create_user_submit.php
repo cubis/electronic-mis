@@ -112,7 +112,7 @@ $pass2 = $_POST['pass2'];
                 header("location: create_user.php");
                 exit();
         }
-$query1 = "INSERT INTO Users ('". $fname. "','". $lname ."','". $pass ."','". $sex ."','". $uname. "','". $type ."','". $email ."','". $bday ."','". $phone ."','". $ssn. "','". $expdate ."','". $locked. "');";
+$query1 = "INSERT INTO Users ('". $fname. "','". $lname ."','".md5($pass)."','". $sex ."','". $uname. "','". $type ."','". $email ."','". $bday ."','". $phone ."','". $ssn. "','". $expdate ."','". $locked. "');";
   //$con = mysql_connect($host, $uname, $pass);
 //@mysql_select_db($db) or die('unable to select DB');
 
