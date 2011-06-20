@@ -58,7 +58,7 @@
                                     else {
                                         //Login failed
                                         echo "<p style=\"color: red;\">Fail!</p>";
-                                        header("location: login-failed.php");
+                                        header("location: change_pass.php");
                                         exit();
                                     }
                                 }

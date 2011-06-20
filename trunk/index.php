@@ -22,6 +22,16 @@
 				</script>
                 <form id="loginForm" name="login_Form" method="post" action="login-exec.php">
                 	<center><p>Welcome to the Electronic Medical Information System (EMIS). Login or register using the form below.</p></center>
+                                            <?php
+						if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
+							echo '<ul class="err">';
+							foreach($_SESSION['ERRMSG_ARR'] as $msg) {
+								echo '<li>',$msg,'</li>';
+							}
+							echo '</ul>';
+							unset($_SESSION['ERRMSG_ARR']);
+						}
+					?>
                     <div class="dashed_line"></div>
                     <div class="form_fields">
                         <label><strong>Username</strong><br /><input name="login" type="text" class="textfield" id="login" /></label><br />
