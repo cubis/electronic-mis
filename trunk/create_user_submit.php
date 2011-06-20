@@ -73,28 +73,25 @@ $pass2 = $_POST['pass2'];
                 $errmsg_arr[] = 'Password must contain at least one digit';
                 $errflag = true;
         }   
-        //needs format validator
-        if($email == ''){
-                $errmsg_arr[] = 'Email Missing';
+        if(!preg_match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$', $email)){
+                $errmsg_arr[] = 'Format for Email not correct (foo@bar.com)';
                 $errflag = true;
         }
-        
-        //needs format validator
-        if($bday == ''){
-            $errmsg_arr[] = 'bday Missing';
+        if(!preg_match('^([1-3][0-9]{3,3})-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][1-9]|3[0-1])\s([0-1][0-9]|2[0-4]):([0-5][0-9]):([0-5][0-9])$',$bday)){
+            $errmsg_arr[] = 'Format for Bday not right';
             $errflag = true;
         }
         if($phone == ''){
-            $errmsg_arr[] = 'bday Missing';
+            $errmsg_arr[] = 'Phone Missing';
             $errflag = true;
         }
         if($ssn == ''){
-            $errmsg_arr[] = 'bday Missing';
+            $errmsg_arr[] = 'SSN Missing';
             $errflag = true;
         }
 //Check for duplicate login ID
-        if($login != '') {
-                $qry = "SELECT * FROM Users WHERE UserName='$login'";
+        if($uname!= '') {
+                $qry = "SELECT * FROM Users WHERE UserName='$uname'";
                 $result = mysql_query($qry);
                 if($result) {
                         if(mysql_num_rows($result) > 0) {
@@ -115,13 +112,8 @@ $pass2 = $_POST['pass2'];
                 header("location: create_user.php");
                 exit();
         }
-
-if ($type == 1){
-	$query2 = "INSERT INTO Patient ('".$ssn."');";
-}
-
 $query1 = "INSERT INTO Users ('". $fname. "','". $lname ."','". $pass ."','". $sex ."','". $uname. "','". $type ."','". $email ."','". $bday ."','". $phone ."','". $ssn. "','". $expdate ."','". $locked. "');";
-$con = mysql_connect($host, $uname, $pass);
+  //$con = mysql_connect($host, $uname, $pass);
 //@mysql_select_db($db) or die('unable to select DB');
 
 if(!mysql_query($query1)){
