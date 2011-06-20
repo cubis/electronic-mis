@@ -1,0 +1,91 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin: 0 auto;
+	background-image: url(../img/background.png);
+	background-repeat: repeat-x;
+	background-color: #d4d3d3;
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+}
+
+.login_box {
+	background-image:url(../img/login_box_gradient.png);
+	background-repeat: repeat-x;
+	background-color: #ebeaea;
+	width: 400px;
+	margin-top: 10px;
+	border: 1px solid black;
+	padding-top: 15px;
+	position: absolute;
+	padding-bottom: 15px; 
+}
+
+#loginForm label {
+	font: 13px/1.5 "Trebuchet MS", Arial;
+	color: #333;
+}
+
+#loginForm p {
+	padding: 10px 15px 0px 15px;
+}
+
+.textfield {
+	padding: 7px;
+	border: 1px solid #999;
+	font-size: 16px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #333;
+	width: 270px;
+	margin: 5px;
+	background: #FFFFF8;
+}
+
+.dashed_line {
+	padding: 0px 10px 10px 10px;
+	border-bottom: 1px dashed black;
+	margin: 15px 15px 20px 15px;
+}
+
+.black_button {
+	margin: 0px;
+	padding: 0px !important;
+	border: 0px;
+	background: transparent url(../img/button.png) no-repeat scroll top right;
+	color: white;
+	display: block;
+	float: right;
+	height: 30px;
+	margin-right: 6px;
+	margin-top: 10px;
+	padding-right: 12px !important;
+	text-decoration: none;
+	overflow: hidden;
+	font-size: 12px;
+	outline: none !important;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.black_button span {
+	background: url(../img/button_left.png) no-repeat left top;
+	display: block;
+	line-height: 30px;
+	padding: 0px 0px 0px 12px;
+	outline: none !important;
+	float: right;
+}
+
+.button {
+	background: url(../img/login.png) no-repeat left top;
+	display: block;
+	line-height: 30px;
+	padding: 0px 0px 0px 12px;
+	outline: none !important;
+	float: right;
+}
+
+.form_fields {
+	margin: 0px 0px 15px 50px;
+}
