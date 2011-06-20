@@ -85,7 +85,7 @@ $pass2 = $_POST['pass2'];
             $errmsg_arr[] = 'Wrong format for phon (##########)';
             $errflag = true;
         }
-        if(!preg_match('^[0-9]{}$', $ssn)){
+        if(!preg_match('^[0-9]{9}$', $ssn)){
             $errmsg_arr[] = 'SSN Missing or wrong format (#########)';
             $errflag = true;
         }
