@@ -81,7 +81,7 @@ $pass2 = $_POST['pass2'];
             $errmsg_arr[] = 'Format for Bday not right (YYYY-MM-DD)';
             $errflag = true;
         }
-  if(!preg_match(`'^[0-9]{10}$`',$phone)){
+  if(!preg_match('`^[0-9]{10}$`',$phone)){
             $errmsg_arr[] = 'Wrong format for phon (##########)';
             $errflag = true;
         }
