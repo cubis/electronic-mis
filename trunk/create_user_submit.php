@@ -119,10 +119,12 @@ $query1 = "INSERT INTO Users ('". $fname. "','". $lname ."','". $pass ."','". $s
 if(!mysql_query($query1)){
 	die('Error: '. mysql_error());
 }
+
+  /*
 if(!mysql_query($query2)){
 	die('Error: '. mysql_error());
 }
-
+  */
   //mysql_close($link);
 ?>
 
