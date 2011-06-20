@@ -25,24 +25,26 @@ $locked = 0;
 $pass2 = $_POST['pass2'];
 
 if ($type == 1){
-	$query2 = "INSERT INTO Patient ('".$ssn."');"
+	$query2 = "INSERT INTO Patient ('".$ssn."');";
 }
 
 $query1 = "INSERT INTO Users ('". $fname. "','". $lname ."','". $pass ."','". $sex ."','". $uname. "','". $type ."','". $email ."','". $bday ."','". $phone ."','". $ssn. "','". $expdate ."','". $locked. "');";
 $con = mysql_connect($host, $uname, $pass);
 //@mysql_select_db($db) or die('unable to select DB');
 
-if(!mysql_query($query1,$con)){
+if(!mysql_query($query1)){
 	die('Error: '. mysql_error());
 }
-if(!mysql_query($query2,$con)){
+if(!mysql_query($query2)){
 	die('Error: '. mysql_error());
 }
-mysql_close($link);
+
+  //mysql_close($link);
 ?>
 
 <html>
 <body>
 <h1>Request Sent, Go back to site home</h1>
+<a href="index.html">Home</a>
 </body>
 </html>
