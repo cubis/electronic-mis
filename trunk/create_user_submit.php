@@ -24,6 +24,98 @@ $expdate = '';
 $locked = 0;
 $pass2 = $_POST['pass2'];
 
+        if($fname == '') {
+                $errmsg_arr[] = 'First name missing';
+                $errflag = true;
+        }
+        if($lname == '') {
+                $errmsg_arr[] = 'Last name missing';
+                $errflag = true;
+        }
+        if($login == '') {
+                $errmsg_arr[] = 'Login ID missing';
+                $errflag = true;
+        }
+        if($pass == '') {
+                $errmsg_arr[] = 'Password missing';
+                $errflag = true;
+        }
+        if($pass2 == '') {
+                $errmsg_arr[] = 'Password Confirm missing';
+                $errflag = true;
+        }
+        if(strcmp($password, $cpassword) != 0 ){
+            $errmsg_arr[] = 'Passwords do not match';
+            $errflag = true;
+        }
+        if(!ctype_alnum($pass)){
+                $errmsg_arr[] = 'Password should be numbers & Digits only';
+                $errflag = true;
+        }
+        if(strlen($pass)<7) {
+                $errmsg_arr[] = 'Password must be at least 7 chars';
+                $errflag = true;
+        }
+        if(strlen($pass)>20){ 
+                $errmsg_arr[] = 'Password must be at most 20 chars ';
+                $errflag = true;
+        }
+        if(! preg_match('`[A-Z]`',$pass)){ 
+                $errmsg_arr[] = 'Password must contain at least one upper case';
+                $errflag = true;
+        }
+        if(! preg_match('`[a-z]`',$pass)){  
+                $errmsg_arr[] = 'Password must contain at least one lower case';
+                $errflag = true;
+        }
+       
+        if(!preg_match('`[0-9]`',$pass)) {
+                $errmsg_arr[] = 'Password must contain at least one digit';
+                $errflag = true;
+        }   
+        //needs format validator
+        if($email == ''){
+                $errmsg_arr[] = 'Email Missing';
+                $errflag = true;
+        }
+        
+        //needs format validator
+        if($bday == ''){
+            $errmsg_arr[] = 'bday Missing';
+            $errflag = true;
+        }
+        if($phone == ''){
+            $errmsg_arr[] = 'bday Missing';
+            $errflag = true;
+        }
+        if($ssn == ''){
+            $errmsg_arr[] = 'bday Missing';
+            $errflag = true;
+        }
+//Check for duplicate login ID
+        if($login != '') {
+                $qry = "SELECT * FROM Users WHERE UserName='$login'";
+                $result = mysql_query($qry);
+                if($result) {
+                        if(mysql_num_rows($result) > 0) {
+                                $errmsg_arr[] = 'Login ID already in use';
+                                $errflag = true;
+                        }
+                        @mysql_free_result($result);
+                }
+                else {
+                        die("Query failed");
+                }
+        }
+        
+        //If there are input validations, redirect back to the registration form
+        if($errflag) {
+                $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+                session_write_close();
+                header("location: create_user.php");
+                exit();
+        }
+
 if ($type == 1){
 	$query2 = "INSERT INTO Patient ('".$ssn."');";
 }
