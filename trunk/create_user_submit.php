@@ -77,16 +77,16 @@ $pass2 = $_POST['pass2'];
                 $errmsg_arr[] = 'Format for Email not correct (foo@bar.com)';
                 $errflag = true;
         }
-        if(!preg_match('^([1-3][0-9]{3,3})-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][1-9]|3[0-1])\s([0-1][0-9]|2[0-4]):([0-5][0-9]):([0-5][0-9])$',$bday)){
-            $errmsg_arr[] = 'Format for Bday not right';
+        if(!preg_match('^([1-3][0-9]{3,3})-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][1-9]|3[0-1])$',$bday)){
+            $errmsg_arr[] = 'Format for Bday not right (YYYY-MM-DD)';
             $errflag = true;
         }
-        if($phone == ''){
-            $errmsg_arr[] = 'Phone Missing';
+  if(!preg_match('^[0-9]{10}$',$phone)){
+            $errmsg_arr[] = 'Wrong format for phon (##########)';
             $errflag = true;
         }
-        if($ssn == ''){
-            $errmsg_arr[] = 'SSN Missing';
+        if(!preg_match('^[0-9]{}$', $ssn)){
+            $errmsg_arr[] = 'SSN Missing or wrong format (#########)';
             $errflag = true;
         }
 //Check for duplicate login ID
