@@ -73,15 +73,15 @@ $pass2 = $_POST['pass2'];
                 $errmsg_arr[] = 'Password must contain at least one digit';
                 $errflag = true;
         }   
-        if(!preg_match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$', $email)){
+        if(!preg_match('`^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$`', $email)){
                 $errmsg_arr[] = 'Format for Email not correct (foo@bar.com)';
                 $errflag = true;
         }
-        if(!preg_match('^([1-3][0-9]{3,3})-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][1-9]|3[0-1])$',$bday)){
+        if(!preg_match('`^([1-3][0-9]{3,3})-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][1-9]|3[0-1])$`',$bday)){
             $errmsg_arr[] = 'Format for Bday not right (YYYY-MM-DD)';
             $errflag = true;
         }
-  if(!preg_match('^[0-9]{10}$',$phone)){
+  if(!preg_match(`'^[0-9]{10}$`',$phone)){
             $errmsg_arr[] = 'Wrong format for phon (##########)';
             $errflag = true;
         }
