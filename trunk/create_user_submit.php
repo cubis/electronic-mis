@@ -1,9 +1,15 @@
 <?php
+    require_once('auth.php');       
+    require_once('config.php');
+    require_once('bootstrap.php');
+
+
+  /*
 $host = 'localhost';
 $uname = '495311team2user';
 $pass = '680c12D5!gP592xViF';
 $db = 'cs49532011team2';
-
+  */
 $fname = $_POST['firstname'];
 $lname = $_POST['lastname'];
 $pass = $_POST['pass'];
