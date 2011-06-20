@@ -64,8 +64,37 @@
 		$errmsg_arr[] = 'Passwords do not match';
 		$errflag = true;
 	}
-	
-	//Check for duplicate login ID
+
+        if(!ctype_alnum($password)){
+ 		$errmsg_arr[] = 'Password should be numbers & Digits only';
+		$errflag = true;
+	}
+
+	if(strlen($password)<7) {
+		$errmsg_arr[] = 'Password must be at least 7 chars';
+		$errflag = true;
+	}
+
+        if(strlen($password)>20){ 
+		$errmsg_arr[] = 'Password must be at most 20 chars ';
+		$errflag = true;
+	}
+        if(! preg_match('`[A-Z]`',$password)){ 
+		$errmsg_arr[] = 'Password must contain at least one upper case';
+		$errflag = true;
+	}
+        
+        if(! preg_match('`[a-z]`',$password)){  
+		$errmsg_arr[] = 'Password must contain at least one lower case';
+		$errflag = true;
+	}
+        
+        if(!preg_match('`[0-9]`',$password)) {
+                $errmsg_arr[] = 'Password must contain at least one digit';
+		$errflag = true;
+	}	
+
+//Check for duplicate login ID
 	if($login != '') {
 		$qry = "SELECT * FROM Users WHERE UserName='$login'";
 		$result = mysql_query($qry);

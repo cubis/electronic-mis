@@ -38,7 +38,7 @@
                     <tr><td></td></tr><tr><td><a class="black_button" href="javascript: submitform()"><span>Reset Password</span></a></td></tr>
                     </table>
                 </form>
-				<center><p style="color: red;">
+				<center>  <p style="color: red;">
 					<?php
                         if(isset($_POST['oldpass']) ){
                             if($_POST['newpass1'] == $_POST['newpass2']){
