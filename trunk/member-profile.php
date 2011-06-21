@@ -10,9 +10,14 @@
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<h1>My Profile </h1>z
+<h1>My Profile </h1>
 
-<?php if($_SESSION['SESS_TYPE'] >= 400): // Logged in user is an Admin ?>
+<?php if($_SESSION['SESS_NEED_APPROVAL'] == 1): // Logged in user is waiting approval ?>
+You are a nobody!<br />
+You can not perform any actions as your account is waiting for admin approval.
+<a href="logout.php">Logout</a>
+
+<?php elseif($_SESSION['SESS_TYPE'] >= 400): // Logged in user is an Admin ?>
 <a href="admin/edit_members.php">View/Edit Members</a> |
 <a href="admin/approve_requests.php">View/Approve/Deny Member Request</a> |
 <a href="#">Edit Profile</a> |
@@ -46,7 +51,7 @@ You can not perform any actions as your account is waiting for admin approval.
 
 
 <?php else: ?>
-I don't know what the fuck you are<br />
+I don't know who you are<br />
 <a href="member-index.php">Home</a> | <a href="logout.php">Logout</a>
 
 <?php endif; ?>
