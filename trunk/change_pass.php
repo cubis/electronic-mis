@@ -36,10 +36,13 @@ require_once('bootstrap.php');
                             <tr><td><label><strong>New Password</strong></label></td></tr><tr><td><input type="password" name="newpass1"  class="textfield" maxlength="20" /></td></tr>
                             <tr><td><label><strong>Confirm New Password</strong></label></td></tr><tr><td><input type="password" name="newpass2" class="textfield"maxlength="20" /></td></tr>
                             <tr><td></td></tr><tr><td><a class="black_button" href="javascript: submitform()"><span>Reset Password</span></a></td></tr>
+                            <tr><td></td></tr><tr><td><a class="black_button" href="member-profile.php"><span>Go Back to Member Profile</span></a></td></tr>
                         </table>
                     </form>
                     <center>  <p style="color: red;">
                             <?php
+                            $errflag = false;
+
                             if (isset($_POST['oldpass'])) {
 
                                 if ($_POST['newpass1'] == $_POST['newpass2']) {
@@ -120,7 +123,18 @@ require_once('bootstrap.php');
                                     $errflag = true;
                                     $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
                                     echo "<p style=\"color: red;\">Error: New Passwords do not match.</p>";
+                                    exit();
                                 }
+                            }
+                            //if old password field is empy
+                            else {
+
+
+                                $errmsg_arr[] = 'Old password field is empty';
+                                echo "<p style=\"color: red;\">Error: Old password field is empty.</p>";
+                                $errflag = true;
+                                $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+                                exit();
                             }
                             ?>
                     </center>
