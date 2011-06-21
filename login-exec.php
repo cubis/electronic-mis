@@ -49,6 +49,7 @@
 			$_SESSION['SESS_LAST_NAME'] = $member['LastName'];
 			$_SESSION['SESS_TYPE'] = $member['Type'];
 			$_SESSION['SESS_USERNAME'] = $member['UserName'];
+			$_SESSION['SESS_NEED_APPROVAL'] = $member['NeedApproval'];
 			session_write_close();
 			header("location: member-profile.php");
 			exit();

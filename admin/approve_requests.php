@@ -22,15 +22,16 @@ foreach ($_POST as $username => $value)
 	}
 	elseif(strcmp($value,"deny") == 0)
 	{
-		echo " Denying user '$key' <br />\n";
-	}
-	else
-	{
-		echo "<br />";
+		$qry = "DELETE FROM Users WHERE UserName='$username'";
+		$result=mysql_query($qry);
+		if ($result)
+			echo " Denying user '$username'. Request deleted<br />\n";
+		else
+			echo "Error: ",mysql_error($link),"<br />\n";
 	}
 }
-
 ?>
+<a href="../member-profile.php">Return to profile</a>
 
 
 <?php else: ?>
