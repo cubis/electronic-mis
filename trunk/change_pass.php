@@ -24,7 +24,7 @@ require_once('bootstrap.php');
                     <script type="text/javascript">
                         function submitform()
                         {
-                            document.forms["loginForm"].submit();
+                        document.forms["loginForm"].submit();
                         }
                     </script>
 

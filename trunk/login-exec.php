@@ -55,10 +55,12 @@
 			exit();
 		}else {
 			//Login failed
-			header("location: login-failed.php");
+                    	$errmsg_arr[] = 'Username or Password does not match';
+                        $errflag = true;
+			header("location: index.php");
 			exit();
 		}
 	}else {
-		die("Query failed");
+            die("Query failed");
 	}
 ?>
