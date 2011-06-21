@@ -126,15 +126,9 @@ require_once('bootstrap.php');
                                     exit();
                                 }
                             }
-                            //if old password field is empy
+                            //in case the sql login fails, for debugging
                             else {
 
-
-                                $errmsg_arr[] = 'Old password field is empty';
-                                echo "<p style=\"color: red;\">Error: Old password field is empty.</p>";
-                                $errflag = true;
-                                $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-                                exit();
                             }
                             ?>
                     </center>
