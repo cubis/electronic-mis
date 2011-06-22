@@ -37,6 +37,10 @@ function clean($str) {
 $fname = clean($_POST['fname']);
 $lname = clean($_POST['lname']);
 $login = clean($_POST['login']);
+$bday = clean($_POST['bday']);
+$email = clean($_POST['email']);
+$ssn = clean($_POST['ssn']);
+
 $password = clean($_POST['password']);
 $cpassword = clean($_POST['cpassword']);
 
@@ -49,6 +53,20 @@ if ($lname == '') {
     $errmsg_arr[] = 'Last name missing';
     $errflag = true;
 }
+//test
+if ($bday == '') {
+    $errmsg_arr[] = 'birthdate name missing';
+    $errflag = true;
+}
+if ($email == '') {
+    $errmsg_arr[] = 'e-mail address missing';
+    $errflag = true;
+}
+if ($ssn == '') {
+    $errmsg_arr[] = 'Social Security Number missing';
+    $errflag = true;
+}
+//end
 if ($login == '') {
     $errmsg_arr[] = 'Login ID missing';
     $errflag = true;
@@ -119,16 +137,17 @@ if ($errflag) {
 }
 
 if (strcmp($_POST['type'], "patient") == 0)
-    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','1','0','" . md5($_POST['password']) . "')";
+    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Email, Birthday, SSN, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','$email','$bday','$ssn','1','0','" . md5($_POST['password']) . "')";
 
 elseif (strcmp($_POST['type'], "nurse") == 0)
-    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','200','1','" . md5($_POST['password']) . "')";
+    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Email, Birthday, SSN, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','$email','$bday','$ssn','200','1','" . md5($_POST['password']) . "')";
 
 elseif (strcmp($_POST['type'], "doctor") == 0)
-    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','300','1','" . md5($_POST['password']) . "')";
+    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Email, Birthday, SSN, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','$email','$bday','$ssn','300','1','" . md5($_POST['password']) . "')";
 
 if (strcmp($_POST['type'], "admin") == 0)
-    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','400','1','" . md5($_POST['password']) . "')";
+    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Email, Birthday, SSN, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','$email','$bday','$ssn','400','1','" . md5($_POST['password']) . "')";
+
 $result = @mysql_query($qry);
 
 //Check whether the query was successful or not

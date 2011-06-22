@@ -1,3 +1,5 @@
+<?php session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,8 +8,7 @@
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <center><h1 style="color: white; margin-top: 50px;">Welcome!</h1></center>
-    <div style="width: 400px; margin-left: auto; margin-right: auto;">
+    <div style="width: 400px; margin-left: auto; margin-right: auto; margin-top: 40px;">
     <div class="login_box">
     <center><img src="img/logo.png" alt="Electronic Medical Information System" /></center>
     <div>
@@ -34,10 +35,13 @@
             <label><strong>Password</strong><br /><input name="password" type="password" class="textfield" id="password" /></label><br />
         </div>
         <a class="black_button" style="margin-right: 60px;" href="javascript: submitform()"><span>Login</span></a>
-        <a class="black_button" href="register-form.php"><span>Register</span></a>
+        <a class="black_button" style="margin-right: 144px;" href="register-form.php"><span>Register</span></a>
         </form>
         </div>
     </div>
+
+
     </div>
+            
 </body>
 </html>

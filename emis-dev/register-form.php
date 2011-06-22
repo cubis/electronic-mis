@@ -41,10 +41,27 @@ session_start();
                                 <th>First Name </th>
                                 <td><input name="fname" type="text" class="textfield" id="fname" /></td>
                             </tr>
+
                             <tr>
                                 <th>Last Name </th>
                                 <td><input name="lname" type="text" class="textfield" id="lname" /></td>
                             </tr>
+                            
+                            <tr>
+                                <th>Birthdate (MMDDYYYY) </th>
+                                <td><input name="bday" type="date" class="textfield" id="bday" /></td>
+                            </tr>
+
+                            <tr>
+                                <th>E-Mail </th>
+                                <td><input name="email" type="text" class="textfield" id="email" /></td>
+                            </tr>
+
+                            <tr>
+                                <th>SSN: </th>
+                                <td><input name="ssn" type="text" class="textfield" id="ssn" /></td>
+                            </tr>
+
                             <tr>
                                 <th width="124">Username</th>
                                 <td width="168"><input name="login" type="text" class="textfield" id="login" /></td>
