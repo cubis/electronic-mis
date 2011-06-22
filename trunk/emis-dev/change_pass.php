@@ -39,7 +39,7 @@ require_once('bootstrap.php');
                             <tr><td></td></tr><tr><td><a class="black_button" href="member-profile.php"><span>Go Back to Member Profile</span></a></td></tr>
                         </table>
                     </form>
-                    <center>  <p style="color: red;">
+                    <center>  
                             <?php
                             $errflag = false;
 
