@@ -29,7 +29,7 @@ require_once('bootstrap.php');
                     </script>
 
                     <form id="loginForm" name="loginForm" action="change_pass.php" method="post">
-                        <center><p>Welcome to the Electronic Medical Information System (EMIS). You may reset your password using the form below.</p></center>
+                        <center><p><b>Welcome to the Electronic Medical Information System. You may reset your password using the form below.</b></p></center>
                         <div class="dashed_line"></div>
                         <table  align="center" >
                             <tr><td><label><strong>Current Password</strong></label></td></tr><tr><td><input type="password" name="oldpass" class="textfield" maxlength="20" /></td></tr>

@@ -12,12 +12,23 @@ unset($_SESSION['SESS_LAST_NAME']);
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Logged Out</title>
-        <link href="loginmodule.css" rel="stylesheet" type="text/css" />
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <h1>Logout </h1>
-        <p align="center">&nbsp;</p>
+        <center><h1 style="color: white; margin-top: 50px;">Logged Out</h1></center>
+            <div style="width: 400px; margin-left: auto; margin-right: auto;">
+            <div class="login_box">
+                <center>
+                    <img src="img/logo.png" alt="Electronic Medical Information System">
+                </center>
+                <div>
+                    <script type="text/javascript">
+                        function submitform()
+                        {
+                        document.forms["loginForm"].submit();
+                        }
+                    </script>
         <h4 align="center" class="err">You have been logged out.</h4>
-        <p align="center">Click here to <a href="index.php">Login</a></p>
+        <p align="center"><b>Click here to </b><a href="index.php">Login</a></p>
     </body>
 </html>

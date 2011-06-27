@@ -4,10 +4,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Registration Successful</title>
-        <link href="loginmodule.css" rel="stylesheet" type="text/css" />
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <h1>Registration Successful</h1>
-        <p><a href="index.php">Click here</a> to login</p>
+         <center><h1 style="color: white; margin-top: 50px;">Registration Successful</h1></center>
+            <div style="width: 400px; margin-left: auto; margin-right: auto;">
+            <div class="login_box">
+                <center>
+                    <img src="img/logo.png" alt="Electronic Medical Information System">
+                </center>
+                <div>
+                    <script type="text/javascript">
+                        function submitform()
+                        {
+                        document.forms["loginForm"].submit();
+                        }
+                    </script>
+        <center><p><a href="index.php">Click here</a><b> to login</b></p></center>
     </body>
 </html>
