@@ -24,7 +24,7 @@ session_start();
 					}
                     </script>
                     <form id="loginForm" name="loginForm" method="post" action="register-exec.php">
-                        <center><p>Welcome to the Electronic Medical Information System (EMIS). Login or register using the form below.</p></center>
+                        <center><p><b>Welcome to the Electronic Medical Information System. Login or register using the form below.</b></p></center>
                         <?php
                         if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) > 0) {
                             echo '<ul class="err">';

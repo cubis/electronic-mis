@@ -35,28 +35,37 @@ foreach ($_POST as $username => $value)
 
 
 <?php else: ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Administrator - Approve Member Requests</title>
-<link href="../loginmodule.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<h1>Admin</h1>
-<hr />
-<br />
-<a href="../member-profile.php">Return to Profile</a>
-<br />
-<br />
-<table border="1">
-<tr>
-<td>First Name</td><td>Last Name</td><td>Sex</td><td>Username</td>
-<td>Email</td><td>Birthday</td><td>Phone Number</td><td>SSN</td><td>Type</td><td>Approval</td>
-</tr>
-
-<form id="approvalForm" name="approvalForm" method="post" action="approve_requests.php">
-<input type="hidden" name="submitted" value="true" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <title>Administrator - Approve Member Requests</title>
+        <link href="../css/styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <center><h1 style="color: white; margin-top: 50px;">Admin Approval</h1></center>
+            <div style="width: 600px; margin-left: auto; margin-right: auto;">
+                <center>
+                    <img src="../img/logo.png" alt="Electronic Medical Information System">
+                </center>
+                <div>
+                    <script type="text/javascript">
+                        function submitform()
+                        {
+                        document.forms["loginForm"].submit();
+                        }
+                    </script>
+ 
+        <br>
+        <br>
+        <table border="2">
+            <tr>
+               <b> <td>First Name</td><td>Last Name</td><td>Sex</td><td>Username</td>
+                <td>Email</td><td>Birthday</td><td>Phone Number</td><td>SSN</td><td>Type</td><td>Approval</td></b>
+            </tr>
+        <form id="approvalForm" name="approvalForm" method="post" action="approve_requests.php">
+        <input type="hidden" name="submitted" value="true" />
 <?php
 $numrows = mysql_num_rows($result);
 
@@ -79,13 +88,14 @@ while ($row = mysql_fetch_assoc($result))
 ?>
 
 
-</table>
-<br />
-<br />
-<input type="submit" />
+        </table>
+        <br>
+        <br>
+       <!--- <a class="black_button" href="approve_requests.php"><span>Submit Query</span></a>--!>
+        <input type="submit" />
+        <a class="black_button"style="margin-right:260px;" href="../member-profile.php"><span>Return To Profile</span></a>
 
-
-</body>
+    </body>
 </html>
 <?php endif;
 ?>
