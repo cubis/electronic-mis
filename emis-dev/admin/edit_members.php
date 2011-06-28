@@ -27,14 +27,14 @@
                         document.forms["loginForm"].submit();
                         }
                     </script>
-        <center><p><h2>Edit User</h2></p>
+        <center><p><h2>Admin Edit User</h2></p>
         <input name="login" type="text" class="textfield" id="login" value="Username" /><BR>
         <p><b>- OR -</b></p>
         <p>
             <input name="login" type="text" class="textfield" id="login" value="First Name" /> <BR>
             <input name="login" type="text" class="textfield" id="login" size="1" maxlength="1" value="MI" /><BR>
             <input name="login" type="text" class="textfield" id="login" value="Last Name" /><BR>
-            <input type=button onClick="parent.location='http://cs.utsa.edu/~bsattler/edit-user-form.php'" value='Edit User'>
+            <a class="black_button" style="margin-right: 360px;"href="../admin/edit-user-form.php"><span>Edit User</span></a>
         </p>
         </center>
         <table border="1">
@@ -56,13 +56,10 @@ while ($row = mysql_fetch_assoc($result))
 	echo "<td>",$row['Birthday'],"</td>\n";
 	echo "<td>",$row['PhoneNumber'],"</td>\n";
 	echo "<td>",$row['SSN'],"</td>\n";
-	echo "<td><a href='/editing_members.php'>Edit</a></td>\n";
+	echo "<td><a href='../admin/edit-user-form.php'>Edit</a></td>\n";
 	echo "</tr>\n";
 }
 ?>
-
-
         </table>
-
      </body>
 </html>
