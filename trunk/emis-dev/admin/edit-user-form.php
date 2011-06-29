@@ -1,8 +1,6 @@
 <?php
 //headers for session
-require_once('../auth.php');
-require_once('../config.php');
-require_once('../bootstrap.php');
+session_start();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -14,22 +12,28 @@ require_once('../bootstrap.php');
     <body>
         <h1>Admin User's Edit Form</h1>
             <?php
-                $errflag = false;
-                $qry = "SELECT * FROM Users WHERE UserName='{$_SESSION['SESS_USERNAME']}' AND Password='" . md5($_POST['SESS_PASSWORD']) . "'";
-                $results = mysql_query($qry);
-                $row = mysql_num_rows($result);
-                echo "<td>",$row['FirstName'],"</td>\n";
+                $connection = @mysql_connect("devdb.fulgentcorp.com","495311team2user","680c12D5!gP592xViF") or die(mysql_error());
+                $database = @mysql_select_db("cs49532011team2", $connection) or die(mysql_error());
+                $table_name = "Users";
+                $sql = "SELECT * FROM $table_name WHERE PK_member_id = '$_GET[ID]'";
+                $result = @mysql_query($sql,$connection) or die(mysql_error());
+                while ($row = mysql_fetch_array($result))
+                {
+ 		    $f_name = $row['FirstName'];
+                    $l_name = $row['LastName'];
+
+                }
             ?>
 
             <table>
                 <tr><td><h3>User's Personal Info</h3></td></tr>
                 <tr>
                     <td>First Name:</td>
-                    <td><input type="text" name="firstname" /></td>
+                    <td><input type="text" name="firstname" value= <?echo "$f_name";?> /></td>
                 </tr>
                 <tr>
                     <td>Last Name:</td><td>
-                        <input type="text" name="lastname" /></td>
+                        <input type="text" name="lastname" value = <?echo "$l_name";?> /></td>
                 </tr>
                 <tr>
                     <td>Sex:</td>

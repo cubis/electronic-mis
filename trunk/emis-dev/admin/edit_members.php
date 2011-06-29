@@ -2,7 +2,7 @@
         require_once('../auth.php');
 	require_once('../config.php');
 	require_once('../bootstrap.php');
-		
+        session_start();
 	$qry="SELECT * FROM Users";
 	$result=mysql_query($qry);
 ?>
@@ -34,7 +34,7 @@
             <input name="login" type="text" class="textfield" id="login" value="First Name" /> <BR>
             <input name="login" type="text" class="textfield" id="login" size="1" maxlength="1" value="MI" /><BR>
             <input name="login" type="text" class="textfield" id="login" value="Last Name" /><BR>
-            <a class="black_button" style="margin-right: 210px;"href='../admin/edit-user-form.php?userID=$row['UserID']'><span>Edit User</span></a>
+            <a class="black_button" style="margin-right: 210px;"href='../admin/edit-user-form.php'+ hidden='?ID=$row['UserID']'><span>Edit User</span></a>
         </p> 
         </center>
         <br>
@@ -49,6 +49,7 @@ $numrows = mysql_num_rows($result);
 while ($row = mysql_fetch_assoc($result))
 {
 	echo "<tr>\n";
+        $ID = $row['PK_member_id'];
 	echo "<td>",$row['FirstName'],"</td>\n";
 	echo "<td>",$row['LastName'],"</td>\n";
 	echo "<td>",$row['Sex'],"</td>\n";
@@ -57,7 +58,8 @@ while ($row = mysql_fetch_assoc($result))
 	echo "<td>",$row['Birthday'],"</td>\n";
 	echo "<td>",$row['PhoneNumber'],"</td>\n";
 	echo "<td>",$row['SSN'],"</td>\n";
-	echo "<td><a href='../admin/edit-user-form.php'>Edit</a></td>\n";
+        //echo "<td><a href='../admin/edit-user-form.php'>Edit</a></td>\n";
+        echo "<td><a href='../admin/edit-user-form.php?ID=$ID'>Edit</a></td>\n";
 	echo "</tr>\n";
 }
 ?>
