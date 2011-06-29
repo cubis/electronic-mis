@@ -16,7 +16,7 @@
     </head>
     <body>
         <center><h1 style="color: white; margin-top: 50px;">Admin Editing</h1></center>
-            <div style="width: 800px; margin-left: auto; margin-right: auto;">
+            <div style="width: 500px; margin-left: auto; margin-right: auto;">
                 <center>
                     <img src="../img/logo.png" alt="Electronic Medical Information System">
                 </center>
@@ -34,9 +34,10 @@
             <input name="login" type="text" class="textfield" id="login" value="First Name" /> <BR>
             <input name="login" type="text" class="textfield" id="login" size="1" maxlength="1" value="MI" /><BR>
             <input name="login" type="text" class="textfield" id="login" value="Last Name" /><BR>
-            <a class="black_button" style="margin-right: 360px;"href="../admin/edit-user-form.php"><span>Edit User</span></a>
-        </p>
+            <a class="black_button" style="margin-right: 210px;"href='../admin/edit-user-form.php?userID=$row['UserID']'><span>Edit User</span></a>
+        </p> 
         </center>
+        <br>
         <table border="1">
             <tr>
             <td>First Name</td><td>Last Name</td><td>Sex</td><td>Username</td>
