@@ -102,6 +102,7 @@ require_once('bootstrap.php');
                                             }
 
                                             //Login Successful
+ 	                                    echo "<p style=\"color: red;\">Your password has been reset!</p>";
                                             $updateQry = "UPDATE Users SET Password='" . md5($_POST['newpass1']) . "' WHERE UserName='{$_SESSION['SESS_USERNAME']}' AND Password='" . md5($_POST['oldpass']) . "'";
                                             mysql_query($updateQry) or die(mysql_error());
                                             exit();
