@@ -4,7 +4,7 @@
 	
 	//Include database connection details
 	require_once('config.php');
-        require_once('bootstrap.php');
+    require_once('bootstrap.php');
 	
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -33,13 +33,32 @@
 		header("location: index.php"); 
 		exit();
 	}
-	
+	/*
 	//Create query
 	$qry="SELECT * FROM Users WHERE UserName='$login' AND Password='".md5($_POST['password'])."'";
 	$result=mysql_query($qry);
-	
+	*/
 	//Check whether the query was successful or not
-	if($result) {
+
+    $epw = md5($password); // encrypt password to lame ass md5 for t-fer
+
+    $request = "AuthenticateREST.php?login=" . urlencode($login) . "&pw=" . urlencode($epw);
+    print("URL: $request <br />\n");
+
+    //format and send request
+    $ch = curl_init($request);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $output = curl_exec($ch); //send URL Request to RESTServer... returns string
+    curl_close($ch); //string from server has been returned <XML> closethe channel
+
+    //-----------------------------
+    // TODO: Decode XML with parser and store the true/false in $result
+
+
+	if($result=='1') {
 		if(mysql_num_rows($result) == 1) {
 			//Login Successful
 			session_regenerate_id();
