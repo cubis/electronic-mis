@@ -34,7 +34,7 @@
             <input name="login" type="text" class="textfield" id="login" value="First Name" /> <BR>
             <input name="login" type="text" class="textfield" id="login" size="1" maxlength="1" value="MI" /><BR>
             <input name="login" type="text" class="textfield" id="login" value="Last Name" /><BR>
-            <a class="black_button" style="margin-right: 210px;"href='../admin/edit-user-form.php'+ hidden='?ID=$row['UserID']'><span>Edit User</span></a>
+            <a class="black_button" style="margin-right: 210px;"href='../admin/edit-user-form.php'+ hidden='?ID=<?$ID?>'><span>Edit User</span></a>
         </p> 
         </center>
         <br>
