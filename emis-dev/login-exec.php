@@ -41,7 +41,7 @@
 	//Check whether the query was successful or not
 
     $epw = md5($password); // encrypt password to lame ass md5 for t-fer
-    $request = "http://127.0.0.1:5007/emis-dev/AuthenticateREST.php?login=" . urlencode($login) . "&pw=" . urlencode($epw);
+    $request = "http://127.0.0.1/emis-dev/AuthenticateREST.php?login=" . urlencode($login) . "&pw=" . urlencode($epw);
     print("URL: $request <br />\n");
 
     //format and send request
