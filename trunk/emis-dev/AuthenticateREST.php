@@ -5,7 +5,7 @@ require_once('bootstrap.php');  //link information
 
 function outputXML($resultMsg) {
 	$outputString = ''; //start empty
-	$outputString .= '<?xml version="1.0"?>\n';
+	$outputString .= '<?xml version="1.0"?>';
 	$outputString .= "<result>".$resultMsg."</result>\n";
 	return $outputString;
 }
@@ -15,7 +15,7 @@ function doService($url, $method, $getArgs, $postArgs) {
         //qry database
         //
 	//Create query
-	$qry="SELECT * FROM Users WHERE UserName='$login' AND Password='".$getArgs['pw']."'";
+	$qry="SELECT * FROM Users WHERE UserName='".$getArgs['login']."' AND Password='".$getArgs['pw']."'";
 	$result=mysql_query($qry);
 
 		if($result)
@@ -32,8 +32,7 @@ function doService($url, $method, $getArgs, $postArgs) {
 $serviceURL = $_SERVER['REQUEST_URI'];
 $serviceMethod = strtoupper($_SERVER['REQUEST_METHOD']);
 $getArgs = $_GET;
-//$postArgs = $_POST; //don't care about post
-$retVal = '';
+$postArgs = $_POST; //don't care about post
 $retVal = doService($serviceURL, $serviceMethod, $getArgs, $postArgs);
 print($retVal);
 return;
