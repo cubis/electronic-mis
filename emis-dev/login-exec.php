@@ -41,8 +41,7 @@
 	//Check whether the query was successful or not
 
     $epw = md5($password); // encrypt password to lame ass md5 for t-fer
-
-    $request = "AuthenticateREST.php?login=" . urlencode($login) . "&pw=" . urlencode($epw);
+    $request = "http://127.0.0.1:5007/emis-dev/AuthenticateREST.php?login=" . urlencode($login) . "&pw=" . urlencode($epw);
     print("URL: $request <br />\n");
 
     //format and send request
@@ -53,13 +52,35 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $output = curl_exec($ch); //send URL Request to RESTServer... returns string
     curl_close($ch); //string from server has been returned <XML> closethe channel
+    
+	if( $output == ''){
+		die("CONNECTION ERROR OUTPUT=".$output);
+	}	
 
     //-----------------------------
     // TODO: Decode XML with parser and store the true/false in $result
+//Initialize the XML parser
+$parser = xml_parser_create();
 
+xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+
+//should be 3 elements inside <response> but parsed as: 
+//	0 response
+//	1 responsecode
+//	2 response
+//	3 responsemsg
+//	4 response
+//	5 responsedetail
+//	6 response
+//	7 response
+/*
+print("Response Code: Tag = " . $wsResponse[1]['tag'] . " Value = " . $wsResponse[1]['value'] . "<br />\n");
+print("Response Msg: Tag = " . $wsResponse[3]['tag'] . " Value = " . $wsResponse[3]['value'] . "<br />\n");
+print("Response Detail: Tag = " . $wsResponse[5]['tag'] . " Value = " . $wsResponse[5]['value'] . "<br />\n");
+*/
+$result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
 
 	if($result=='1') {
-		if(mysql_num_rows($result) == 1) {
 			//Login Successful
 			session_regenerate_id();
 			$member = mysql_fetch_assoc($result);
@@ -70,16 +91,16 @@
 			$_SESSION['SESS_USERNAME'] = $member['UserName'];
 			$_SESSION['SESS_NEED_APPROVAL'] = $member['NeedApproval'];
 			session_write_close();
-			header("location: member-profile.php");
+			die("ACCESS GAINED");
+		//	header("location: member-profile.php");
 			exit();
-		}else {
 			//Login failed
-                    	$errmsg_arr[] = 'Username or Password does not match';
-                        $errflag = true;
-			header("location: index.php");
-			exit();
-		}
+         
 	}else {
-            die("Query failed");
+	//     	$errmsg_arr[] = 'Username or Password does not match';
+	//	$errflag = true;
+	//	header("location: index.php");
+	//	exit();
+	die("QUERY FAILED OUTPUT = ".$output);
 	}
 ?>
