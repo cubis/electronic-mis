@@ -11,6 +11,7 @@ session_start();
         <link type="text/css" rel="stylesheet" href="../css/styles.css">
     </head>
     <body>
+        <form id="loginForm" name="login_Form" method="post" action="edit-user-update.php">
         <center><h1 style="color: white; margin-top: 50px;">Admin User's Editing Form</h1></center>
             <div style="width: 500px; margin-left: auto; margin-right: auto;">
                 <center>
@@ -32,6 +33,7 @@ session_start();
                 $result = @mysql_query($sql,$connection) or die(mysql_error());
                 while ($row = mysql_fetch_array($result))
                 {
+                    $ID = $row['PK_member_id'];
                     $user = $row['UserName'];
  		    $f_name = $row['FirstName'];
                     $l_name = $row['LastName'];
@@ -40,27 +42,28 @@ session_start();
                     $birthday = $row['Birthday'];
                     $phone = $row['PhoneNumber'];
                     $ssn = $row['SSN'];
-//                    $address = $row['Address'];
-//                    $policy = $row['Policy'];
+//                  $address = $row['Address'];
+//                  $policy = $row['Policy'];
 
 
                 }
-            ?>
+           ?>
             <center><table>
                 <center><tr><td><h3><?echo "$user Personal Infomation";?></h3></td></tr></center>
                 <tr>
                     <td>First Name:</td>
-                    <td><input type="text" name="firstname" value= <?echo "$f_name";?> /></td>
+                    <td><input type="text" name="Firstname" value= <?echo "$f_name";?> /></td>
+                    <td><INPUT TYPE=hidden NAME="ID" VALUE= <?echo "$ID";?>></td>
                 </tr>
                 <tr>
                     <td>Last Name:</td><td>
-                        <input type="text" name="lastname" value = <?echo "$l_name";?> /></td>
+                        <input type="text" name="Lastname" value = <?echo "$l_name";?> /></td>
                 </tr>
                 <tr>
                     <td>Sex:</td>
-                    <td><select name="sex">
-                            <option value = "m">Male</option>
-                            <option value = "f">Female</option>
+                    <td><select name="Sex">
+                            <option value = "M">Male</option>
+                            <option value = "F">Female</option>
                         </select></td>
                 </tr>
                 <tr>
@@ -78,22 +81,25 @@ session_start();
                     <tr><td><h3><div class="dashed_line"></div><?echo "$user Contact Information";?></h3></tr><tr></tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input type="text" name="email" value = <?echo "$email";?>  /><br />
+                    <td><input type="text" name="Email" value = <?echo "$email";?>  /><br />
                 </tr>
                 <tr>
                     <td>Phone Number(###-###-####):</td>
-                    <td><input type="text" name="pnumber" value = <?echo "$phone";?>  /></td>
+                    <td><input type="text" name="Phonenumber" value = <?echo "$phone";?>  /></td>
                 </tr>
                 <tr>
                 <tr><td><h3><div class="dashed_line"></div><? echo "$user Insurance Information";?></h3></td></tr>
                     <td>Insurance Policy Number:</td>
-                    <td><input type="textbox" name="insurance" value = <?echo "$policy";?>  /></td>
+                    <td><input type="text" name="Policy" value = <?echo "$policy";?>  /></td>
                 </tr>
                 <tr>
                     <td><div class="dashed_line"></div>
                 </tr>
             </table></center>
-            <a class="black_button" style="margin-right: 310px;"href='../admin/edit-user-form.php?ID=<?$ID?>'><span>Save Changes</span></a>
+            <a class="black_button" style="margin-right: 70px;" href="javascript: submitform()"><span>Save Changes</span></a>
+            <a class="black_button" style="margin-right: 50px;" href="../admin/edit-user-form.php?ID=<?echo "$ID";?>"><span>Reset Changes</span></a>
+            <a class="black_button" style="margin-right: 45px;" href="../admin/edit_members.php"><span>Back</span></a>
         </form>
     </body>
 </html>
+
