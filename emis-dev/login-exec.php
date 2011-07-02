@@ -41,7 +41,7 @@
 	//Check whether the query was successful or not
 
     $epw = md5($password); // encrypt password to lame ass md5 for t-fer
-    $request = "http://127.0.0.1/emis-dev/AuthenticateREST.php?login=" . urlencode($login) . "&pw=" . urlencode($epw);
+    $request = "http://127.0.0.1/emis/emis-dev/AuthenticateREST.php?login=" . urlencode($login) . "&pw=" . urlencode($epw);
     print("URL: $request <br />\n");
 
     //format and send request
@@ -83,7 +83,9 @@ $result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
 	if($result=='1') {
 			//Login Successful
 			session_regenerate_id();
-			$member = mysql_fetch_assoc($result);
+			$qry="SELECT * FROM Users WHERE UserName='" .$login. "'";
+			$qresult = mysql_query($qry);
+			$member = mysql_fetch_assoc($qresult);
 			$_SESSION['SESS_MEMBER_ID'] = $member['PK_member_id'];
 			$_SESSION['SESS_FIRST_NAME'] = $member['FirstName'];
 			$_SESSION['SESS_LAST_NAME'] = $member['LastName'];
@@ -91,8 +93,8 @@ $result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
 			$_SESSION['SESS_USERNAME'] = $member['UserName'];
 			$_SESSION['SESS_NEED_APPROVAL'] = $member['NeedApproval'];
 			session_write_close();
-			die("ACCESS GAINED");
-		//	header("location: member-profile.php");
+		//	die("ACCESS GAINED");
+			header("location: member-profile.php");
 			exit();
 			//Login failed
          
