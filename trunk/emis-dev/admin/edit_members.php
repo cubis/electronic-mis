@@ -16,7 +16,7 @@
     </head>
     <body>
         <center><h1 style="color: white; margin-top: 50px;">Admin Editing</h1></center>
-            <div style="width: 500px; margin-left: auto; margin-right: auto;">
+            <div style="width: 565px; margin-left: auto; margin-right: auto;">
                 <center>
                     <img src="../img/logo.png" alt="Electronic Medical Information System">
                 </center>
@@ -34,7 +34,7 @@
             <input name="login" type="text" class="textfield" id="login" value="First Name" /> <BR>
             <input name="login" type="text" class="textfield" id="login" size="1" maxlength="1" value="MI" /><BR>
             <input name="login" type="text" class="textfield" id="login" value="Last Name" /><BR>
-            <a class="black_button" style="margin-right: 210px;"href='../admin/edit-user-form.php'+ hidden='?ID=<?$ID?>'><span>Edit User</span></a>
+            <a class="black_button" style="margin-right: 240px;"href='../admin/edit-user-form.php'+ hidden='?ID=<?$ID?>'><span>Edit User</span></a>
         </p> 
         </center>
         <br>
@@ -58,11 +58,11 @@ while ($row = mysql_fetch_assoc($result))
 	echo "<td>",$row['Birthday'],"</td>\n";
 	echo "<td>",$row['PhoneNumber'],"</td>\n";
 	echo "<td>",$row['SSN'],"</td>\n";
-        //echo "<td><a href='../admin/edit-user-form.php'>Edit</a></td>\n";
         echo "<td><a href='../admin/edit-user-form.php?ID=$ID'>Edit</a></td>\n";
 	echo "</tr>\n";
 }
 ?>
         </table>
+        <a class="black_button" style="margin-right: 255px;"href='../member-profile.php'><span>Back</span></a>
      </body>
 </html>

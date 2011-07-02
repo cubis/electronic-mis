@@ -31,7 +31,6 @@ foreach ($_POST as $username => $value)
 	}
 }
 ?>
-<a href="../member-profile.php">Return to profile</a>
 
 
 <?php else: ?>
@@ -45,7 +44,7 @@ foreach ($_POST as $username => $value)
     </head>
     <body>
         <center><h1 style="color: white; margin-top: 50px;">Admin Approval</h1></center>
-            <div style="width: 600px; margin-left: auto; margin-right: auto;">
+            <div style="width: 500px; margin-left: auto; margin-right: auto;">
                 <center>
                     <img src="../img/logo.png" alt="Electronic Medical Information System">
                 </center>
@@ -86,15 +85,12 @@ while ($row = mysql_fetch_assoc($result))
 	echo "</tr>\n";
 }
 ?>
-
-
         </table>
         <br>
         <br>
-       <!--- <a class="black_button" href="approve_requests.php"><span>Submit Query</span></a>--!>
-        <input type="submit" />
-        <a class="black_button"style="margin-right:260px;" href="../member-profile.php"><span>Return To Profile</span></a>
-
+        <center><input type="submit" /d></center>
+        <a class="black_button"style="margin-right:191px;" href="../member-profile.php"><span>Return To Profile</span></a>
+    </form>
     </body>
 </html>
 <?php endif;
