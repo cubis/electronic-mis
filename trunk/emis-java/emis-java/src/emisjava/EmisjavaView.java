@@ -11,6 +11,8 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URI;
+import java.net.URLConnection;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -136,6 +138,8 @@ public class EmisjavaView extends FrameView {
         jPasswordField1.setText(resourceMap.getString("jPasswordField1.text")); // NOI18N
         jPasswordField1.setName("jPasswordField1"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(emisjava.EmisjavaApp.class).getContext().getActionMap(EmisjavaView.class, this);
+        jButton1.setAction(actionMap.get("doLogin")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
 
@@ -181,7 +185,6 @@ public class EmisjavaView extends FrameView {
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(emisjava.EmisjavaApp.class).getContext().getActionMap(EmisjavaView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
@@ -238,6 +241,19 @@ public class EmisjavaView extends FrameView {
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
+
+    @Action
+    public void doLogin() {
+        //todo: add login logic
+
+
+       URI test;
+       test = URI.create("http://~cookie/Authenticateuser.php?user=bsattler&pass=tacos123");
+       System.out.println("URL: "+test.toASCIIString());
+       System.out.println("Query: "+test.getQuery());
+       System.out.println("Auth:  "+test.getRawAuthority());
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

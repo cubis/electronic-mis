@@ -86,6 +86,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="emisjava.EmisjavaView" id="doLogin" methodName="doLogin"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="jButton1.text"/>
             <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
           </Properties>
