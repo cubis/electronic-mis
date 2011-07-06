@@ -41,7 +41,10 @@
 	//Check whether the query was successful or not
 
     $epw = md5($password); // encrypt password to lame ass md5 for t-fer
-    $request = "http://127.0.0.1/emis/emis-dev/AuthenticateREST.php?login=" . urlencode($login) . "&pw=" . urlencode($epw);
+
+    //replace starting with your own webroot for debugging...
+    
+    $request = "http://localhost/~cookie/emis-dev/Authenticate.php?login=".urlencode($login)."&pw=".urlencode($epw);
     print("URL: $request <br />\n");
 
     //format and send request
@@ -86,6 +89,14 @@ $result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
 			$qry="SELECT * FROM Users WHERE UserName='" .$login. "'";
 			$qresult = mysql_query($qry);
 			$member = mysql_fetch_assoc($qresult);
+
+            /* $_SESSOION  will only hold variables for
+             *
+             * SESS_MEMBER_ID
+             * SESS_MEMBER_TYPE
+             * SESS_KEY  a hashed athentication key provided by auth server
+             *
+            */
 			$_SESSION['SESS_MEMBER_ID'] = $member['PK_member_id'];
 			$_SESSION['SESS_FIRST_NAME'] = $member['FirstName'];
 			$_SESSION['SESS_LAST_NAME'] = $member['LastName'];
