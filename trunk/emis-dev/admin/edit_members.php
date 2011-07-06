@@ -16,7 +16,7 @@
     </head>
     <body>
         <center><h1 style="color: white; margin-top: 50px;">Admin Editing</h1></center>
-            <div style="width: 565px; margin-left: auto; margin-right: auto;">
+            <div style="width: 630px; margin-left: auto; margin-right: auto;">
                 <center>
                     <img src="../img/logo.png" alt="Electronic Medical Information System">
                 </center>
@@ -34,14 +34,22 @@
             <input name="login" type="text" class="textfield" id="login" value="First Name" /> <BR>
             <input name="login" type="text" class="textfield" id="login" size="1" maxlength="1" value="MI" /><BR>
             <input name="login" type="text" class="textfield" id="login" value="Last Name" /><BR>
-            <a class="black_button" style="margin-right: 240px;"href='../admin/edit-user-form.php'+ hidden='?ID=<?$ID?>'><span>Edit User</span></a>
+            <a class="black_button" style="margin-right: 275px;"href='../admin/edit-user-form.php'+ hidden='?ID=<?$ID?>'><span>Edit User</span></a>
         </p> 
         </center>
         <br>
         <table border="1">
             <tr>
-            <td>First Name</td><td>Last Name</td><td>Sex</td><td>Username</td>
-            <td>Email</td><td>Birthday</td><td>Phone Number</td><td>SSN</td><td>Edit</td>
+              <td>First Name</td>
+              <td>Last Name</td>
+              <td>Sex</td>
+              <td>Username</td>
+              <td>Email</td>
+              <td>Birthday</td>
+              <td>Phone Number</td>
+              <td>SSN</td>
+              <td>Type</td>
+              <td>Edit</td>
             </tr>
 <?php
 $numrows = mysql_num_rows($result);
@@ -58,11 +66,12 @@ while ($row = mysql_fetch_assoc($result))
 	echo "<td>",$row['Birthday'],"</td>\n";
 	echo "<td>",$row['PhoneNumber'],"</td>\n";
 	echo "<td>",$row['SSN'],"</td>\n";
+        echo "<td>",$row['Type'],"</td>\n";
         echo "<td><a href='../admin/edit-user-form.php?ID=$ID'>Edit</a></td>\n";
 	echo "</tr>\n";
 }
 ?>
         </table>
-        <a class="black_button" style="margin-right: 255px;"href='../member-profile.php'><span>Back</span></a>
+        <a class="black_button" style="margin-right: 295px;"href='../member-profile.php'><span>Back</span></a>
      </body>
 </html>

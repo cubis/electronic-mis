@@ -44,7 +44,7 @@ foreach ($_POST as $username => $value)
     </head>
     <body>
         <center><h1 style="color: white; margin-top: 50px;">Admin Approval</h1></center>
-            <div style="width: 500px; margin-left: auto; margin-right: auto;">
+            <div style="width: 550px; margin-left: auto; margin-right: auto;">
                 <center>
                     <img src="../img/logo.png" alt="Electronic Medical Information System">
                 </center>
@@ -60,8 +60,17 @@ foreach ($_POST as $username => $value)
         <br>
         <table border="2">
             <tr>
-               <b> <td>First Name</td><td>Last Name</td><td>Sex</td><td>Username</td>
-                <td>Email</td><td>Birthday</td><td>Phone Number</td><td>SSN</td><td>Type</td><td>Approval</td></b>
+               <b> <td>First Name</td>
+                   <td>Last Name</td>
+                   <td>Sex</td>
+                   <td>Username</td>
+                   <td>Email</td>
+                   <td>Birthday</td>
+                   <td>Phone Number</td>
+                   <td>SSN</td>
+                   <td>Type</td>
+                   <td>Approval</td>
+              </b>
             </tr>
         <form id="approvalForm" name="approvalForm" method="post" action="approve_requests.php">
         <input type="hidden" name="submitted" value="true" />
@@ -89,7 +98,7 @@ while ($row = mysql_fetch_assoc($result))
         <br>
         <br>
         <center><input type="submit" /d></center>
-        <a class="black_button"style="margin-right:191px;" href="../member-profile.php"><span>Return To Profile</span></a>
+        <a class="black_button"style="margin-right:210px;" href="../member-profile.php"><span>Return To Profile</span></a>
     </form>
     </body>
 </html>

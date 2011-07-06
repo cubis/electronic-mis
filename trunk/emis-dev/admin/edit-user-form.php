@@ -42,6 +42,8 @@ session_start();
                     $birthday = $row['Birthday'];
                     $phone = $row['PhoneNumber'];
                     $ssn = $row['SSN'];
+                    $type = $row['Type'];
+                    $need = $row['NeedApproval'];
 //                  $address = $row['Address'];
 //                  $policy = $row['Policy'];
 
@@ -49,11 +51,13 @@ session_start();
                 }
            ?>
             <center><table>
-                <center><tr><td><h3><?echo "$user Personal Infomation";?></h3></td></tr></center>
+                <tr>
+                   <td><h3><?echo "$user Personal Infomation";?></h3></td></tr>
                 <tr>
                     <td>First Name:</td>
                     <td><input type="text" name="Firstname" value= <?echo "$f_name";?> /></td>
                     <td><INPUT TYPE=hidden NAME="ID" VALUE= <?echo "$ID";?>></td>
+		    <td><INPUT TYPE=hidden NAME="Need" VALUE= <?echo "$need";?>></td>
                 </tr>
                 <tr>
                     <td>Last Name:</td><td>
@@ -64,21 +68,23 @@ session_start();
                     <td><select name="Sex">
                             <option value = "M">Male</option>
                             <option value = "F">Female</option>
-                        </select></td>
+                    </select></td>
                 </tr>
                 <tr>
-                    <td>Address:</td><td>
-                        <input type="text" name="Address" value = <?echo "$address";?> /></td>
+                    <td>Address:</td>
+                    <td><input type="text" name="Address" value = <?echo "$address";?> /></td>
                 </tr>
                 <tr>
                     <td>Birthday("YYYY-MM-DD"):</td>
                     <td><input type="text" name="Birthday" value = <?echo "$birthday";?>  /></td>
                 </tr>
                 <tr>
-                    <td>SSN:</td><td>
-                        <input type="text" name="SSN" value = <?echo "$ssn";?>  /></td>
+                    <td>SSN:</td>
+                    <td><input type="text" name="SSN" value = <?echo "$ssn";?>  /></td>
                 </tr>
-                    <tr><td><h3><div class="dashed_line"></div><?echo "$user Contact Information";?></h3></tr><tr></tr>
+                <tr>
+                    <td><h3><div class="dashed_line"></div><?echo "$user Contact Information";?></h3></tr><tr>
+                </tr>
                 <tr>
                     <td>Email:</td>
                     <td><input type="text" name="Email" value = <?echo "$email";?>  /><br />
@@ -88,9 +94,33 @@ session_start();
                     <td><input type="text" name="Phonenumber" value = <?echo "$phone";?>  /></td>
                 </tr>
                 <tr>
-                <tr><td><h3><div class="dashed_line"></div><? echo "$user Insurance Information";?></h3></td></tr>
-                    <td>Insurance Policy Number:</td>
-                    <td><input type="text" name="Policy" value = <?echo "$policy";?>  /></td>
+                    <td><h3><div class="dashed_line"></div><? echo "$user Insurance Information";?></h3></td>
+                </tr>
+                <tr>
+                    <td>Insurance ID:</td>
+                    <td><input type="text" name="Insurance" value=<?echo "$policy";?>/></td>
+                </tr>
+                <tr>
+                    <td>Insurance Group:</td>
+                    <td><input type="text" name="Group" value=<?echo "$policy";?>/></td>
+                </tr>
+                <tr>
+                    <td>Co-Pay:</td>
+                    <td><input type="text" name="Co" value=<?echo "$policy";?>/></td>
+                </tr>
+                <tr>
+                    <td>Coverage Start:</td>
+                    <td><input type="text" name="CoStart" value=<?echo "$policy";?>/></td>
+                </tr>
+                <tr>
+                    <td>Coverage Ends:</td>
+                    <td><input type="text" name="CoEnd" value=<?echo "$policy";?>/></td>
+                </tr>
+                    <td><h3><div class="dashed_line"></div><? echo "$user Access Level";?></h3></td>
+                </tr>
+                <tr>
+                     <td>Type:</td>
+                     <td><input type="text" name="Type" value = <?echo "$type";?>  /></td>
                 </tr>
                 <tr>
                     <td><div class="dashed_line"></div>
