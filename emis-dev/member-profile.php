@@ -1,6 +1,5 @@
 <?php
-//require_once('auth.php');
-session_start();
+require_once('auth.php');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -33,11 +32,10 @@ session_start();
     <center>
         <p><b>You Are An Admin</b></p>
         <div class="dashed_line"></div>
+        <p><b>Your Menu Options</b></p>
         <a href="admin/edit_members.php">View/Edit Members</a>
         <br> 
         <a href="admin/approve_requests.php">View/Approve/Deny Member Request</a>
-        <br>
-        <a href="#">Edit Profile</a>
         <br>
     </center>
 <?php elseif ($_SESSION['SESS_TYPE'] == 300): // Logged in user is a doctor ?>
@@ -69,7 +67,8 @@ session_start();
         <label><strong>User Menu</strong></label>
         <br>
         <a href="#">Set Up Appointments</a> <br>
-        <a href="#">Edit Profile Information</a>
+        <a href="#">Edit Profile Information</a><br>
+        <a href="patient_screen.php">View Medical Information</a>
     </center>
 <?php else: ?>
     I don't know who you are<br />

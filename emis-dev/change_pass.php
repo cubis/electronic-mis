@@ -1,5 +1,6 @@
 <?php
 //headers for session
+session_start();
 require_once('auth.php');
 require_once('config.php');
 require_once('bootstrap.php');
@@ -32,11 +33,14 @@ require_once('bootstrap.php');
                         <center><p><b>Welcome to the Electronic Medical Information System. You may reset your password using the form below.</b></p></center>
                         <div class="dashed_line"></div>
                         <table  align="center" >
-                            <tr><td><label><strong>Current Password</strong></label></td></tr><tr><td><input type="password" name="oldpass" class="textfield" maxlength="20" /></td></tr>
-                            <tr><td><label><strong>New Password</strong></label></td></tr><tr><td><input type="password" name="newpass1"  class="textfield" maxlength="20" /></td></tr>
-                            <tr><td><label><strong>Confirm New Password</strong></label></td></tr><tr><td><input type="password" name="newpass2" class="textfield"maxlength="20" /></td></tr>
-                            <tr><td></td></tr><tr><td><a class="black_button" href="javascript: submitform()"><span>Reset Password</span></a></td></tr>
-                            <tr><td></td></tr><tr><td><a class="black_button" href="member-profile.php"><span>Go Back to Member Profile</span></a></td></tr>
+                            <tr><td><label><strong>Current Password</strong></label></td></tr>
+                                <tr><td><input type="password" name="oldpass" class="textfield" maxlength="20" /></td></tr>
+                            <tr><td><label><strong>New Password</strong></label></td></tr>
+                                <tr><td><input type="password" name="newpass1"  class="textfield" maxlength="20" /></td></tr>
+                            <tr><td><label><strong>Confirm New Password</strong></label></td></tr>
+                                <tr><td><input type="password" name="newpass2" class="textfield"maxlength="20" /></td></tr>
+                            <tr><td><a class="black_button" href="javascript: submitform()"><span>Reset Password</span></a></td></tr>
+                            <tr><td><a class="black_button" href="member-profile.php"><span>Go Back to Member Profile</span></a></td></tr>
                         </table>
                     </form>
                     <center>  
@@ -105,7 +109,6 @@ require_once('bootstrap.php');
  	                                    echo "<p style=\"color: red;\">Your password has been reset!</p>";
                                             $updateQry = "UPDATE Users SET Password='" . md5($_POST['newpass1']) . "' WHERE UserName='{$_SESSION['SESS_USERNAME']}' AND Password='" . md5($_POST['oldpass']) . "'";
                                             mysql_query($updateQry) or die(mysql_error());
-											header("location: member-profile.php");
                                             exit();
                                         } else {
                                             //Login failed or old password is wrong
