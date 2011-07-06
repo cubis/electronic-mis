@@ -18,14 +18,14 @@ function doService($url, $method, $getArgs, $postArgs) {
 	$retVal = "METHOD = " . $method;
 	if($method == 'GET') {
 		if(strtoupper($getArgs['login']) == 'TEST' && strtoupper($getArgs['pw']) == 'TEST')
-			$retVal = output('OK', '1', 'AUTHENTICATION SUCCESS');
+			$retVal = output('OK', '1', 'GET AUTHENTICATION SUCCESS');
 		else
-			$retVal = output('OK', '0', 'AUTHENTICATION FAILURE');
+			$retVal = output('OK', '0', 'GET AUTHENTICATION FAILURE');
 	} else if($method == 'POST') {
 		if(strtoupper($postArgs['login']) == 'TEST' && strtoupper($postArgs['pw']) == 'TEST')
-			$retVal = output('OK', '1', 'AUTHENTICATION SUCCESS');
+			$retVal = output('OK', '1', 'POST AUTHENTICATION SUCCESS');
 		else
-			$retVal = output('OK', '0', 'AUTHENTICATION SUCCESS');
+			$retVal = output('OK', '0', 'POST AUTHENTICATION SUCCESS');
 	} else 
 		return 'UNKNOWN METHOD';
 	return $retVal;
