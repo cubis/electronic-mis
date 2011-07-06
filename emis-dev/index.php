@@ -37,6 +37,7 @@
         </div>
         <a class="black_button" style="margin-right: 60px;" href="javascript: submitform()"><span>Login</span></a>
         <a class="black_button" style="margin-right: 144px;" href="register-form.php"><span>Register</span></a>
+        <input style="margin-right: 60px; visibility:  hidden;" type="submit" value="Login" />
         </form>
         </div>
     </div>
