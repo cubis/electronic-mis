@@ -27,33 +27,25 @@ require_once('bootstrap.php');  //link information
 function outputXML($resultMsg) {
 	$outputString = ''; //start empty
 	$outputString .= '<?xml version="1.0"?>';
-	$outputString .= "<result>".$resultMsg."</result>\n";
-    $outputString .= "<key>".$AUTH_KEY."</key>\n";
-    $outputString .= "<result>".$resultMsg."</result>\n";
+	$outputString .= "<result>" . $resultMsg . "</result>\n";
+    $outputString .= "<key>" . $AUTH_KEY . "</key>\n";
+    $outputString .= "<result>" . $resultMsg . "</result>\n";
 
 	return $outputString;
 }
 
 function doService($url, $method, $getArgs, $postArgs) {
-	if($method == 'GET') {
-        //qry database
-        //
-	//Create query
-  
-     if ($getArgs['login']=='taco') 
-     {
-       $retVal = outputXML('1');
-       return $retVal;
-     }
-   
-	$qry="SELECT * FROM Users WHERE UserName='".$getArgs['login']."' AND Password='".$getArgs['pw']."'";
-	$result=mysql_query($qry);
+	if($method == 'GET')
+	{   
+		$qry="SELECT * FROM Users WHERE UserName='".$getArgs['u']."' AND Password='".$getArgs['p']."'";
+		$result=mysql_query($qry);
 
 		if($result)
 			$retVal = outputXML('1');
 		else
 			$retVal = outputXML('0');
-	} else
+	}
+	else
 		$retVal = outputXML('0'); //fail if not GET method!!
 
 	return $retVal;

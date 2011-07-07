@@ -1,6 +1,6 @@
 <?php
 	//Start session
-	session_start();
+	//session_start();
 	
 	//Include database connection details
 	require_once('config.php');
@@ -44,7 +44,7 @@
 
     //replace starting with your own webroot for debugging...
     
-    $request = "http://localhost/~cookie/emis-dev/Authenticate.php?login=".urlencode($login)."&pw=".urlencode($epw);
+    $request = "http://localhost/emis/emis-dev/Authenticate.php?u=" . urlencode($login) . "&p=" . urlencode($epw);
     print("URL: $request <br />\n");
 
     //format and send request
@@ -81,7 +81,7 @@ print("Response Code: Tag = " . $wsResponse[1]['tag'] . " Value = " . $wsRespons
 print("Response Msg: Tag = " . $wsResponse[3]['tag'] . " Value = " . $wsResponse[3]['value'] . "<br />\n");
 print("Response Detail: Tag = " . $wsResponse[5]['tag'] . " Value = " . $wsResponse[5]['value'] . "<br />\n");
 */
-$result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
+$result = $wsResponse[$wsIndices['result'][0]]['value'];
 
 	if($result=='1') {
 			//Login Successful
