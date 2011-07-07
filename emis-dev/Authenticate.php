@@ -18,45 +18,44 @@
  *
  *  */
 
-/* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */
-$AUTH_KEY = md5("3p1XyTiBj01EM0360lFw");
+
+
 
 require_once('config.php');     //sql connection information
 require_once('bootstrap.php');  //link information
 
 function outputXML($resultMsg) {
+/* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */
+	$AUTH_KEY = md5("3p1XyTiBj01EM0360lFw");
+	
 	$outputString = ''; //start empty
-	$outputString .= '<?xml version="1.0"?>';
+	$outputString .= "<?xml version=\"1.0\"?>\n";
 	$outputString .= "<result>" . $resultMsg . "</result>\n";
     $outputString .= "<key>" . $AUTH_KEY . "</key>\n";
-    $outputString .= "<result>" . $resultMsg . "</result>\n";
 
 	return $outputString;
 }
 
-function doService($url, $method, $getArgs, $postArgs) {
-	if($method == 'GET')
-	{   
-		$qry="SELECT * FROM Users WHERE UserName='".$getArgs['u']."' AND Password='".$getArgs['p']."'";
-		$result=mysql_query($qry);
+function doService() {
+	$qry="SELECT * FROM Users WHERE UserName='" . $_GET['u'] . "' AND Password='" . $_GET['p'] . "'";
+	$result=mysql_query($qry);
 
-		if($result)
-			$retVal = outputXML('1');
-		else
-			$retVal = outputXML('0');
-	}
+	if($result)
+		$retVal = outputXML('1');
 	else
-		$retVal = outputXML('0'); //fail if not GET method!!
-
+		$retVal = outputXML('0');
+		
 	return $retVal;
 }
 
 // set up some useful variables
-$serviceURL = $_SERVER['REQUEST_URI'];
-$serviceMethod = strtoupper($_SERVER['REQUEST_METHOD']);
-$getArgs = $_GET;
-$postArgs = $_POST; //don't care about post
-$retVal = doService($serviceURL, $serviceMethod, $getArgs, $postArgs);
-print($retVal);
-return;
+//$serviceURL = $_SERVER['REQUEST_URI'];
+//$serviceMethod = strtoupper($_SERVER['REQUEST_METHOD']);
+//$getArgs = $_GET;
+//$postArgs = $_POST; //don't care about post
+//$retVal = doService($serviceURL, $serviceMethod, $getArgs);
+
+$output = doService();
+print($output);
+
 ?>
