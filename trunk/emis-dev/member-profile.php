@@ -50,7 +50,7 @@ require_once('auth.php');
         <br>
         <a href="#">View Patients</a> 
         <br>
-        <a href="#">Edit Profile</a> 
+        <a href="edit-member.php">Edit Profile</a> 
     </center>
 <?php elseif ($_SESSION['SESS_TYPE'] == 200): // Logged in user is a nurse ?>
     <center>
@@ -58,7 +58,7 @@ require_once('auth.php');
         <div class="dashed_line"></div>
         <label><strong>User Menu</strong></Label>
         <br>
-        <a href="#">Edit Profile</a> 
+        <a href="edit-member">Edit Profile</a> 
     </center>
 <?php elseif ($_SESSION['SESS_TYPE'] == 1): // Logged in user is a patient ?>
     <center><p><b>You Are A Patient</b></p></center>
@@ -67,7 +67,7 @@ require_once('auth.php');
         <label><strong>User Menu</strong></label>
         <br>
         <a href="#">Set Up Appointments</a> <br>
-        <a href="#">Edit Profile Information</a><br>
+        <a href="edit-member.php">Edit Profile Information</a><br>
         <a href="patient_screen.php">View Medical Information</a>
     </center>
 <?php else: ?>
