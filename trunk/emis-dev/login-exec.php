@@ -55,17 +55,25 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $output = curl_exec($ch); //send URL Request to RESTServer... returns string
     curl_close($ch); //string from server has been returned <XML> closethe channel
-    
+	
 	if( $output == ''){
 		die("CONNECTION ERROR OUTPUT=".$output);
 	}	
 
+	
+	print "OUTPUT: $output\n";
+	
     //-----------------------------
     // TODO: Decode XML with parser and store the true/false in $result
 //Initialize the XML parser
 $parser = xml_parser_create();
 
 xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+
+echo "Index array\n";
+print_r($wsIndices);
+echo "\nVals array\n";
+print_r($wsResponse);
 
 //should be 3 elements inside <response> but parsed as: 
 //	0 response
@@ -81,7 +89,9 @@ print("Response Code: Tag = " . $wsResponse[1]['tag'] . " Value = " . $wsRespons
 print("Response Msg: Tag = " . $wsResponse[3]['tag'] . " Value = " . $wsResponse[3]['value'] . "<br />\n");
 print("Response Detail: Tag = " . $wsResponse[5]['tag'] . " Value = " . $wsResponse[5]['value'] . "<br />\n");
 */
-$result = $wsResponse[$wsIndices['result'][0]]['value'];
+$result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
+	
+	print "RESULT: $result\n";
 
 	if($result=='1') {
 			//Login Successful
