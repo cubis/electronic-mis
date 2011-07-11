@@ -24,26 +24,33 @@
 require_once('config.php');     //sql connection information
 require_once('bootstrap.php');  //link information
 
-function outputXML($resultMsg) {
+function outputXML($resultMsg, $user, $pw) {
 /* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */
-	$AUTH_KEY = md5("3p1XyTiBj01EM0360lFw");
+	$controlString = "3p1XyTiBj01EM0360lFw";
+	$AUTH_KEY = md5($user.$pw.$controlString);
 	
 	$outputString = ''; //start empty
 	$outputString .= "<?xml version=\"1.0\"?>\n";
-	$outputString .= "<result>" . $resultMsg . "</result>\n";
-    $outputString .= "<key>" . $AUTH_KEY . "</key>\n";
-
+	$outputString .= "<content><result>" . $resultMsg . "</result>\n";
+	if($resultMsg == '1' )
+		$outputString .= "<key>" . $AUTH_KEY . "</key>\n";
+	else
+		$outputString .="<key> NO KEY </key>\n";
+		
+	$outputString .= "</content>";
 	return $outputString;
+	
 }
 
 function doService() {
 	$qry="SELECT * FROM Users WHERE UserName='" . $_GET['u'] . "' AND Password='" . $_GET['p'] . "'";
 	$result=mysql_query($qry);
+	$member = mysql_fetch_assoc($result);
 
-	if($result)
-		$retVal = outputXML('1');
+	if(mysql_numrows($result))
+		$retVal = outputXML('1', $_GET['u'], $_GET['p']);
 	else
-		$retVal = outputXML('0');
+		$retVal = outputXML('0', '', '');
 		
 	return $retVal;
 }
@@ -55,7 +62,8 @@ function doService() {
 //$postArgs = $_POST; //don't care about post
 //$retVal = doService($serviceURL, $serviceMethod, $getArgs);
 
-$output = doService();
-print($output);
+	$output = doService();
+	
+	print($output);
 
 ?>

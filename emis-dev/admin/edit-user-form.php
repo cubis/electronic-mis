@@ -50,18 +50,19 @@ session_start();
 
                 }
            ?>
-            <center><table>
-                <tr>
-                   <td><h3><?echo "$user Personal Infomation";?></h3></td></tr>
-                <tr>
-                    <td>First Name:</td>
-                    <td><input type="text" name="Firstname" value= <?echo "$f_name";?> /></td>
-                    <td><INPUT TYPE=hidden NAME="ID" VALUE= <?echo "$ID";?>></td>
-		    <td><INPUT TYPE=hidden NAME="Need" VALUE= <?echo "$need";?>></td>
+	<center><table>
+		<tr>
+			<td><h3><?php echo "$user Personal Infomation";?></h3></td>
+		</tr>
+		<tr>
+			<td>First Name:</td>
+			<td><input type="text" name="Firstname" value= <?php echo "$f_name";?> /></td>
+			<td><INPUT TYPE=hidden NAME="ID" VALUE= <?php echo "$ID";?>></td>
+			<td><INPUT TYPE=hidden NAME="Need" VALUE= <?php echo "$need";?>></td>
                 </tr>
                 <tr>
-                    <td>Last Name:</td><td>
-                        <input type="text" name="Lastname" value = <?echo "$l_name";?> /></td>
+                    <td>Last Name:</td>
+		<td><input type="text" name="Lastname" value = <?php echo "$l_name";?> /></td>
                 </tr>
                 <tr>
                     <td>Sex:</td>
@@ -72,63 +73,67 @@ session_start();
                 </tr>
                 <tr>
                     <td>Address:</td>
-                    <td><input type="text" name="Address" value = <?echo "$address";?> /></td>
+                    <td><input type="text" name="Address" value = <?php echo "$address";?> /></td>
                 </tr>
                 <tr>
                     <td>Birthday("YYYY-MM-DD"):</td>
-                    <td><input type="text" name="Birthday" value = <?echo "$birthday";?>  /></td>
+                    <td><input type="text" name="Birthday" value = <?php echo "$birthday";?>  /></td>
                 </tr>
                 <tr>
                     <td>SSN:</td>
-                    <td><input type="text" name="SSN" value = <?echo "$ssn";?>  /></td>
+                    <td><input type="text" name="SSN" value = <?php echo "$ssn";?>  /></td>
                 </tr>
                 <tr>
-                    <td><h3><div class="dashed_line"></div><?echo "$user Contact Information";?></h3></tr><tr>
+                    <td><h3><div class="dashed_line"></div><?php echo "$user Contact Information";?></h3></tr><tr>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input type="text" name="Email" value = <?echo "$email";?>  /><br />
+                    <td><input type="text" name="Email" value = <?php echo "$email";?>  /><br />
                 </tr>
                 <tr>
                     <td>Phone Number(###-###-####):</td>
-                    <td><input type="text" name="Phonenumber" value = <?echo "$phone";?>  /></td>
+                    <td><input type="text" name="Phonenumber" value = <?php echo "$phone";?>  /></td>
                 </tr>
                 <tr>
-                    <td><h3><div class="dashed_line"></div><? echo "$user Insurance Information";?></h3></td>
+                    <td><h3><div class="dashed_line"></div><?php echo "$user Insurance Information";?></h3></td>
                 </tr>
                 <tr>
                     <td>Insurance ID:</td>
-                    <td><input type="text" name="Insurance" value=<?echo "$policy";?>/></td>
+                    <td><input type="text" name="Insurance" value=<?php echo "$policy";?>/></td>
                 </tr>
                 <tr>
                     <td>Insurance Group:</td>
-                    <td><input type="text" name="Group" value=<?echo "$policy";?>/></td>
+                    <td><input type="text" name="Group" value=<?php echo "$policy";?>/></td>
                 </tr>
                 <tr>
                     <td>Co-Pay:</td>
-                    <td><input type="text" name="Co" value=<?echo "$policy";?>/></td>
+                    <td><input type="text" name="Co" value=<?php echo "$policy";?>/></td>
                 </tr>
                 <tr>
                     <td>Coverage Start:</td>
-                    <td><input type="text" name="CoStart" value=<?echo "$policy";?>/></td>
+                    <td><input type="text" name="CoStart" value=<?php echo "$policy";?>/></td>
                 </tr>
                 <tr>
                     <td>Coverage Ends:</td>
-                    <td><input type="text" name="CoEnd" value=<?echo "$policy";?>/></td>
+                    <td><input type="text" name="CoEnd" value=<?php echo "$policy";?>/></td>
                 </tr>
-                    <td><h3><div class="dashed_line"></div><? echo "$user Access Level";?></h3></td>
+                    <td><h3><div class="dashed_line"></div><?php echo "$user Access Level";?></h3></td>
                 </tr>
                 <tr>
                      <td>Type:</td>
-                     <td><input type="text" name="Type" value = <?echo "$type";?>  /></td>
+                     <td><input type="text" name="Type" value = <?php echo "$type";?>  /></td>
                 </tr>
                 <tr>
                     <td><div class="dashed_line"></div>
                 </tr>
+	      <tr>
+		<td><?php echo "<p style=\"color: red;\">$_GET[msg]</p>"; ?>  </td>
+	      </tr>
             </table></center>
             <a class="black_button" style="margin-right: 70px;" href="javascript: submitform()"><span>Save Changes</span></a>
-            <a class="black_button" style="margin-right: 50px;" href="../admin/edit-user-form.php?ID=<?echo "$ID";?>"><span>Reset Changes</span></a>
+            <a class="black_button" style="margin-right: 50px;" href="../admin/edit-user-form.php?ID=<?php echo "$ID";?>"><span>Reset Changes</span></a>
             <a class="black_button" style="margin-right: 45px;" href="../admin/edit_members.php"><span>Back</span></a>
+	    
         </form>
     </body>
 </html>
