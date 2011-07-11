@@ -55,7 +55,7 @@ function doService($url, $method) {
 				$updateQry = "UPDATE $table_name Set FirstName='$f_name',LastName='$l_name',Sex='$sex',Email='$email',Birthday='$birthday',PhoneNumber='$phone',SSN='$ssn', Type = '$type', NeedApproval='1' WHERE PK_member_id = '$ID'";
 			}
 			if(mysql_query($updateQry)){
-				$retVal = outputXML('1', 'SUCCESSFUL UPDATE');
+				$retVal = outputXML('1', 'SUCCESSFUL UPDATE!');
 			}else {
 				$retVal = outputXML('0', mysql_error());
 			}
@@ -65,7 +65,7 @@ function doService($url, $method) {
 			$retVal = outputXML('0', 'UNAUTHORIZED ACCESS ATTEMPT');
 		}
 	}else{
-		$retVal = 'NOT STUFF';
+		$retVal = outputXML('0', 'RECEIVED INCORRECT MESSAGE');
 	}
 	return $retVal;
 }
