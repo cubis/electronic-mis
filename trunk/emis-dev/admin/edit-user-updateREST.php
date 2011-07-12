@@ -18,7 +18,7 @@ function outputXML($result, $message) {
 	
 }
 
-function doService($url, $method) {
+function doService($url, $method, $level) {
 	if($method == 'POST'){
 		$user = $_POST['u'];
 		$qry="SELECT * FROM Users WHERE UserName='" . $user . "'";
@@ -34,7 +34,7 @@ function doService($url, $method) {
 		$TRUST_KEY = md5($AUTH_KEY.$trustedKey);
 		$postKey = $_POST['key'];
 		
-		if($postKey == $TRUST_KEY){
+		if($postKey == $TRUST_KEY && ((int)$member['Type'])>=$level){
 			$ID = clean($_POST['ID']);
 			$f_name = clean($_POST['Firstname']);
 			$l_name = clean($_POST['Lastname']);
@@ -62,7 +62,7 @@ function doService($url, $method) {
 		} else if($postKey == $AUTH_KEY){
 			$retVal = outputXML('0', 'UNTRUSTED CLIENTS UNABLE TO UPDATE ACCOUNT INFORMATION');
 		} else {
-			$retVal = outputXML('0', 'UNAUTHORIZED ACCESS ATTEMPT');
+			$retVal = outputXML('0',  'UNAUTHORIZED ACCESS');
 		}
 	}else{
 		$retVal = outputXML('0', 'RECEIVED INCORRECT MESSAGE');
@@ -77,7 +77,7 @@ $serviceURL = $_SERVER['REQUEST_URI'];
 $serviceMethod = strtoupper($_SERVER['REQUEST_METHOD']);
 $getArgs = $_GET;
 $postArgs = $_POST; //don't care about post
-$retVal = doService($serviceURL, $serviceMethod);
+$retVal = doService($serviceURL, $serviceMethod, 400);
 
 	
 print($retVal);
