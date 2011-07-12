@@ -115,7 +115,7 @@
 		session_write_close();
 		//	die("ACCESS GAINED");
 		header("location: member-profile.php");
-
+		//print($key);
 		exit();
 		//Login failed
 	
