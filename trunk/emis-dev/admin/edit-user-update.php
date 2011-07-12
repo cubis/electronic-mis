@@ -50,7 +50,5 @@
 	$id = $_POST['ID'];
 	header("location: ../admin/edit-user-form.php?ID=$id&msg=$msg");
 
-
-	print($result);
 	exit();
 ?>
