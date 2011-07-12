@@ -20,7 +20,7 @@ function outputXML($result, $message) {
 
 function doService($url, $method, $level) {
 	if($method == 'POST'){
-		$user = $_POST['u'];
+		$user = strtoupper($_POST['u']);
 		$qry="SELECT * FROM Users WHERE UserName='" . $user . "'";
 		$result=mysql_query($qry);
 		$member = mysql_fetch_assoc($result);
