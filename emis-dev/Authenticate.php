@@ -43,12 +43,13 @@ function outputXML($resultMsg, $user, $pw) {
 }
 
 function doService() {
-	$qry="SELECT * FROM Users WHERE UserName='" . $_GET['u'] . "' AND Password='" . $_GET['p'] . "'";
+	$user = strtoupper($_GET['u']);
+	$qry="SELECT * FROM Users WHERE UserName='" .$user. "' AND Password='" . $_GET['p'] . "'";
 	$result=mysql_query($qry);
 	$member = mysql_fetch_assoc($result);
 
 	if(mysql_numrows($result))
-		$retVal = outputXML('1', $_GET['u'], $_GET['p']);
+		$retVal = outputXML('1', $user, $_GET['p']);
 	else
 		$retVal = outputXML('0', '', '');
 		
