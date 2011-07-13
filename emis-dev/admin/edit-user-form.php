@@ -29,7 +29,7 @@ session_start();
 	    
 	$user = $_SESSION['SESS_USERNAME'];
 	$key = $_SESSION['SESS_AUTH_KEY'];
-	$request = "http://localhost/emis/emis-dev/admin/edit_membersREST.php?u=".urlencode($user)."&key=".urlencode($key)."&targetType=PK_member_id&target=".urlencode($_GET['ID']);
+	$request = "http://localhost/emis/emis-dev/admin/getMemberInfoREST.php?u=".urlencode($user)."&key=".urlencode($key)."&targetType=PK_member_id&target=".urlencode($_GET['ID']);
 
 	//print("URL: $request <br />\n");
 
