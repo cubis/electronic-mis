@@ -5,7 +5,7 @@
 
 Doctor Attributes:
 || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
-|| PK_DoctorID ||  ||  || int(11) ||  ||  ||    
+|| PK_DoctorID ||  ||  || int(11) ||  ||  ||  NULL if value is 2 ||  
 || FK_member_id ||  ||  || int(11) ||  ||  ||    
 || Specialty ||  ||  || varchar(45) ||  ||  ||  
 
