@@ -1,6 +1,6 @@
 <?php
-require_once('config.php');     //sql connection information
-require_once('bootstrap.php');  //link information
+require_once('../configREST.php');     //sql connection information
+require_once('../bootstrapREST.php');  //link information
 
 function outputXML($result, $message) {
 /* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */

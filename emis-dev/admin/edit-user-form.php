@@ -26,30 +26,46 @@ session_start();
                         }
                     </script>
             <?php
-                $connection = @mysql_connect("devdb.fulgentcorp.com","495311team2user","680c12D5!gP592xViF") or die(mysql_error());
-                $database = @mysql_select_db("cs49532011team2", $connection) or die(mysql_error());
-                $table_name = "Users";
-                $sql = "SELECT * FROM $table_name WHERE PK_member_id = '$_GET[ID]'";
-                $result = @mysql_query($sql,$connection) or die(mysql_error());
-                while ($row = mysql_fetch_array($result))
-                {
-                    $ID = $row['PK_member_id'];
-                    $user = $row['UserName'];
- 		    $f_name = $row['FirstName'];
-                    $l_name = $row['LastName'];
-                    $sex = $row['Sex'];
-                    $email = $row['Email'];
-                    $birthday = $row['Birthday'];
-                    $phone = $row['PhoneNumber'];
-                    $ssn = $row['SSN'];
-                    $type = $row['Type'];
-                    $need = $row['NeedApproval'];
+	    
+	$user = $_SESSION['SESS_USERNAME'];
+	$key = $_SESSION['SESS_AUTH_KEY'];
+	$request = "http://localhost/emis/emis-dev/admin/edit_membersREST.php?u=".urlencode($user)."&key=".urlencode($key)."&targetType=PK_member_id&target=".urlencode($_GET['ID']);
+
+	//print("URL: $request <br />\n");
+
+	//format and send request
+	$ch = curl_init($request);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);    
+	curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+	curl_setopt($ch, CURLOPT_HEADER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$output = curl_exec($ch); //send URL Request to RESTServer... returns string
+	curl_close($ch); //string from server has been returned <XML> closethe channel
+	
+	if( $output == ''){
+		die("CONNECTION ERROR ");
+	}
+	
+	$parser = xml_parser_create();
+	xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+	//print("OUTPUT = ".$output."\n");
+	//print_r($wsResponse."\n");
+
+                    $ID = $wsResponse[$wsIndices['ID'][0]]['value'];
+                    $user = $wsResponse[$wsIndices['USERNAME'][0]]['value'];
+ 		    $f_name = $wsResponse[$wsIndices['FIRSTNAME'][0]]['value'];
+                    $l_name = $wsResponse[$wsIndices['LASTNAME'][0]]['value'];
+                    $sex = $wsResponse[$wsIndices['SEX'][0]]['value'];
+                    $email = $wsResponse[$wsIndices['EMAIL'][0]]['value'];
+                    $birthday = $wsResponse[$wsIndices['BIRTHDAY'][0]]['value'];
+                    $phone = $wsResponse[$wsIndices['PHONENUMBER'][0]]['value'];
+                    $ssn = $wsResponse[$wsIndices['SSN'][0]]['value'];
+                    $type = $wsResponse[$wsIndices['TYPE'][0]]['value'];
+                    $need = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
 //                  $address = $row['Address'];
 //                  $policy = $row['Policy'];
 					$locked = $row['Locked'];
 
-
-                }
            ?>
 	<center><table>
 		<tr>
