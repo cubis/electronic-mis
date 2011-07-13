@@ -1,0 +1,4 @@
+#summary Insurance Attribute in Database
+#labels Insurance
+
+= Insurance Attribute in Database =
