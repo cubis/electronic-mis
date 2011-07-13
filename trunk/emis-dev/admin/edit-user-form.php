@@ -46,6 +46,7 @@ session_start();
                     $need = $row['NeedApproval'];
 //                  $address = $row['Address'];
 //                  $policy = $row['Policy'];
+					$locked = $row['Locked'];
 
 
                 }
@@ -124,7 +125,21 @@ session_start();
                      <td><input type="text" name="Type" value = <?php echo "$type";?>  /></td>
                 </tr>
                 <tr>
-                    <td><div class="dashed_line"></div>
+                    <td><h3><div class="dashed_line"></div><?php echo "$user Account status";?></h3></td>
+                </tr>
+				<tr>
+                     <td>Unlocked:</td>
+                     <td>
+					 <input type="radio" name="Status" value="unlock" 
+						<?php if(!$locked) echo "checked"; ?>  />
+					 </td>
+				</tr>
+				<tr>
+					 <td>Locked:</td>
+                     <td>
+					 <input type="radio" name="Status" value="lock"
+						<?php if($locked) echo "checked"; ?>  />
+					 </td>
                 </tr>
 	      <tr>
 		<td><?php echo "<p style=\"color: red;\">$_GET[msg]</p>"; ?>  </td>

@@ -16,7 +16,8 @@
 	'Phonenumber' => urlencode($_POST['Phonenumber']),
 	'SSN' => urlencode($_POST['SSN']),
 	'Type' => urlencode($_POST['Type']),
-	'Need' => urlencode($_POST['Need'])    
+	'Need' => urlencode($_POST['Need']),
+	'Status' => urlencode($_POST['Status'])
   );
     
    foreach($fields as $key=>$value){
