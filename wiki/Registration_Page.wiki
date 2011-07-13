@@ -1,4 +1,5 @@
 #summary Specifications for Form on Registration Page
+#labels Registration,Page
 
 = Specifications for Form on Registration Page =
 
@@ -11,4 +12,4 @@
 ||Password||22||
 ||Confirm Password||22||
 
-[http://code.google.com/p/electronic-mis/wiki/Form_Fields Go Back to Form Fields]
+[http://code.google.com/p/electronic-mis/wiki/Form_Fields Back to Form Fields]
