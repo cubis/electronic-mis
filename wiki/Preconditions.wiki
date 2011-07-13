@@ -1,4 +1,10 @@
 #summary Preconditions Attribute in Database
 #labels Preconditions
 
-= Preoconditions Attribute in Database =
+= Preconditions Attribute in Database =
+
+Preconditions Attributes: 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Condition_ID ||  ||  || int(11) ||  ||  ||    
+|| FK_Patient_ID ||  ||  || int(11) ||  ||  ||    
+|| Description ||  ||  || varchar(2000) ||  ||  ||  
