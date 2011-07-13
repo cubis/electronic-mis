@@ -7,5 +7,3 @@
 This document aims to record and standardize all major aspects in the Emergency Medical Information System (EMIS) project for CS 4953.
 
 [http://code.google.com/p/electronic-mis/wiki/Table_Of_Contents Table of Contents]
-
-[http://electronic-mis.googlecode.com/files/flow1.png http://electronic-mis.googlecode.com/files/flow1.png]
