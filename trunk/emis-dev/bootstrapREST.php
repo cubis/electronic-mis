@@ -23,20 +23,19 @@ function clean($str) {
     return mysql_real_escape_string($str);
 }
 
-function logToDB($actionDescription, $isLoggedIn)
+function logToDB($actionDescription, $isLoggedIn, $userID)
 {
 	// Add this function to events of the program that should be logged.
 	// Example: logToDB("User logged into the system", TRUE);
 	
 	// In the event that a user failed login, we will want to record the username by pulling
 	// it from the form on the page and inserting it into $actionDescription.
-	
-	$ipAddress = @$REMOTE_ADDR;
-	$type = $actionDescription;
+	$ipAddress = getenv("REMOTE_ADDR");
 
-	if($loggedIn) {
+	$type = $actionDescription;
+	
+	if($isLoggedIn) {
 		// User is logged in. Add userID to FK_member_id in the table.
-		$userID = $_SESSION['SESS_MEMBER_ID'];
 		$dbLog = "INSERT INTO LogFiles (SourceIP, Type, PurgeDate, FK_member_id, TimeStamp) 
 		VALUES ('$ipAddress', '$type', CURDATE() + INTERVAL '1' MONTH, '$userID', NOW())";
 	}
@@ -47,5 +46,9 @@ function logToDB($actionDescription, $isLoggedIn)
 	}
 
 	$result = mysql_query($dbLog);
+	
+	return $dbLog;
+	
+	
 }
 ?>

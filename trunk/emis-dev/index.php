@@ -11,7 +11,7 @@
 <body>
     <div style="width: 400px; margin-left: auto; margin-right: auto; margin-top: 40px;">
     <div class="login_box">
-    <center><img src="img/logo.png" alt="Electronic Medical Information System" /></center>
+    <center><img src="img/logo.png" alt="Electronic Medical Information System"  /></center>
     <div>
         <script type="text/javascript">
         function submitform(){
