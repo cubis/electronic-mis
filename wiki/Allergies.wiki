@@ -2,3 +2,9 @@
 #labels Allergies
 
 = Allergies Attribute in Database =
+
+Allergies Attributes:
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Allergy_ID ||  ||  || int(11) ||  ||  ||    
+|| FK_Patient_ID ||  ||  || int(11) ||  ||  ||    
+|| Description ||  ||  || varchar(2000) ||  ||  ||  
