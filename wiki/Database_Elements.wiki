@@ -2,3 +2,16 @@
 #labels DatabaseElements,Database,Elements,List,ListandDecriptionofDatabaseElements
 
 = List and Description of Database Elements =
+
+Allergies
+Appointment
+Copayment
+Doctor
+Files
+History
+LogFiles
+Medications
+Nurse
+Patient
+Preconditions
+User
