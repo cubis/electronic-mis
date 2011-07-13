@@ -16,7 +16,7 @@ Patient
 Preconditions
 User
 
-[http://code.google.com/p/electronic-mis/wiki/Allergies Allergies]
+[http://code.google.com/p/electronic-mis/wiki/Allergies Allergies]<br>
 [http://code.google.com/p/electronic-mis/wiki/Appointment Appointment]
 [http://code.google.com/p/electronic-mis/wiki/Copayment Copayment]
 [http://code.google.com/p/electronic-mis/wiki/Doctor Doctor]
