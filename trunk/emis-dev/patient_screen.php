@@ -24,102 +24,97 @@ session_start();
                         }
                     </script>
             <?php
-                $connection = @mysql_connect("devdb.fulgentcorp.com","495311team2user","680c12D5!gP592xViF") or die(mysql_error());
-                $database = @mysql_select_db("cs49532011team2", $connection) or die(mysql_error());
-                $table_name = "Users";
-                $sql = "SELECT * FROM $table_name WHERE UserName = '{$_SESSION['SESS_USERNAME']}'"; 
-                $result = @mysql_query($sql,$connection) or die(mysql_error());
-                while ($row = mysql_fetch_array($result))
-                {
-                    $user = $row['UserName'];
-                    $f_name = $row['FirstName'];
-                    $l_name = $row['LastName'];
-                    $sex = $row['Sex'];
-                    $email = $row['Email'];
-                    $birthday = $row['Birthday'];
-                    $phone = $row['PhoneNumber'];
-                    $ssn = $row['SSN'];
-//                  $address = $row['Address'];
-//                  $policy = $row['Policy'];
+	    
+		$user = $_SESSION['SESS_USERNAME'];
+		$key = $_SESSION['SESS_AUTH_KEY'];
+		$request = "http://localhost/emis/emis-dev/patient_screenREST.php?u=".urlencode($user)."&key=".urlencode($key);
+	
+	//print("--------------------------------".($_GET['targetType'] == ''));
+	//print("URL: $request <br />\n");
 
-
-                }
+	//format and send request
+	$ch = curl_init($request);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);    
+	curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+	curl_setopt($ch, CURLOPT_HEADER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$output = curl_exec($ch); //send URL Request to RESTServer... returns string
+	curl_close($ch); //string from server has been returned <XML> closethe channel
+	
+	if( $output == ''){
+		die("CONNECTION ERROR ");
+	}
+	
+		$parser = xml_parser_create();
+		xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+		//print("OUTPUT = ".$output."\n");
+		//print_r($wsResponse);
+            
+		
+			
+		    $InsuranceID = $wsResponse[$wsIndices['INSURANCEID'][0]]['value'];
+		    $InsuranceGroup = $wsResponse[$wsIndices['INSURANCEGROUP'][0]]['value'];
+		    $CoPay = $wsResponse[$wsIndices['COPAY'][0]]['value'];
+		    $Start = $wsResponse[$wsIndices['START'][0]]['value'];
+		    $End = $wsResponse[$wsIndices['END'][0]]['value'];
+		    $PrimaryDoctor = $wsResponse[$wsIndices['DOCTOR'][0]]['value'];
+		    
+		    
+		    $numPrecs =  $wsResponse[$wsIndices['NUMPRECS'][0]]['value'];
+		    $ct = 0;
+		    $Preconditions = "";
+		    while($ct < $numPrecs){
+			$Preconditions .= "-".$wsResponse[$wsIndices['PRECONDITION'][$ct]]['value']."\n<br />";		    
+			$ct+=1;
+		    }
+		    
+		    
+		    $numMeds = $wsResponse[$wsIndices['NUMMEDS'][0]]['value'];
+		    $ct = 0;
+		    $Medication = "";
+		    while($ct < $numMeds){
+			$Medication .= "-".$wsResponse[$wsIndices['MEDICATION'][0]]['value']."\n<br />";		    
+			$ct+=1;
+		    }
            ?>
             <center><table>
                 <tr>
-                    <td><h3><?echo "$user Personal Infomation";?></h3></td>
+                    <td><h3><?php echo "$user Personal Infomation";?></h3></td>
                 </tr>
-                <tr>
-                    <td>First Name:</td>
-                    <td><b><?echo "$f_name";?><b></td>
-                </tr>
-                <tr>
-                    <td>Last Name:</td>
-                    <td><b><?echo "$l_name";?><b></td>
-                </tr>
-                <tr>
-                    <td>Sex:</td>
-                    <td><b><?echo "$sex";?><b></td>
-                </tr>
-                <tr>
-                    <td>Address:</td>
-                    <td><b><?echo "$address";?><b></td>                
-                </tr>
-                <tr>
-                    <td>Birthday("YYYY-MM-DD"):</td>
-                    <td><b><?echo "$birthday";?><b></td>
-                </tr>
-                <tr>
-                    <td>SSN:</td>
-                    <td><b><?echo "$ssn";?><b></td>
-                </tr>
-                <tr>
-                    <td><h3><div class="dashed_line"></div><?echo "$user Contact Information";?></h3></tr><tr>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><b><?echo "$email";?><b></td>
-                </tr>
-                <tr>
-                    <td>Phone Number(###-###-####):</td>
-                    <td><b><?echo "$phone";?><b></td>
-                </tr>
-                <tr>
-                    <td><h3><div class="dashed_line"></div><? echo "$user Insurance Information";?></h3></td>
-                </tr>
+                
                 <tr>
                     <td>Insurance ID:</td>
-                    <td><b><?echo "$policy";?><b></td>
+                    <td><b><?php echo "$InsuranceID";?><b></td>
                 </tr>
                 <tr>
                     <td>Insurance Group:</td>
-                    <td><b><?echo "$policy";?><b></td>
+                    <td><b><?php echo "$InsuranceGroup";?><b></td>
                 </tr>
                 <tr>
                     <td>Co-Pay:</td>
-                    <td><b><?echo "$policy";?><b></td>
+                    <td><b><?php echo "$CoPay";?><b></td>
                 </tr>
                 <tr>
                     <td>Coverage Start:</td>
-                    <td><b><?echo "$policy";?><b></td>
+                    <td><b><?php echo "$Start";?><b></td>
                 </tr>
                 <tr>
                     <td>Coverage Ends:</td>
-                    <td><b><?echo "$policy";?><b></td>
+                    <td><b><?php echo "$End";?><b></td>
                 </tr>
                     <td><h3><div class="dashed_line"></div><? echo "$user Medical Information";?></h3></td>
                 </tr>
                 <tr>    
-                    <td>Allergies:</td>
-                    <td><b><?echo "$policy";?><b></td>
+                    <td>Preconditions:</td>
+                    <td><b><?php echo "$Preconditions";?><b></td>
                 </tr>
                 <tr>
                     <td>Medication:</td>
-                    <td><b><?echo "$policy";?><b></td>
+                    <td><b><?php echo "$Medication";?><b></td>
                 </tr>
                 <tr>
                     <td>Primary Doctor:</td>
-                    <td><b><?echo "$policy";?><b></td>
+                    <td><b><?php echo "$PrimaryDoctor";?><b></td>
                 </tr>
                 <tr>
                     <td><div class="dashed_line"></div>
