@@ -15,7 +15,7 @@ History Attributes:
 || Old_Date ||  ||  || date ||  ||  ||    
 || New_Date ||  ||  || date ||  ||  ||    
 || Old_Time ||  ||  || time ||  ||  ||    
-|| Neww_Time ||  ||  || time ||  || New_Time couldn’t be a valid name ||    
+|| Neww_Time ||  ||  || time || || || New_Time couldn’t be a valid name ||    
 || Old_String ||  ||  || varchar(2000) ||  ||  ||    
 || New_String ||  ||  || varchar(2000) ||  ||  ||    
 || Old_Double ||  ||  || double(9,2) ||  ||  ||  ||    
