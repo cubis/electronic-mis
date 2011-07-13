@@ -1,5 +1,5 @@
 #summary List and Description of Database Elements
-#labels DatabaseElements,Database,Elements,List,ListandDecriptionofDatabaseElements
+#labels Description,Database,Elements,List
 
 = List and Description of Database Elements =
 
@@ -28,5 +28,7 @@ User
 [http://code.google.com/p/electronic-mis/wiki/Patient Patient]<br>
 [http://code.google.com/p/electronic-mis/wiki/Preconditions Preconditions]<br>
 [http://code.google.com/p/electronic-mis/wiki/User User]<br>
+
+[http://electronic-mis.googlecode.com/files/Database Structure.png http://electronic-mis.googlecode.com/files/Database Structure.png]
 
 [http://code.google.com/p/electronic-mis/wiki/Table_Of_Contents Back to Table of Contents]
