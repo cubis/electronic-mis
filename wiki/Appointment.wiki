@@ -18,6 +18,6 @@ Appointment Attributes
 || Diagnosis ||  ||  || varchar(2000) ||  ||  ||    
 || Treatment ||  ||  || varchar(2000) ||  ||  ||    
 || FK3_Med_ID ||  ||  || int(11) ||  ||  ||    
-|| Bill_Total ||  ||  || double(9 || 2) ||  ||  ||    
+|| Bill_Total ||  ||  || double(9,2) ||  ||  ||  ||    
 || Payment_Plan ||  ||  || varchar(2000) ||  ||  ||    
 || Num_Months ||  ||  || smallint ||  ||  ||  
