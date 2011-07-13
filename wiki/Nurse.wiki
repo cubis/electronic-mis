@@ -7,3 +7,5 @@ Nurse Attributes:
 || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
 || PK_Nurse_ID ||  ||  || int(11) ||  ||  ||    
 || FK_Member_ID ||  ||  || int(11) ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
