@@ -4,7 +4,6 @@
 = Logfiles Attribute in Database =
 
 Logfiles Attributes:
-||  ||  ||  ||  ||  ||  || 
 || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes    ||    
 || PK_Log_ID ||  ||  || int(11) ||  ||  ||    
 || FK_Member_ID ||  ||  || int(11) ||  ||  ||    
