@@ -11,9 +11,9 @@ require_once('bootstrap.php');
 	$fields = array(
 		'u' => urlencode($_SESSION['SESS_USERNAME']),
 		'key' => urlencode($_SESSION['SESS_AUTH_KEY']),
-		'oldpass' => urlencode(md5($_POST['oldpass'])),
-		'newpass1' => urlencode(md5($_POST['newpass1'])),
-		'newpass2' => urlencode(md5($_POST['newpass2']))
+		'oldpass' => urlencode($_POST['oldpass']),
+		'newpass1' => urlencode($_POST['newpass1']),
+		'newpass2' => urlencode($_POST['newpass2'])
 	);
     
 	foreach($fields as $key=>$value){
@@ -45,7 +45,12 @@ require_once('bootstrap.php');
 	$id = $_POST['ID'];
 	//print_r($wsResponse);
 	if($result == '1'){
-		$_SESSION['AUTH_KEY'] = $wsResponse[$wsIndices['KEY'][0]]['value'];
+	$trustedKey = "xolJXj25jlk56LJkk5677LS";
+	$authKey = $wsResponse[$wsIndices['KEY'][0]]['value'];
+		$_SESSION['SESS_AUTH_KEY'] = md5($authKey.$trustedKey);
+		$errStr = 'PASSWORD CHANGED';
+
+		print($_SESSION['AUTH_KEY']);
 	}else{
 		$errStr = $wsResponse[$wsIndices['ERROR'][0]]['value'];
 	}
