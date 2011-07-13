@@ -2,5 +2,3 @@
 #labels User
 
 = User Attribute in Database =
-
-A
