@@ -1,5 +1,5 @@
 #summary LogFiles Attribute in Database
-#labels LogFiles
+#labels LogFiles,Log,Files
 
 = Logfiles Attribute in Database =
 
@@ -11,3 +11,5 @@ Logfiles Attributes:
 || Type ||  ||  ||  ||  || || Type of Method  ||
 || Purgedate ||  ||  || date ||  ||  ||    
 || Timestamp ||  ||  || time ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
