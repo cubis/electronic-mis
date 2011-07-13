@@ -4,6 +4,52 @@ session_start();
 require_once('auth.php');
 require_once('config.php');
 require_once('bootstrap.php');
+	//print("POST = ".$_POST['oldpass']);
+	if(!($_POST['oldpass'] == '') ){
+
+	$url = "http://localhost/emis/emis-dev/changePasswordREST.php";
+	$fields = array(
+		'u' => urlencode($_SESSION['SESS_USERNAME']),
+		'key' => urlencode($_SESSION['SESS_AUTH_KEY']),
+		'oldpass' => urlencode(md5($_POST['oldpass'])),
+		'newpass1' => urlencode(md5($_POST['newpass1'])),
+		'newpass2' => urlencode(md5($_POST['newpass2']))
+	);
+    
+	foreach($fields as $key=>$value){
+		$field_string .= $key.'='.$value.'&';
+	}
+  
+	rtrim($field_string, '&');
+    
+    
+    
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_POST, 0);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $field_string);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);    
+	curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+	curl_setopt($ch, CURLOPT_HEADER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$output = curl_exec($ch);
+	$errStr = '';
+	curl_close($ch);
+   
+	$parser = xml_parser_create();
+	
+	xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+	
+	
+	$result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
+	$msg = $wsResponse[$wsIndices['MESSAGE'][0]]['value'];
+	$id = $_POST['ID'];
+	//print_r($wsResponse);
+	if($result == '1'){
+		$_SESSION['AUTH_KEY'] = $wsResponse[$wsIndices['KEY'][0]]['value'];
+	}else{
+		$errStr = $wsResponse[$wsIndices['ERROR'][0]]['value'];
+	}
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -45,6 +91,15 @@ require_once('bootstrap.php');
                     </form>
                     <center>  
                             <?php
+			    
+		
+	//header("location: ../admin/edit-user-form.php?ID=$id&msg=$msg");
+			    
+			    
+			/*    $errmsg_arr[] = 'New and old passwords must be different';
+			echo "<p style=\"color: red;\">Error: New and old passwords must be different.</p>";
+				$errflag = true;
+			    
                             $errflag = false;
 
                             if (isset($_POST['oldpass'])) {
@@ -122,7 +177,7 @@ require_once('bootstrap.php');
                                     } else {
                                         echo "<p style=\"color: red;\">Result was empty!</p>";
                                     }
-                                } else {
+                                } else {				
                                     $errmsg_arr[] = 'New Passwords do not match';
                                     $errflag = true;
                                     $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
@@ -133,7 +188,8 @@ require_once('bootstrap.php');
                             //in case the sql login fails, for debugging
                             else {
 
-                            }
+                            }*/
+			    echo $errStr;
                             ?>
                     </center>
                 </div>
