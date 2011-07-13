@@ -18,5 +18,5 @@ History Attributes:
 || Neww_Time ||  ||  || time ||  || New_Time couldn’t be a valid name ||    
 || Old_String ||  ||  || varchar(2000) ||  ||  ||    
 || New_String ||  ||  || varchar(2000) ||  ||  ||    
-|| Old_Double ||  ||  || double(9 || 2) ||  ||  ||    
-|| New_Double ||  ||  || double(9 || 2) ||  ||  ||  
+|| Old_Double ||  ||  || double(9,2) ||  ||  ||  ||    
+|| New_Double ||  ||  || double(9,2) ||  ||  ||  ||  
