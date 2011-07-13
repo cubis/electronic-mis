@@ -21,3 +21,5 @@ Appointment Attributes
 || Bill_Total ||  ||  || double(9,2) ||  ||  ||  ||    
 || Payment_Plan ||  ||  || varchar(2000) ||  ||  ||    
 || Num_Months ||  ||  || smallint ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
