@@ -1,0 +1,4 @@
+#summary Appointment Attribute in Database
+#labels Appointment
+
+= Appointment Attribute in Database =
