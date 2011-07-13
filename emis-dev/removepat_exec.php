@@ -8,7 +8,7 @@
 	//$qry="SELECT * FROM Patients";
 	//$result1=mysql_query($qry);
         $did = 2;
-	$upquer = "UPDATE Patient SET FK_DoctorID = '".$did."' WHERE PK_PatientID = '".$pid."'";
+	$upquer = "UPDATE Patient SET FK_DoctorID = NULL WHERE PK_PatientID = '".$pid."'";
 	
 	mysql_query($upquer)
 ?>
