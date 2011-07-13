@@ -1,7 +1,9 @@
 #summary Page One
-#labels Objective
+#labels Objective,Page1
 
 = “The Bible” - 1st Ed. (July 2011) =
                            Written by Mu Li, contributed by everyone
 
 This document aims to record and standardize all major aspects in the Emergency Medical Information System (EMIS) project for CS 4953.
+
+<wiki:gadget url="http://code.google.com/p/electronic-mis/TableOfContents" height="200" border="0" />
