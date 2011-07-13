@@ -8,4 +8,4 @@ This document aims to record and standardize all major aspects in the Emergency 
 
 [http://code.google.com/p/electronic-mis/wiki/Table_Of_Contents Table of Contents]
 
-[http://code.google.com/p/electronic-mis/downloads/detail?name=flow1.png http://code.google.com/p/electronic-mis/downloads/detail?name=flow1.png]
+[http://code.google.com/p/electronic-mis/downloads/flow1.png http://code.google.com/p/electronic-mis/downloads/flow1.png]
