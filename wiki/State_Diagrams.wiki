@@ -1,0 +1,6 @@
+#summary State Diagrams
+#labels State,Diagrams,flow1,flow2,flow
+
+[http://electronic-mis.googlecode.com/files/flow1.png http://electronic-mis.googlecode.com/files/flow1.png]
+
+[http://electronic-mis.googlecode.com/files/flow2.png http://electronic-mis.googlecode.com/files/flow2.png]
