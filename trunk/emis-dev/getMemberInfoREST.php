@@ -19,15 +19,18 @@ function outputXML($result, $message, $targetType, $target) {
 			$qry="SELECT * FROM Users WHERE ".$targetType."='".$target."'";
 		}
 		$sqlResult=mysql_query($qry);	
-		if(!$sqlResult){
+		if(!$sqlResult)
+		{
 			$message = mysql_error();
 			$outputString .= "<message>".$message."</message>\n";
-		} else {
-		
+		}
+		else
+		{
 			$userCount = mysql_num_rows($sqlResult);
 			$outputString .= "<count>".$userCount."</count>\n";
 		
-			while ($row = mysql_fetch_assoc($sqlResult)){
+			while ($row = mysql_fetch_assoc($sqlResult))
+			{
 				$outputString .= "<Entry>";
 				$outputString .="<ID>".$row['PK_member_id']."</ID>\n";
 				$outputString .= "<FirstName>".$row['FirstName']."</FirstName>\n";
@@ -40,21 +43,22 @@ function outputXML($result, $message, $targetType, $target) {
 				$outputString .= "<SSN>".$row['SSN']."</SSN>\n";
 				$outputString .= "<Type>".$row['Type']."</Type>\n";
 				$outputString .= "<NeedApproval>".$row['NeedApproval']."</NeedApproval>\n";
+				$outputString .= "<Locked>".$row['Locked']."</Locked>\n";
 				$outputString .= "</Entry>";
-			
 			}
-			
 		}
 		
-	} else {
-		$outputString .= "<message>".$message."</message>";
 	}
+	else
+	{
+		$outputString .= "<message>" . $message . "</message>";
+	}
+	
 	$outputString .= "</content>";
 	
 	
 
 	return $outputString;
-	
 }
 
 function doService($url, $method, $levelForAll) {
@@ -74,22 +78,44 @@ function doService($url, $method, $levelForAll) {
 		$TRUST_KEY = md5($AUTH_KEY.$trustedKey);
 		$postKey = $_GET['key'];
 		
-		if($postKey == $TRUST_KEY && ((int)$member['Type'])>=$levelForAll){
-			if($_GET['targetType'] == '' || $_GET['target'] == ''){
+		// admin requesting info
+		if($postKey == $TRUST_KEY && ((int)$member['Type'])>=$levelForAll)
+		{
+		
+			// request all users' info
+			if($_GET['targetType'] == '' || $_GET['target'] == '')
+			{
 				$retVal = outputXML('1', '', '', '');
-			} else {
+			}
+			
+			// request a single user's info
+			else
+			{
 				$retVal = outputXML('1', '', $_GET['targetType'], $_GET['target']);
 			}
-		} else if($postKey == $TRUST_KEY){
+		}
+		
+		// non-admin user, receives only his info 
+		else if($postKey == $TRUST_KEY)
+		{
 			$retVal = outputXML('1', '', 'UserName', $user);
-		}else if($postKey == $AUTH_KEY){
+		}
+		
+		// untrusted client
+		else if($postKey == $AUTH_KEY)
+		{
 			$retVal = outputXML('0', 'UNTRUSTED CLIENTS UNABLE TO UPDATE ACCOUNT INFORMATION');
-		} else {
+		}
+		
+		// random error, fuck off
+		else {
 			$retVal = outputXML('0',  'UNAUTHORIZED ACCESS');
 		}
-	}else{
-		$retVal = outputXML('0', 'RECEIVED INCORRECT MESSAGE');
-		
+	}
+	
+	else
+	{
+		$retVal = outputXML('0', 'RECEIVED INCORRECT MESSAGE');	
 	}
 	
 	return $retVal;
