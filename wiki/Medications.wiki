@@ -1,0 +1,4 @@
+#summary Medications Attribute in Database
+#labels Medications
+
+= Medications Attribute in Database =
