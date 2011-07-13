@@ -64,7 +64,7 @@ session_start();
                     $need = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
 //                  $address = $row['Address'];
 //                  $policy = $row['Policy'];
-					$locked = $row['Locked'];
+					$locked = $wsResponse[$wsIndices['LOCKED'][0]]['value'];
 
            ?>
 	<center><table>
