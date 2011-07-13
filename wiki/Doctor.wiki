@@ -3,3 +3,8 @@
 
 = Doctor Attribute in Database =
 
+Doctor Attributes:
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_DoctorID ||  ||  || int(11) ||  ||  ||    
+|| FK_member_id ||  ||  || int(11) ||  ||  ||    
+|| Specialty ||  ||  || varchar(45) ||  ||  ||  
