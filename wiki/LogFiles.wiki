@@ -1,4 +1,4 @@
 #summary LogFiles Attribute in Database
 #labels LogFiles
 
-= LogFiles Attribute in Database =
+= Logfiles Attribute in Database =
