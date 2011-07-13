@@ -1,0 +1,4 @@
+#summary Patient Attribute in Database
+#labels Patient
+
+= Patient Attribute in Database =
