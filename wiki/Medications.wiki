@@ -2,3 +2,11 @@
 #labels Medications
 
 = Medications Attribute in Database =
+
+Medications Attributes:
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Medication_ID ||  ||  || int(11) ||  ||  ||    
+|| Medicine ||  ||  || varchar(100) ||  ||  ||    
+|| Dosage ||  ||  || varchar(100) ||  ||  ||    
+|| Start_Date ||  ||  || date ||  ||  ||    
+|| End_Date ||  ||  || date ||  ||  ||
