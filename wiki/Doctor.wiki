@@ -1,0 +1,5 @@
+#summary Doctor Attribute in Database
+#labels Doctor
+
+= Doctor Attribute in Database =
+
