@@ -1,133 +1,106 @@
-import java.io.File;
-import java.io.FileInputStream;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.*;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.security.*;
 import java.net.URLEncoder;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
-
-
-//import sun.misc.BASE64Encoder;
-
-public class emisUntrusted {
+class Login extends JFrame implements ActionListener
+{
 	
-    private static final String GET = "GET";
-    private static final String PUT = "PUT";
-    private static final String DELETE = "DELETE";
-    private static final String POST = "POST";
-    
-    private emisUntrusted() {
-    	super();
-    }
-    private static void usage()
-    {
-        System.out.println("Usage:");
-        System.out.println("  For get and delete:");
-        System.out.println("    java -jar restclient.jar user pass GET/DELETE url");
-   /*     System.out.println("");
-        System.out.println("  For put and post, sending the contents of a file as the body:");
-        System.out.println("    java -jar restclient.jar [-quiet] user pass PUT/POST url filename");
-        System.out.println("");
-        System.out.println("  -quiet will cause only the response body to be printed, otherwise");
-        System.out.println("  the response headers and timing information is included.");
-   */
-        System.exit(1);
-    }
+	private static final String GET = "GET";
+
+	private static final long serialVersionUID = 1L;
 	
-    public static void main(String[] arguments){
-    	
-    	
-        //     if (!args.hasNext()) usage();
-        String user = "DMoney";
+	JButton SUBMIT;
+	JPanel panel;
+	JLabel label1,label2;
+	static JTextField text1;
+	final JTextField text2;
+	
+	Login()
+	{
+	    label1 = new JLabel();
+		label1.setText("Username:");
+		text1 = new JTextField(15);
 
-//        if (!args.hasNext()) usage();
-    	String myPw = "Capone";
-    	String epw = "";
-    	try{
-    	
-    	/* 												THIS GARBAGE DOES MD5 FOR YOU */
-    		byte[] bytesOfMessage = myPw.getBytes("UTF-8");
-
-    		MessageDigest md = MessageDigest.getInstance("MD5");
-    		
-    		
-    	    md.update(bytesOfMessage);
-    	    byte[] hash = md.digest();
-    	    String hexString = convertToHex(hash);
-    	    epw = hexString;
-    	} catch (Exception e){
-    		System.err.println(e);
-    		System.exit(1);
-    	}
-
-    //	 List<String> argsList = new ArrayList<String>(arguments.length);
-     //    for (int i=0; i<arguments.length; i++) argsList.add(arguments[i]);
-         
-     //    Iterator args = argsList.iterator();
-         
-         boolean quiet = false;
+		label2 = new JLabel();
+		label2.setText("Password:");
+	    text2 = new JPasswordField(15);
+	    //this.setLayout(new BorderLayout());
  
+		SUBMIT=new JButton("SUBMIT");
+		
+        panel=new JPanel(new GridLayout(3,1));
+		panel.add(label1);
+		panel.add(text1);
+		panel.add(label2);
+		panel.add(text2);
+		panel.add(SUBMIT);
+	    add(panel,BorderLayout.CENTER);
+        SUBMIT.addActionListener(this);
+        setTitle("LOGIN FORM");
+	}
+	
+	public void actionPerformed(ActionEvent ae)
+	{
+		String user = text1.getText();
+		String myPw = text2.getText();
+		String epw = "";
+		
+		try {
+			/* THIS GARBAGE DOES MD5 FOR YOU */
+	    	byte[] bytesOfMessage = myPw.getBytes("UTF-8");
 
-         
-         try
-         {
-    //         if (!args.hasNext()) usage();
-             String method = "GET";
-             
-      //       if (!args.hasNext()) usage();
-             URL url = new URL("http://localhost/emis/emis-dev/Authenticate.php?u="+URLEncoder.encode(user)+"&p="+URLEncoder.encode(epw));
-             
-             if (GET.equalsIgnoreCase(method))
-             {
-               //  if (args.hasNext()) usage();
-                 request(quiet, GET, url, user, myPw, null);
-             }
-             else{
-            	 usage();
-             }
-            	 
-             	/*												THIS IS FOR ALL OTHER MESSAGES
-            	 if (PUT.equalsIgnoreCase(method))
-             {
-                 if (!args.hasNext()) usage();
-                 String file = (String)args.next();
-                 request(quiet, PUT, url, user, pass, new FileInputStream(new File(file)));
-             }
-             else if (POST.equalsIgnoreCase(method))
-             {
-                 if (!args.hasNext()) usage();
-                 String file = (String)args.next();
-                 request(quiet, POST, url, user, pass, new FileInputStream(new File(file)));
-             }
-             else if (DELETE.equalsIgnoreCase(method))
-             {
-                 if (args.hasNext()) usage();
-                 request(quiet, DELETE, url, user, pass, null);
-             }
-             else
-             {
-                 usage();
-             }      */                                                               
-             
-         }
-         catch (Exception x)
-         {
-             System.err.println(x);
-             System.exit(1);
-         }
-         
-         
-    	
-    }
-    
-    private static String convertToHex(byte[] data) { 
+	   		MessageDigest md = MessageDigest.getInstance("MD5");
+	    		
+	   	    md.update(bytesOfMessage);
+	   	    byte[] hash = md.digest();
+	   	    String hexString = convertToHex(hash);
+    	    epw = hexString;
+		} catch (Exception e) {
+	 		System.err.println(e);
+	    		System.exit(1);
+	    }
+		
+		boolean quiet = false;
+
+        try
+        {
+            String method = "GET";
+            
+            URL url = new URL("http://localhost/emis-dev/Authenticate.php?u="+URLEncoder.encode(user)+"&p="+URLEncoder.encode(epw));
+            
+            if (GET.equalsIgnoreCase(method))
+            {
+                request(quiet, GET, url, user, myPw, null);
+            }
+            else {
+            	JOptionPane.showMessageDialog(this,"Error. Something went wrong.", "Error", JOptionPane.ERROR_MESSAGE);
+            }                                                     
+        }
+        catch (Exception x)
+        {
+            System.err.println(x);
+            System.exit(1);
+        }
+	}
+	
+	public static String getUsername() {
+		return(text1.getText());
+	}
+	
+	private static String convertToHex(byte[] data) { 
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < data.length; i++) { 
             int halfbyte = (data[i] >>> 4) & 0x0F;
@@ -142,41 +115,31 @@ public class emisUntrusted {
         } 
         return buf.toString();
     } 
- 
 	
-	 private static void request(boolean quiet, String method, URL url, String username, String password, InputStream body)
+    public static Document loadXMLFromString(String responseBody) throws Exception
+    {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        InputSource is = new InputSource(new StringReader(responseBody));
+        return builder.parse(is);
+    }
+    
+    private static void request(boolean quiet, String method, URL url, String username, String password, InputStream body)
 	    throws IOException
 	    {
 	        // sigh.  openConnection() doesn't actually open the connection,
 	        // just gives you a URLConnection.  connect() will open the connection.
-	        if (!quiet)
+	       
+		 	if (!quiet)
 	        {
 	            System.out.println("[issuing request: " + method + " " + url + "]");
 	        }
+	        
 	        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 	        connection.setRequestMethod(method);
-	        
-	        // write auth header
-	     //   BASE64Encoder encoder = new BASE64Encoder();
-	      //  String encodedCredential = encoder.encode( (username + ":" + password).getBytes() );
-	   //     connection.setRequestProperty("Authorization", "BASIC " + encodedCredential);
-	      //  connection.setRequestProperty("Content-Type", "text/xml");
-	        
-	        // write body if we're doing POST or PUT
+
 	        byte buffer[] = new byte[8192];
 	        int read = 0;
-//	        if (body != null)
-//	        {
-//	            connection.setDoOutput(true);
-//	            
-//	            OutputStream output = connection.getOutputStream();
-//	            while ((read = body.read(buffer)) != -1)
-//	            {
-//	                output.write(buffer, 0, read);
-//	            }
-//	        }
-	        
-	        // do request
 	        long time = System.currentTimeMillis();
 	        connection.connect();
 	        
@@ -216,6 +179,52 @@ public class emisUntrusted {
 	        
 	        // dump body
 	        System.out.print(responseBody);
+	        String message = responseBody.toString();
+	        try {
+	        	
+	        	/* Parse XML Values for result (resultValue) and key (keyValue) */
+	        	
+				Document myXML = loadXMLFromString(message);
+				NodeList resultList = myXML.getElementsByTagName("result");
+				Node resultNode = resultList.item(0);
+				String resultValue = resultNode.getTextContent().toString();
+				System.out.println("\nLogged in result:" + resultValue);
+				
+				NodeList keyList = myXML.getElementsByTagName("key");
+				Node keyNode = keyList.item(0);
+				String keyValue = keyNode.getTextContent().toString();
+				System.out.println("Key value:" + keyValue);
+				
+				if(resultValue.equals("1")) {
+					EmisSession currentSession = new EmisSession();
+					currentSession.setKeyValue(keyValue);
+					currentSession.setName(getUsername());
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	        System.out.flush();
 	    }
+}
+
+public class emisUntrusted {
+	
+	public static void main(String[] args)
+	{
+		try
+		{
+			Login frame=new Login();
+			frame.setSize(300,100);
+			frame.setVisible(true);
+		}
+		catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+	}
+
+	public emisUntrusted() {
+		super();
+	}
 }
