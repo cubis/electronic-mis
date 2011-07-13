@@ -117,9 +117,13 @@
 		$_SESSION['SESS_USERNAME'] = $member['UserName'];
 		$_SESSION['SESS_NEED_APPROVAL'] = $member['NeedApproval'];
 		$_SESSION['SESS_AUTH_KEY'] = $key;
+		$locked = $member['Locked'];
 		session_write_close();
 		//	die("ACCESS GAINED");
-		header("location: member-profile.php");
+		if(!$locked)
+			header("location: member-profile.php");
+		else
+			header("location: block_user.php");
 		//print($output);
 		exit();
 		//Login failed
