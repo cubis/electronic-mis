@@ -2,3 +2,10 @@
 #labels Insurance
 
 = Insurance Attribute in Database =
+Insurance Attributes:
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Insurance_ID ||  ||  || int(11) ||  ||  ||    
+|| Company_Name ||  ||  || varchar(90) ||  ||  ||    
+|| Plan_Type ||  ||  || varchar(2000) ||  ||  ||    
+|| Plan_Num ||  ||  || int(11) ||  ||  ||    
+|| Coverage_Percent ||  ||  || double(4 || 2) ||  ||  ||
