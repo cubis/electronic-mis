@@ -3,8 +3,7 @@
 	require_once('../config.php');
 	require_once('../bootstrap.php');
         session_start();
-	$qry="SELECT * FROM Users";
-	$result=mysql_query($qry);
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -52,24 +51,55 @@
               <td>Edit</td>
             </tr>
 <?php
-$numrows = mysql_num_rows($result);
 
-while ($row = mysql_fetch_assoc($result))
+
+$user = $_SESSION['SESS_USERNAME'];
+$key = $_SESSION['SESS_AUTH_KEY'];
+$request = "http://localhost/emis/emis-dev/admin/edit_membersREST.php?u=".urlencode($user)."&key=".urlencode($key);
+	
+	//print("--------------------------------".($_GET['targetType'] == ''));
+	//print("URL: $request <br />\n");
+
+	//format and send request
+	$ch = curl_init($request);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);    
+	curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+	curl_setopt($ch, CURLOPT_HEADER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$output = curl_exec($ch); //send URL Request to RESTServer... returns string
+	curl_close($ch); //string from server has been returned <XML> closethe channel
+	
+	if( $output == ''){
+		die("CONNECTION ERROR ");
+	}
+	
+	$parser = xml_parser_create();
+	xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+	//print("OUTPUT = ".$output."\n");
+	//print("name = ".$wsResponse[$wsIndices['FIRSTNAME'][0]]['value']."\n");
+
+	
+	$numrows = $wsResponse[$wsIndices['COUNT'][0]]['value'];
+	$currRow = 0;
+
+while ($currRow < $numrows)
 {
 	echo "<tr>\n";
-        $ID = $row['PK_member_id'];
-	echo "<td>",$row['FirstName'],"</td>\n";
-	echo "<td>",$row['LastName'],"</td>\n";
-	echo "<td>",$row['Sex'],"</td>\n";
-	echo "<td>",$row['UserName'],"</td>\n";
-	echo "<td>",$row['Email'],"</td>\n";
-	echo "<td>",$row['Birthday'],"</td>\n";
-	echo "<td>",$row['PhoneNumber'],"</td>\n";
-	echo "<td>",$row['SSN'],"</td>\n";
-        echo "<td>",$row['Type'],"</td>\n";
+        $ID = $wsResponse[$wsIndices['ID'][$currRow]]['value'];
+	echo "<td>",$wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'],"</td>\n";
+	echo "<td>",$wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'],"</td>\n";
+	echo "<td>",$wsResponse[$wsIndices['SEX'][$currRow]]['value'],"</td>\n";
+	echo "<td>",$wsResponse[$wsIndices['USERNAME'][$currRow]]['value'],"</td>\n";
+	echo "<td>",$wsResponse[$wsIndices['EMAIL'][$currRow]]['value'],"</td>\n";
+	echo "<td>",$wsResponse[$wsIndices['BIRTHDAY'][$currRow]]['value'],"</td>\n";
+	echo "<td>",$wsResponse[$wsIndices['PHONENUMBER'][$currRow]]['value'],"</td>\n";
+	echo "<td>",$wsResponse[$wsIndices['SSN'][$currRow]]['value'],"</td>\n";
+        echo "<td>",$wsResponse[$wsIndices['TYPE'][$currRow]]['value'],"</td>\n";
         echo "<td><a href='../admin/edit-user-form.php?ID=$ID'>Edit</a></td>\n";
 	echo "</tr>\n";
+	$currRow += 1;
 }
+
 ?>
         </table>
         <a class="black_button" style="margin-right: 295px;"href='../member-profile.php'><span>Back</span></a>
