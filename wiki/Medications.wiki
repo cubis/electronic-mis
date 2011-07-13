@@ -10,3 +10,5 @@ Medications Attributes:
 || Dosage ||  ||  || varchar(100) ||  ||  ||    
 || Start_Date ||  ||  || date ||  ||  ||    
 || End_Date ||  ||  || date ||  ||  ||
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
