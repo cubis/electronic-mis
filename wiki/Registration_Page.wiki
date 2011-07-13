@@ -10,155 +10,156 @@
 ||Username||22||
 ||Password||22||
 ||Confirm Password||22||
- || User Attributes ||   ||   ||   ||   ||   || 
- ||   ||   ||   ||   ||   ||   || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_member_id || 1, 2, 3...etc || #s || int(11) || N || AUTO_INCREMENT ||    
- || FirstName ||  ||  || varchar(45) ||  || Any character ||    
- || LastName || Abc, aBc...etc || N/A || varchar(45) || N || Any character ||    
- || Password ||  ||  || varchar(50) || Y ||  ||    
- || Sex ||  ||  || varchar(1) || N ||  ||    
- || UserName ||  ||  || varchar(22) || N ||  ||    
- || Type ||  ||  || smallint || N || Level of Access ||    
- || Email ||  ||  || varchar(45) || N ||  ||    
- || Birthday ||  ||  || date || N ||  ||    
- || PhoneNumber ||  ||  || varchar(14) || N ||  ||    
- || SSN ||  ||  || varchar(20) || Y || hashed ||    
- || ExpirationDate ||  ||  || date || N ||  ||    
- || Locked ||  ||  || tinyint(1) || N ||  ||    
- || NeedApproval ||  ||  || tinyint(1) || N ||  ||  
- ||   ||   ||   ||   ||   ||   || 
- ||   ||   ||   ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  || Appointment Attributes ||  ||  ||  ||  ||  || 
- ||   ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_AppID ||  ||  || int(11) ||  ||  ||    
- || FK_DoctorID ||  ||  || int(11) ||  ||  ||    
- || FK_PatientID ||   ||   || int(11) ||   ||   ||    
- || Date ||  ||  || date ||  ||  ||    
- || Time ||  ||  || time ||  ||  ||    
- || Address ||  ||  || varchar(200) ||  ||  ||    
- || Status ||  ||  || varchar(45) ||  ||  ||    
- || Blood_Pres ||  ||  || smallint ||  ||  ||    
- || Weight ||  ||  || smallint ||  ||  ||    
- || Reason ||  ||  || varchar(2000) ||  ||  ||    
- || Symptoms ||  ||  || varchar(2000) ||  ||  ||    
- || Diagnosis ||  ||  || varchar(2000) ||  ||  ||    
- || Treatment ||  ||  || varchar(2000) ||  ||  ||    
- || FK3_Med_ID ||  ||  || int(11) ||  ||  ||    
- || Bill_Total ||  ||  || double(9 || 2) ||  ||  ||    
- || Payment_Plan ||  ||  || varchar(2000) ||  ||  ||    
- || Num_Months ||  ||  || smallint ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Co-Payment Attributes: ||  ||  ||  ||  ||  || 
- ||   ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_Copayment(ID) ||  ||  || int(11) ||  ||  ||    
- || Amount ||  ||  || double(9 || 2) ||  ||  ||    
- || Date ||  ||  || date ||  ||  ||    
- || FK_AppID ||  ||  || int(11) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Doctor Attributes: ||  ||  ||  ||  ||  || 
- ||   ||   ||   ||   ||   ||   || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_DoctorID ||  ||  || int(11) ||  ||  ||    
- || FK_member_id ||  ||  || int(11) ||  ||  ||    
- || Specialty ||  ||  || varchar(45) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Patients Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_PatientID ||  ||  || int(11) ||  ||  ||    
- || FK_member_id ||  ||  || int(11) ||  ||  ||    
- || FK_DoctorID ||  ||  || int(11) ||  ||  ||    
- || FK_NurseID ||  ||  || int(11) ||  ||  ||    
- || FK_InsuranceID ||  ||  || int(11) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- || Insurance Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_Insurance_ID ||  ||  || int(11) ||  ||  ||    
- || Company_Name ||  ||  || varchar(90) ||  ||  ||    
- || Plan_Type ||  ||  || varchar(2000) ||  ||  ||    
- || Plan_Num ||  ||  || int(11) ||  ||  ||    
- || Coverage_Percent ||  ||  || double(4 || 2) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- || Preconditions Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_Condition_ID ||  ||  || int(11) ||  ||  ||    
- || FK_Patient_ID ||  ||  || int(11) ||  ||  ||    
- || Description ||  ||  || varchar(2000) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- || Allergies Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_Allergy_ID ||  ||  || int(11) ||  ||  ||    
- || FK_Patient_ID ||  ||  || int(11) ||  ||  ||    
- || Description ||  ||  || varchar(2000) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- || Medications Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_Medication_ID ||  ||  || int(11) ||  ||  ||    
- || Medicine ||  ||  || varchar(100) ||  ||  ||    
- || Dosage ||  ||  || varchar(100) ||  ||  ||    
- || Start_Date ||  ||  || date ||  ||  ||    
- || End_Date ||  ||  || date ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- || Files Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_File_ID ||  ||  || int(11) ||  ||  ||    
- || Name ||  ||  || varchar(100) ||  || Name of File ||    
- || Location ||  ||  || varchar(2000) ||  ||  ||    
- || File_Type ||  ||  || varchar(100) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- || History Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_History_ID ||  ||  || int(11) ||  ||  ||    
- || Table_Name ||  ||  || varchar(22) ||  ||  ||    
- || Row_ID ||  ||  || int(11) ||  ||  ||    
- || Column_Name ||  ||  || varchar(32) ||  ||  ||    
- || Old_Int ||  ||  || int(11) ||  ||  ||    
- || New_Int ||  ||  || int(11) ||  ||  ||    
- || Old_Date ||  ||  || date ||  ||  ||    
- || New_Date ||  ||  || date ||  ||  ||    
- || Old_Time ||  ||  || time ||  ||  ||    
- || Neww_Time ||  ||  || time ||  || New_Time couldn’t be a valid name ||    
- || Old_String ||  ||  || varchar(2000) ||  ||  ||    
- || New_String ||  ||  || varchar(2000) ||  ||  ||    
- || Old_Double ||  ||  || double(9 || 2) ||  ||  ||    
- || New_Double ||  ||  || double(9 || 2) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- || Nurse Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_Nurse_ID ||  ||  || int(11) ||  ||  ||    
- || FK_Member_ID ||  ||  || int(11) ||  ||  ||  
- ||  ||  ||  ||  ||  ||  || 
- || LogFiles Attributes: ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- ||  ||  ||  ||  ||  ||  || 
- || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
- || PK_Log_ID ||  ||  || int(11) ||  ||  ||    
- || FK_Member_ID ||  ||  || int(11) ||  ||  ||    
- || SourceIP ||  ||  || varchar(40) ||  ||  ||    
- || Type ||  ||  ||  ||  || Type of Method ||    
- || Purgedate ||  ||  || date ||  ||  ||    
- || Timestamp ||  ||  || time ||  ||  ||  
+
+|| User Attributes ||   ||   ||   ||   ||   || 
+||   ||   ||   ||   ||   ||   || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||
+|| PK_member_id || 1, 2, 3...etc || #s || int(11) || N || AUTO_INCREMENT ||
+|| FirstName ||  ||  || varchar(45) ||  || Any character ||
+|| LastName || Abc, aBc...etc || N/A || varchar(45) || N || Any character ||
+|| Password ||  ||  || varchar(50) || Y ||  ||    
+|| Sex ||  ||  || varchar(1) || N ||  ||    
+|| UserName ||  ||  || varchar(22) || N ||  ||    
+|| Type ||  ||  || smallint || N || Level of Access ||    
+|| Email ||  ||  || varchar(45) || N ||  ||    
+|| Birthday ||  ||  || date || N ||  ||    
+|| PhoneNumber ||  ||  || varchar(14) || N ||  ||    
+|| SSN ||  ||  || varchar(20) || Y || hashed ||    
+|| ExpirationDate ||  ||  || date || N ||  ||    
+|| Locked ||  ||  || tinyint(1) || N ||  ||    
+|| NeedApproval ||  ||  || tinyint(1) || N ||  ||  
+||   ||   ||   ||   ||   ||   || 
+||   ||   ||   ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  || Appointment Attributes ||  ||  ||  ||  ||  || 
+||   ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_AppID ||  ||  || int(11) ||  ||  ||    
+|| FK_DoctorID ||  ||  || int(11) ||  ||  ||    
+|| FK_PatientID ||   ||   || int(11) ||   ||   ||    
+|| Date ||  ||  || date ||  ||  ||    
+|| Time ||  ||  || time ||  ||  ||    
+|| Address ||  ||  || varchar(200) ||  ||  ||    
+|| Status ||  ||  || varchar(45) ||  ||  ||    
+|| Blood_Pres ||  ||  || smallint ||  ||  ||    
+|| Weight ||  ||  || smallint ||  ||  ||    
+|| Reason ||  ||  || varchar(2000) ||  ||  ||    
+|| Symptoms ||  ||  || varchar(2000) ||  ||  ||    
+|| Diagnosis ||  ||  || varchar(2000) ||  ||  ||    
+|| Treatment ||  ||  || varchar(2000) ||  ||  ||    
+|| FK3_Med_ID ||  ||  || int(11) ||  ||  ||    
+|| Bill_Total ||  ||  || double(9 || 2) ||  ||  ||    
+|| Payment_Plan ||  ||  || varchar(2000) ||  ||  ||    
+|| Num_Months ||  ||  || smallint ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Co-Payment Attributes: ||  ||  ||  ||  ||  || 
+||   ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Copayment(ID) ||  ||  || int(11) ||  ||  ||    
+|| Amount ||  ||  || double(9 || 2) ||  ||  ||    
+|| Date ||  ||  || date ||  ||  ||    
+|| FK_AppID ||  ||  || int(11) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Doctor Attributes: ||  ||  ||  ||  ||  || 
+||   ||   ||   ||   ||   ||   || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_DoctorID ||  ||  || int(11) ||  ||  ||    
+|| FK_member_id ||  ||  || int(11) ||  ||  ||    
+|| Specialty ||  ||  || varchar(45) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Patients Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_PatientID ||  ||  || int(11) ||  ||  ||    
+|| FK_member_id ||  ||  || int(11) ||  ||  ||    
+|| FK_DoctorID ||  ||  || int(11) ||  ||  ||    
+|| FK_NurseID ||  ||  || int(11) ||  ||  ||    
+|| FK_InsuranceID ||  ||  || int(11) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+|| Insurance Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Insurance_ID ||  ||  || int(11) ||  ||  ||    
+|| Company_Name ||  ||  || varchar(90) ||  ||  ||    
+|| Plan_Type ||  ||  || varchar(2000) ||  ||  ||    
+|| Plan_Num ||  ||  || int(11) ||  ||  ||    
+|| Coverage_Percent ||  ||  || double(4 || 2) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+|| Preconditions Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Condition_ID ||  ||  || int(11) ||  ||  ||    
+|| FK_Patient_ID ||  ||  || int(11) ||  ||  ||    
+|| Description ||  ||  || varchar(2000) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+|| Allergies Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Allergy_ID ||  ||  || int(11) ||  ||  ||    
+|| FK_Patient_ID ||  ||  || int(11) ||  ||  ||    
+|| Description ||  ||  || varchar(2000) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+|| Medications Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Medication_ID ||  ||  || int(11) ||  ||  ||    
+|| Medicine ||  ||  || varchar(100) ||  ||  ||    
+|| Dosage ||  ||  || varchar(100) ||  ||  ||    
+|| Start_Date ||  ||  || date ||  ||  ||    
+|| End_Date ||  ||  || date ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+|| Files Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_File_ID ||  ||  || int(11) ||  ||  ||    
+|| Name ||  ||  || varchar(100) ||  || Name of File ||    
+|| Location ||  ||  || varchar(2000) ||  ||  ||    
+|| File_Type ||  ||  || varchar(100) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+|| History Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_History_ID ||  ||  || int(11) ||  ||  ||    
+|| Table_Name ||  ||  || varchar(22) ||  ||  ||    
+|| Row_ID ||  ||  || int(11) ||  ||  ||    
+|| Column_Name ||  ||  || varchar(32) ||  ||  ||    
+|| Old_Int ||  ||  || int(11) ||  ||  ||    
+|| New_Int ||  ||  || int(11) ||  ||  ||    
+|| Old_Date ||  ||  || date ||  ||  ||    
+|| New_Date ||  ||  || date ||  ||  ||    
+|| Old_Time ||  ||  || time ||  ||  ||    
+|| Neww_Time ||  ||  || time ||  || New_Time couldn’t be a valid name ||    
+|| Old_String ||  ||  || varchar(2000) ||  ||  ||    
+|| New_String ||  ||  || varchar(2000) ||  ||  ||    
+|| Old_Double ||  ||  || double(9 || 2) ||  ||  ||    
+|| New_Double ||  ||  || double(9 || 2) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+|| Nurse Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Nurse_ID ||  ||  || int(11) ||  ||  ||    
+|| FK_Member_ID ||  ||  || int(11) ||  ||  ||  
+||  ||  ||  ||  ||  ||  || 
+|| LogFiles Attributes: ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+||  ||  ||  ||  ||  ||  || 
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_Log_ID ||  ||  || int(11) ||  ||  ||    
+|| FK_Member_ID ||  ||  || int(11) ||  ||  ||    
+|| SourceIP ||  ||  || varchar(40) ||  ||  ||    
+|| Type ||  ||  ||  ||  || Type of Method ||    
+|| Purgedate ||  ||  || date ||  ||  ||    
+|| Timestamp ||  ||  || time ||  ||  ||  
