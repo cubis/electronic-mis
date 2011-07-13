@@ -1,0 +1,4 @@
+#summary Allergies Attribute in Database
+#labels Allergies
+
+= Allergies Attribute in Database =
