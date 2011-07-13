@@ -2,3 +2,22 @@
 #labels Appointment
 
 = Appointment Attribute in Database =
+Appointment Attributes
+|| Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
+|| PK_AppID ||  ||  || int(11) ||  ||  ||    
+|| FK_DoctorID ||  ||  || int(11) ||  ||  ||    
+|| FK_PatientID ||   ||   || int(11) ||   ||   ||    
+|| Date ||  ||  || date ||  ||  ||    
+|| Time ||  ||  || time ||  ||  ||    
+|| Address ||  ||  || varchar(200) ||  ||  ||    
+|| Status ||  ||  || varchar(45) ||  ||  ||    
+|| Blood_Pres ||  ||  || smallint ||  ||  ||    
+|| Weight ||  ||  || smallint ||  ||  ||    
+|| Reason ||  ||  || varchar(2000) ||  ||  ||    
+|| Symptoms ||  ||  || varchar(2000) ||  ||  ||    
+|| Diagnosis ||  ||  || varchar(2000) ||  ||  ||    
+|| Treatment ||  ||  || varchar(2000) ||  ||  ||    
+|| FK3_Med_ID ||  ||  || int(11) ||  ||  ||    
+|| Bill_Total ||  ||  || double(9 || 2) ||  ||  ||    
+|| Payment_Plan ||  ||  || varchar(2000) ||  ||  ||    
+|| Num_Months ||  ||  || smallint ||  ||  ||  
