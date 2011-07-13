@@ -94,6 +94,11 @@
 	if($result=='1') {
 		//Login Successful
 		session_regenerate_id();
+		
+		
+		
+		
+		
 		$qry="SELECT * FROM Users WHERE UserName='" .$login. "'";
 		$qresult = mysql_query($qry);
 		$member = mysql_fetch_assoc($qresult);
