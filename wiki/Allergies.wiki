@@ -1,10 +1,10 @@
 #summary Allergies Attribute in Database
 #labels Allergies
 #sidebar Navigation
+* [Articles HOWTO articles]
+
 
 = Allergies Attribute in Database =
-
-* [Articles HOWTO articles]
 
 Allergies Attributes:
 || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
