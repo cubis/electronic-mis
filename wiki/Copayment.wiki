@@ -9,3 +9,5 @@ Co-Payment Attributes:
 || Amount ||  ||  || double(9,2) ||  ||  ||  ||    
 || Date ||  ||  || date ||  ||  ||    
 || FK_AppID ||  ||  || int(11) ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
