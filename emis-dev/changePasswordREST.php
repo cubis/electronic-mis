@@ -10,19 +10,20 @@ function outputXML($result, $key, $numError, $ErrorString) {
 	$outputString = ''; //start empty
 	$outputString .= "<?xml version=\"1.0\"?>\n";
 	$outputString .= "<content><result>" . $result . "</result>\n";
-	
-	if($result == '1'){
-		$getIDQry = "SELECT * FROM USERS WHERE UserName='".$user."' AND Password='".md5($oldpass)."'";
+	$getIDQry = "SELECT * FROM Users WHERE UserName='".$_POST['u']."'";
 		$getIDRes = mysql_query($getIDQry);
 		$rows = mysql_fetch_assoc($getIDRes);
 		$id = $rows['PK_member_id'];
+	if($result == '1'){
+		
 		logToDB($user." changed password", true, $id); 
 		
 		$outputString .="<key>".$key."</key>\n";	
 		
 	} else {
 		$outputString .="<numerror>".$numError."</numerror>\n";
-			$outputString .= "<ERROR>".$ErrorString."</ERROR>\n";			
+			$outputString .= "<ERROR>".$ErrorString."</ERROR>\n";
+		logToDB($user." failed to change password", true, $id);			
 
 	}
 		
