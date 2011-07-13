@@ -4,8 +4,8 @@
 
 === Length of Fields ===
 
-Firstname: 45
-Lastname: 45
-Username: 22
-Password: 22
+Firstname: 45--
+Lastname: 45--
+Username: 22--
+Password: 22--
 Confirm Password: 22
