@@ -1,0 +1,4 @@
+#summary Copayment Attribute in Database
+#labels Copayment
+
+= Copayment Attribute in Database =
