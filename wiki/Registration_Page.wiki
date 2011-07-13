@@ -4,7 +4,7 @@
 
 === Length of Fields ===
 
-||*Field Name*||*Length*||
+|| *Field Name* || *Length* ||
 ||Firstname:||45||
 ||Lastname:||45||
 ||Username:||22||
