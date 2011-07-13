@@ -6,6 +6,6 @@
 Co-Payment Attributes:
 || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
 || PK_Copayment(ID) ||  ||  || int(11) ||  ||  ||    
-|| Amount ||  ||  || double(9 || 2) ||  ||  ||    
+|| Amount ||  ||  || double(9,2) ||  ||  ||  ||    
 || Date ||  ||  || date ||  ||  ||    
 || FK_AppID ||  ||  || int(11) ||  ||  ||  
