@@ -4,10 +4,11 @@
 	require_once('bootstrap.php');
 	//session_start();
 	//get doctor id from member---$_SESSION['PK_member_id']
-	$docid = "SELECT PK_DoctorID FROM Doctor WHERE FK_member_id = ".$_SESSION['PK_member_id'].";";
-	$result = mysql_query($docid)or die(mysql_error());
-	$row = mysql_fetch_array($result) or die(mysql_error());
-	$did = $row['PK_member_id'];
+	$docid = "SELECT * FROM Doctor WHERE FK_member_id = '".$_SESSION['SESS_MEMBER_ID']."';";
+        $result = mysql_query($docid)or die(mysql_error());
+        //echo "<hr>";
+        $row = mysql_fetch_assoc($result) /*or die(mysql_error())*/;
+        $did = $row['PK_DoctorID'];
 	$pid = $_GET['ID'];
 	//$qry="SELECT * FROM Patients";
 	//$result1=mysql_query($qry);
