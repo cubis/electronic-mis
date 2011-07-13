@@ -1,9 +1,10 @@
 #summary Table of Contents
-#labels TableOfContents,Table,Contents
+#labels Table,Contents
 
 = Table of Contents =
 
 [http://code.google.com/p/electronic-mis/wiki/Form_Fields Form Fields]<br>
 [http://code.google.com/p/electronic-mis/wiki/Database_Elements Database Elements]
+[http://code.google.com/p/electronic-mis/wiki/State_Diagrams State Diagrams]
 
 [http://code.google.com/p/electronic-mis/wiki/Objective Back to Objective]
