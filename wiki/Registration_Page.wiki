@@ -1,0 +1,11 @@
+#summary Specifications for Form on Registration Page
+
+= Specifications for Form on Registration Page =
+
+=== Length of Fields ===
+
+Firstname: 45
+Lastname: 45
+Username: 22
+Password: 22
+Confirm Password: 22
