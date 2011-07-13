@@ -20,3 +20,5 @@ History Attributes:
 || New_String ||  ||  || varchar(2000) ||  ||  ||    
 || Old_Double ||  ||  || double(9,2) ||  ||  ||  ||    
 || New_Double ||  ||  || double(9,2) ||  ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
