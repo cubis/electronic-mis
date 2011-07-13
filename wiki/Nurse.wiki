@@ -1,0 +1,4 @@
+#summary Nurse Attribute in Database
+#labels Nurse
+
+= Nurse Attribute in Database =
