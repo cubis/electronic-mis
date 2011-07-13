@@ -8,3 +8,5 @@ Doctor Attributes:
 || PK_DoctorID ||  ||  || int(11) ||  ||  ||    
 || FK_member_id ||  ||  || int(11) ||  ||  ||    
 || Specialty ||  ||  || varchar(45) ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
