@@ -48,15 +48,27 @@ function doService($url, $method, $level) {
 			$table_name = 'Users';
 			//  $address = clean($_POST['Address']);
 			//  $policy = clean($_POST['Policy']);
+			$status = clean($_POST['Status']);
 		
 			if($need == 1){ 
 				$updateQry = "UPDATE $table_name Set FirstName='$f_name',LastName='$l_name',Sex='$sex',Email='$email',Birthday='$birthday',PhoneNumber='$phone',SSN='$ssn', Type = '$type', NeedApproval='0' WHERE PK_member_id = '$ID'";
 			}else{
 				$updateQry = "UPDATE $table_name Set FirstName='$f_name',LastName='$l_name',Sex='$sex',Email='$email',Birthday='$birthday',PhoneNumber='$phone',SSN='$ssn', Type = '$type', NeedApproval='1' WHERE PK_member_id = '$ID'";
 			}
+			
+			if(strcmp($status,"lock") == 0)
+				$statusQry = "UPDATE $table_name SET Locked = '1' WHERE PK_member_id = '$ID'";
+			else
+				$statusQry = "UPDATE $table_name SET Locked = '0' WHERE PK_member_id = '$ID'";
+			
 			if(mysql_query($updateQry)){
-				$retVal = outputXML('1', 'SUCCESSFUL UPDATE!');
-			}else {
+				if( mysql_query($statusQry) )
+					$retVal = outputXML('1', 'SUCCESSFUL UPDATE!');
+				else 
+					$retVal = outputXML('0', mysql_error());
+			}
+			else 
+			{
 				$retVal = outputXML('0', mysql_error());
 			}
 		} else if($postKey == $AUTH_KEY){

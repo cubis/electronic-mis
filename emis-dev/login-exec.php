@@ -45,7 +45,7 @@
 	//replace starting with your own webroot for debugging...
     
 	$request = "http://localhost/emis/emis-dev/Authenticate.php?u=" . urlencode($login) . "&p=" . urlencode($epw);
-	print("URL: $request <br />\n");
+	//print("URL: $request <br />\n");
 
 	//format and send request
 	$ch = curl_init($request);
@@ -61,7 +61,7 @@
 	}	
 
 	
-	print "OUTPUT: $output\n";
+	//print "OUTPUT: $output\n";
 	
 	//-----------------------------
 	// TODO: Decode XML with parser and store the true/false in $result
@@ -114,6 +114,11 @@
 		$_SESSION['SESS_AUTH_KEY'] = $key;
 		session_write_close();
 		//	die("ACCESS GAINED");
+		if( $member['Locked'] == 1 )
+		{
+			header("location: block_user.php");
+			exit();
+		}
 		header("location: member-profile.php");
 		//print($key);
 		exit();
