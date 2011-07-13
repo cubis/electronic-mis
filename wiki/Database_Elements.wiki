@@ -15,3 +15,16 @@ Nurse
 Patient
 Preconditions
 User
+
+[http://code.google.com/p/electronic-mis/wiki/Allergies Allergies]
+[http://code.google.com/p/electronic-mis/wiki/Appointment Appointment]
+[http://code.google.com/p/electronic-mis/wiki/Copayment Copayment]
+[http://code.google.com/p/electronic-mis/wiki/Doctor Doctor]
+[http://code.google.com/p/electronic-mis/wiki/Files Files]
+[http://code.google.com/p/electronic-mis/wiki/History History]
+[http://code.google.com/p/electronic-mis/wiki/LogFiles LogFiles]
+[http://code.google.com/p/electronic-mis/wiki/Medications Medications]
+[http://code.google.com/p/electronic-mis/wiki/Nurse Nurse]
+[http://code.google.com/p/electronic-mis/wiki/Patient Patient]
+[http://code.google.com/p/electronic-mis/wiki/Preconditions Preconditions]
+[http://code.google.com/p/electronic-mis/wiki/User User]
