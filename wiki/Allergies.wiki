@@ -3,6 +3,8 @@
 
 = Allergies Attribute in Database =
 
+#sidebar Navigation
+
 Allergies Attributes:
 || Attribute || Template || Values || Type ||  Max length || Hashed? (Y/N) || Notes ||    
 || PK_Allergy_ID ||  ||  || int(11) ||  ||  ||    
