@@ -12,7 +12,14 @@ function outputXML($result, $key, $numError, $ErrorString) {
 	$outputString .= "<content><result>" . $result . "</result>\n";
 	
 	if($result == '1'){
+		$getIDQry = "SELECT * FROM USERS WHERE UserName='".$user."' AND Password='".md5($oldpass)."'";
+		$getIDRes = mysql_query($getIDQry);
+		$rows = mysql_fetch_assoc($getIDRes);
+		$id = $rows['PK_member_id'];
+		logToDB($user." changed password", true, $id); 
+		
 		$outputString .="<key>".$key."</key>\n";	
+		
 	} else {
 		$outputString .="<numerror>".$numError."</numerror>\n";
 			$outputString .= "<ERROR>".$ErrorString."</ERROR>\n";			
@@ -45,7 +52,7 @@ function doService($url, $method) {
 			  if (isset($_POST['oldpass'])) {
 
                                 if ($_POST['newpass1'] == $_POST['newpass2']) {
-                                    $qry = "SELECT * FROM Users WHERE UserName='$user' AND Password='" . $_POST['oldpass'] . "'";
+                                    $qry = "SELECT * FROM Users WHERE UserName='$user' AND Password='" . md5($_POST['oldpass']) . "'";
                                     $result = mysql_query($qry);
 
                                     $oldpass = $_POST['oldpass'];
@@ -96,13 +103,15 @@ function doService($url, $method) {
                                             }
 					    
 					    if($numError == 0){
-						$updateQry = "UPDATE Users SET Password='" . $newpass1 . "' WHERE UserName='" . $user . "' AND Password='" . $oldpass . "'";
+						
+						$updateQry = "UPDATE Users SET Password='" . md5($newpass1) . "' WHERE UserName='" . $user . "' AND Password='" . md5($oldpass) . "'";
 						if(!mysql_query($updateQry)){
 							$ErrorString .= mysql_error()."\n<br />";
 							$numError += 1;
 							$retVal = outputXML('0', -1, $numError, $ErrorString);
 						}
-						$AUTH_KEY = md5($user.$newpass1.$controlString);
+						$controlString = "3p1XyTiBj01EM0360lFw";
+						$AUTH_KEY = md5(strtoupper($user).md5($newpass1).$controlString);
 						$retVal = outputXML('1', $AUTH_KEY, $numError, $ErrorString);
 					    } else {
 						$retVal = outputXML('0', 'PASSWORD RESET ERROR', $numError, $ErrorString);
