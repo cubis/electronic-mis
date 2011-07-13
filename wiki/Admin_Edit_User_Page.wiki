@@ -1,5 +1,5 @@
 #summary Specifications for Form on Admin Edit User Page
-#labels AdminEditUserPage
+#labels Admin,Edit,User
 
 = Specifications for Form on Admin Edit User Page =
 
@@ -10,3 +10,5 @@
 ||Firstname||45||
 ||Middle Inital||1||
 ||Lastname||45||
+
+[http://code.google.com/p/electronic-mis/wiki/Form_Fields Back to Form Fields]
