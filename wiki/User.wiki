@@ -19,3 +19,5 @@ User Attributes
 || ExpirationDate ||  ||  || date || N ||  ||    
 || Locked ||  ||  || tinyint(1) || N ||  ||    
 || NeedApproval ||  ||  || tinyint(1) || N ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
