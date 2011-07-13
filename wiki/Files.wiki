@@ -9,3 +9,5 @@ Files Attributes:
 || Name ||  ||  || || varchar(100) ||  || Name of File ||    
 || Location ||  ||  || || varchar(2000) ||  ||  ||    
 || File_Type ||  || || || varchar(100) ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
