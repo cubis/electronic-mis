@@ -9,7 +9,7 @@ Copayment
 Doctor
 Files
 History
-LogFiles
+Logfiles
 Medications
 Nurse
 Patient
