@@ -8,3 +8,5 @@ Preconditions Attributes:
 || PK_Condition_ID ||  ||  || int(11) ||  ||  ||    
 || FK_Patient_ID ||  ||  || int(11) ||  ||  ||    
 || Description ||  ||  || varchar(2000) ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
