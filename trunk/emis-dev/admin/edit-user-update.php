@@ -3,7 +3,7 @@
     session_start();
     
     
-   $url = "http://localhost/emis/emis-dev/admin/edit-user-updateREST.php";
+   $url = "http://localhost/emis/emis-dev/admin/editUserInfoREST.php";
    $fields = array(
 	'u' => urlencode($_SESSION['SESS_USERNAME']),
 	'key' => urlencode($_SESSION['SESS_AUTH_KEY']),
