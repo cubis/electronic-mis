@@ -50,10 +50,12 @@ require_once('bootstrap.php');
 		$_SESSION['SESS_AUTH_KEY'] = md5($authKey.$trustedKey);
 		$errStr = 'PASSWORD CHANGED';
 
-		print($_SESSION['AUTH_KEY']);
+		//print($_SESSION['AUTH_KEY']);
 	}else{
 		$errStr = $wsResponse[$wsIndices['ERROR'][0]]['value'];
 	}
+	
+
 	}
 ?>
 
