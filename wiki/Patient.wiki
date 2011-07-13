@@ -10,3 +10,5 @@ Patients Attributes:
 || FK_DoctorID ||  ||  || int(11) ||  ||  ||    
 || FK_NurseID ||  ||  || int(11) ||  ||  ||    
 || FK_InsuranceID ||  ||  || int(11) ||  ||  ||  
+
+[http://code.google.com/p/electronic-mis/wiki/Database_Elements Back to Database Elements]
