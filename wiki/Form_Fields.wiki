@@ -1,10 +1,11 @@
 #summary Specifications for Form Fields
+#labels Form,Fields
 
 = Specifications for Form Fields =
 
 
-[http://code.google.com/p/electronic-mis/wiki/Registration_Page Registration Page]
+[http://code.google.com/p/electronic-mis/wiki/Registration_Page Registration Page]<br>
+[http://code.google.com/p/electronic-mis/wiki/Admin_Edit_User_Page Admin Edit User Page]<br>
+[http://code.google.com/p/electronic-mis/wiki/Change_Password_Page Change Password Page]<br>
 
-[http://code.google.com/p/electronic-mis/wiki/Admin_Edit_User_Page Admin Edit User Page]
-
-[http://code.google.com/p/electronic-mis/wiki/Change_Password_Page Change Password Page]
+[http://code.google.com/p/electronic-mis/wiki/Table_Of_Contents Back to Table of Contents]
