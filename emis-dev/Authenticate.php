@@ -21,8 +21,8 @@
 
 
 
-require_once('config.php');     //sql connection information
-require_once('bootstrap.php');  //link information
+require_once('configREST.php');     //sql connection information
+require_once('bootstrapREST.php');  //link information
 
 function outputXML($resultMsg, $user, $pw) {
 /* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */
@@ -48,11 +48,14 @@ function doService() {
 	$result=mysql_query($qry);
 	$member = mysql_fetch_assoc($result);
 
-	if(mysql_numrows($result))
+	if(mysql_numrows($result)){
 		$retVal = outputXML('1', $user, $_GET['p']);
-	else
+		logToDB("Login Succeed", true, $member['PK_member_id']);
+	}else{
 		$retVal = outputXML('0', '', '');
-		
+		logToDB("Login Fail", false, -1);
+	}
+	
 	return $retVal;
 }
 

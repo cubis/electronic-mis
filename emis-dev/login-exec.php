@@ -45,7 +45,7 @@
 	//replace starting with your own webroot for debugging...
     
 	$request = "http://localhost/emis/emis-dev/Authenticate.php?u=" . urlencode($login) . "&p=" . urlencode($epw);
-	//print("URL: $request <br />\n");
+//	print("URL: $request <br />\n");
 
 	//format and send request
 	$ch = curl_init($request);
@@ -90,7 +90,7 @@
 	$result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
 	$key = md5($wsResponse[$wsIndices['KEY'][0]]['value'].$trustedKey);
 
-	
+	//print("OUTPUT = ".$output);
 	if($result=='1') {
 		//Login Successful
 		session_regenerate_id();
@@ -114,13 +114,8 @@
 		$_SESSION['SESS_AUTH_KEY'] = $key;
 		session_write_close();
 		//	die("ACCESS GAINED");
-		if( $member['Locked'] == 1 )
-		{
-			header("location: block_user.php");
-			exit();
-		}
 		header("location: member-profile.php");
-		//print($key);
+		//print($output);
 		exit();
 		//Login failed
 	
