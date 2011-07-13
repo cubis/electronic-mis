@@ -1,4 +1,5 @@
 #summary Table of Contents
+#labels TableOfContents,Table,Contents
 
 = Table of Contents =
 
