@@ -13,4 +13,5 @@ public class EmisSession {
 	{
 		name = nameVal;
 	}
+        
 }

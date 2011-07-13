@@ -15,14 +15,18 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+
+
 class Login extends JFrame implements ActionListener
 {
+    static EmisSession currentSession;
 	
 	private static final String GET = "GET";
 
 	private static final long serialVersionUID = 1L;
 	
 	JButton SUBMIT;
+        JButton LOGOUT;
 	JPanel panel;
 	JLabel label1,label2;
 	static JTextField text1;
@@ -40,20 +44,30 @@ class Login extends JFrame implements ActionListener
 	    //this.setLayout(new BorderLayout());
  
 		SUBMIT=new JButton("SUBMIT");
-		
+                LOGOUT=new JButton("LOGOUT");
+		LOGOUT.setActionCommand("logout");
         panel=new JPanel(new GridLayout(3,1));
 		panel.add(label1);
 		panel.add(text1);
 		panel.add(label2);
 		panel.add(text2);
 		panel.add(SUBMIT);
+                panel.add(LOGOUT);
 	    add(panel,BorderLayout.CENTER);
         SUBMIT.addActionListener(this);
+        LOGOUT.addActionListener(this);
         setTitle("LOGIN FORM");
 	}
 	
 	public void actionPerformed(ActionEvent ae)
 	{
+            
+            if(ae.getActionCommand().equals("logout")){
+                currentSession = null;
+                System.out.println("Logged out!");
+                System.out.println(currentSession);
+                
+            }else{
 		String user = text1.getText();
 		String myPw = text2.getText();
 		String epw = "";
@@ -79,7 +93,7 @@ class Login extends JFrame implements ActionListener
         {
             String method = "GET";
             
-            URL url = new URL("http://localhost/emis-dev/Authenticate.php?u="+URLEncoder.encode(user)+"&p="+URLEncoder.encode(epw));
+            URL url = new URL("http://localhost/emis/emis-dev/Authenticate.php?u="+URLEncoder.encode(user)+"&p="+URLEncoder.encode(epw));
             
             if (GET.equalsIgnoreCase(method))
             {
@@ -94,7 +108,7 @@ class Login extends JFrame implements ActionListener
             System.err.println(x);
             System.exit(1);
         }
-	}
+        }}
 	
 	public static String getUsername() {
 		return(text1.getText());
@@ -196,7 +210,7 @@ class Login extends JFrame implements ActionListener
 				System.out.println("Key value:" + keyValue);
 				
 				if(resultValue.equals("1")) {
-					EmisSession currentSession = new EmisSession();
+                                        currentSession = new EmisSession();
 					currentSession.setKeyValue(keyValue);
 					currentSession.setName(getUsername());
 				}
@@ -210,8 +224,10 @@ class Login extends JFrame implements ActionListener
 
 public class emisUntrusted {
 	
+        
 	public static void main(String[] args)
 	{
+            
 		try
 		{
 			Login frame=new Login();
