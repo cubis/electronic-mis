@@ -86,12 +86,16 @@ function doService($url, $method, $levelForAll) {
 			if($_GET['targetType'] == '' || $_GET['target'] == '')
 			{
 				$retVal = outputXML('1', '', '', '');
+//HEEEEEEEEERRRRRRRREEEE				
+				logToDB($user." accessing information for all users", true, $member['PK_member_id']);
 			}
 			
 			// request a single user's info
 			else
 			{
 				$retVal = outputXML('1', '', $_GET['targetType'], $_GET['target']);
+//HEEEEEEEEERRRRRRRREEEE					
+				logToDB($user." accessing information for user that has " . $_GET['targetType'] . " of " . $_GET['target'], true, $member['PK_member_id']);
 			}
 		}
 		
@@ -99,6 +103,8 @@ function doService($url, $method, $levelForAll) {
 		else if($postKey == $TRUST_KEY)
 		{
 			$retVal = outputXML('1', '', 'UserName', $user);
+//HEEEEEEEEERRRRRRRREEEE				
+			logToDB($user." accessing information for self", true, $member['PK_member_id']);
 		}
 		
 		// untrusted client
