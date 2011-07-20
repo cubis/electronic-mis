@@ -1,0 +1,10 @@
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\bin\Release\Electronic MIS.exe
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\bin\Release\Electronic MIS.pdb
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\obj\x86\Release\Electronic_MIS.Appointments.resources
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\obj\x86\Release\Electronic_MIS.Form1.resources
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\obj\x86\Release\Electronic_MIS.Properties.Resources.resources
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\obj\x86\Release\Electronic MIS.exe
+C:\Users\David Gorena\documents\visual studio 2010\Projects\Electronic MIS\Electronic MIS\obj\x86\Release\Electronic MIS.pdb
