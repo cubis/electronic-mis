@@ -48,7 +48,6 @@
             this.calAppointments.Location = new System.Drawing.Point(66, 18);
             this.calAppointments.Name = "calAppointments";
             this.calAppointments.TabIndex = 0;
-            this.calAppointments.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calAppointments_DateChanged);
             this.calAppointments.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.calAppointments_DateSelected);
             // 
             // listBox1
