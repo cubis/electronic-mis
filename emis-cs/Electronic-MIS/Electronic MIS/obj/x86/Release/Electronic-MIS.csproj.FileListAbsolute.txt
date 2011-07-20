@@ -1,0 +1,11 @@
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic_MIS.Appointments.resources
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic_MIS.Properties.Resources.resources
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic MIS.exe
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic MIS.pdb
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\bin\Release\Electronic MIS.exe
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\bin\Release\Electronic MIS.pdb
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic_MIS.Login.resources
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic_MIS.MainForm.resources
