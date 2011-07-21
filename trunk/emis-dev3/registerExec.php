@@ -3,8 +3,6 @@
 	//Start session
 	session_start();
 
-	//Include database connection details
-	require_once('config.php');
 
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -22,15 +20,15 @@
 	}
 
 	//Sanitize the POST values
-	$fname = clean($_POST['fname']);
-	$lname = clean($_POST['lname']);
-	$login = clean($_POST['login']);
-	$bday = clean($_POST['bday']);
-	$email = clean($_POST['email']);
-	$ssn = clean($_POST['ssn']);
-
-	$password = clean($_POST['password']);
-	$cpassword = clean($_POST['cpassword']);
+	$fname = $_POST['fname'];
+	$lname = $_POST['lname'];
+	$login = $_POST['login'];
+	$bday = $_POST['bday'];
+	$email = $_POST['email'];
+	$ssn = $_POST['ssn'];
+	$type = $_POST['type'];
+	$password = $_POST['password'];
+	$cpassword = $_POST['cpassword'];
 
 	//Input Validations
 /*	if ($fname == '') {
@@ -122,11 +120,11 @@
 	}
   
 	rtrim($field_string, '&');
-    
-    
-    
+	
+	
+	    
 	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_POST, 0);
+	curl_setopt($ch, CURLOPT_POST, count($fields) );
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $field_string);
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);    
 	curl_setopt($ch, CURLOPT_TIMEOUT, 8);
@@ -142,53 +140,27 @@
 	
 	
 
-	print("OUTPUT = ".$output);
-
-
-
-/*if ($login != '') {
-    $qry = "SELECT * FROM Users WHERE UserName='$login'";
-    $result = mysql_query($qry);
-    if ($result) {
-        if (mysql_num_rows($result) > 0) {
-            $errmsg_arr[] = 'Login ID already in use';
-            $errflag = true;
-        }
-        @mysql_free_result($result);
-    } else {
-        die("Query failed");
-    }
-}
-
-//If there are input validations, redirect back to the registration form
-if ($errflag) {
-    $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-    session_write_close();
-    header("location: registerForm.php");
-    exit();
-}
-
-if (strcmp($_POST['type'], "patient") == 0)
-    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Email, Birthday, SSN, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','$email','$bday','$ssn','1','0','" . md5($_POST['password']) . "')";
-
-elseif (strcmp($_POST['type'], "nurse") == 0)
-    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Email, Birthday, SSN, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','$email','$bday','$ssn','200','1','" . md5($_POST['password']) . "')";
-
-elseif (strcmp($_POST['type'], "doctor") == 0)
-    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Email, Birthday, SSN, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','$email','$bday','$ssn','300','1','" . md5($_POST['password']) . "')";
-
-if (strcmp($_POST['type'], "admin") == 0)
-    $qry = "INSERT INTO Users(FirstName, LastName, UserName, Email, Birthday, SSN, Type, NeedApproval, Password) VALUES('$fname','$lname','$login','$email','$bday','$ssn','400','1','" . md5($_POST['password']) . "')";
-
-$result = @mysql_query($qry);
-*/
-
-
-	//Check whether the query was successful or not
-	if ($result) {
-		header("location: registerSuccess.php");
+	$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
+	
+	if($errNum > 0){
+		$errflag = true;
+		$ct = 0;
+		while($ct < $errNum){
+			$errmsg_arr[] = $wsResponse[$wsIndices['ERROR'][$ct]]['value'];
+			$ct += 1;
+		}
+	}
+	
+	//If there are input validations, redirect back to the registration form
+	if ($errflag) {
+		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+		session_write_close();
+		header("location: registerForm.php");
 		exit();
 	} else {
-		die("Query failed");
+		header("location: registerSuccess.php");
+		exit();
 	}
+
+	
 ?>
