@@ -43,14 +43,13 @@
 	
 	//create trusted key from the given auth key and trusted string
 	$trustedKey = "xolJXj25jlk56LJkk5677LS";
-	$result = $wsResponse[$wsIndices['RESULT'][0]]['value'];
 	$key = md5($wsResponse[$wsIndices['KEY'][0]]['value'].$trustedKey);
 
 	$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 	//print("OUTPUT = ".$output);
 	
 	
-	if($result=='1' && $errNum == 0) {
+	if($errNum == 0) {
 		//Login Successful
 		//if member profile locked send to proper screen
 		if($wsResponse[$wsIndices['KEY'][0]]['value'] == "MEMBER PROFILE LOCKED"){
