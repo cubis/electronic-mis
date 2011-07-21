@@ -52,28 +52,30 @@
 	if($errNum == 0) {
 		//Login Successful
 		//if member profile locked send to proper screen
+		
+		
 		if($wsResponse[$wsIndices['KEY'][0]]['value'] == "MEMBER PROFILE LOCKED"){
 			header("location: blockUserForm.php");
 		} else {
 		
 			///set up session variables
-		/*	//SESS_PERSONAL_ID is like doctor id nurse id .....depending on type
+			//SESS_PERSONAL_ID is like doctor id nurse id .....depending on type
 			session_regenerate_id();		
 			$_SESSION['SESS_MEMBER_ID'] = $wsResponse[$wsIndices['MEMBERID'][0]]['value'];
-			$_SESSION['SESS_FIRST_NAME'] = $wsResponse[$wsIndices['FIRSTNAME'][0]]['value'];			
+		/*	$_SESSION['SESS_FIRST_NAME'] = $wsResponse[$wsIndices['FIRSTNAME'][0]]['value'];			
 			$_SESSION['SESS_LAST_NAME'] = $wsResponse[$wsIndices['LASTNAME'][0]]['value'];
 			$_SESSION['SESS_TYPE'] = $wsResponse[$wsIndices['TYPE'][0]]['value'];
 			$_SESSION['SESS_USERNAME'] = $wsResponse[$wsIndices['USERNAME'][0]]['value'];
 			$_SESSION['SESS_NEED_APPROVAL'] = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
 			$_SESSION['SESS_PERSONAL_ID'] = $wsResponse[$wsIndices['PERSONALID'][0]]['value'];
-			$_SESSION['SESS_AUTH_KEY'] = $key;
+			$_SESSION['SESS_AUTH_KEY'] = $key;*/
 			session_write_close();
 			header("location: memberProfileForm.php");
-		*/
+		
 		}
 		exit();
 		//Login failed
-	
+			
 	}else {
 	
 			//login failed...output error to screen
@@ -87,6 +89,6 @@
 			header("location: index.php");
 			exit();
 	}
-*/
+
 ?>
 	
