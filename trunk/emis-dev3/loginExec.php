@@ -69,7 +69,7 @@
 			$_SESSION['SESS_AUTH_KEY'] = $key;
 			session_write_close();
 			print($output);
-			header("location: memberProfile.php");
+			header("location: memberProfileForm.php");
 		
 		}
 		exit();
