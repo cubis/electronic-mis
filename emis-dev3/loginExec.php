@@ -46,18 +46,18 @@
 	$key = md5($wsResponse[$wsIndices['KEY'][0]]['value'].$trustedKey);
 
 	$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
-	//print("OUTPUT = ".$output);
+	print("OUTPUT = ".$output);
 	
 	
 	if($errNum == 0) {
 		//Login Successful
 		//if member profile locked send to proper screen
 		if($wsResponse[$wsIndices['KEY'][0]]['value'] == "MEMBER PROFILE LOCKED"){
-			header("location: block_user.php");
+			header("location: blockUserForm.php");
 		} else {
 		
 			///set up session variables
-			//SESS_PERSONAL_ID is like doctor id nurse id .....depending on type
+		/*	//SESS_PERSONAL_ID is like doctor id nurse id .....depending on type
 			session_regenerate_id();		
 			$_SESSION['SESS_MEMBER_ID'] = $wsResponse[$wsIndices['MEMBERID'][0]]['value'];
 			$_SESSION['SESS_FIRST_NAME'] = $wsResponse[$wsIndices['FIRSTNAME'][0]]['value'];			
@@ -68,9 +68,8 @@
 			$_SESSION['SESS_PERSONAL_ID'] = $wsResponse[$wsIndices['PERSONALID'][0]]['value'];
 			$_SESSION['SESS_AUTH_KEY'] = $key;
 			session_write_close();
-			print($output);
 			header("location: memberProfileForm.php");
-		
+		*/
 		}
 		exit();
 		//Login failed
@@ -88,6 +87,6 @@
 			header("location: index.php");
 			exit();
 	}
-
+*/
 ?>
 	
