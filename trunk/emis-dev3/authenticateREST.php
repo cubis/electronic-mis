@@ -24,7 +24,7 @@
 require_once('configREST.php');     //sql connection information
 require_once('bootstrapREST.php');  //link information
 
-function outputXML($resultMsg, $errNum, $errMsgArr, $memberInfo, $db) {
+function outputXML($errNum, $errMsgArr, $memberInfo, $db) {
 /* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */
 	/*$controlString = "3p1XyTiBj01EM0360lFw";
 	$AUTH_KEY = md5($user.$pw.$controlString);
@@ -37,7 +37,7 @@ function outputXML($resultMsg, $errNum, $errMsgArr, $memberInfo, $db) {
 	//START FORMATTING STRING; WRAP CONTENT TAG AROUND ENTIRE MESSAGE
 	$outputString = ''; //start empty
 	$outputString .= "<?xml version=\"1.0\"?>\n";
-	$outputString .= "<content><result>" . $resultMsg . "</result>\n";
+	$outputString .= "<content>\n";
 	$outputString .= "<errNum>" . $errNum . "</errNum>\n";
 	if($resultMsg == '1' && $errNum == 0){
 	 
@@ -137,17 +137,17 @@ function doService($db) {
 	if ($prep->execute(array(":id" => $user, ":pw" => $pw))) {
 		if($prep->rowCount() == 1){
 			$info = $prep->fetch(PDO::FETCH_ASSOC);
-			$retVal = outputXML('1', $errNum, $errMsgArr, $info, $db);
+			$retVal = outputXML($errNum, $errMsgArr, $info, $db);
 		} else {
 			$errMsgArr[] = 'Login and Password Incorrect';
 			$errNum += 1;
-			$retVal = outputXML('0', $errNum, $errMsgArr, '', $db);
+			$retVal = outputXML($errNum, $errMsgArr, '', $db);
 		}
 	} else {
 		$error = $prep->errorInfo();
 		$errMsgArr[] = $error[2];
 		$errNum += 1;
-		$retVal = outputXML('0', $errNum, $errMsgArr, '', $db);		
+		$retVal = outputXML($errNum, $errMsgArr, '', $db);		
 	}	
 	return $retVal;	
 }
