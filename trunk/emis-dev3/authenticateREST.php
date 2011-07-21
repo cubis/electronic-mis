@@ -39,7 +39,7 @@ function outputXML($errNum, $errMsgArr, $memberInfo, $db) {
 	$outputString .= "<?xml version=\"1.0\"?>\n";
 	$outputString .= "<content>\n";
 	$outputString .= "<errNum>" . $errNum . "</errNum>\n";
-	if($resultMsg == '1' && $errNum == 0){
+	if($errNum == 0){
 	 
 		//IF MEMBER PROFILE LOCKED OUTPUT LOCKED AS THE KEY
 		if($memberInfo['Locked'] == 1){
