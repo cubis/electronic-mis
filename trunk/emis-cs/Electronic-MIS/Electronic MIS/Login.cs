@@ -78,15 +78,17 @@ namespace Electronic_MIS
             {
                 WebResponse response = request.GetResponse();
 
-                StreamReader reader = new StreamReader(response.GetResponseStream());
+ //               StreamReader reader = new StreamReader(response.GetResponseStream());
+ //               textBox1.Text = reader.ReadToEnd();
+
                 XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
+
                 while (xmlReader.Read())
                 {
                     switch (xmlReader.NodeType)
                     {
                         case XmlNodeType.Element:
-                            if (xmlReader.Name == "result")
-                            {
+                            if (xmlReader.Name == "result"){
                                 if(xmlReader.ReadElementContentAsInt() == 0)
                                 {
                                     MessageBox.Show("Login failure.  Please check your info and try again.");
@@ -140,6 +142,11 @@ namespace Electronic_MIS
         {
             exitClean();
             Application.Exit();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
