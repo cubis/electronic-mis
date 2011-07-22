@@ -69,65 +69,65 @@ function doService($db) {
 	//Input Validations
 	if (!isset($_POST['fname']) || $_POST['fname'] == '') {
 		$errMsgArr[] = 'First name missing';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!isset($_POST['lname']) || $_POST['lname'] == '') {
 		$errMsgArr[] = 'Last name missing';
-		$errNum += 1;
+		$errNum++;
 	}
 	//test
 	if (!isset($_POST['bday']) || $_POST['bday'] == '') {
 		$errMsgArr[] = 'birthdate missing';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!isset($_POST['email']) || $_POST['email'] == '') {
 		$errMsgArr[] = 'e-mail address missing';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!isset($_POST['ssn']) || $_POST['ssn'] == '') {
 		$errMsgArr[] = 'Social Security Number missing';
-		$errNum += 1;
+		$errNum++;
 	}
 	//end
 	if (!isset($_POST['u']) || $_POST['u'] == '') {
 		$errMsgArr[] = 'Login ID missing';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!isset($_POST['p']) || $_POST['p'] == '' || $_POST['p'] == 'd41d8cd98f00b204e9800998ecf8427e') {
 		$errMsgArr[] = 'Password missing';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!isset($_POST['cp']) || $_POST['cp'] == '' || $_POST['cp'] == 'd41d8cd98f00b204e9800998ecf8427e') {
 		$errMsgArr[] = 'Confirm password missing';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (strcmp($password, $cpassword) != 0) {
 		$errMsgArr[] = 'Passwords do not match';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!ctype_alnum($password)) {
 		$errMsgArr[] = 'Password should be numbers and digits only';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (strlen($password) < 7) {
 		$errMsgArr[] = 'Password must be at least 7 chars';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (strlen($password) > 20) {
 		$errMsgArr[] = 'Password must be at most 20 chars ';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!preg_match('`[A-Z]`', $password)) {
 		$errMsgArr[] = 'Password must contain at least one upper case';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!preg_match('`[a-z]`', $password)) {
 		$errMsgArr[] = 'Password must contain at least one lower case';
-		$errNum += 1;
+		$errNum++;
 	}
 	if (!preg_match('`[0-9]`', $password)) {
 		$errMsgArr[] = 'Password must contain at least one digit';
-		$errNum += 1;
+		$errNum++;
 	}	
 	
 		$prepUsers = $db->prepare("SELECT * FROM `Users` WHERE UserName = :id ; ");	
@@ -136,12 +136,12 @@ function doService($db) {
 			//IF NAME IS NOT IN USE
 			if($prepUsers->rowCount() != 0){
 				$errMsgArr[] = 'Username already in use';
-				$errNum += 1;
+				$errNum++;
 			} 
 		} else {
 			$error = $prepUsers->errorInfo();
 			$errMsgArr[] = $error[2];
-			$errNum += 1;
+			$errNum++;
 			$retVal = outputXML($errNum, $errMsgArr, $db);		
 		}
 	
@@ -191,8 +191,9 @@ function doService($db) {
 			$insertUserSuccess = $insertUserPrep->execute($vals);
 			
 			if(   !$insertUserSuccess  ){
-				$errMsgArr[] = 'Insert into user table failed';
-				$errNum += 1;				
+				//didnt insert into user table
+				$errMsgArr[] = 'DATABASE ERROR ONE';
+				$errNum++;				
 			} 			
 			else {
 			
@@ -200,16 +201,18 @@ function doService($db) {
 				$memIDPrep = $db->prepare("SELECT * FROM Users WHERE UserName = '" . $user . "'");
 				$getIDSuccess = $memIDPrep->execute();
 				if( ! $getIDSuccess ){
-					$errMsgArr[] = 'Get user table ID failed';
-					$errNum += 1;
+					//get member id error
+					$errMsgArr[] = 'DATABASE ERROR TWO';
+					$errNum++;
 				} else {
 					
 					//add into the proper sub table with the user primary key as the member foreign key
 					$member = $memIDPrep->fetch(PDO::FETCH_ASSOC);
 					$insertTypePrep = $db->prepare("INSERT INTO " .$tableType. "(FK_member_id) VALUES('" .$member['PK_member_id']. "')");
+					//insert into subtable failed
 					if( !($insertTypePrep->execute()) ){
-						$errMsgArr[] =  "Insert into $tableType table failed";
-						$errNum += 1;
+						$errMsgArr[] =  "DATABASE ERORR THREE";
+						$errNum++;
 					}
 				}
 			}
