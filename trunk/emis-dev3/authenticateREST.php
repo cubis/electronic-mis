@@ -44,14 +44,14 @@ function outputXML($errNum, $errMsgArr, $memberInfo) {
 			logToDB($memberInfo['UserName'] . " tried to login to locked account", false,  -1, $db);
 		} else {			
 			//CREATE AUTH KEY AND GRAB ALL PERSONAL INFO FROM THE USER TABLE
-		//	$outputString .= "<key>" . $memberInfo['AUTHKEY'] . "</key>\n";
+			$outputString .= "<key>" . $memberInfo['AUTHKEY'] . "</key>\n";
 			$outputString .="<MemberID>" . $memberInfo['PK_member_id'] . "</MemberID>\n";
 			$outputString .="<FirstName>" .$memberInfo['FirstName'] . "</FirstName>\n";
 			$outputString .="<LastName>" .$memberInfo['LastName'] . "</LastName>\n";
 			$outputString .="<Type>" .$memberInfo['Type'] . "</Type>\n";
 			$outputString .="<UserName>" .$memberInfo['UserName'] . "</UserName>\n";
 			$outputString .="<NeedApproval>" .$memberInfo['NeedApproval'] . "</NeedApproval>\n";
-		//	$outputString .= "<PersonalID>". $memberInfo['PersonalID'] ."</PersonalID>";			
+			$outputString .= "<PersonalID>". $memberInfo['PersonalID'] ."</PersonalID>";			
 			
 			//log successful login to the database
 			logToDB($memberInfo['UserName'] . " successfully logged in", true, $memberInfo['PK_member_id'], $db);	
