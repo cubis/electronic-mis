@@ -155,10 +155,10 @@
 	if ($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		session_write_close();
-		header("location: registerForm.php");
+		header("location: registerView.php");
 		exit();
 	} else {
-		header("location: registerSuccess.php");
+		header("location: registerSuccessView.php");
 		exit();
 	}
 
