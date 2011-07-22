@@ -18,6 +18,8 @@ function logToDB($actionDescription, $isLoggedIn, $userID, $db)
 	
 	// In the event that a user failed login, we will want to record the username by pulling
 	// it from the form on the page and inserting it into $actionDescription.
+	
+	
 	$ipAddress = $_SESSION["REMOTE_ADDR"];
 
 	$type = $actionDescription;
