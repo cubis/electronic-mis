@@ -46,7 +46,7 @@
 	$key = md5($wsResponse[$wsIndices['KEY'][0]]['value'].$trustedKey);
 
 	$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
-	print("OUTPUT = ".$output);
+	//print("OUTPUT = ".$output);
 	
 	
 	if($errNum == 0) {
