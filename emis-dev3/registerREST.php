@@ -130,20 +130,20 @@ function doService($db) {
 		$errNum += 1;
 	}	
 	
-	$prepUsers = $db->prepare("SELECT * FROM `Users` WHERE UserName = :id ; ");	
+		$prepUsers = $db->prepare("SELECT * FROM `Users` WHERE UserName = :id ; ");	
 
-	if ( $prepUsers->execute( array( ":id" => $user ) ) ) {	
-		//IF NAME IS NOT IN USE
-		if($prepUsers->rowCount() != 0){
-			$errMsgArr[] = 'Username already in use';
+		if ( $prepUsers->execute( array( ":id" => $user ) ) ) {	
+			//IF NAME IS NOT IN USE
+			if($prepUsers->rowCount() != 0){
+				$errMsgArr[] = 'Username already in use';
+				$errNum += 1;
+			} 
+		} else {
+			$error = $prepUsers->errorInfo();
+			$errMsgArr[] = $error[2];
 			$errNum += 1;
-		} 
-	} else {
-		$error = $prepUsers->errorInfo();
-		$errMsgArr[] = $error[2];
-		$errNum += 1;
-		$retVal = outputXML($errNum, $errMsgArr, $db);		
-	}
+			$retVal = outputXML($errNum, $errMsgArr, $db);		
+		}
 	
 	
 	
