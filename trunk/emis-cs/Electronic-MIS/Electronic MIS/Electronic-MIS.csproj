@@ -61,11 +61,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Appointments.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Appointments.cs" />
     <Compile Include="Appointments.Designer.cs">
       <DependentUpon>Appointments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AppointmentTab.Designer.cs">
+      <DependentUpon>AppointmentTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -96,6 +100,9 @@
     <Compile Include="SessionManager.cs" />
     <EmbeddedResource Include="Appointments.resx">
       <DependentUpon>Appointments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppointmentTab.resx">
+      <DependentUpon>AppointmentTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
