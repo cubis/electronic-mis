@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+/*
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +23,7 @@ using System.IO;
  *  <remind>true</remind>
  * </appt>
  * 
- * */
+ * 
 
 
 
@@ -144,6 +146,11 @@ namespace Electronic_MIS
                 Application.Exit();
             }             
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     class Appt
@@ -221,3 +228,4 @@ namespace Electronic_MIS
         }
     }
 }
+/*

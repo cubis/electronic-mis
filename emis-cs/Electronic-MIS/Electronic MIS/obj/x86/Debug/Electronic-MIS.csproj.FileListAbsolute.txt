@@ -10,3 +10,17 @@ C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.Login.resources
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.MainForm.resources
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.LoginTab.resources
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic MIS.exe
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic MIS.pdb
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\bin\Debug\Electronic MIS.exe
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\bin\Debug\Electronic MIS.pdb
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.Appointments.resources
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.Login.resources
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.LoginTab.resources
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.MainForm.resources
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.PatientInfoTab.resources
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.Properties.Resources.resources
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\wamp\www\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.AppointmentTab.resources
