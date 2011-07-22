@@ -36,7 +36,7 @@
             <label><strong>Password</strong><br /><input name="password" type="password" class="textfield" id="password" /></label><br />
         </div>
         <a class="black_button" style="margin-right: 60px;" href="javascript: submitform()"><span>Login</span></a>
-        <a class="black_button" style="margin-right: 144px;" href="registerForm.php"><span>Register</span></a>
+        <a class="black_button" style="margin-right: 144px;" href="registerView.php"><span>Register</span></a>
         <input style="margin-right: 60px; visibility:  hidden;" type="submit" value="Login" />
         </form>
         </div>

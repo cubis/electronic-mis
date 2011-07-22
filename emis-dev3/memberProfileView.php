@@ -33,9 +33,9 @@ require_once('auth.php');
         <p><b>You Are An Admin</b></p>
         <div class="dashed_line"></div>
         <p><b>Your Menu Options</b></p>
-        <a href="admin/edit_members.php">View/Edit Members</a>
+        <a href="admin/editMembersView.php">View/Edit Members</a>
         <br> 
-        <a href="admin/approve_requests.php">View/Approve/Deny Member Request</a>
+        <a href="admin/approveRequestsView.php">View/Approve/Deny Member Request</a>
         <br>
     </center>
 <?php elseif ($_SESSION['SESS_TYPE'] == 300): // Logged in user is a doctor ?>
@@ -48,11 +48,11 @@ require_once('auth.php');
         <br>
         <a href="#">View/Edit Availability</a> 
         <br>
-        <a href="doctor_removepatient.php">View/Remove Patients</a> 
+        <a href="doctorRemovePatientView.php">View/Remove Patients</a> 
         <br>
-        <a href="doctor_addpatient.php">Add Patients</a> 
+        <a href="doctorAddPatientView.php">Add Patients</a> 
         <br>
-        <a href="edit-member.php">Edit Profile</a> 
+        <a href="editMemberView.php">Edit Profile</a> 
     </center>
 <?php elseif ($_SESSION['SESS_TYPE'] == 200): // Logged in user is a nurse ?>
     <center>
@@ -60,7 +60,7 @@ require_once('auth.php');
         <div class="dashed_line"></div>
         <label><strong>User Menu</strong></Label>
         <br>
-        <a href="edit-member">Edit Profile</a> 
+        <a href="editMemberView.php">Edit Profile</a> 
     </center>
 <?php elseif ($_SESSION['SESS_TYPE'] == 1): // Logged in user is a patient ?>
     <center><p><b>You Are A Patient</b></p></center>
@@ -69,20 +69,20 @@ require_once('auth.php');
         <label><strong>User Menu</strong></label>
         <br>
         <a href="#">Set Up Appointments</a> <br>
-        <a href="edit-member.php">Edit Profile Information</a><br>
-        <a href="patient_screen.php">View Medical Information</a>
+        <a href="editMemberView.php">Edit Profile Information</a><br>
+        <a href="patientInfoView.php">View Medical Information</a>
     </center>
 <?php else: ?>
     I don't know who you are<br />
-    <a href="member-index.php">Home</a> | <a href="logout.php">Logout</a>
-<?php endif; ?>
+    <a href="accessDeniedView.php">Home</a> | <a href="logout.php">Logout</a>
+<?php endif; ?>1
     <div class="dashed_line"></div>
     <center>
         <label><strong>Your Account Settings</strong></label>
         <br>
-        <a href="change_pass.php">Change Password</a>
+        <a href="changePassView.php">Change Password</a>
         <br>
-        <a class="black_button" href="logout.php"><span>Logout</span></a>
+        <a class="black_button" href="logoutExec.php"><span>Logout</span></a>
     </center>
 </body>
 </html>

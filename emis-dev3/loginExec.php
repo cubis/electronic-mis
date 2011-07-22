@@ -55,7 +55,7 @@
 		
 		
 		if($wsResponse[$wsIndices['KEY'][0]]['value'] == "MEMBER PROFILE LOCKED"){
-			header("location: blockUserForm.php");
+			header("location: blockUserView.php");
 		} else {
 		
 			///set up session variables
@@ -70,7 +70,7 @@
 			$_SESSION['SESS_PERSONAL_ID'] = $wsResponse[$wsIndices['PERSONALID'][0]]['value'];
 			$_SESSION['SESS_AUTH_KEY'] = $key;
 			session_write_close();
-			header("location: memberProfileForm.php");
+			header("location: memberProfileView.php");
 		
 		}
 		exit();
