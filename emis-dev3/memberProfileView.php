@@ -75,7 +75,7 @@ require_once('auth.php');
 <?php else: ?>
     I don't know who you are<br />
     <a href="accessDeniedView.php">Home</a> | <a href="logout.php">Logout</a>
-<?php endif; ?>1
+<?php endif; ?>
     <div class="dashed_line"></div>
     <center>
         <label><strong>Your Account Settings</strong></label>
