@@ -15,5 +15,15 @@ namespace Electronic_MIS
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Insuranceid_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
