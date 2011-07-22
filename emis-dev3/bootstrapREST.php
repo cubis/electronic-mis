@@ -2,9 +2,10 @@
 if (!isset($_SESSION['SESS_MEMBER_ID']))   // start session if it hasn't been
     session_start();
 
+	
 //new pdo connection stuff
 try {
-    $db = new PDO("mysql:dbname=".DB_DATABASE.";host=".DB_HOST,DB_USER,DB_PASSWORD);
+	$db = new PDO("mysql:dbname=".DB_DATABASE.";host=".DB_HOST,DB_USER,DB_PASSWORD);
 } catch (PDOException $e) {
     die("Database Connection Failed: " . $e->getMessage());
 }
