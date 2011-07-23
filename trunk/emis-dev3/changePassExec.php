@@ -38,7 +38,7 @@ require_once('bootstrap.php');
 		xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 
 		
-		print("OUTPUT = " . $output);
+	//	print("OUTPUT = " . $output);
 		
 		
 		$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
