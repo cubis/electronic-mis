@@ -95,7 +95,80 @@ function doService() {
 
 
 	$user = strtoupper($_GET['u']);
-	$pw = $_GET['p'];	
+	$pw = $_GET['p'];
+
+	// // CHECK FOR MULTIPLE SERVICE REQESTS FROM IP, DENY IF > 3/MINUTE, ALLOW OTHERWISE
+	// $prep = $db->prepare('SELECT TimeStamp FROM LogFiles WHERE SourceIP = ?');
+	// if ($prep->execute(array($_SESSION["REMOTE_ADDR"]))) { // if records exist, check them
+	//   if($prep->rowCount() >= 1){ // else if no previous records, proceed
+	//     $info = $prep->fetchAll();
+	//     $currentTime = end($info);
+	//     $currentTime = date_create_from_format('Y-m-d H:i:s', $currentTime[0]);
+	//     $cutOffTime = $currentTime->modify("-1 minutes");
+	//     $count = 0;
+	//     foreach($info as &$record) {
+	//       if(date_create_from_format('Y-m-d H:i:s', $record[0]) > $cutOffTime) {
+	// 	$count++;
+	//       }
+	//     }
+	//     if($count > 3) {
+	//       $errMsgArr[] = 'Too many login attempts';
+	//       $errNum += 1;
+	//       $retVal = outputXML($errNum, $errMsgArr, '');
+	//       return $retVal;
+	//     }
+	//   }
+	// } else {
+	//   $error = $prep->errorInfo();
+	//   $errMsgArr[] = $error[2];
+	//   $errNum += 1;
+	//   return outputXML($errNum, $errMsgArr, '', $db);
+	// }
+
+	// CHECK FOR MULTIPLE SERVICE REQESTS FROM MEMBER_ID, DENY IF > 5/MINUTE, ALLOW OTHERWISE
+	// FIND MEMEBER_ID FOR CURRENT ATTEMPTED USER
+	$prep = $db->prepare('SELECT PK_member_id FROM Users WHERE UserName = ?');
+	$id = '';
+	if($prep->execute(array($user))) {
+	  $id = $prep->fetch();
+	  $id = $id[0];
+	} else {
+	  $error = $prep->errorInfo();
+	  $errMsgArr[] = $error[2];
+	  $errNum += 1;
+	  return outputXML($errNum, $errMsgArr, '', $db);
+	}
+	// SEARCH FOR PREVIOUS LOGIN ATTEMPTS BY USER
+	$prep = $db->prepare('SELECT TimeStamp FROM LogFiles WHERE UserName = ?');
+	if ($prep->execute(array($user))) {
+	  if($prep->rowCount() >= 1){ // if records exist, check them
+	    $info = $prep->fetchAll();
+	    $currentTime = date_create();
+	    $cutOffTime = $currentTime->modify("-12 minutes");
+	    $count = 0;
+	    foreach($info as &$record) {
+	      // $errMsgArr[] = $record['TimeStamp'] . " compared to " . $cutOffTime->format('Y-m-d H:i:s');
+	      // $errNum += 1;
+	      if(date_create_from_format('Y-m-d H:i:s', $record['TimeStamp']) > $cutOffTime) {
+		// $errMsgArr[] = $record['TimeStamp'] . " is greater than " . $cutOffTime->format('Y-m-d H:i:s');
+		// $errNum += 1;
+		$count++;
+	      }
+	    }
+	    if($count > 5) { // IF MORE THAN 5 ATTEMPTS IN A MINUTE, DENY ACCESS
+	      $errMsgArr[] = "Too many login attempts $count, $id, $user";
+	      $errNum += 1;
+	      $retVal = outputXML($errNum, $errMsgArr, '');
+	      return $retVal;
+	    }
+	  }
+	} else {
+	  $error = $prep->errorInfo();
+	  $errMsgArr[] = $error[2];
+	  $errNum += 1;
+	  return outputXML($errNum, $errMsgArr, '', $db);
+	}
+	
 	$prep = $db->prepare("SELECT * FROM `Users` WHERE UserName = :id AND Password = :pw ; ");
 
 	//LOOK FOR USERNAME AND PW IN DATABASE THEN CALL OUTPUTXML BASED ON RESULTS
