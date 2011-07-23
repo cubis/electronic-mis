@@ -81,18 +81,23 @@ namespace Electronic_MIS
             }
             else if (e.Node.Name == "LogoutNode")
             {
-                sessionManager = new SessionManager();
-                sessionManager.User = "";
-                sessionManager.Key = "";
-                tabViewer.TabPages.Clear();
 
-                tabViewer.TabPages.Add("Welcome", "Welcome");
-                int index = tabViewer.TabPages.IndexOfKey("Welcome");
+                DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.OKCancel);
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    sessionManager = new SessionManager();
+                    sessionManager.User = "";
+                    sessionManager.Key = "";
+                    tabViewer.TabPages.Clear();
 
-                WelcomeTab welcomeTab = new WelcomeTab();
-                tabViewer.TabPages[index].Controls.Add(welcomeTab);
+                    tabViewer.TabPages.Add("Welcome", "Welcome");
+                    int index = tabViewer.TabPages.IndexOfKey("Welcome");
 
-                updateNavTree();
+                    WelcomeTab welcomeTab = new WelcomeTab();
+                    tabViewer.TabPages[index].Controls.Add(welcomeTab);
+
+                    updateNavTree();
+                }
             }
         }
 
@@ -154,6 +159,11 @@ namespace Electronic_MIS
                 TreeViewEventArgs args = new TreeViewEventArgs(node);
                 navigationTree_AfterSelect(this, args);
             }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -12,6 +12,7 @@ using System.IO;
 using System.Web;
 using System.Security.Cryptography;
 using System.Xml;
+using System.Diagnostics;
 
 namespace Electronic_MIS
 {
@@ -62,7 +63,7 @@ namespace Electronic_MIS
             data.Append("u=" + WebUtility.HtmlEncode(txtUser.Text));
             data.Append("&p=" + WebUtility.HtmlEncode(pass));
 
-            ub.Host = "robertdiazisabitch.dyndns.org/EMIS/Authenticate.php";
+            ub.Host = "robertdiazisabitch.dyndns.org/EMIS/authenticateREST.php";
             ub.Query = data.ToString();
 
             //Create the request
@@ -70,9 +71,21 @@ namespace Electronic_MIS
             WebRequest request = WebRequest.Create(requestUri);
             request.Method = "GET";
 
+            Debug.WriteLine("Connection Request: ");
+            Debug.WriteLine(request.RequestUri.OriginalString.ToString());
+
             try
             {
                 WebResponse response = request.GetResponse();
+
+                /*
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                Debug.WriteLine("");
+                Debug.WriteLine("LOGIN XML:");
+                Debug.WriteLine(reader.ReadToEnd());
+
+                response = request.GetResponse();
+                */
                 
                 XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
 
@@ -92,6 +105,11 @@ namespace Electronic_MIS
                             {
                                 xmlReader.Read();
                                 sessionManager.Key = xmlReader.Value;
+                            }
+                            else if (xmlReader.Name == "ERROR")
+                            {
+                                xmlReader.Read();
+                                MessageBox.Show(xmlReader.ReadContentAsString());
                             }
 
                             break;
