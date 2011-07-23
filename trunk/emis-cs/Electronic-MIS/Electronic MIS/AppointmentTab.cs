@@ -69,7 +69,7 @@ namespace Electronic_MIS
             data.Append("u=" + WebUtility.HtmlEncode(sessionManager.User));
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
 
-            ub.Host = "67.10.181.224/~cookie/emis-dev/Appointments.php";
+            ub.Host = "robertdiazisabitch.dyndns.org/EMIS/Appointments.php";
             ub.Query = data.ToString();
 
             //Create the request

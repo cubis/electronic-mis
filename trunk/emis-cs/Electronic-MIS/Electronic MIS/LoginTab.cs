@@ -60,9 +60,8 @@ namespace Electronic_MIS
 
             string pass = CalculateMD5Hash(txtPassword.Text);
             StringBuilder data = new StringBuilder();
-            data.Append("u=" + WebUtility.HtmlEncode(txtUser.Text));
-            data.Append("&p=" + WebUtility.HtmlEncode(pass));
-
+            data.Append("u=" + WebUtility.HtmlEncode(txtUser.Text.Replace("'","''")));
+            data.Append("&p=" + WebUtility.HtmlEncode(pass.Replace("'","''")));
             ub.Host = "robertdiazisabitch.dyndns.org/EMIS/authenticateREST.php";
             ub.Query = data.ToString();
 
@@ -94,22 +93,17 @@ namespace Electronic_MIS
                     switch (xmlReader.NodeType)
                     {
                         case XmlNodeType.Element:
-                            if (xmlReader.Name == "result")
+                            if (xmlReader.Name == "errNum")
                             {
-                                if (xmlReader.ReadElementContentAsInt() == 0)
+                                if (xmlReader.ReadElementContentAsInt() > 0)
                                 {
-                                    MessageBox.Show("Login failure.  Please check your info and try again.");
+                                    MessageBox.Show("Login failure.  Please check your login information and try again.");
                                 }
                             }
                             else if (xmlReader.Name == "key")
                             {
                                 xmlReader.Read();
                                 sessionManager.Key = xmlReader.Value;
-                            }
-                            else if (xmlReader.Name == "ERROR")
-                            {
-                                xmlReader.Read();
-                                MessageBox.Show(xmlReader.ReadContentAsString());
                             }
 
                             break;
