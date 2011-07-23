@@ -14,7 +14,7 @@ function outputXML($errNum, $errMsgArr, $memberInfo) {
 	$outputString .= "<?xml version=\"1.0\"?>\n";
 	$outputString .= "<content><errNum>" . $errNum . "</errNum>\n";
 	if($errNum == 0){
-		logToDB($user." changed password", true, $memberInfo['PK_member_id'], $db); 		
+		logToDB($user." changed password", $memberInfo['PK_member_id'], $user); 		
 	} 
 	else {
 		$ct = 0;
@@ -23,9 +23,9 @@ function outputXML($errNum, $errMsgArr, $memberInfo) {
 			$ct++;
 		}
 		if( !isset($memberInfo['PK_member_id']) ){
-			logToDB($user." failed to change password", false, -1, $db);
+			logToDB($user." failed to change password", NULL, $user);
 		} else {		
-			logToDB($user." failed to change password", true, $memberInfo['PK_member_id'], $db);
+			logToDB($user." failed to change password", $memberInfo['PK_member_id'], $user);
 		}		
 	}
 		
