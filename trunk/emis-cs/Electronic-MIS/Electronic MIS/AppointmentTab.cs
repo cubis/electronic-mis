@@ -27,11 +27,16 @@ namespace Electronic_MIS
         private void AppointmentTab_Load(object sender, EventArgs e)
         {
             getAppointments();
+
+            appointments.Sort();
+
             foreach (Appointment appt in appointments)
             {
                 calAppointments.AddBoldedDate(appt.AppointmentTime);
                 appointmentListBox.Items.Add(appt);
             }
+
+            calAppointments.UpdateBoldedDates();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,6 +51,7 @@ namespace Electronic_MIS
 
         private void calAppointments_DateSelected(object sender, DateRangeEventArgs e)
         {
+            selectAppointmentByDate(e.End);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -139,7 +145,11 @@ namespace Electronic_MIS
         private void appointmentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Appointment selectedAppointment = (Appointment)appointmentListBox.SelectedItem;
-            calAppointments.SetDate(selectedAppointment.AppointmentTime);
+            if (selectedAppointment != null)
+            {
+                calAppointments.SetDate(selectedAppointment.AppointmentTime);
+            }
+            selectAppointment();
         }
 
         private void calAppointments_DateChanged(object sender, DateRangeEventArgs e)
@@ -150,6 +160,10 @@ namespace Electronic_MIS
         private void selectAppointmentByDate(DateTime date)
         {
             comboBox1.Items.Clear();
+            comboBox1.ResetText();
+            textBox1.Clear();
+            remindMeChkBox.Visible = false;
+            CancelButton.Visible = false;
 
             foreach (Appointment appt in appointments)
             {
@@ -160,12 +174,24 @@ namespace Electronic_MIS
             }
 
             if (comboBox1.Items.Count > 0)
+            {
                 comboBox1.SelectedIndex = 0;
+            }
+
+            selectAppointment();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            selectAppointment();
+        }
+
+        private void selectAppointment()
+        {
             Appointment appt = (Appointment)comboBox1.SelectedItem;
+
+            calAppointments.SetDate(appt.AppointmentTime);
+            appointmentListBox.SelectedItem = appt;
 
             StringBuilder sb = new StringBuilder();
             sb.Append(appt.AppointmentTime.ToLongDateString());
@@ -180,10 +206,50 @@ namespace Electronic_MIS
             {
                 remindMeChkBox.CheckState = CheckState.Checked;
             }
+
+            CancelButton.Visible = true;
+            remindMeChkBox.Visible = true;
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("Are you sure you want to cancel this appointment?",
+                "Confirm Cancel", MessageBoxButtons.YesNo))
+            {
+                removeAppointment();
+            }
+        }
+
+        private void removeAppointment()
+        {
+            Appointment appt = (Appointment)comboBox1.SelectedItem;
+
+            appointments.Remove(appt);
+            calAppointments.RemoveBoldedDate(appt.AppointmentTime);
+            appointmentListBox.Items.Remove(appt);
+            comboBox1.Items.Remove(appt);
+
+            if (comboBox1.Items.Count > 1)
+            {
+                comboBox1.SelectedIndex = 0;
+                selectAppointment();
+            }
+            else
+            {
+                comboBox1.SelectedIndex = -1;
+            }
+
+            textBox1.Clear();
+            comboBox1.Text = "";
+
+            CancelButton.Visible = false;
+            remindMeChkBox.Visible = false;
+
+            calAppointments.UpdateBoldedDates();
         }
     }
 
-    class Appointment
+    class Appointment : IComparable
     {
         String doc;
         String reason;
@@ -259,6 +325,13 @@ namespace Electronic_MIS
         public override string ToString()
         {
             return (AppointmentTime.ToLongDateString() + ", " +AppointmentTime.ToLongTimeString());
+        }
+
+        public int CompareTo(object obj)
+        {
+            Appointment comp = (Appointment)obj;
+
+            return DateTime.Compare(this.AppointmentTime,comp.AppointmentTime);
         }
     }
 }

@@ -49,6 +49,11 @@ namespace Electronic_MIS
             }
             else if (e.Node.Name == "PatientInfoNode")
             {
+                if (tabViewer.TabPages.ContainsKey("Welcome"))
+                {
+                    tabViewer.TabPages.RemoveByKey("Welcome");
+                }
+
                 if (!tabViewer.TabPages.ContainsKey("PatientInfo"))
                 {
 
@@ -63,6 +68,10 @@ namespace Electronic_MIS
             }
             else if (e.Node.Name == "AppointmentNode")
             {
+                if (tabViewer.TabPages.ContainsKey("Welcome"))
+                {
+                    tabViewer.TabPages.RemoveByKey("Welcome");
+                }
                 if (!tabViewer.TabPages.ContainsKey("Appointments"))
                 {
 
@@ -77,7 +86,16 @@ namespace Electronic_MIS
             }
             else if (e.Node.Name == "WelcomeNode")
             {
-                tabViewer.SelectTab("Welcome");
+                if (!tabViewer.TabPages.ContainsKey("Welcome"))
+                {
+
+                    tabViewer.TabPages.Add("Welcome", "Welcome");
+                    int index = tabViewer.TabPages.IndexOfKey("Welcome");
+
+                    WelcomeTab appTab = new WelcomeTab();
+
+                    tabViewer.TabPages[index].Controls.Add(appTab);
+                }
             }
             else if (e.Node.Name == "LogoutNode")
             {

@@ -42,6 +42,7 @@
             this.calAppointments.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
             this.calAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.calAppointments.Location = new System.Drawing.Point(45, 49);
+            this.calAppointments.MaxSelectionCount = 1;
             this.calAppointments.Name = "calAppointments";
             this.calAppointments.TabIndex = 1;
             this.calAppointments.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calAppointments_DateChanged);
@@ -55,11 +56,13 @@
             this.CancelButton.Text = "Cancel This Appointment";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Visible = false;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // remindMeChkBox
             // 
             this.remindMeChkBox.AutoSize = true;
             this.remindMeChkBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.remindMeChkBox.Enabled = false;
             this.remindMeChkBox.Location = new System.Drawing.Point(466, 373);
             this.remindMeChkBox.Name = "remindMeChkBox";
             this.remindMeChkBox.Size = new System.Drawing.Size(80, 17);
