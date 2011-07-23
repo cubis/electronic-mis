@@ -19,7 +19,7 @@ require_once('bootstrap.php');
 		foreach($fields as $key=>$value){
 			$field_string .= $key.'='.$value.'&';
 		}
-		rtrim($field_string, '&');
+		$field_string = rtrim($field_string, '&');
     
     
     
