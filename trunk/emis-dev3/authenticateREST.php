@@ -31,6 +31,11 @@ function outputXML($errNum, $errMsgArr, $memberInfo) {
 	
 	*/
 	global $db;
+	if(isset($_GET['u'])){
+			$user = $_GET['u'];
+	} else {
+		$user = "UNKOWN";
+	}
 	
 	//START FORMATTING STRING; WRAP CONTENT TAG AROUND ENTIRE MESSAGE
 	$outputString = ''; //start empty
@@ -41,7 +46,7 @@ function outputXML($errNum, $errMsgArr, $memberInfo) {
 		//IF MEMBER PROFILE LOCKED OUTPUT LOCKED AS THE KEY
 		if($memberInfo['Locked'] == 1){
 			$outputString .="<key>MEMBER PROFILE LOCKED</key>\n";
-			logToDB($memberInfo['UserName'] . " tried to login to locked account", false,  -1, $db);
+			logToDB($memberInfo['UserName'] . " tried to login to locked account", NULL, $user);
 		} else {			
 			//CREATE AUTH KEY AND GRAB ALL PERSONAL INFO FROM THE USER TABLE
 			$outputString .= "<key>" . $memberInfo['AUTHKEY'] . "</key>\n";
@@ -54,18 +59,19 @@ function outputXML($errNum, $errMsgArr, $memberInfo) {
 			$outputString .= "<PersonalID>". $memberInfo['PersonalID'] ."</PersonalID>";			
 			
 			//log successful login to the database
-			logToDB($memberInfo['UserName'] . " successfully logged in", true, $memberInfo['PK_member_id'], $db);	
+			logToDB($memberInfo['UserName'] . " successfully logged in", $memberInfo['PK_member_id'], $user);	
 		}		
 	} 	
 	//INCORRET USERNAME OR PASSWORD
 	else {	
 		//run through error array and output into xml
+		
 		$ct = 0;
 		while($ct < $errNum){
 			$outputString .="<ERROR>" . $errMsgArr[$ct] . "</ERROR>\n";
 			$ct += 1;
 		}
-		logToDB($_GET['u'] . " unsuccessful login", false, -1, $db);
+		logToDB($user . " unsuccessful login", NULL, $user);
 	}		
 	$outputString .= "</content>";	
 	return $outputString;	
