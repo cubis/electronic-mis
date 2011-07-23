@@ -15,44 +15,37 @@ namespace Electronic_MIS
     public partial class AppointmentTab : UserControl
     {
         SessionManager sessionManager;
-        List<Appt> appointments;
+        List<Appointment> appointments;
 
         public AppointmentTab(SessionManager session)
         {
             InitializeComponent();
             sessionManager = session;
-            appointments = new List<Appt>();
+            appointments = new List<Appointment>();
         }
 
         private void AppointmentTab_Load(object sender, EventArgs e)
         {
-            listBox1.Items.Add(DateTime.Today.ToLongDateString() + " " + DateTime.Today.ToLongTimeString());
+            getAppointments();
+            foreach (Appointment appt in appointments)
+            {
+                calAppointments.AddBoldedDate(appt.AppointmentTime);
+                appointmentListBox.Items.Add(appt);
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            calAppointments.SetDate(DateTime.Parse(listBox1.SelectedValue.ToString()));
+            calAppointments.SetDate(DateTime.Parse(appointmentListBox.SelectedValue.ToString()));
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            calAppointments.SetDate(DateTime.Parse(listBox1.SelectedItem.ToString()));
+            calAppointments.SetDate(DateTime.Parse(appointmentListBox.SelectedItem.ToString()));
         }
 
         private void calAppointments_DateSelected(object sender, DateRangeEventArgs e)
         {
-            if (true)
-            {
-                DialogResult result = MessageBox.Show("Appointment time at ...", "Appointment", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (result == System.Windows.Forms.DialogResult.Cancel)
-                {
-                    result = MessageBox.Show("Are you sure you want to cancel this?", "Cancel app", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (result == System.Windows.Forms.DialogResult.Yes)
-                    {
-                        //Cancel appt.
-                    }
-                }
-            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,7 +62,7 @@ namespace Electronic_MIS
             data.Append("u=" + WebUtility.HtmlEncode(sessionManager.User));
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
 
-            ub.Host = "robertdiazisabitch.dyndns.org/EMIS/Appointments.php";
+            ub.Host = "robertdiazisabitch.dyndns.org/EMIS/appointmentsREST.php";
             ub.Query = data.ToString();
 
             //Create the request
@@ -79,42 +72,57 @@ namespace Electronic_MIS
 
             try
             {
-                WebResponse response = request.GetResponse();
-
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
+                //WebResponse response = request.GetResponse();
+                TextReader respone = new StringReader(Properties.Resources.AppointmentXMLSample);
+                XmlTextReader xmlReader = new XmlTextReader(respone);
                 while (xmlReader.Read())
                 {
                     switch (xmlReader.NodeType)
                     {
                         case XmlNodeType.Element:
-                            if (xmlReader.Name == "appt")
+                            if (xmlReader.Name == "appointment")
                             {
-                                Appt newAppt = new Appt();
+                                Appointment newAppt = new Appointment();
+                                StringBuilder sb = new StringBuilder();
                                 xmlReader.Read();
-                                switch (xmlReader.Name)
+                                while (xmlReader.Name != "appointment")
                                 {
-                                    case "date":
-                                        newAppt.AppointmentTime = xmlReader.ReadElementContentAsDateTime();
-                                        break;
-                                    case "time":
-                                        DateTime time = xmlReader.ReadElementContentAsDateTime();
-                                        newAppt.AppointmentTime.AddHours(time.Hour);
-                                        newAppt.AppointmentTime.AddMinutes(time.Minute);
-                                        break;
+                                    xmlReader.Read();
+                                    switch (xmlReader.Name)
+                                    {
+                                        case "date":
+                                            sb.Append(xmlReader.ReadElementContentAsString() + " ");
+                                            break;
+                                        
+                                        case "time":
+                                            sb.Append(xmlReader.ReadElementContentAsString());
+                                            break;
+                                        
+                                        case "doctor":
+                                            newAppt.Doctor = xmlReader.ReadElementContentAsString();
+                                            break;
 
-                                    default:
-                                        break;
+                                        case "reason":
+                                            newAppt.Reason = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "remind":
+                                            newAppt.Remind = xmlReader.ReadElementContentAsBoolean();
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
                                 }
-
+                                newAppt.AppointmentTime = DateTime.Parse(sb.ToString());
                                 appointments.Add(newAppt);
                             }
                             break;
+
                         default:
                             break;
                     }
                 }
-
             }
             catch (Exception exp)
             {
@@ -128,13 +136,54 @@ namespace Electronic_MIS
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void appointmentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Appointment selectedAppointment = (Appointment)appointmentListBox.SelectedItem;
+            calAppointments.SetDate(selectedAppointment.AppointmentTime);
+        }
 
+        private void calAppointments_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            selectAppointmentByDate(e.End);
+        }
+
+        private void selectAppointmentByDate(DateTime date)
+        {
+            comboBox1.Items.Clear();
+
+            foreach (Appointment appt in appointments)
+            {
+                if (appt.AppointmentTime.Date == date.Date)
+                {
+                    comboBox1.Items.Add(appt);
+                }
+            }
+
+            if (comboBox1.Items.Count > 0)
+                comboBox1.SelectedIndex = 0;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Appointment appt = (Appointment)comboBox1.SelectedItem;
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(appt.AppointmentTime.ToLongDateString());
+            sb.Append(" ");
+            sb.AppendLine(appt.AppointmentTime.ToLongTimeString());
+            sb.AppendLine("Appointment with Dr. " + appt.Doctor);
+            sb.AppendLine("Reason: \n\t" + appt.Reason);
+
+            textBox1.Text = sb.ToString();
+
+            if (appt.Remind)
+            {
+                remindMeChkBox.CheckState = CheckState.Checked;
+            }
         }
     }
 
-    class Appt
+    class Appointment
     {
         String doc;
         String reason;
@@ -205,6 +254,11 @@ namespace Electronic_MIS
                 appTime = value;
             }
 
+        }
+
+        public override string ToString()
+        {
+            return (AppointmentTime.ToLongDateString() + ", " +AppointmentTime.ToLongTimeString());
         }
     }
 }

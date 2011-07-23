@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.calAppointments = new System.Windows.Forms.MonthCalendar();
-            this.button1 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.remindMeChkBox = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.appointmentListBox = new System.Windows.Forms.ListBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // calAppointments
@@ -43,35 +44,36 @@
             this.calAppointments.Location = new System.Drawing.Point(45, 49);
             this.calAppointments.Name = "calAppointments";
             this.calAppointments.TabIndex = 1;
+            this.calAppointments.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calAppointments_DateChanged);
             // 
-            // button1
+            // CancelButton
             // 
-            this.button1.Location = new System.Drawing.Point(281, 367);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Cancel This Appointment";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.CancelButton.Location = new System.Drawing.Point(281, 367);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(144, 23);
+            this.CancelButton.TabIndex = 11;
+            this.CancelButton.Text = "Cancel This Appointment";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Visible = false;
             // 
-            // checkBox1
+            // remindMeChkBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox1.Location = new System.Drawing.Point(466, 373);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = "Remind Me";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.remindMeChkBox.AutoSize = true;
+            this.remindMeChkBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.remindMeChkBox.Location = new System.Drawing.Point(466, 373);
+            this.remindMeChkBox.Name = "remindMeChkBox";
+            this.remindMeChkBox.Size = new System.Drawing.Size(80, 17);
+            this.remindMeChkBox.TabIndex = 10;
+            this.remindMeChkBox.Text = "Remind Me";
+            this.remindMeChkBox.UseVisualStyleBackColor = true;
+            this.remindMeChkBox.Visible = false;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(284, 49);
+            this.textBox1.Location = new System.Drawing.Point(284, 82);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(265, 296);
+            this.textBox1.Size = new System.Drawing.Size(265, 263);
             this.textBox1.TabIndex = 9;
             // 
             // label1
@@ -84,25 +86,34 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Your Current Appointments:";
             // 
-            // listBox1
+            // appointmentListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "Friday, August 17, 2012 4:15:00 PM"});
-            this.listBox1.Location = new System.Drawing.Point(45, 256);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(227, 134);
-            this.listBox1.TabIndex = 7;
+            this.appointmentListBox.FormattingEnabled = true;
+            this.appointmentListBox.Location = new System.Drawing.Point(45, 256);
+            this.appointmentListBox.Name = "appointmentListBox";
+            this.appointmentListBox.Size = new System.Drawing.Size(227, 134);
+            this.appointmentListBox.TabIndex = 7;
+            this.appointmentListBox.SelectedIndexChanged += new System.EventHandler(this.appointmentListBox_SelectedIndexChanged);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(285, 49);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(264, 21);
+            this.comboBox1.TabIndex = 12;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // AppointmentTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.remindMeChkBox);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.appointmentListBox);
             this.Controls.Add(this.calAppointments);
             this.Name = "AppointmentTab";
             this.Size = new System.Drawing.Size(615, 465);
@@ -115,10 +126,11 @@
         #endregion
 
         private System.Windows.Forms.MonthCalendar calAppointments;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.CheckBox remindMeChkBox;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox appointmentListBox;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
