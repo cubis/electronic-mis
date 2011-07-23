@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<content>
+	<appointment>
+		<apptID>12345</apptID>
+		<date>08/25/2011</date>
+		<time>09:45</time>
+		<doctor>Gonzalez</doctor>
+		<reason>Standard Checkup</reason>
+		<remind>1</remind>
+	</appointment>
+	<appointment>
+		<apptID>63563</apptID>
+		<date>08/28/2011</date>
+		<time>14:00</time>
+		<doctor>Dre</doctor>
+		<reason>Drug Test</reason>
+		<remind>0</remind>
+	</appointment>
+		<appointment>
+		<apptID>83498392</apptID>
+		<date>07/22/2011</date>
+		<time>14:00</time>
+		<doctor>Seuss</doctor>
+		<reason>There's a wocket in my pocket!</reason>
+		<remind>0</remind>
+	</appointment>
+	<appointment>
+		<apptID>9383</apptID>
+		<date>09/27/2011</date>
+		<time>10:00</time>
+		<doctor>Jekyl</doctor>
+		<reason>Mental Health analysis</reason>
+		<remind>0</remind>
+	</appointment>
+	<appointment>
+		<apptID>77285</apptID>
+		<date>08/25/2011</date>
+		<time>10:30</time>
+		<doctor>Pepper</doctor>
+		<reason>Having trouble going to the bathroom.  Need a urine analysis.</reason>
+		<remind>1</remind>
+	</appointment>
+</content>
