@@ -53,6 +53,8 @@ require_once('auth.php');
         <a href="doctorAddPatientView.php">Add Patients</a> 
         <br>
         <a href="editMemberView.php">Edit Profile</a> 
+        <br>
+        <a href="doctor_appt.php">Appointments</a> 
     </center>
 <?php elseif ($_SESSION['SESS_TYPE'] == 200): // Logged in user is a nurse ?>
     <center>
