@@ -20,7 +20,10 @@
         }
 
         //Sanitize the POST values
-		$id = $_POST['id'];
+		$type = 2;
+		//$appid = $_GET['ID'];
+		///////test to make sure get_id works -->might need to find a way to get to work
+		$id = $_GET['ID'];
         $bp = $_POST['bp'];
         $weight = $_POST['weight'];
         $sym = $_POST['sym'];
@@ -29,6 +32,7 @@
         $dos = $_POST['dos'];
         $sdate = $_POST['sdate'];
         $edate = $_POST['edate'];
+		$bill = $_POST['bill']
         $pp = $_POST['pp'];
 		$numon = $_POST['nummonths'];
 		$rd = $_POST['rd'];
@@ -39,15 +43,18 @@
         $url = "http://localhost/emis/emis-dev3/visitREST.php";
 
         $fields = array(
-			'bp' => urlencode($fname), 
-			'weight' => urlencode($lname),
-			'sym' => urlencode($bday), 
-			'diag' => urlencode($email),
-			'med' => urlencode($ssn), 
-			'dos' => urlencode($login), 
-			'sdate' => urlencode($password),
-			'edate' => urlencode($cpassword),
-			'pp' => urlencode($type),
+			'type' => urlencode($type),
+			'id' => urlencode($id),
+			'bp' => urlencode($bp), 
+			'weight' => urlencode($weight),
+			'sym' => urlencode($sym), 
+			'diag' => urlencode($diag),
+			'med' => urlencode($med), 
+			'dos' => urlencode($dos), 
+			'sdate' => urlencode($sdate),
+			'edate' => urlencode($edate),
+			'bill' => urlencode($bill),
+			'pp' => urlencode($pp),
 			'numon' => urlencode($numon),
 			'rd' => urlencode($rd),
 			'fname' => urlencode($fname),
