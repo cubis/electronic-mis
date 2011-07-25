@@ -295,15 +295,15 @@ function doServiceUp($db) {
 function doServiceView($db) {
     $errMsgArr = array();
     $errNum = 0;
-    
+
     $pid = $_POST['pid'];
 
     //end
     if ($errNum == 0) {
-       //all appointments per for user
+        //all appointments per for user
         $appoint = $db->prepare("SELECT * FROM Appointment WHERE PK_APPID = :pid");
-        
-        
+
+
         $vals = array(
             ':pid' => $pid
         );
@@ -319,33 +319,33 @@ function doServiceView($db) {
         $retVal = outputXML($errNum, $errMsgArr, $db);
     }
     //Not going to use method
-    while ($appt = $getAppt->fetch(PDO::FETCH_ASSOC)){
-    $outputString = ''; //start empty
     $outputString .= "<?xml version=\"1.0\"?>\n";
-    $outputString .= "<Appointment>\n";
-    $outputString .= "<ID>" . $appt['PK_AppID'] . "</ID>\n";
-    $outputString .= "<DoctorID>" . $appt['FK_DoctorID'] . "</DoctorID>\n";
-    $outputString .= "<PatientID>" . $appt['FK_PatientID'] . "</PatientID>\n";
-    $outputString .= "<Date>" . $appt['Date'] . "</Date>\n";
-    $outputString .= "<Time>" . $appt['Time'] . "</Time>\n";
-    $outputString .= "<Address>" . $appt['Address'] . "</Address>\n";
-    $outputString .= "<Status>" . $appt['Status'] . "</Status>\n";
-    $outputString .= "<Reason>" . $appt['Reason'] . "</Reason>\n";
-    $outputString .= "<BloodPressure>" . $appt['bp'] . "</BloodPressure>\n";
-    $outputString .= "<Weight>" . $appt['weight'] . "</Weight>\n";
-    $outputString .= "<Symptoms>" . $appt['symptoms'] . "</Symptoms>\n";
-    $outputString .= "<Diagnosis>" . $appt['diagnosis'] . "</Diagnosis>\n";
-    $outputString .= "<Bill>" . $appt['bill'] . "</Bill>\n";
-    $outputString .= "<PaymentPlan>" . $appt['paymentPlan'] . "</PaymentPlan>\n";
-    $outputString .= "<NumberMonths>" . $appt['NumMonths'] . "</NumberMonths>\n";
-    $outputString .= "<ReferalDoc>" . $appt['FK_ReferalDoc'] . "</ReferalDoc>\n";
-    $outputString .= "<FileNane>" . $appt['fileName'] . "</FileNane>\n";
-    $outputString .= "<FileLocation>" . $appt['fileLocation'] . "</FileLocation>\n";
-    $outputString .= "<Reminder>" . $appt['Reminder'] . "</Reminder>\n";
-    $outputString .= "</Appointment>\n";
+    while ($appt = $getAppt->fetch(PDO::FETCH_ASSOC)) {
+        $outputString = ''; //start empty
+        $outputString .= "<Appointment>\n";
+        $outputString .= "<ID>" . $appt['PK_AppID'] . "</ID>\n";
+        $outputString .= "<DoctorID>" . $appt['FK_DoctorID'] . "</DoctorID>\n";
+        $outputString .= "<PatientID>" . $appt['FK_PatientID'] . "</PatientID>\n";
+        $outputString .= "<Date>" . $appt['Date'] . "</Date>\n";
+        $outputString .= "<Time>" . $appt['Time'] . "</Time>\n";
+        $outputString .= "<Address>" . $appt['Address'] . "</Address>\n";
+        $outputString .= "<Status>" . $appt['Status'] . "</Status>\n";
+        $outputString .= "<Reason>" . $appt['Reason'] . "</Reason>\n";
+        $outputString .= "<BloodPressure>" . $appt['bp'] . "</BloodPressure>\n";
+        $outputString .= "<Weight>" . $appt['weight'] . "</Weight>\n";
+        $outputString .= "<Symptoms>" . $appt['symptoms'] . "</Symptoms>\n";
+        $outputString .= "<Diagnosis>" . $appt['diagnosis'] . "</Diagnosis>\n";
+        $outputString .= "<Bill>" . $appt['bill'] . "</Bill>\n";
+        $outputString .= "<PaymentPlan>" . $appt['paymentPlan'] . "</PaymentPlan>\n";
+        $outputString .= "<NumberMonths>" . $appt['NumMonths'] . "</NumberMonths>\n";
+        $outputString .= "<ReferalDoc>" . $appt['FK_ReferalDoc'] . "</ReferalDoc>\n";
+        $outputString .= "<FileNane>" . $appt['fileName'] . "</FileNane>\n";
+        $outputString .= "<FileLocation>" . $appt['fileLocation'] . "</FileLocation>\n";
+        $outputString .= "<Reminder>" . $appt['Reminder'] . "</Reminder>\n";
+        $outputString .= "</Appointment>\n";
     }
     $retVal = $outputString;
-    
+
 
     return $retVal;
 }
@@ -363,21 +363,20 @@ function outputXML2($errNum, $errMsgArr, $db) {
     $outputString .= "<content>\n";
     $outputString .= "<ID>" . $_POST['$id'] . "</ID>\n";
     //if ($errNum == 0) {
-      //  $outputString .= "<RESULT>SUCCESSFUL Visit</RESULT>";
-        //logToDB($_POST['u'] . " successful query", false, -1, $db);
+    //  $outputString .= "<RESULT>SUCCESSFUL Visit</RESULT>";
+    //logToDB($_POST['u'] . " successful query", false, -1, $db);
     //} 
     /*
-        $ct = 0;
-        while ($ct < $errNum) {
-            $outputString .= "<ERROR>" . $errMsgArr[$ct] . "</ERROR>\n";
-            $ct++;
-        }
-        logToDB($_POST['u'] . " unsuccessful visit", false, -1, $db);
-    }
-    $outputString .= "</content>";
-    return $outputString;
+      $ct = 0;
+      while ($ct < $errNum) {
+      $outputString .= "<ERROR>" . $errMsgArr[$ct] . "</ERROR>\n";
+      $ct++;
+      }
+      logToDB($_POST['u'] . " unsuccessful visit", false, -1, $db);
+      }
+      $outputString .= "</content>";
+      return $outputString;
      * */
-     
 }
 
 ?>
