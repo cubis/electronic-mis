@@ -18,6 +18,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
 	$outputString .= "<?xml version=\"1.0\"?>\n";
 	$outputString .= "<content><errNum>" . $errNum . "</errNum>\n";
 	if($errNum == 0){
+		$outputString .= "<PatientCount>" . $patientInfoPrep->rowCount() . "</PatientCount>\n";
 		while( $patientInfo = $patientInfoPrep->fetch(PDO::FETCH_ASSOC) ){
 			$outputString .= "<FirstName>" . $patientInfo['FirstName'] . "</FirstName>\n";
 			$outputString .= "<LastName>" . $patientInfo['LastName'] . "</LastName>\n";
@@ -33,6 +34,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
 			$outputString .= "<CoPay>" . $patientInfo['Co-Pay'] . "</CoPay>\n";
 			$outputString .= "<CoverageStart>" . $patientInfo['CoverageStart'] . "</CoverageStart>\n";
 			$outputString .= "<CoverageEnd>" . $patientInfo['CoverageEnd'] . "</CoverageEnd>\n";
+			$outputString .= "<FKDoctorID>" . $patientInfo['FK_DoctorID'] . "</FKDoctorID>\n";
 			logToDB($user." access patient info for " . $target, $memberInfo['PK_member_id'], $user); 
 		}			
 	} 
@@ -112,6 +114,7 @@ function doService($level) {
 			}
 			if(errNum == 0){
 				$retVal = outputXML($errNum, $errMsgArr, $patientInfoPrep);
+				//print($patientInfoPrep->rowCount());
 			} else {
 				$retVal = outputXML($errNum, $errMsgArr, '');
 			}
