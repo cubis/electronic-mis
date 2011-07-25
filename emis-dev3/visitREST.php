@@ -26,12 +26,15 @@ require_once('bootstrapREST.php');  //link information
 //type1 =  insert (create)
 //type 2 = update (execute)
 //type 3 = reschedule;
+//Type 4 = View all infotmation
 if ($_POST['type'] == 1)
     $output = doServiceAp($db);
 else if ($_POST['type'] == 2)
     $output = doServiceVi($db);
 else if ($_POST['type'] == 3)
     $output = doServiceUp($db);
+else if ($_POST['type'] == 4)
+    $output = doServiceView($db);
 else
     $output = "ERROR NO TYPE SPECIFIED IN EXECUTION CODE";
 
@@ -287,5 +290,85 @@ function doServiceUp($db) {
 
     return $retVal;
 }
+
+//Type 4 Service
+function doServiceView($db) {
+    $errMsgArr = array();
+    $errNum = 0;
+    
+    $id = $_POST['id'];
+    $bp = $_POST['bp'];
+    $weight = $_POST['weight'];
+    $sym = $_POST['sym'];
+    $diag = $_POST['diag'];
+    $med = $_POST['med'];
+    $dos = $_POST['dos'];
+    $sdate = $_POST['sdate'];
+    $edate = $_POST['edate'];
+    $bill = $_POST['bill'];
+    $pp = $_POST['pp'];
+    $numon = $_POST['numan'];
+    $rd = $_POST['rd'];
+    $fname = $_POST['fname'];
+    $floc = $_POST['floc'];
+
+    //Input Validations (still need to do
+    if (!isset($_POST['bp']) || $_POST['bp'] == '') {
+        $errMsgArr[] = 'Blood Pressure missing';
+        $errNum += 1;
+    }
+    if (!isset($_POST['weight']) || $_POST['weight'] == '') {
+        $errMsgArr[] = 'Weight missing';
+        $errNum += 1;
+    }
+    //test
+    if (!isset($_POST['sym']) || $_POST['sym'] == '') {
+        $errMsgArr[] = 'Symptoms missing';
+        $errNum += 1;
+    }
+    if (!isset($_POST['diag']) || $_POST['diag'] == '') {
+        $errMsgArr[] = 'Diagnosis address missing';
+        $errNum += 1;
+    }
+    //end
+    if ($errNum == 0) {
+        //Do update
+        //$updateVistPrep = $db->prepare("UPDATE Appointment SET bp = :bp, weight = :weight, symptoms = :sym, diagnosis = :diag,
+	//											bill = :bill, paymentPlan = :pp, NumMonths = :numan, FK_ReferalDoc = :rd,
+	//											fileName = :fname, fileLocation = :floc
+	//											WHERE PK_AppID = :id");
+        //$tableType = '';
+        $appoint = $db->prepare("SELECT * FROM Appointment;");
+        
+        
+        /*$vals = array(
+            ':bp' => $bp,
+            ':weight' => $weight,
+            ':sym' => $sym,
+            ':diag' => $diag,
+            ':bill' => $bill,
+            ':pp' => $pp,
+            ':numan' => $numan,
+            ':rd' => $ssn,
+            ':fname' => $ssn,
+            ':floc' => $floc,
+            ':id' => $id
+        );*/
+        $updateVisitSuccess = $updateVistPrep->execute($vals);
+
+        if (!$updateVisitSuccess) {
+            $errMsgArr[] = 'update visit failed';
+            $errNum += 1;
+        }
+
+        $retVal = outputXML($errNum, $errMsgArr, $db);
+    } else {
+        $retVal = outputXML($errNum, $errMsgArr, $db);
+    }
+
+
+    return $retVal;
+}
+
 
 ?>
