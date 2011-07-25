@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<content>
+	<patientinfo>
+		<firstname>12345</firstname>
+		<date>08/25/2011</date>
+		<time>09:45</time>
+		<doctor>Gonzalez</doctor>
+		<reason>Standard Checkup</reason>
+		<remind>1</remind>
+	</patientinfo>
+</content>
