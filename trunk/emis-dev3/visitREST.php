@@ -53,7 +53,7 @@ function outputXML($errNum, $errMsgArr, $db) {
     $outputString .= "<content>\n";
     $outputString .= "<errNum>" . $errNum . "</errNum>\n";
     if ($errNum == 0) {
-        $outputString .= "<RESULT>SUCCESSFUL Visit</RESULT>";
+        $outputString .= "<RESULT>SUCCESSFUL Service</RESULT>";
         logToDB($_POST['u'] . " successful query", false, -1, $db);
     } else {
         $ct = 0;
