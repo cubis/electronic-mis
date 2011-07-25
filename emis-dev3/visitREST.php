@@ -307,7 +307,7 @@ function doServiceView($db) {
         $vals = array(
             ':id' => $id
         );
-        $updateVisitSuccess = $appoint->execute($vals);
+        $getAppt = $appoint->execute($vals);
 
         if (!$updateVisitSuccess) {
             $errMsgArr[] = 'Gather Appoint failed';
@@ -318,10 +318,66 @@ function doServiceView($db) {
     } else {
         $retVal = outputXML($errNum, $errMsgArr, $db);
     }
-
+    //Not going to use method
+    $appt = $getAppt->fetch(PDO::FETCH_ASSOC);
+    $outputString = ''; //start empty
+    $outputString .= "<?xml version=\"1.0\"?>\n";
+    $outputString .= "<Appointment>\n";
+    $outputString .= "<ID>" . $appt['PK_AppID'] . "</ID>\n";
+    $outputString .= "<DoctorID>" . $appt['FK_DoctorID'] . "</DoctorID>\n";
+    $outputString .= "<PatientID>" . $appt['FK_PatientID'] . "</PatientID>\n";
+    $outputString .= "<Date>" . $appt['Date'] . "</Date>\n";
+    $outputString .= "<Time>" . $appt['Time'] . "</Time>\n";
+    $outputString .= "<Address>" . $appt['Address'] . "</Address>\n";
+    $outputString .= "<Status>" . $appt['Status'] . "</Status>\n";
+    $outputString .= "<Reason>" . $appt['Reason'] . "</Reason>\n";
+    $outputString .= "<BloodPressure>" . $appt['bp'] . "</BloodPressure>\n";
+    $outputString .= "<Weight>" . $appt['weight'] . "</Weight>\n";
+    $outputString .= "<Symptoms>" . $appt['symptoms'] . "</Symptoms>\n";
+    $outputString .= "<Diagnosis>" . $appt['diagnosis'] . "</Diagnosis>\n";
+    $outputString .= "<Bill>" . $appt['bill'] . "</Bill>\n";
+    $outputString .= "<PaymentPlan>" . $appt['paymentPlan'] . "</PaymentPlan>\n";
+    $outputString .= "<NumberMonths>" . $appt['NumMonths'] . "</NumberMonths>\n";
+    $outputString .= "<ReferalDoc>" . $appt['FK_ReferalDoc'] . "</ReferalDoc>\n";
+    $outputString .= "<FileNane>" . $appt['fileName'] . "</FileNane>\n";
+    $outputString .= "<FileLocation>" . $appt['fileLocation'] . "</FileLocation>\n";
+    $outputString .= "<Reminder>" . $appt['Reminder'] . "</Reminder>\n";
+    $outputString .= "</Appointment>\n";
+    
+    $retVal = $outputString;
+ 
 
     return $retVal;
 }
 
+function outputXML2($errNum, $errMsgArr, $db) {
+
+
+    /* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */
+    /* $controlString = "3p1XyTiBj01EM0360lFw";
+      $AUTH_KEY = md5($user.$pw.$controlString);
+
+     */
+    $outputString = ''; //start empty
+    $outputString .= "<?xml version=\"1.0\"?>\n";
+    $outputString .= "<content>\n";
+    $outputString .= "<ID>" . $_POST['$id'] . "</ID>\n";
+    //if ($errNum == 0) {
+      //  $outputString .= "<RESULT>SUCCESSFUL Visit</RESULT>";
+        //logToDB($_POST['u'] . " successful query", false, -1, $db);
+    //} 
+    /*
+        $ct = 0;
+        while ($ct < $errNum) {
+            $outputString .= "<ERROR>" . $errMsgArr[$ct] . "</ERROR>\n";
+            $ct++;
+        }
+        logToDB($_POST['u'] . " unsuccessful visit", false, -1, $db);
+    }
+    $outputString .= "</content>";
+    return $outputString;
+     * */
+     
+}
 
 ?>
