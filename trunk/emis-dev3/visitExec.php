@@ -32,7 +32,7 @@
         $dos = $_POST['dos'];
         $sdate = $_POST['sdate'];
         $edate = $_POST['edate'];
-		$bill = $_POST['bill']
+		$bill = $_POST['bill'];
         $pp = $_POST['pp'];
 		$numon = $_POST['nummonths'];
 		$rd = $_POST['rd'];
