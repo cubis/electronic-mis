@@ -300,7 +300,7 @@ function doServiceView($db) {
 
     //end
     if ($errNum == 0) {
-
+       //all appointments per for user
         $appoint = $db->prepare("SELECT * FROM Appointment WHERE PK_APPID = :id");
         
         
