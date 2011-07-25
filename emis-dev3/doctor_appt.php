@@ -41,13 +41,13 @@
                                     $row2 = mysql_fetch_assoc($result2);
 									echo "<tr>";
 									$ID = $row1['PK_AppID'];
-									echo "<td><a href='visit.php?ID=$ID'>Visit</a></td>\n";
-									echo "<td>",$row2['FirstName'],"</td>\n";
-									echo "<td>",$row2['LastName'],"</td>\n";
-									echo "<td>",$row1['Reason'],"</td>\n";
-									echo "<td>",$row1['Date'],"</td>\n";
-									echo "<td>",$row1['Time'],"</td>\n";
-									echo "<td>",$row1['Status'],"</td>\n";
+									echo "<td><a href='visit.php?ID=$ID'>Visit</a></td>";
+									echo "<td>",$row2['FirstName'],"</td>";
+									echo "<td>",$row2['LastName'],"</td>";
+									echo "<td>",$row1['Reason'],"</td>";
+									echo "<td>",$row1['Date'],"</td>";
+									echo "<td>",$row1['Time'],"</td>";
+									echo "<td>",$row1['Status'],"</td>";
 									echo "</tr>";
 								}
                                 
