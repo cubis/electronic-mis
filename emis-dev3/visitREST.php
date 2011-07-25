@@ -296,16 +296,16 @@ function doServiceView($db) {
     $errMsgArr = array();
     $errNum = 0;
     
-    $id = $_POST['id'];
+    $pid = $_POST['pid'];
 
     //end
     if ($errNum == 0) {
        //all appointments per for user
-        $appoint = $db->prepare("SELECT * FROM Appointment WHERE PK_APPID = :id");
+        $appoint = $db->prepare("SELECT * FROM Appointment WHERE PK_APPID = :pid");
         
         
         $vals = array(
-            ':id' => $id
+            ':pid' => $pid
         );
         $getAppt = $appoint->execute($vals);
 
@@ -319,7 +319,7 @@ function doServiceView($db) {
         $retVal = outputXML($errNum, $errMsgArr, $db);
     }
     //Not going to use method
-    $appt = $getAppt->fetch(PDO::FETCH_ASSOC);
+    while ($appt = $getAppt->fetch(PDO::FETCH_ASSOC)){
     $outputString = ''; //start empty
     $outputString .= "<?xml version=\"1.0\"?>\n";
     $outputString .= "<Appointment>\n";
@@ -343,9 +343,9 @@ function doServiceView($db) {
     $outputString .= "<FileLocation>" . $appt['fileLocation'] . "</FileLocation>\n";
     $outputString .= "<Reminder>" . $appt['Reminder'] . "</Reminder>\n";
     $outputString .= "</Appointment>\n";
-    
+    }
     $retVal = $outputString;
- 
+    
 
     return $retVal;
 }
