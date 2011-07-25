@@ -150,6 +150,7 @@ function doServiceVi($db) {
     $rd = $_POST['rd'];
     $fname = $_POST['fname'];
     $floc = $_POST['floc'];
+    $status = "close";
 
     //Input Validations (still need to do
     if (!isset($_POST['bp']) || $_POST['bp'] == '') {
@@ -174,7 +175,7 @@ function doServiceVi($db) {
         //Do update
         $updateVistPrep = $db->prepare("UPDATE Appointment SET bp = :bp, weight = :weight, symptoms = :sym, diagnosis = :diag,
 												bill = :bill, paymentPlan = :pp, NumMonths = :numan, FK_ReferalDoc = :rd,
-												fileName = :fname, fileLocation = :floc
+												fileName = :fname, fileLocation = :floc, Status = :status
 												WHERE PK_AppID = :id");
         //$tableType = '';
 
@@ -189,7 +190,8 @@ function doServiceVi($db) {
             ':rd' => $ssn,
             ':fname' => $ssn,
             ':floc' => $floc,
-            ':id' => $id
+            ':id' => $id,
+            ':status' => $status
         );
         $updateVisitSuccess = $updateVistPrep->execute($vals);
 
@@ -350,33 +352,5 @@ function doServiceView($db) {
     return $retVal;
 }
 
-function outputXML2($errNum, $errMsgArr, $db) {
-
-
-    /* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */
-    /* $controlString = "3p1XyTiBj01EM0360lFw";
-      $AUTH_KEY = md5($user.$pw.$controlString);
-
-     */
-    $outputString = ''; //start empty
-    $outputString .= "<?xml version=\"1.0\"?>\n";
-    $outputString .= "<content>\n";
-    $outputString .= "<ID>" . $_POST['$id'] . "</ID>\n";
-    //if ($errNum == 0) {
-    //  $outputString .= "<RESULT>SUCCESSFUL Visit</RESULT>";
-    //logToDB($_POST['u'] . " successful query", false, -1, $db);
-    //} 
-    /*
-      $ct = 0;
-      while ($ct < $errNum) {
-      $outputString .= "<ERROR>" . $errMsgArr[$ct] . "</ERROR>\n";
-      $ct++;
-      }
-      logToDB($_POST['u'] . " unsuccessful visit", false, -1, $db);
-      }
-      $outputString .= "</content>";
-      return $outputString;
-     * */
-}
 
 ?>
