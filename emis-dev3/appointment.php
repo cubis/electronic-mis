@@ -7,9 +7,14 @@
     <body>
         
         <?php
-        /*require_once('/configREST.php');
-        require_once('/bootstrapREST.php');
-        require_once('/authenticateREST.php');*/
+        require_once('configREST.php');
+        /*require_once('bootstrapREST.php');*/
+        /*require_once('auth.php');*/
+        /*require_once('make_appt.php');*/
+        
+        $doclist = "SELECT * FROM Doctor;";
+        $result = mysql_query($doclist)or die(mysql_error());
+        
         ?>
         
         <h1>Make Appointment</h1>
@@ -23,12 +28,27 @@
             <option value="1">Select Doctor</option>
             </select>
         
+            
+
         <br />
         <br />
         
-        Date: ';
+        Date: '; ?>
+        
+            <br />
+            
+            <h1>Referral Doctor</h1>
+								<select name ="rd" id="rd">
+									<option value =""></option>
+									<?php
+										while ($row1 = mysql_fetch_assoc($result)){
+											echo '<option value = "',$row1['PK_DoctorID'],'">',$row1['DocName'],'</option>';
+										}
+									?>
+								</select>
+        
                 
-                
+              <?php  
                 
                 $days = range(1,31);
                 $years = range(2011,2061);
