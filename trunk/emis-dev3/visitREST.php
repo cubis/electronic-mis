@@ -54,7 +54,7 @@ function outputXML($errNum, $errMsgArr, $db) {
     $outputString .= "<errNum>" . $errNum . "</errNum>\n";
     if ($errNum == 0) {
         $outputString .= "<RESULT>SUCCESSFUL Visit</RESULT>";
-        logToDB($_POST['u'] . " successful visit", false, -1, $db);
+        logToDB($_POST['u'] . " successful query", false, -1, $db);
     } else {
         $ct = 0;
         while ($ct < $errNum) {
@@ -297,71 +297,24 @@ function doServiceView($db) {
     $errNum = 0;
     
     $id = $_POST['id'];
-    $bp = $_POST['bp'];
-    $weight = $_POST['weight'];
-    $sym = $_POST['sym'];
-    $diag = $_POST['diag'];
-    $med = $_POST['med'];
-    $dos = $_POST['dos'];
-    $sdate = $_POST['sdate'];
-    $edate = $_POST['edate'];
-    $bill = $_POST['bill'];
-    $pp = $_POST['pp'];
-    $numon = $_POST['numan'];
-    $rd = $_POST['rd'];
-    $fname = $_POST['fname'];
-    $floc = $_POST['floc'];
 
-    //Input Validations (still need to do
-    if (!isset($_POST['bp']) || $_POST['bp'] == '') {
-        $errMsgArr[] = 'Blood Pressure missing';
-        $errNum += 1;
-    }
-    if (!isset($_POST['weight']) || $_POST['weight'] == '') {
-        $errMsgArr[] = 'Weight missing';
-        $errNum += 1;
-    }
-    //test
-    if (!isset($_POST['sym']) || $_POST['sym'] == '') {
-        $errMsgArr[] = 'Symptoms missing';
-        $errNum += 1;
-    }
-    if (!isset($_POST['diag']) || $_POST['diag'] == '') {
-        $errMsgArr[] = 'Diagnosis address missing';
-        $errNum += 1;
-    }
     //end
     if ($errNum == 0) {
-        //Do update
-        //$updateVistPrep = $db->prepare("UPDATE Appointment SET bp = :bp, weight = :weight, symptoms = :sym, diagnosis = :diag,
-	//											bill = :bill, paymentPlan = :pp, NumMonths = :numan, FK_ReferalDoc = :rd,
-	//											fileName = :fname, fileLocation = :floc
-	//											WHERE PK_AppID = :id");
-        //$tableType = '';
-        $appoint = $db->prepare("SELECT * FROM Appointment;");
+
+        $appoint = $db->prepare("SELECT * FROM Appointment WHERE PK_APPID = :id");
         
         
-        /*$vals = array(
-            ':bp' => $bp,
-            ':weight' => $weight,
-            ':sym' => $sym,
-            ':diag' => $diag,
-            ':bill' => $bill,
-            ':pp' => $pp,
-            ':numan' => $numan,
-            ':rd' => $ssn,
-            ':fname' => $ssn,
-            ':floc' => $floc,
+        $vals = array(
             ':id' => $id
-        );*/
-        $updateVisitSuccess = $updateVistPrep->execute($vals);
+        );
+        $updateVisitSuccess = $appoint->execute($vals);
 
         if (!$updateVisitSuccess) {
-            $errMsgArr[] = 'update visit failed';
+            $errMsgArr[] = 'Gather Appoint failed';
             $errNum += 1;
         }
 
-        $retVal = outputXML($errNum, $errMsgArr, $db);
+        $retVal = outputXML2($errNum, $errMsgArr, $db);
     } else {
         $retVal = outputXML($errNum, $errMsgArr, $db);
     }
