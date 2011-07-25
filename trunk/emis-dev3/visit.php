@@ -31,7 +31,7 @@ $result = mysql_query($doclist)or die(mysql_error());
                                                 document.forms["visit"].submit();
                                         }
                     </script>
-                    <form id="visitForm" name="visitForm" method="post" action="visitExec.php">
+                    <form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID=<?php echo $apptid?>">
                         <center><p><b>Fill in the visit information below.</b></p></center>
                         <?php
 						
@@ -122,7 +122,8 @@ $result = mysql_query($doclist)or die(mysql_error());
 
                             <tr>
                                 <td>&nbsp;</td>
-                                <td><a class="black_button" href="javascript: submitform()"><span>Submit</span></a></td>
+								<td><input type="submit" /> </td>
+                                <!--<td><a class="black_button" href="javascript: submitform()"><span>Submit</span></a></td>-->
                             </tr>
                         </table>
                     </form>
@@ -131,4 +132,3 @@ $result = mysql_query($doclist)or die(mysql_error());
         </div>
     </body>
 </html>
-
