@@ -1,3 +1,8 @@
+<?php
+require_once('auth.php');
+require_once('bootstrap.php');
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
@@ -7,25 +12,25 @@
     <body>
         
         <?php
-        require_once('configREST.php');
-        /*require_once('bootstrapREST.php');*/
-        /*require_once('auth.php');*/
-        /*require_once('make_appt.php');*/
         
-        $doclist = "SELECT * FROM Doctor;";
-        $result = mysql_query($doclist)or die(mysql_error());
+        /*$doclist = "SELECT * FROM Doctor;";
+        $result = mysql_query($doclist)or die(mysql_error());*/
         
         ?>
         
         <h1>Make Appointment</h1>
-        <br />
+        <h4>Referral Doctor: </h4>
         
         <form action="make_appt.php" method="post">
         
         <?php
-        echo 'Doctor:
+        
+        
+        
+        echo 'Request appointment with Doctor:
             <select name="doctor">
             <option value="1">Select Doctor</option>
+            
             </select>
         
             
@@ -33,24 +38,9 @@
         <br />
         <br />
         
-        Date: '; ?>
+        Date: '; 
         
-            <br />
-            
-            <h1>Referral Doctor</h1>
-								<select name ="rd" id="rd">
-									<option value =""></option>
-									<?php
-										while ($row1 = mysql_fetch_assoc($result)){
-											echo '<option value = "',$row1['PK_DoctorID'],'">',$row1['DocName'],'</option>';
-										}
-									?>
-								</select>
-        
-                
-              <?php  
-                
-                $days = range(1,31);
+        $days = range(1,31);
                 $years = range(2011,2061);
                 $hours = range(0,23);
                 
@@ -96,6 +86,24 @@
                     echo "<option value=\"$value\">$value </option>\n";
                 }
                 echo '</select>';
+                
+                ?>
+        
+            <br />
+            
+								<select name ="rd" id="rd">
+									<option value =""></option>
+									<?php
+										while ($row1 = mysql_fetch_assoc($result)){
+											echo '<option value = "',$row1['PK_DoctorID'],'">',$row1['DocName'],'</option>';
+										}
+									?>
+								</select>
+        
+                
+              <?php  
+                
+               
                 
                 
                 ?>
