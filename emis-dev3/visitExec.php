@@ -43,6 +43,8 @@ $floc = $_POST['floc'];
 $url = "http://localhost/emis/emis-dev3/visitREST.php";
 
 $fields = array(
+    'u' => urlencode($_SESSION['SESS_USERNAME']),
+    'key' => urlencode($_SESSION['SESS_AUTH_KEY']),
     'type' => urlencode($type),
     'id' => urlencode($id),
     'bp' => urlencode($bp),
