@@ -48,9 +48,7 @@ require_once('auth.php');
         <br>
         <a href="#">View/Edit Availability</a> 
         <br>
-        <a href="doctorRemovePatientView.php">View/Remove Patients</a> 
-        <br>
-        <a href="doctorAddPatientView.php">Add Patients</a> 
+        <a href="doctorAddRemovePatientView.php">Add/Remove Patients</a> 
         <br>
         <a href="editMemberView.php">Edit Profile</a> 
         <br>
