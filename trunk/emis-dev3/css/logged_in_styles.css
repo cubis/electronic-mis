@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin: 0 auto;
+	background-image:url(../img/internal_bg.png);
+	background-repeat: repeat-x;
+	background-color: #e5e5e5;
+}
+
+.container {
+	width: 1000px;
+	padding: 0px 20px 20px 20px;
+	margin: 0 auto;
+}
+
+.header {
+	width: 960px;
+	display: inline-block;
+	margin-top: 25px;
+}
+
+.header h1 {
+	color: white;
+}
+
+.logo {
+	float: left;
+	width: 480px;
+}
+
+.welcome_text {
+	float: right;
+	text-align: right;
+	width: 480px;
+}
+
+.contentwrap {
+	display: inline-block;
+	margin-top: 25px;
+	background-color: #ffffff;
+	border: 1px solid black;
+	min-height: 250px;
+	width: 918px;
+	padding: 20px;
+	background-image: url(../img/gradient.png);
+	background-repeat: repeat-x;
+}
+
+.navigation {
+	float: left;
+	display: inherit;
+	border: 1px solid black;
+	width: 198px;
+	margin-right: 20px;
+}
+
+.nav_title {
+	background-color:#900;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.nav_content {
+	font-weight: bold;
+}
+
+.navlist {
+	background-color:#f5f5f5;
+	padding: 10px;
+	vertical-align:middle;
+}
+
+.navlist:hover {
+	background-color:#c0c0c0;
+}
+
+.navlist a {
+	color: black;
+	text-decoration: none;
+}
+
+.page_display {
+	width: 695px;
+	border: 1px solid black;
+	display: inherit;
+}
+
+.page_title {
+	text-align: right;
+	color: white;
+	background-color: #900;
+	padding: 10px;
+	font-weight: bold;
+}
+	
+.page_content {
+	padding: 20px;
+	background-color: white;
+}
+
+.footer {
+	font-size: 12px;
+	text-align: center;
+}
