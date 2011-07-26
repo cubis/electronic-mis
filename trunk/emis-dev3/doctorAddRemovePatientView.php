@@ -44,15 +44,18 @@ session_start();
 		$parser = xml_parser_create();
 		
 		xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+		
 	$numRows = $wsResponse[$wsIndices['PATIENTCOUNT'][0]]['value'];
 	$currRow = 0;
 	
 	while ($currRow < $numRows){
 		$doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
-		if($_SESSION['SESS_PERSONAL_ID'] == $doc){
+		$type = $wsResponse[$wsIndices['TYPE'][$currRow]]['value'];
+		
+		if($_SESSION['SESS_PERSONAL_ID'] == $doc && $type == 1){
 			echo "<tr>";
 			$ID = $wsResponse[$wsIndices['PK_PatientID'][$currRow]]['value'];
-			echo "<td><a href='doctorRemovePatientExec.php?ID=$ID'>Remove</a></td>\n";
+			echo "<td><a href='doctorRemovePatientExec.php?ID=$ID&do=remove'>Remove</a></td>\n";
 			echo "<td>",$wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['SEX'][$currRow]]['value'],"</td>\n";
@@ -64,13 +67,15 @@ session_start();
 		}
 		$currRow++;
 	}
+	$currRow = 0;
 	
-	//print_r($wsResponse);
 ?>
 		</table>
+		
 		<table>
+		<th></th><th></th><th><center> NOT MY PATIENTS </center></th>
 		<tr>
-				<td>Remove</td>
+				<td>Add</td>
 				<td>First Name</td>
 				<td>Last Name</td>
 				<td>Sex</td>
@@ -81,12 +86,12 @@ session_start();
 			</tr>
 <?php
 
-	/*		while ($currRow < $numRows){
+	while ($currRow < $numRows){
 		$doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
-		if(!isset(  $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value']  )){
+		if(!isset( $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'] ) && $wsResponse[$wsIndices['TYPE'][$currRow]]['value'] == 1){
 			echo "<tr>";
 			$ID = $wsResponse[$wsIndices['PK_PatientID'][$currRow]]['value'];
-			echo "<td><a href='doctorRemovePatientExec.php?ID=$ID'>Remove</a></td>\n";
+			echo "<td><a href='doctorRemovePatientExec.php?ID=$ID&do=add'>Add</a></td>\n";
 			echo "<td>",$wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['SEX'][$currRow]]['value'],"</td>\n";
@@ -99,7 +104,7 @@ session_start();
 		$currRow++;
 	}
 	
-	*/
+	
 
 ?>
 		
