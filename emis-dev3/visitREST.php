@@ -295,12 +295,12 @@ function doServiceUp($db) {
     return $retVal;
 }
 
-//Type 4 Service
+//Type 4 Service (patient appts
 function doServiceView($db) {
     $errMsgArr = array();
     $errNum = 0;
-
-    $pid = $_POST['pid'];
+    $uname = $_GET['u'];
+    //$pid = $_POST['pid'];
 
     //end
     if ($errNum == 0) {
@@ -324,30 +324,22 @@ function doServiceView($db) {
     }
     //Not going to use method
     $outputString .= "<?xml version=\"1.0\"?>\n";
+    $outputString .= "<content>\n";
     while ($appt = $getAppt->fetch(PDO::FETCH_ASSOC)) {
         $outputString = ''; //start empty
-        $outputString .= "<Appointment>\n";
-        $outputString .= "<ID>" . $appt['PK_AppID'] . "</ID>\n";
-        $outputString .= "<DoctorID>" . $appt['FK_DoctorID'] . "</DoctorID>\n";
-        $outputString .= "<PatientID>" . $appt['FK_PatientID'] . "</PatientID>\n";
-        $outputString .= "<Date>" . $appt['Date'] . "</Date>\n";
-        $outputString .= "<Time>" . $appt['Time'] . "</Time>\n";
-        $outputString .= "<Address>" . $appt['Address'] . "</Address>\n";
-        $outputString .= "<Status>" . $appt['Status'] . "</Status>\n";
-        $outputString .= "<Reason>" . $appt['Reason'] . "</Reason>\n";
-        $outputString .= "<BloodPressure>" . $appt['bp'] . "</BloodPressure>\n";
-        $outputString .= "<Weight>" . $appt['weight'] . "</Weight>\n";
-        $outputString .= "<Symptoms>" . $appt['symptoms'] . "</Symptoms>\n";
-        $outputString .= "<Diagnosis>" . $appt['diagnosis'] . "</Diagnosis>\n";
-        $outputString .= "<Bill>" . $appt['bill'] . "</Bill>\n";
-        $outputString .= "<PaymentPlan>" . $appt['paymentPlan'] . "</PaymentPlan>\n";
-        $outputString .= "<NumberMonths>" . $appt['NumMonths'] . "</NumberMonths>\n";
-        $outputString .= "<ReferalDoc>" . $appt['FK_ReferalDoc'] . "</ReferalDoc>\n";
-        $outputString .= "<FileNane>" . $appt['fileName'] . "</FileNane>\n";
-        $outputString .= "<FileLocation>" . $appt['fileLocation'] . "</FileLocation>\n";
-        $outputString .= "<Reminder>" . $appt['Reminder'] . "</Reminder>\n";
-        $outputString .= "</Appointment>\n";
+        $outputString .= "<appointment>\n";
+        $outputString .= "<apptID>" . $appt['PK_AppID'] . "</apptID>\n";
+        $outputString .= "<date>" . $appt['Date'] . "</date>\n";
+        $outputString .= "<time>" . $appt['Time'] . "</time>\n";
+        $outputString .= "<doctor>" . $appt['FK_DoctorID'] . "</doctor>\n";
+        
+        //$outputString .= "<Address>" . $appt['Address'] . "</Address>\n";
+        //$outputString .= "<Status>" . $appt['Status'] . "</Status>\n";
+        $outputString .= "<reason>" . $appt['Reason'] . "</reason>\n";
+        $outputString .= "<remind>" . $appt['Reminder'] . "</remind>\n";
+        $outputString .= "</appointment>\n";
     }
+    $outputString .= "</content>\n";
     $retVal = $outputString;
 
 
