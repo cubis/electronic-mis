@@ -97,13 +97,9 @@ $docListPrep = $db->prepare("SELECT * FROM Doctor");
                                     <option value =""></option>
                                     <?php
                                     $appt = $docListPrep->execute();
-                                     while ($appt = $getAppt->fetch(PDO::FETCH_ASSOC)){
+                                     while ($row1 = $appt->fetch(PDO::FETCH_ASSOC)){
                                           echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
                                      }
-                                    /*
-                                    while ($row1 = mysql_fetch_assoc($result)) {
-                                        echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
-                                    }*/
                                     ?>
                                 </select>
 
