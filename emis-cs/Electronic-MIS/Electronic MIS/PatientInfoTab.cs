@@ -20,12 +20,14 @@ namespace Electronic_MIS
 
         SessionManager sessionManager;
         List<Patient> patients;
+        string server;
 
-        public PatientInfoTab(SessionManager manager)
+        public PatientInfoTab(SessionManager manager,string activeServer)
         {
             InitializeComponent();
             this.sessionManager = manager;
             patients = new List<Patient>();
+            server = activeServer;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -45,28 +47,31 @@ namespace Electronic_MIS
 
         private void PatientInfoTab_Load(object sender, EventArgs e)
         {
-            //Build the Connection String
-            UriBuilder ub = new UriBuilder();
-
             StringBuilder data = new StringBuilder();
-            data.Append("u=" + WebUtility.HtmlEncode(sessionManager.User));
+            data.Append(server);
+            data.Append("viewPateintREST.php");
+            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.User));
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
-
-            ub.Host = "localhost/emis/emis-dev3/viewPatientREST.php";
-            ub.Query = data.ToString();
-
             
             //Create the request
-            Uri requestUri = ub.Uri;
-            WebRequest request = WebRequest.Create(requestUri);
-            request.Method = "GET";
-            
+
+
+            string url = data.ToString();
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "GET";           
             
             try
-            {
+            {        
                 WebResponse response = request.GetResponse();
-                //StreamReader reader = new StreamReader(response.GetResponseStream);
-                //Debug.WriteLine(reader.ReadToEnd());
+
+
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                Debug.WriteLine("");
+                Debug.WriteLine("LOGIN XML:");
+                Debug.WriteLine(reader.ReadToEnd());
+
+                response = request.GetResponse();
+                //*/
 
                 XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
                 

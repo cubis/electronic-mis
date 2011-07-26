@@ -61,7 +61,7 @@ namespace Electronic_MIS
                     tabViewer.TabPages.Add("PatientInfo", "PatientInfo");
                     int index = tabViewer.TabPages.IndexOfKey("PatientInfo");
 
-                    PatientInfoTab patientTab = new PatientInfoTab(sessionManager);
+                    PatientInfoTab patientTab = new PatientInfoTab(sessionManager,activeServer);
 
                     tabViewer.TabPages[index].Controls.Add(patientTab);
                 }
