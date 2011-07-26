@@ -36,7 +36,7 @@ else if ($_POST['type'] == 3)
 else if ($_POST['type'] == 4)
     $output = doServiceView($db);
 else
-    $output = "ERROR NO TYPE SPECIFIED IN EXECUTION CODE";
+    $output = doServiceView($db);
 
 print($output);
 
@@ -73,7 +73,7 @@ function doServiceAp($db) {
     //NOTE: GET WITH MU TO SEE WHAT HE USING TO POST
     $errMsgArr = array();
     $errNum = 0;
-    $doc = $_POST[''];
+    $doc = $_GET[''];
     $pat = $_POST[''];
     $date = $_POST[''];
     $time = $_POST[''];
@@ -244,25 +244,6 @@ function doServiceUp($db) {
     $address = $_POST[''];
     $status = $_POST[''];
     $reason = $_POST[''];
-    /*
-      //Input Validations (still need to do
-      if (!isset($_POST['bp']) || $_POST['bp'] == '') {
-      $errMsgArr[] = 'Blood Pressure missing';
-      $errNum += 1;
-      }
-      if (!isset($_POST['weight']) || $_POST['weight'] == '') {
-      $errMsgArr[] = 'Weight missing';
-      $errNum += 1;
-      }
-      //test
-      if (!isset($_POST['sym']) || $_POST['sym'] == '') {
-      $errMsgArr[] = 'Symptoms missing';
-      $errNum += 1;
-      }
-      if (!isset($_POST['diag']) || $_POST['diag'] == '') {
-      $errMsgArr[] = 'Diagnosis address missing';
-      $errNum += 1;
-      } */
 
     if ($errNum == 0) {
         //set up and insert values into the appointment table
