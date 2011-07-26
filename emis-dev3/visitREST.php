@@ -27,6 +27,7 @@ require_once('bootstrapREST.php');  //link information
 //type 2 = update (execute)
 //type 3 = reschedule;
 //Type 4 = View all infotmation
+if ($_POST['type']){
 if ($_POST['type'] == 1)
     $output = doServiceAp($db);
 else if ($_POST['type'] == 2)
@@ -35,6 +36,7 @@ else if ($_POST['type'] == 3)
     $output = doServiceUp($db);
 else if ($_POST['type'] == 4)
     $output = doServiceView($db);
+}
 else
     $output = doServiceView($db);
 
