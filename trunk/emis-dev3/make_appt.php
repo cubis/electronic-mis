@@ -76,8 +76,6 @@ echo 'Hour: ' . $hour . '<br />';
 echo 'Reason: ' . $reason . '<br />';
 echo 'Reminder: ' . $reminder . '<br />';
 
-$url = "http://localhost/emis/emis-dev3/visitREST.php";
-
 $fields = array(
     'u' => urlencode($_SESSION['SESS_USERNAME']),
     'key' => urlencode($_SESSION['SESS_AUTH_KEY']),
