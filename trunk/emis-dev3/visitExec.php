@@ -1,6 +1,7 @@
 <?php
-	require_once('auth.php');
-	require_once('bootstrap.php');
+
+require_once('auth.php');
+require_once('bootstrap.php');
 //Start session
 //session_start();
 //Array to store validation errors
@@ -22,7 +23,7 @@ function clean($str) {
 $type = 2;
 //$appid = $_GET['ID'];
 ///////test to make sure get_id works -->might need to find a way to get to work
-//$id = $_GET['ID'];
+$id = $_GET['ID'];
 $bp = $_POST['bp'];
 $weight = $_POST['weight'];
 $sym = $_POST['sym'];
@@ -43,7 +44,7 @@ $url = "http://localhost/emis/emis-dev3/visitREST.php";
 
 $fields = array(
     'type' => urlencode($type),
-    //'id' => urlencode($id),
+    'id' => urlencode($id),
     'bp' => urlencode($bp),
     'weight' => urlencode($weight),
     'sym' => urlencode($sym),
