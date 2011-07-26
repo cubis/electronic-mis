@@ -30,6 +30,7 @@
 		
         //$qry="SELECT * FROM Patient;";
         $result1=mysql_query($appts);
+        echo $result1;
 ?>
 
 
