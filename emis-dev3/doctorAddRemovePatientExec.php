@@ -5,13 +5,14 @@
 $errmsg_arr = array();
 $errflag = false;
 $neg = -1;
+
 $request = "http://localhost/emis/emis-dev3/doctorPatientREST.php?u=" . 
 		urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']) . "&pat=" . 
 		urlencode($_GET['ID']) . "&doc=";
 		if($_GET['do'] == "remove"){
 			$request .= urlencode($neg);
 		} else if($_GET['do'] == "add"){
-			$request .= urlencode($_SESSION['PERSONALID']);
+			$request .= urlencode($_SESSION['SESS_PERSONAL_ID']);
 		}
 
 //format and send request
@@ -26,7 +27,6 @@ curl_close($ch); //string from server has been returned <XML> closethe channel
 if( $output == ''){
 	die("CONNECTION ERROR");
 }	
-
 //parse return string
 $parser = xml_parser_create();	
 xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
@@ -35,6 +35,7 @@ $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
 if($errNum == 0) {
 	header("location: successPatientAddView.php");
+	//print "OUTPUT = " . $output;
 	exit();
 }
 else {
@@ -49,6 +50,7 @@ else {
 	header("location: failPatientAddView.php");
 	exit();
 }
-print("OUTPUT = " . $output);
+
+
 
 ?>
