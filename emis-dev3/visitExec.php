@@ -1,5 +1,6 @@
 <?php
-
+	require_once('auth.php');
+	require_once('bootstrap.php');
 //Start session
 //session_start();
 //Array to store validation errors
