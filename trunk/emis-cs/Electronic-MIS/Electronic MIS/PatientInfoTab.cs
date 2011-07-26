@@ -10,7 +10,7 @@ using System.Net;
 using System.Security;
 using System.Diagnostics;
 using System.IO;
-using System.Xml;   
+using System.Xml;
 
 namespace Electronic_MIS
 {
@@ -22,7 +22,7 @@ namespace Electronic_MIS
         List<Patient> patients;
         string server;
 
-        public PatientInfoTab(SessionManager manager,string activeServer)
+        public PatientInfoTab(SessionManager manager, string activeServer)
         {
             InitializeComponent();
             this.sessionManager = manager;
@@ -49,22 +49,24 @@ namespace Electronic_MIS
         {
             StringBuilder data = new StringBuilder();
             data.Append(server);
-            data.Append("viewPateintREST.php");
+            data.Append("viewPatientREST.php");
             data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.User));
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
-            
+            data.Append("&pat=all");
+
             //Create the request
 
 
             string url = data.ToString();
             WebRequest request = WebRequest.Create(url);
-            request.Method = "GET";           
-            
+            request.Method = "GET";
+
             try
-            {        
+            {
                 WebResponse response = request.GetResponse();
 
 
+                /*
                 StreamReader reader = new StreamReader(response.GetResponseStream());
                 Debug.WriteLine("");
                 Debug.WriteLine("LOGIN XML:");
@@ -74,47 +76,48 @@ namespace Electronic_MIS
                 //*/
 
                 XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
-                
+
                 //testing to put input inside textbox1, first name textbox
                 //textBox1.Text = "juan";
-                
+
                 while (xmlReader.Read())
                 {
                     switch (xmlReader.NodeType)
                     {
                         case XmlNodeType.Element:
-                            if (xmlReader.Name == "PatientCount")
+                            if (xmlReader.Name == "Patient")
                             {
                                 Patient newpat = new Patient();
                                 xmlReader.Read();
-                                while (xmlReader.Name != "patientinfo")
-                                {
+                                while(xmlReader.Name != "Patient")
+                                {                                    
                                     xmlReader.Read();
                                     switch (xmlReader.Name)
                                     {
                                         case "FirstName":
                                             newpat.FirstName = xmlReader.ReadElementContentAsString();
+                                            textBox1.Text = newpat.FirstName;
                                             break;
-
+                                        case "ERROR":
+                                            MessageBox.Show(xmlReader.ReadElementContentAsString());
+                                            break;
                                     }
                                 }
-
-
                             }
                             break;
-                            default:
+                        default:
                             break;
                     }
                 }
-                
+
             }
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message, "Yeah...we didn't plan for this", MessageBoxButtons.OK);
                 Application.Exit();
             }
-            
-            
+
+
         }
     }
 
