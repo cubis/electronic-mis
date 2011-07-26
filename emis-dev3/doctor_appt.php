@@ -28,7 +28,7 @@
 
             </tr>
 
-            <?php/*
+            <?php
             $url = "http://localhost/emis/emis-dev3/visitREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
 
 
@@ -65,7 +65,7 @@
                 }
                 $currRow++;
             }
-            $currRow = 0;*/
+            $currRow = 0;
             
             ?>
 
