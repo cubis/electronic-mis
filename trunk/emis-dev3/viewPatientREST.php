@@ -38,6 +38,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
 			$outputString .= "<CoverageEnd>" . $patientInfo['CoverageEnd'] . "</CoverageEnd>\n";
 			$outputString .= "<FKDoctorID>" . $patientInfo['FK_DoctorID'] . "</FKDoctorID>\n";
 			$outputString .= "<Type>" . $patientInfo['Type'] . "</Type>\n";
+			$outputString .= "<PatientID>" . $patientInfo['PK_PatientID'] . "</PatientID>\n";
 			$outputString .= "</Patient>";
 			logToDB($user." access patient info for " . $target, $memberInfo['PK_member_id'], $user); 
 		}			
