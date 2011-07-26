@@ -13,6 +13,8 @@ using System.Web;
 using System.Security.Cryptography;
 using System.Xml;
 using System.Diagnostics;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Electronic_MIS
 {
@@ -24,6 +26,8 @@ namespace Electronic_MIS
         public event LoginEventHandler LoginEvent;        
         
         public SessionManager sessionManager;
+
+        string Server = "";
         
         protected virtual void OnLoginEvent(LoginEventArgs e)
         {
@@ -35,10 +39,23 @@ namespace Electronic_MIS
         {
             InitializeComponent();
             sessionManager = new SessionManager();
+            serverSelect.SelectedItem = 0;
         }
         
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            SetCertificatePolicy();
+
+            Server = serverSelect.SelectedItem.ToString();
+
+            if (Server == ""){
+                MessageBox.Show("Please select a server");
+                return;
+            }
+
+
+            Cursor.Current = Cursors.WaitCursor;
+
             //Form Validation
             if (txtUser.Text == "")
             {
@@ -55,19 +72,15 @@ namespace Electronic_MIS
             //Set the User for the Session Manager
             sessionManager.User = txtUser.Text;
 
-            //Build the Connection String
-            UriBuilder ub = new UriBuilder();
-
             string pass = CalculateMD5Hash(txtPassword.Text);
             StringBuilder data = new StringBuilder();
-            data.Append("u=" + WebUtility.HtmlEncode(txtUser.Text.Replace("'","''")));
+            data.Append(Server);
+            data.Append("authenticateREST.php");
+            data.Append("?u=" + WebUtility.HtmlEncode(txtUser.Text.Replace("'","''")));
             data.Append("&p=" + WebUtility.HtmlEncode(pass.Replace("'","''")));
-            ub.Host = "robertdiazisabitch.dyndns.org/EMIS/authenticateREST.php";
-            ub.Query = data.ToString();
-
-            //Create the request
-            Uri requestUri = ub.Uri;
-            WebRequest request = WebRequest.Create(requestUri);
+            
+            string url = data.ToString();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
 
             Debug.WriteLine("Connection Request: ");
@@ -84,7 +97,7 @@ namespace Electronic_MIS
                 Debug.WriteLine(reader.ReadToEnd());
 
                 response = request.GetResponse();
-                */
+                //*/
                 
                 XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
 
@@ -119,7 +132,10 @@ namespace Electronic_MIS
                 Application.Exit();
             }
 
+            Cursor.Current = Cursors.Default;
+
             LoginEventArgs eventArgs = new LoginEventArgs(sessionManager);
+            eventArgs.Server = Server;
             OnLoginEvent(eventArgs);
         }
 
@@ -130,6 +146,10 @@ namespace Electronic_MIS
             byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
             byte[] hash = md5.ComputeHash(inputBytes);
 
+
+            RSA rsa = RSA.Create();
+
+
             // step 2, convert byte array to hex string
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
@@ -137,12 +157,28 @@ namespace Electronic_MIS
                 sb.Append(hash[i].ToString("x2"));
             }
             return sb.ToString();
-        }        
+        }
+
+        public static void SetCertificatePolicy() 
+        {
+            ServicePointManager.ServerCertificateValidationCallback = RemoteCertificateValidate;
+        }
+        
+        /// <summary>
+        /// Remotes the certificate validate./// 
+        /// </summary>
+        private static bool RemoteCertificateValidate(object sender, X509Certificate cert,X509Chain chain, SslPolicyErrors error)
+        {    
+            // trust any certificate!!!    
+            System.Console.WriteLine("Warning, trust any certificate");    
+            return true;
+        }
     }
 
     public class LoginEventArgs : EventArgs
     {
         SessionManager session;
+        string server;
 
         public LoginEventArgs(SessionManager session)
         {
@@ -155,6 +191,19 @@ namespace Electronic_MIS
             {
                 return session;
             }
+        }
+
+        public String Server
+        {
+            get
+            {
+                return server;
+            }
+            set
+            {
+                server = value;
+            }
+
         }
     }
 }

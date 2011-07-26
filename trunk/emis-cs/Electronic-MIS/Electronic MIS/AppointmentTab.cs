@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Net;
 using System.Xml;
 using System.IO;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Electronic_MIS
 {
@@ -16,11 +18,13 @@ namespace Electronic_MIS
     {
         SessionManager sessionManager;
         List<Appointment> appointments;
+        string server;
 
-        public AppointmentTab(SessionManager session)
+        public AppointmentTab(SessionManager session,string activeServer)
         {
             InitializeComponent();
             sessionManager = session;
+            server = activeServer;
             appointments = new List<Appointment>();
         }
 
@@ -61,26 +65,25 @@ namespace Electronic_MIS
 
         private void getAppointments()
         {
-            //Build the Connection String
-            UriBuilder ub = new UriBuilder();
-
             StringBuilder data = new StringBuilder();
+            data.Append(server);
+            data.Append("authenticateREST.php");
             data.Append("u=" + WebUtility.HtmlEncode(sessionManager.User));
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
 
-            ub.Host = "robertdiazisabitch.dyndns.org/EMIS/appointmentsREST.php";
-            ub.Query = data.ToString();
+            string url = data.ToString();
 
-            //Create the request
-            Uri requestUri = ub.Uri;
-            WebRequest request = WebRequest.Create(requestUri);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
 
             try
             {
-                //WebResponse response = request.GetResponse();
-                TextReader respone = new StringReader(Properties.Resources.AppointmentXMLSample);
-                XmlTextReader xmlReader = new XmlTextReader(respone);
+                WebResponse response = request.GetResponse();
+                XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
+                
+                //TextReader response = new StringReader(Properties.Resources.AppointmentXMLSample);                
+                //XmlTextReader xmlReader = new XmlTextReader(response);
+                
                 while (xmlReader.Read())
                 {
                     switch (xmlReader.NodeType)
@@ -132,8 +135,14 @@ namespace Electronic_MIS
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message, "Yeah... We didn't plan for this.", MessageBoxButtons.OK);
-                Application.Exit();
+                if (exp.Message.Contains("404"))
+                {
+                    MessageBox.Show("Cannot connect to server.\n  Please try again later.", "Server connection error", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show(exp.Message, "Yeah... We didn't plan for this.", MessageBoxButtons.OK);
+                }
             }
         }
 
@@ -247,6 +256,22 @@ namespace Electronic_MIS
 
             calAppointments.UpdateBoldedDates();
         }
+
+        public static void SetCertificatePolicy()
+        {
+            ServicePointManager.ServerCertificateValidationCallback = RemoteCertificateValidate;
+        }
+
+        /// <summary>
+        /// Remotes the certificate validate./// 
+        /// </summary>
+        private static bool RemoteCertificateValidate(object sender, X509Certificate cert, X509Chain chain, SslPolicyErrors error)
+        {
+            // trust any certificate!!!    
+            System.Console.WriteLine("Warning, trust any certificate");
+            return true;
+        }
+  
     }
 
     class Appointment : IComparable

@@ -12,6 +12,7 @@ namespace Electronic_MIS
     public partial class MainForm : Form
     {
         SessionManager sessionManager;
+        string activeServer;
 
         public MainForm()
         {
@@ -78,7 +79,7 @@ namespace Electronic_MIS
                     tabViewer.TabPages.Add("Appointments", "Appointments");
                     int index = tabViewer.TabPages.IndexOfKey("Appointments");
 
-                    AppointmentTab appTab = new AppointmentTab(sessionManager);
+                    AppointmentTab appTab = new AppointmentTab(sessionManager,activeServer);
 
                     tabViewer.TabPages[index].Controls.Add(appTab);
                 }
@@ -96,6 +97,7 @@ namespace Electronic_MIS
 
                     tabViewer.TabPages[index].Controls.Add(appTab);
                 }
+                tabViewer.SelectTab("Welcome");
             }
             else if (e.Node.Name == "LogoutNode")
             {
@@ -134,6 +136,7 @@ namespace Electronic_MIS
         private void login_LoginEvent(object sender, LoginEventArgs e)
         {
             sessionManager = e.Session;
+            activeServer = e.Server;
             tabViewer.TabPages.RemoveByKey("Login");
             updateNavTree();
         }
@@ -179,9 +182,9 @@ namespace Electronic_MIS
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void closeThisTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            tabViewer.TabPages.Remove(tabViewer.SelectedTab);
         }
     }
 }

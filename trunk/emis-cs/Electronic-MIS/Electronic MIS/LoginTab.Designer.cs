@@ -33,6 +33,8 @@
             this.txtUser = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblServer = new System.Windows.Forms.Label();
+            this.serverSelect = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -84,10 +86,33 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Username";
             // 
+            // lblServer
+            // 
+            this.lblServer.AutoSize = true;
+            this.lblServer.Location = new System.Drawing.Point(142, 237);
+            this.lblServer.Name = "lblServer";
+            this.lblServer.Size = new System.Drawing.Size(74, 13);
+            this.lblServer.TabIndex = 9;
+            this.lblServer.Text = "Select Server:";
+            // 
+            // serverSelect
+            // 
+            this.serverSelect.FormattingEnabled = true;
+            this.serverSelect.Items.AddRange(new object[] {
+            "https://67.10.181.224/emis/emis-dev3/",
+            "http://robertdiazisabitch.dyndns.org/EMIS/"});
+            this.serverSelect.Location = new System.Drawing.Point(238, 228);
+            this.serverSelect.Name = "serverSelect";
+            this.serverSelect.Size = new System.Drawing.Size(218, 21);
+            this.serverSelect.TabIndex = 10;
+            this.serverSelect.Text = "https://67.10.181.224/emis/emis-dev3/";
+            // 
             // LoginTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.serverSelect);
+            this.Controls.Add(this.lblServer);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUser);
@@ -107,5 +132,7 @@
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblServer;
+        private System.Windows.Forms.ComboBox serverSelect;
     }
 }
