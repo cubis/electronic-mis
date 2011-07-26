@@ -89,6 +89,7 @@ function doServiceAp($db) {
     $reminder = $_POST['reminder'];
     
     
+    
     $date = $year."-".$month."-".$day;
     $time .= ":00";
     if ($errNum == 0) {
@@ -105,7 +106,7 @@ function doServiceAp($db) {
             ':address' => $address,
             ':status' => $status,
             ':reason' => $reason,
-            ':reminder' => $reminder,
+            ':reminder' => $reminder
         );
         $insertApptSuccess = $addApptPrep->execute($vals);
 
@@ -198,7 +199,7 @@ function doServiceVi($db) {
             //$getIDSuccess = $memIDPrep->execute();
             $medPrep = $db->prepare("SELECT * FROM Appointment WHERE PK_AppID = '" . $id . "'");
             $medSuccess = $medPrep->execute();
-            $meds = $medSuccess->fetch(PDO::FETCH_ASSOC);
+            $meds = $medPrep->fetch(PDO::FETCH_ASSOC);
             $insertMedPrep = $db->prepare("INSERT INTO Medications (FK_PatientID, Medication, Dosage, StartDate, EndDate)
 												VALUSE( '" . $meds['FK_PatientID'] . "', :med, :dos, :sdate, :edate)");
             $vals2 = array(
@@ -223,7 +224,7 @@ function doServiceVi($db) {
     return $retVal;
 }
 
-//Type 3 service
+/*//Type 3 service Not being used
 function doServiceUp($db) {
     //NOTE: GET WITH MU TO SEE WHAT HE USING TO POST
     $errMsgArr = array();
@@ -267,7 +268,7 @@ function doServiceUp($db) {
 
     return $retVal;
 }
-
+*/
 //Type 4 Service (get appts)
 function doServiceView($db) {
     $errMsgArr = array();
@@ -287,9 +288,9 @@ function doServiceView($db) {
         $vals = array(
             ':uname' => $uname
         );
-        $getAppt = $appoint->execute($vals);
+        $apptSuc = $appoint->execute($vals);
 
-        if (!$getAppt) {
+        if (!$apptSuc) {
             $errMsgArr[] = 'Gather Appoint failed';
             $errNum += 1;
         }
@@ -299,7 +300,7 @@ function doServiceView($db) {
     //Not going to use method
     $outputString .= "<?xml version=\"1.0\"?>\n";
     $outputString .= "<content>\n";
-    while ($appt = $getAppt->fetch(PDO::FETCH_ASSOC)) {
+    while ($appt = $appoint->fetch(PDO::FETCH_ASSOC)) {
         $outputString = ''; //start empty
         $outputString .= "<appointment>\n";
         $outputString .= "<apptID>" . $appt['PK_AppID'] . "</apptID>\n";
