@@ -68,7 +68,7 @@ require_once('auth.php');
     <center>
         <label><strong>User Menu</strong></label>
         <br>
-        <a href="#">Set Up Appointments</a> <br>
+        <a href="appointment.php">Set Up Appointments</a> <br>
         <a href="editMemberView.php">Edit Profile Information</a><br>
         <a href="patientInfoView.php">View Medical Information</a>
     </center>
