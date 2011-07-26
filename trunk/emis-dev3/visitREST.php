@@ -80,25 +80,6 @@ function doServiceAp($db) {
     $address = $_POST[''];
     $status = $_POST[''];
     $reason = $_POST[''];
-    /*
-      //Input Validations (still need to do
-      if (!isset($_POST['bp']) || $_POST['bp'] == '') {
-      $errMsgArr[] = 'Blood Pressure missing';
-      $errNum += 1;
-      }
-      if (!isset($_POST['weight']) || $_POST['weight'] == '') {
-      $errMsgArr[] = 'Weight missing';
-      $errNum += 1;
-      }
-      //test
-      if (!isset($_POST['sym']) || $_POST['sym'] == '') {
-      $errMsgArr[] = 'Symptoms missing';
-      $errNum += 1;
-      }
-      if (!isset($_POST['diag']) || $_POST['diag'] == '') {
-      $errMsgArr[] = 'Diagnosis address missing';
-      $errNum += 1;
-      } */
 
     if ($errNum == 0) {
         //set up and insert values into the appointment table
@@ -313,9 +294,6 @@ function doServiceView($db) {
         $outputString .= "<date>" . $appt['Date'] . "</date>\n";
         $outputString .= "<time>" . $appt['Time'] . "</time>\n";
         $outputString .= "<doctor>" . $appt['FK_DoctorID'] . "</doctor>\n";
-        
-        //$outputString .= "<Address>" . $appt['Address'] . "</Address>\n";
-        //$outputString .= "<Status>" . $appt['Status'] . "</Status>\n";
         $outputString .= "<reason>" . $appt['Reason'] . "</reason>\n";
         $outputString .= "<remind>" . $appt['Reminder'] . "</remind>\n";
         $outputString .= "</appointment>\n";
