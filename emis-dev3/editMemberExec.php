@@ -35,7 +35,7 @@ if( $RESToutput == ''){
 	die("CONNECTION ERROR");
 }	
 
-
+//print $RESToutput;
 //parse return string
 $parser = xml_parser_create();	
 xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
@@ -53,7 +53,8 @@ else {
 	while($ct < $errNum){
 		$errmsg_arr[] = $wsResponse[$wsIndices['ERROR'][$ct]]['value'];
 		$ct += 1;
-	}		
+		//print $wsResponse[$wsIndices['ERROR'][$ct]]['value'] . "<br />";
+	}
 	$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 	session_write_close();
 	header("location: index.php");
