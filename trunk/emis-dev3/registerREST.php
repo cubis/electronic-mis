@@ -24,7 +24,7 @@
 require_once('configREST.php');     //sql connection information
 require_once('bootstrapREST.php');  //link information
 
-function outputXML($errNum, $errMsgArr, $db) {
+function outputXML($errNum, $errMsgArr) {
 
 
 /* @var $AUTH_KEY A key that will be used to prove authentication occurred from this service. */
@@ -32,20 +32,27 @@ function outputXML($errNum, $errMsgArr, $db) {
 	$AUTH_KEY = md5($user.$pw.$controlString);
 	
 	*/	
+	global $db;
+	if(isset($_POST['u'])){
+			$user = $_POST['u'];
+	} else {
+		$user = "UNKOWN";
+	}
+	
 	$outputString = ''; //start empty
 	$outputString .= "<?xml version=\"1.0\"?>\n";
 	$outputString .= "<content>\n";
 	$outputString .= "<errNum>" . $errNum . "</errNum>\n";
 	if($errNum == 0){
 		$outputString .= "<RESULT>SUCCESSFUL REGISTER!</RESULT>";
-		logToDB($_POST['u'] . " successfuly registered", false, -1, $db);
+		logToDB($user . " successfuly registered", NULL, $user);
 	} else {
 		$ct = 0;
 		while($ct < $errNum){
 			$outputString .= "<ERROR>" . $errMsgArr[$ct] . "</ERROR>\n";
 			$ct++;
 		}
-		logToDB($_POST['u'] . " unsuccessful register", false, -1, $db);
+		logToDB($user . " unsuccessful registered", NULL, $user);
 	}		
 	$outputString .= "</content>";	
 	return $outputString;	
@@ -142,7 +149,7 @@ function doService($db) {
 			$error = $prepUsers->errorInfo();
 			$errMsgArr[] = $error[2];
 			$errNum++;
-			$retVal = outputXML($errNum, $errMsgArr, $db);		
+			$retVal = outputXML($errNum, $errMsgArr);		
 		}
 	
 	
@@ -217,10 +224,10 @@ function doService($db) {
 				}
 			}
 			
-			$retVal = outputXML($errNum, $errMsgArr, $db);
+			$retVal = outputXML($errNum, $errMsgArr);
 			
 	} else {
-		$retVal = outputXML($errNum, $errMsgArr, $db);
+		$retVal = outputXML($errNum, $errMsgArr);
 	}
 	
 			
