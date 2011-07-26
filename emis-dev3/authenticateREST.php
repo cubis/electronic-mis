@@ -207,7 +207,8 @@ function doService() {
 			if ($prep->execute(array( ":id" => $memberInfo['PK_member_id'] ))) {
 				if($prep->rowCount() == 1){
 					$info = $prep->fetch(PDO::FETCH_ASSOC);
-					$memberInfo['PersonalID'] = $info[$assocString];				}
+					$memberInfo['PersonalID'] = $info[$assocString];	
+				}					
 			} else {				
 				$error = $prep->errorInfo();
 				$errMsgArr[] = $error[2];
