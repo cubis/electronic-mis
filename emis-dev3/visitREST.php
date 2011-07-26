@@ -73,7 +73,7 @@ function doServiceAp($db) {
     //NOTE: GET WITH MU TO SEE WHAT HE USING TO POST
     $errMsgArr = array();
     $errNum = 0;
-    $doc = $_GET[''];
+    $doc = $_POST[''];
     $pat = $_POST[''];
     $date = $_POST[''];
     $time = $_POST[''];
@@ -257,7 +257,7 @@ function doServiceUp($db) {
     return $retVal;
 }
 
-//Type 4 Service (patient appts
+//Type 4 Service (get appts)
 function doServiceView($db) {
     $errMsgArr = array();
     $errNum = 0;
