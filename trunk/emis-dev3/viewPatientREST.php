@@ -20,6 +20,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
 	if($errNum == 0){
 		$outputString .= "<PatientCount>" . $patientInfoPrep->rowCount() . "</PatientCount>\n";
 		while( $patientInfo = $patientInfoPrep->fetch(PDO::FETCH_ASSOC) ){
+			$outputString .= "<Patient>";
 			$outputString .= "<UserName>" . $patientInfo['UserName'] . "</UserName>\n";
 			$outputString .= "<FirstName>" . $patientInfo['FirstName'] . "</FirstName>\n";
 			$outputString .= "<LastName>" . $patientInfo['LastName'] . "</LastName>\n";
@@ -37,6 +38,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
 			$outputString .= "<CoverageEnd>" . $patientInfo['CoverageEnd'] . "</CoverageEnd>\n";
 			$outputString .= "<FKDoctorID>" . $patientInfo['FK_DoctorID'] . "</FKDoctorID>\n";
 			$outputString .= "<Type>" . $patientInfo['Type'] . "</Type>\n";
+			$outputString .= "</Patient>";
 			logToDB($user." access patient info for " . $target, $memberInfo['PK_member_id'], $user); 
 		}			
 	} 
