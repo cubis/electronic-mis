@@ -270,7 +270,7 @@ function doServiceView($db) {
     if ($errNum == 0) {
         //all appointments per for user
         
-        $appoint = $db->prepare("Select * From Appointment WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = :uname))");
+        $appoint = $db->prepare("Appointment INNER JOIN Doctor WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = 'bsattler')) AND Appointment.FK_DoctorID = Doctor.PK_DoctorID");
 
 
         $vals = array(
@@ -294,7 +294,7 @@ function doServiceView($db) {
         $outputString .= "<apptID>" . $appt['PK_AppID'] . "</apptID>\n";
         $outputString .= "<date>" . $appt['Date'] . "</date>\n";
         $outputString .= "<time>" . $appt['Time'] . "</time>\n";
-        $outputString .= "<doctor>" . $appt['FK_DoctorID'] . "</doctor>\n";
+        $outputString .= "<doctor>" . $appt['DocName'] . "</doctor>\n";
         $outputString .= "<reason>" . $appt['Reason'] . "</reason>\n";
         $outputString .= "<remind>" . $appt['Reminder'] . "</remind>\n";
         $outputString .= "</appointment>\n";
