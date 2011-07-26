@@ -3,9 +3,9 @@ require_once('auth.php');
 require_once('configREST.php');     //sql connection information
 require_once('bootstrap.php');  //link information
 $appid = $_GET['ID'];
-
-$doclist = "SELECT * FROM Doctor;";
-$result = mysql_query($doclist) or die(mysql_error());
+$docListPrep = $db->prepare("SELECT * FROM Doctor");
+//$doclist = "SELECT * FROM Doctor;";
+//$result = mysql_query($doclist) or die(mysql_error());
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -96,9 +96,14 @@ $result = mysql_query($doclist) or die(mysql_error());
                                 <select name ="rd" id="rd">
                                     <option value =""></option>
                                     <?php
+                                    $appt = $docListPrep->execute();
+                                     while ($appt = $getAppt->fetch(PDO::FETCH_ASSOC)){
+                                          echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
+                                     }
+                                    /*
                                     while ($row1 = mysql_fetch_assoc($result)) {
                                         echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
-                                    }
+                                    }*/
                                     ?>
                                 </select>
 
