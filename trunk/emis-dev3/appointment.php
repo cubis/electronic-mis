@@ -13,19 +13,16 @@ require_once('bootstrapREST.php');
     </head>
     <body>
 
-        <?php
-        /* $doclist = "SELECT * FROM Doctor;";
-          $result = mysql_query($doclist)or die(mysql_error()); */
-        ?>
 
         <h1>Make Appointment</h1>
-        <h4>Referral Doctor: </h4>
 
         <form action="make_appt.php" method="post">
 
             <?php
+            // Displays list of doctors
             echo 'Doctor: ';
             
+            //fetches list from database and formats for dropdown box
             global $db;
             $prep = $db->prepare('SELECT * FROM Doctor');
             if($prep->execute())
@@ -33,11 +30,11 @@ require_once('bootstrapREST.php');
                 if($prep->rowCount() >= 1)
                 {
                     echo '<select name="doctor">
-                    <option value="1">Select Doctor</option>';
+                    <option value="0">Select Doctor</option>';
                     $doctors = $prep->fetchAll();
                     foreach($doctors as &$doc)
                     {
-                        echo 'option value=$doc[PK_DoctorID]>$doc['DocName']</option>';
+                        echo '<option value='. $doc[PK_DoctorID] . '>' . $doc['DocName'] . '</option>';
                     }
                 }
                 else
@@ -66,19 +63,19 @@ require_once('bootstrapREST.php');
 
             //Dropdown box for months
             echo '<select name="month">
-<option value="1">January</option>
-<option value="2">February</option>
-<option value="3">March</option>
-<option value="4">April</option>
-<option value="5">May</option>
-<option value="6">June</option>
-<option value="7">July</option>
-<option value="8">August</option>
-<option value="9">September</option>
-<option value="10">October</option>
-<option value="11">November</option>
-<option value="12">December</option>
-</select>';
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+            </select>';
 
             //Dropdown box for days
             echo '<select name="day">';
@@ -107,14 +104,7 @@ require_once('bootstrapREST.php');
 
             <br />
 
-            <select name ="rd" id="rd">
-                <option value =""></option>
-<?php
-while ($row1 = mysql_fetch_assoc($result)) {
-    echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
-}
-?>
-            </select>
+            
 
 
                 <?php
@@ -142,7 +132,8 @@ while ($row1 = mysql_fetch_assoc($result)) {
 
 
 <?php
-// put your code here
+
+
 ?>
     </body>
 </html>
