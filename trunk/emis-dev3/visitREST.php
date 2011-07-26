@@ -27,15 +27,16 @@ require_once('bootstrapREST.php');  //link information
 //type 2 = update (execute)
 //type 3 = reschedule;
 //Type 4 = View all infotmation
-if (isset($_POST['type']){
-if ($_POST['type'] == 1)
-    $output = doServiceAp($db);
-else if ($_POST['type'] == 2)
-    $output = doServiceVi($db);
-else if ($_POST['type'] == 3)
-    $output = doServiceUp($db);
-else if ($_POST['type'] == 4)
-    $output = doServiceView($db);
+if (isset($_POST['type'])) {
+    if ($_POST['type'] == 1) {
+        $output = doServiceAp($db);
+    } else if ($_POST['type'] == 2) {
+        $output = doServiceVi($db);
+    } else if ($_POST['type'] == 3) {
+        $output = doServiceUp($db);
+    } else {
+        $output = doServiceView($db);
+    }
 }
 else
     $output = doServiceView($db);
@@ -75,18 +76,26 @@ function doServiceAp($db) {
     //NOTE: GET WITH MU TO SEE WHAT HE USING TO POST
     $errMsgArr = array();
     $errNum = 0;
-    $doc = $_POST[''];
-    $pat = $_POST[''];
-    $date = $_POST[''];
-    $time = $_POST[''];
+    $doc = $_POST['doctor'];
+    $uname = $_POST['u'];
+    //$pat = $_POST[''];
+    $year = $_POST['day'];
+    $month = $_POST['month'];
+    $day = $_POST['day'];
+    
+    $time = $_POST['year'];
     $address = $_POST[''];
-    $status = $_POST[''];
-    $reason = $_POST[''];
-
+    $status = 'new';
+    $reason = $_POST['reason'];
+    $reminder = $_POST['reminder'];
+    
+    
+    $date = $year."-".$month."-".$day;
+    $time .= ":00";
     if ($errNum == 0) {
         //set up and insert values into the appointment table
-        $addApptPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason) 
-                                        VALUES(:doc, :pat, :date, :time, :address, :status, :reason);");
+        $addApptPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason, Reminder) 
+                                        VALUES(:doc, :pat, :date, :time, :address, :status, :reason, :reminder);");
         //$tableType = '';
 
         $vals = array(
@@ -96,7 +105,8 @@ function doServiceAp($db) {
             ':time' => $time,
             ':address' => $address,
             ':status' => $status,
-            ':reason' => $reason
+            ':reason' => $reason,
+            ':reminder' => $reminder,
         );
         $insertApptSuccess = $addApptPrep->execute($vals);
 
@@ -135,24 +145,24 @@ function doServiceVi($db) {
     $floc = $_POST['floc'];
     $status = "close";
 
-    /*//Input Validations (still need to do
-    if (!isset($_POST['bp']) || $_POST['bp'] == '') {
-        $errMsgArr[] = 'Blood Pressure missing';
-        $errNum += 1;
-    }
-    if (!isset($_POST['weight']) || $_POST['weight'] == '') {
-        $errMsgArr[] = 'Weight missing';
-        $errNum += 1;
-    }
-    //test
-    if (!isset($_POST['sym']) || $_POST['sym'] == '') {
-        $errMsgArr[] = 'Symptoms missing';
-        $errNum += 1;
-    }
-    if (!isset($_POST['diag']) || $_POST['diag'] == '') {
-        $errMsgArr[] = 'Diagnosis address missing';
-        $errNum += 1;
-    }*/
+    /* //Input Validations (still need to do
+      if (!isset($_POST['bp']) || $_POST['bp'] == '') {
+      $errMsgArr[] = 'Blood Pressure missing';
+      $errNum += 1;
+      }
+      if (!isset($_POST['weight']) || $_POST['weight'] == '') {
+      $errMsgArr[] = 'Weight missing';
+      $errNum += 1;
+      }
+      //test
+      if (!isset($_POST['sym']) || $_POST['sym'] == '') {
+      $errMsgArr[] = 'Symptoms missing';
+      $errNum += 1;
+      }
+      if (!isset($_POST['diag']) || $_POST['diag'] == '') {
+      $errMsgArr[] = 'Diagnosis address missing';
+      $errNum += 1;
+      } */
     //end
     if ($errNum == 0) {
         //Do update
@@ -271,7 +281,7 @@ function doServiceView($db) {
     //end
     if ($errNum == 0) {
         //all appointments per for user
-        
+
         $appoint = $db->prepare("Appointment INNER JOIN Doctor WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = 'bsattler')) AND Appointment.FK_DoctorID = Doctor.PK_DoctorID");
 
 
@@ -279,7 +289,7 @@ function doServiceView($db) {
             ':uname' => $uname
         );
         $getAppt = $appoint->execute($vals);
-        
+
         if (!$getAppt) {
             $errMsgArr[] = 'Gather Appoint failed';
             $errNum += 1;
@@ -307,6 +317,5 @@ function doServiceView($db) {
 
     return $retVal;
 }
-
 
 ?>
