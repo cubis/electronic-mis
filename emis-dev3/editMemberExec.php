@@ -14,10 +14,10 @@ foreach ($_POST as $key => $value) {
 	$fieldString .= urlencode($value) . "&";
 }
 $fieldString = rtrim($fieldString, "&");
-print "$fieldString\n";
+//print "$fieldString\n";
 
-$text = print_r($_POST, true);
-print "<pre>$text</pre>";
+//$text = print_r($_POST, true);
+//print "<pre>$text</pre>";
 
 $request = "http://localhost/emis/emis-dev3/editMemberREST.php";
 //format and send request
@@ -43,7 +43,7 @@ xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
 if($errNum == 0) {
-	print "no errors";
+	//print "no errors";
 	header("location: memberProfileView.php");
 	exit();
 }

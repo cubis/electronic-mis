@@ -39,7 +39,7 @@ session_start();
 
 $user = $_SESSION['SESS_USERNAME'];
 $key = $_SESSION['SESS_AUTH_KEY'];
-$request = "http://localhost/emis/emis-dev3/viewPatientREST.php?u=" 
+$request = "../viewPatientREST.php?u=" 
 			. urlencode($user) . "&key=" . urlencode($key) . "&pat=all";
 
 //format and send request
