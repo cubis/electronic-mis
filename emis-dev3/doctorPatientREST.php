@@ -62,17 +62,17 @@ function outputXML($errNum, $errMsgArr, $memberInfo) {
 	return $outputString;	
 }
 
-function doService($db) {
-
+function doService() {
+	global $db;
 	$errMsgArr = array();
 	$errNum = 0;
 	
 	//Input Validations
-	if (!isset($_GET['pat']) || $_GET['fname'] == '') {
+	if (!isset($_GET['pat']) || $_GET['pat'] == '') {
 		$errMsgArr[] = 'Patient ID number missing';
 		$errNum++;
 	}
-	if (!isset($_GET['doc']) || $_GET['lname'] == '') {
+	if (!isset($_GET['doc']) || $_GET['doc'] == '') {
 		$errMsgArr[] = 'Doctor ID number missing';
 		$errNum++;
 	}
@@ -81,8 +81,8 @@ function doService($db) {
 		$errMsgArr[] = 'Login ID missing';
 		$errNum++;
 	}
-	if (!isset($_GET['key']) || $_GET['p'] == '' || $_GET['p'] == 'd41d8cd98f00b204e9800998ecf8427e') {
-		$errMsgArr[] = 'Password missing';
+	if (!isset($_GET['key']) || $_GET['key'] == '' || $_GET['key'] == 'd41d8cd98f00b204e9800998ecf8427e') {
+		$errMsgArr[] = 'Authorization key missing';
 		$errNum++;
 	}
 
@@ -138,7 +138,7 @@ function doService($db) {
 }
 	
 	
-	$output = doService($db);
+	$output = doService();
 	
 	print($output);
 
