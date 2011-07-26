@@ -70,7 +70,7 @@
 			$_SESSION['SESS_PERSONAL_ID'] = $wsResponse[$wsIndices['PERSONALID'][0]]['value'];
 			$_SESSION['SESS_AUTH_KEY'] = $key;
 			session_write_close();
-			
+			//print($output);
 			header("location: memberProfileView.php");
 		
 		}
