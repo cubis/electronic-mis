@@ -133,7 +133,7 @@ function doServiceVi($db) {
     $floc = $_POST['floc'];
     $status = "close";
 
-    //Input Validations (still need to do
+    /*//Input Validations (still need to do
     if (!isset($_POST['bp']) || $_POST['bp'] == '') {
         $errMsgArr[] = 'Blood Pressure missing';
         $errNum += 1;
@@ -150,7 +150,7 @@ function doServiceVi($db) {
     if (!isset($_POST['diag']) || $_POST['diag'] == '') {
         $errMsgArr[] = 'Diagnosis address missing';
         $errNum += 1;
-    }
+    }*/
     //end
     if ($errNum == 0) {
         //Do update
@@ -176,20 +176,20 @@ function doServiceVi($db) {
         );
         $updateVisitSuccess = $updateVistPrep->execute($vals);
 
-        if (!$insertUserSuccess) {
+        if (!$updateVisitSuccess) {
             $errMsgArr[] = 'update visit failed';
             $errNum += 1;
         }
 
-        if ($med && $dos && $sdate && edate) {
+        if ($med && $dos && $sdate && $edate) {
             //get the patient id from visit key for the recently entered row
-            $patIDPrep = $db->prepare("SELECT * FROM Appointment WHERE PK_APPTID = '" . $id . "'");
+            //$patIDPrep = $db->prepare("SELECT * FROM Appointment WHERE PK_APPTID = '" . $id . "'");
             //$getIDSuccess = $memIDPrep->execute();
-            $memIDPrep = $db->prepare("SELECT * FROM Users WHERE UserName = '" . $user . "'");
-            $getIDSuccess = $patIDPrep->execute();
-            $patient = $memIDPrep->fetch(PDO::FETCH_ASSOC);
+            $medPrep = $db->prepare("SELECT * FROM Users WHERE UserName = '" . $user . "'");
+            $medSuccess = $medPrep->execute();
+            $meds = $memIDPrep->fetch(PDO::FETCH_ASSOC);
             $insertMedPrep = $db->prepare("INSERT INTO Medications (FK_PatientID, Medication, Dosage, StartDate, EndDate)
-												VALUSE( '" . $patient['FK_PatientID'] . "', :med, :dos, :sdate, :edate)");
+												VALUSE( '" . $meds['FK_PatientID'] . "', :med, :dos, :sdate, :edate)");
             $vals2 = array(
                 ':med' => $med,
                 ':dos' => $dos,
