@@ -6,8 +6,13 @@ $errmsg_arr = array();
 $errflag = false;
 $neg = -1;
 $request = "http://localhost/emis/emis-dev3/doctorPatientREST.php?u=" . 
-		urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']) . "&id=" . 
-		urlencode($_POST['ID']) . "&doc=" . urlencode($neg);
+		urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']) . "&pat=" . 
+		urlencode($_GET['ID']) . "&doc=";
+		if($_GET['do'] == "remove"){
+			$request .= urlencode($neg);
+		} else if($_GET['do'] == "add"){
+			$request .= urlencode($_SESSION['PERSONALID']);
+		}
 
 //format and send request
 $ch = curl_init($request);
@@ -29,7 +34,7 @@ xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
 if($errNum == 0) {
-	header("location: index.php");
+	header("location: successPatientAddView.php");
 	exit();
 }
 else {
@@ -41,8 +46,9 @@ else {
 	}		
 	$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 	session_write_close();
-	header("location: index.php");
+	header("location: failPatientAddView.php");
 	exit();
 }
+print("OUTPUT = " . $output);
 
 ?>
