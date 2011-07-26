@@ -15,7 +15,9 @@ session_start();
 				unset($_SESSION['ERRMSG_ARR']);
                         }
 		?>
-		<table>
+		
+		<table>    
+		<th></th><th></th><th><center> MY PATIENTS </center></th>
 			<tr>
 				<td>Remove</td>
 				<td>First Name</td>
@@ -30,7 +32,6 @@ session_start();
 
 	$url = "http://localhost/emis/emis-dev3/viewPatientREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']) . "&pat=" . urlencode("all");
     
-		print("URL: " . $url . "<br />");
     
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);    
@@ -64,11 +65,48 @@ session_start();
 		$currRow++;
 	}
 	
-	
-	
 	//print_r($wsResponse);
 ?>
 		</table>
+		<table>
+		<tr>
+				<td>Remove</td>
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td>Sex</td>
+				<td>Email</td>
+				<td>Birthday</td>
+				<td>Phone Number</td>
+				<td>SSN</td>
+			</tr>
+<?php
+
+	/*		while ($currRow < $numRows){
+		$doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
+		if(!isset(  $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value']  )){
+			echo "<tr>";
+			$ID = $wsResponse[$wsIndices['PK_PatientID'][$currRow]]['value'];
+			echo "<td><a href='doctorRemovePatientExec.php?ID=$ID'>Remove</a></td>\n";
+			echo "<td>",$wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'],"</td>\n";
+			echo "<td>",$wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'],"</td>\n";
+			echo "<td>",$wsResponse[$wsIndices['SEX'][$currRow]]['value'],"</td>\n";
+			echo "<td>",$wsResponse[$wsIndices['EMAIL'][$currRow]]['value'],"</td>\n";
+			echo "<td>",$wsResponse[$wsIndices['BIRTHDAY'][$currRow]]['value'],"</td>\n";
+			echo "<td>",$wsResponse[$wsIndices['PHONENUMBER'][$currRow]]['value'],"</td>\n";
+			echo "<td>",$wsResponse[$wsIndices['SSN'][$currRow]]['value'],"</td>\n";
+			echo "</tr>";
+		}
+		$currRow++;
+	}
+	
+	*/
+
+?>
+		
+		</table>
+		
+		
+		
 		
 	</body>
 </html>

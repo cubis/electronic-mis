@@ -1,32 +1,4 @@
 <?php
-
-
-/* ISSUES I DONT KNOW HOW TO SOLVE
-
-	DOS ATTACKS ON OUR SERVICES
-	
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Start session
 session_start();
 require_once("configREST.php");
@@ -59,7 +31,12 @@ function doService(){
 	return $retVal;
 }
 
-$output = doService();
+//$output = doService();
+
+$a = 10;
+$b = NULL;
+$aprep = $db->prepare("INSERT INTO Type (TypeNumber, TypeName) VALUES(:a, :b);");
+$success = $aprep->execute( array(":a"=>$a, ":b"=>$b) );
 
 print($output);
 
