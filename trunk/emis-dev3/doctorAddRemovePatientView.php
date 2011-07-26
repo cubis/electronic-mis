@@ -54,8 +54,8 @@ session_start();
 		
 		if($_SESSION['SESS_PERSONAL_ID'] == $doc && $type == 1){
 			echo "<tr>";
-			$ID = $wsResponse[$wsIndices['PK_PatientID'][$currRow]]['value'];
-			echo "<td><a href='doctorRemovePatientExec.php?ID=$ID&do=remove'>Remove</a></td>\n";
+			$ID = urlencode($wsResponse[$wsIndices['PATIENTID'][$currRow]]['value']);
+			echo "<td><a href='doctorAddRemovePatientExec.php?ID=$ID&do=remove'>Remove</a></td>\n";
 			echo "<td>",$wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['SEX'][$currRow]]['value'],"</td>\n";
@@ -63,11 +63,13 @@ session_start();
 			echo "<td>",$wsResponse[$wsIndices['BIRTHDAY'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['PHONENUMBER'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['SSN'][$currRow]]['value'],"</td>\n";
+			echo "<td>",$ID,"</td>\n";
 			echo "</tr>";
 		}
 		$currRow++;
 	}
 	$currRow = 0;
+
 	
 ?>
 		</table>
@@ -90,8 +92,12 @@ session_start();
 		$doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
 		if(!isset( $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'] ) && $wsResponse[$wsIndices['TYPE'][$currRow]]['value'] == 1){
 			echo "<tr>";
-			$ID = $wsResponse[$wsIndices['PK_PatientID'][$currRow]]['value'];
-			echo "<td><a href='doctorRemovePatientExec.php?ID=$ID&do=add'>Add</a></td>\n";
+			if(isset($wsResponse[$wsIndices['PATIENTID'][$currRow]]['value'])){
+				$ID = urlencode($wsResponse[$wsIndices['PATIENTID'][$currRow]]['value']);
+				echo "<td><a href='doctorAddRemovePatientExec.php?ID=$ID&do=add'>Add</a></td>\n";
+			} else {
+				echo "<td>Cannot Add</td>\n";
+			}
 			echo "<td>",$wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'],"</td>\n";
 			echo "<td>",$wsResponse[$wsIndices['SEX'][$currRow]]['value'],"</td>\n";
