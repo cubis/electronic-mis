@@ -10,8 +10,8 @@
         echo '</ul>';
         unset($_SESSION['ERRMSG_ARR']);
      * 
-     */
-    }
+    }     */
+
     ?>
     <body>
         <h1>Doctor - Appointments</h1>
@@ -28,7 +28,7 @@
 
             </tr>
 
-            <?php
+            <?php/*
             $url = "http://localhost/emis/emis-dev3/visitREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
 
 
@@ -65,56 +65,13 @@
                 }
                 $currRow++;
             }
-            $currRow = 0;
+            $currRow = 0;*/
+            
             ?>
 
         </table>
 
     </body>
 </html>
-<?php
-/*
-  require_once('auth.php');
-  require_once('config.php');
-  require_once('bootstrap.php');
-
-  //session_start();
-  //get doctor id from member---$_SESSION['PK_member_id']
-  $docid = "SELECT * FROM Doctor WHERE FK_member_id = '" . $_SESSION['SESS_MEMBER_ID'] . "';";
-  $result = mysql_query($docid) or die(mysql_error());
-  //echo "<hr>";
-  $row = mysql_fetch_assoc($result) /* or die(mysql_error()) ;
-  $id = $row['PK_DoctorID'];
-
-  //Get appointments w/docID
-  $appts = "SELECT * FROM Appointment WHERE FK_DoctorID = '" . $id . "';";
-
-  //$qry="SELECT * FROM Patient;";
-  $result1 = mysql_query($appts);
-  echo "test" . $result1;
- * 
- */
-?>
 
 
-<?php
-/*
-  while ($row1 = mysql_fetch_assoc($appts)) {
-  //$qry2 = "SELECT * FROM Users WHERE PK_member_id = " . $row1['FK_PatientID'] . ";";
-  //$result2 = mysql_query($qry2);
-  //$row2 = mysql_fetch_assoc($result2);
-  echo "<tr>";
-  $ID = $row1['PK_AppID'];
-  echo "<td><a href='visit.php?ID=$ID'>Visit</a></td>";
-  echo "<td>", $row2['FirstName'], "</td>";
-  echo "<td>", $row2['LastName'], "</td>";
-  echo "<td>", $row1['Reason'], "</td>";
-  echo "<td>", $row1['Date'], "</td>";
-  echo "<td>", $row1['Time'], "</td>";
-  echo "<td>", $row1['Status'], "</td>";
-  echo "</tr>";
- * 
- */
-}
-?>
- 
