@@ -31,7 +31,7 @@
             <div class="navigation">
                 <div class="nav_content">
 					<?php
-                    	include_once "generatenNav.php"; // This will generate a navigation menu according to the user's role.
+                    	include_once "generateNav.php"; // This will generate a navigation menu according to the user's role.
 					?>
                 </div>
             </div>
