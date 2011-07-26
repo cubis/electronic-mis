@@ -263,7 +263,9 @@ function doServiceView($db) {
     $errNum = 0;
     $uname = $_GET['u'];
     //$pid = $_POST['pid'];
-
+    //test to see if doc or pat
+    //$userTypePrep = $db->prepare("SELECT * FROM Users WHERE PK_APPID = :pid");
+    
     //end
     if ($errNum == 0) {
         //all appointments per for user
@@ -274,13 +276,11 @@ function doServiceView($db) {
             ':pid' => $pid
         );
         $getAppt = $appoint->execute($vals);
-
-        if (!$updateVisitSuccess) {
+        
+        if (!$getAppt) {
             $errMsgArr[] = 'Gather Appoint failed';
             $errNum += 1;
         }
-
-        $retVal = outputXML2($errNum, $errMsgArr, $db);
     } else {
         $retVal = outputXML($errNum, $errMsgArr, $db);
     }
