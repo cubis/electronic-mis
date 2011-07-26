@@ -185,9 +185,9 @@ function doServiceVi($db) {
             //get the patient id from visit key for the recently entered row
             //$patIDPrep = $db->prepare("SELECT * FROM Appointment WHERE PK_APPTID = '" . $id . "'");
             //$getIDSuccess = $memIDPrep->execute();
-            $medPrep = $db->prepare("SELECT * FROM Users WHERE UserName = '" . $user . "'");
+            $medPrep = $db->prepare("SELECT * FROM Appointment WHERE PK_AppID = '" . $id . "'");
             $medSuccess = $medPrep->execute();
-            $meds = $memIDPrep->fetch(PDO::FETCH_ASSOC);
+            $meds = $medSuccess->fetch(PDO::FETCH_ASSOC);
             $insertMedPrep = $db->prepare("INSERT INTO Medications (FK_PatientID, Medication, Dosage, StartDate, EndDate)
 												VALUSE( '" . $meds['FK_PatientID'] . "', :med, :dos, :sdate, :edate)");
             $vals2 = array(
