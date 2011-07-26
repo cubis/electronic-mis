@@ -20,6 +20,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
 	if($errNum == 0){
 		$outputString .= "<PatientCount>" . $patientInfoPrep->rowCount() . "</PatientCount>\n";
 		while( $patientInfo = $patientInfoPrep->fetch(PDO::FETCH_ASSOC) ){
+			$outputString .= "<UserName>" . $patientInfo['UserName'] . "</UserName>\n";
 			$outputString .= "<FirstName>" . $patientInfo['FirstName'] . "</FirstName>\n";
 			$outputString .= "<LastName>" . $patientInfo['LastName'] . "</LastName>\n";
 			$outputString .= "<Sex>" . $patientInfo['Sex'] . "</Sex>\n";
@@ -96,14 +97,14 @@ function doService($level) {
 		$trustedKey = md5($currKey.$trustString);
 		
 		
-		if($recKey == $trustedKey || $reKey == $currKey){
+		if($recKey == $trustedKey || $recKey == $currKey){
 			if(isset($_GET['pat']) && $memberInfo['Type'] >= $level){
 				$target  = $_GET['pat'];
 			} else {
 				$target = $_GET['u'];
 			}
 			$qry = "SELECT * FROM Users LEFT JOIN Patient ON Users.PK_member_id = Patient.FK_member_id
-					LEFT JOIN Insurance ON Patient.PK_PatientID = Insurance.FK_PatientID";
+					LEFT JOIN Insurance ON Insurance.FK_PatientID = Patient.PK_PatientID";
 			if($target != "all"){
 				$qry .= " WHERE UserName = :target";
 			}
