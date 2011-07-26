@@ -84,8 +84,7 @@ function doServiceAp($db) {
     $day = $_POST['day'];
     
     $time = $_POST['year'];
-    $address = $_POST[''];
-    $status = 'new';
+    $status = 'created';
     $reason = $_POST['reason'];
     $reminder = $_POST['reminder'];
     
