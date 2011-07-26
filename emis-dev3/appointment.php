@@ -37,7 +37,7 @@ require_once('bootstrapREST.php');
                     $doctors = $prep->fetchAll();
                     foreach($doctors as &$doc)
                     {
-                        echo $doc['DocName'];
+                        echo 'option value=$doc[PK_DoctorID]>$doc['DocName']</option>';
                     }
                 }
                 else
