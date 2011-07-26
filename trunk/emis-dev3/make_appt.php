@@ -1,16 +1,12 @@
 <?php
-
-//headers for session
-session_start();
 require_once('auth.php');
-require_once('bootstrap.php');
+require_once('configREST.php');
+require_once('bootstrapREST.php');
 
 		
 		$errmsg_arr = array();
 
-		$url = "http://localhost/emis/emis-dev3/visitREST.php";
-        
-        $doctor = "DummyDoc";
+		/*$url = "http://localhost/emis/emis-dev3/visitREST.php";
         
 		$fields = array(
 			'u' => urlencode($_SESSION['SESS_USERNAME']),
@@ -58,20 +54,32 @@ require_once('bootstrap.php');
 			}
 		}
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-		session_write_close();
-		header("location: changePassView.php"); 
+		session_write_close();*/
+		/*header("location: appointment.php"); */
   
 
         
-        
-$year = $_POST['year'];
+$doctor = $_POST['doctor'];      
+$month = $_POST['month'];
 $day = $_POST['day'];
+$year = $_POST['year'];
 $hour = $_POST['hour'];
+$reason = $_POST['reason'];
+$reminder = $_POST['reminder'];
 
-echo 'Year: ' . $year . '<br />';
+echo 'Doctor: ' . $doctor . '<br />';
+echo 'Month: ' . $month . '<br />';
 echo 'Day: ' . $day . '<br />';
+echo 'Year: ' . $year . '<br />';
 echo 'Hour: ' . $hour . '<br />';
+echo 'Reason: ' . $reason . '<br />';
+echo 'Reminder: ' . $reminder . '<br />';
 
+$url = "http://localhost/emis/emis-dev3/visitREST.php";
 
+$fields = array(
+    'u' => urlencode($_SESSION['SESS_USERNAME']),
+	'key' => urlencode($_SESSION['SESS_AUTH_KEY'])
+    );
 
 ?>
