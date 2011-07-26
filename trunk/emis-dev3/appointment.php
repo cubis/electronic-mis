@@ -1,6 +1,8 @@
 <?php
 require_once('auth.php');
-require_once('bootstrap.php');
+require_once('configREST.php');
+require_once('bootstrapREST.php');
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -22,13 +24,32 @@ require_once('bootstrap.php');
         <form action="make_appt.php" method="post">
 
             <?php
-            $doclist = "SELECT * FROM Doctor;";
-            $result = mysql_query($doclist) or die(mysql_error());
+            echo 'Doctor: ';
+            
+            global $db;
+            $prep = $db->prepare('SELECT * FROM Doctor');
+            if($prep->execute())
+            {
+                if($prep->rowCount() >= 1)
+                {
+                    echo '<select name="doctor">
+                    <option value="1">Select Doctor</option>';
+                    $doctors = $prep->fetchAll();
+                    foreach($doctors as &$doc)
+                    {
+                        echo $doc['DocName'];
+                    }
+                }
+                else
+                    echo '<option value="NULL">No Doctors Available!</option>';
+            }
+            echo '</select>';
+            /*$result = mysql_query($doclist) or die(mysql_error());
             echo 'Request appointment with Doctor:
             <select name="doctor">';
             while ($row1 = mysql_fetch_assoc($result)) {
                 echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
-            }
+            }*/
 
 
 
