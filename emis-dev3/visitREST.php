@@ -265,15 +265,16 @@ function doServiceView($db) {
     //$pid = $_POST['pid'];
     //test to see if doc or pat
     //$userTypePrep = $db->prepare("SELECT * FROM Users WHERE PK_APPID = :pid");
-    
+    //Select * From Appointment WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = $uname))
     //end
     if ($errNum == 0) {
         //all appointments per for user
-        $appoint = $db->prepare("SELECT * FROM Appointment WHERE PK_APPID = :pid");
+        
+        $appoint = $db->prepare("Select * From Appointment WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = :uname))");
 
 
         $vals = array(
-            ':pid' => $pid
+            ':uname' => $uname
         );
         $getAppt = $appoint->execute($vals);
         
