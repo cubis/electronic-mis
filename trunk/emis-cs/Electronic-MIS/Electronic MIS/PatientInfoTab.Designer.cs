@@ -34,8 +34,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.sex = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.address = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.Birthday = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -71,6 +69,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // firstname
             // 
@@ -113,25 +112,9 @@
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 5;
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(132, 130);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 6;
-            // 
-            // address
-            // 
-            this.address.AutoSize = true;
-            this.address.Location = new System.Drawing.Point(78, 137);
-            this.address.Name = "address";
-            this.address.Size = new System.Drawing.Size(48, 13);
-            this.address.TabIndex = 7;
-            this.address.Text = "Address:";
-            // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(132, 156);
+            this.textBox5.Location = new System.Drawing.Point(132, 130);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(100, 20);
             this.textBox5.TabIndex = 8;
@@ -139,7 +122,7 @@
             // Birthday
             // 
             this.Birthday.AutoSize = true;
-            this.Birthday.Location = new System.Drawing.Point(78, 163);
+            this.Birthday.Location = new System.Drawing.Point(78, 137);
             this.Birthday.Name = "Birthday";
             this.Birthday.Size = new System.Drawing.Size(48, 13);
             this.Birthday.TabIndex = 9;
@@ -147,7 +130,7 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(132, 182);
+            this.textBox6.Location = new System.Drawing.Point(132, 156);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(100, 20);
             this.textBox6.TabIndex = 10;
@@ -155,7 +138,7 @@
             // SSN
             // 
             this.SSN.AutoSize = true;
-            this.SSN.Location = new System.Drawing.Point(94, 189);
+            this.SSN.Location = new System.Drawing.Point(94, 163);
             this.SSN.Name = "SSN";
             this.SSN.Size = new System.Drawing.Size(32, 13);
             this.SSN.TabIndex = 11;
@@ -385,8 +368,6 @@
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.Birthday);
             this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.address);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.sex);
             this.Controls.Add(this.textBox2);
@@ -395,6 +376,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "PatientInfoTab";
             this.Size = new System.Drawing.Size(615, 465);
+            this.Load += new System.EventHandler(this.PatientInfoTab_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,8 +390,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label sex;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label address;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label Birthday;
         private System.Windows.Forms.TextBox textBox6;
