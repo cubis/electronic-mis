@@ -11,8 +11,7 @@
 	<div class="nav_title">Doctor</div>
 	<div class="navlist"><a href="#">View/Cancel Upcoming Appointments</a></div>
 	<div class="navlist"><a href="#">View/Edit Availability</a></div>
-	<div class="navlist"><a href="doctorRemovePatientView.php">View/Remove Patients</a></div> 
-	<div class="navlist"><a href="doctorAddPatientView.php">Add Patients</a></div>
+	<div class="navlist"><a href="doctorAddRemovePatientView.php">Add/Remove Patients</a></div> 
     <div class="navlist"><a href="editMemberView.php">Edit Profile</a></div>
 	<div class="navlist"><a href="doctor_appt.php">Appointments</a></div>
 <?php elseif ($_SESSION['SESS_TYPE'] == 200): // Logged in user is a nurse ?>
