@@ -2,7 +2,6 @@
 session_start();
 ?>
 <html>
-    <h1> test</h1>
     <?php
     
     if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) > 0) {
@@ -33,7 +32,6 @@ session_start();
 
             <?php
             $url = "http://localhost/emis/emis-dev3/viewDocApptsREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
-            echo "<p>another test</p>";
 
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
