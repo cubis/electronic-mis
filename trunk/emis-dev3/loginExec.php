@@ -14,10 +14,7 @@
 	$password = $_POST['password'];	
 	$epw = md5($password); // encrypt password to lame ass md5 for t-fer
 
-	//replace starting with your own webroot for debugging...
-    
 	$request = "http://localhost/emis/emis-dev3/authenticateREST.php?u=" . urlencode($login) . "&p=" . urlencode($epw);
-
 	//format and send request
 	$ch = curl_init($request);
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);    
@@ -35,12 +32,14 @@
 	$parser = xml_parser_create();	
 	xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 	
-	//print( "OUTPUT|$output|\n");
-	//print "<pre>";
-	//print_r($wsResponse);
-	//print_r($wsIndices);
-	//print "</pre>";
-		
+	/*print( "OUTPUT|$output|\n");
+	print "<pre>";
+	print_r($wsResponse);
+	print_r($wsIndices);
+	print "</pre>";*/
+	
+	//die();
+	
 	//create trusted key from the given auth key and trusted string
 	$trustedKey = "xolJXj25jlk56LJkk5677LS";
 	$key = md5($wsResponse[$wsIndices['KEY'][0]]['value'].$trustedKey);

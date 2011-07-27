@@ -80,10 +80,9 @@ function outputXML($errNum, $errMsgArr, $memberInfo) {
 function doService() {
 	
 	global $db;
-	
 	$errMsgArr = array();
-
 	$errNum = 0;
+	
 	if(!isset($_GET['u']) || $_GET['u'] ==''){
 		$errMsgArr[] = 'Login ID Missing';
 		$errNum += 1;
@@ -92,7 +91,6 @@ function doService() {
 		$errMsgArr[] = 'Password Missing';
 		$errNum += 1;
 	}
-
 
 	$user = strtoupper($_GET['u']);
 	$pw = $_GET['p'];
@@ -138,6 +136,7 @@ function doService() {
 	  $errNum += 1;
 	  return outputXML($errNum, $errMsgArr, '', $db);
 	}
+	
 	// SEARCH FOR PREVIOUS LOGIN ATTEMPTS BY USER
 	$prep = $db->prepare('SELECT TimeStamp FROM LogFiles WHERE UserName = ?');
 	if ($prep->execute(array($user))) {
@@ -162,7 +161,8 @@ function doService() {
 	      return $retVal;
 	    }
 	  }
-	} else {
+	}
+	else {
 	  $error = $prep->errorInfo();
 	  $errMsgArr[] = $error[2];
 	  $errNum += 1;
@@ -185,8 +185,6 @@ function doService() {
 			$db->exec("UPDATE Users SET CurrentKey='" . $AUTH_KEY . "' WHERE PK_member_id='" . $memberInfo['PK_member_id'] . "'");
 			$memberInfo['AUTHKEY'] = $AUTH_KEY;
 			
-			
-			
 			//DEPENDING ON TYPE GRAB THEIR PERSONAL ID
 			$qry = "SELECT * FROM ";
 			if($memberInfo['Type'] == 1){
@@ -199,17 +197,20 @@ function doService() {
 				$qry .= "`Doctor` ";
 				$assocString = 'PK_DoctorID';				
 			} else if($memberInfo['Type'] == 400){
-				$qry .= "`Admin` ";
+				$qry .= "Admin ";
 				$assocString = 'PK_AdminID';							
 			}			
-			$qry .= "WHERE FK_member_id = :id; ";
+			$qry .= " WHERE FK_member_id = :id";
+			//print($qry . " ID[" . $memberInfo['PK_member_id'] . "]");
 			$prep = $db->prepare($qry);
-			if ($prep->execute(array( ":id" => $memberInfo['PK_member_id'] ))) {
-				if($prep->rowCount() == 1){
+			
+			if ( $prep->execute(array( ":id" => $memberInfo['PK_member_id'] ))) {
+			//die("PERSONAL ID: " . $prep->rowCount());
+				
 					$info = $prep->fetch(PDO::FETCH_ASSOC);
-					$memberInfo['PersonalID'] = $info[$assocString];	
-				}					
-			} else {				
+					$memberInfo['PersonalID'] = $info[$assocString];			
+			} 
+			else {				
 				$error = $prep->errorInfo();
 				$errMsgArr[] = $error[2];
 				$errNum += 1;

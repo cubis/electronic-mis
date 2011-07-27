@@ -2,8 +2,6 @@
 require_once('../auth.php');
 require_once('../configREST.php');
 require_once('../bootstrapREST.php');
-session_start();
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -35,8 +33,8 @@ session_start();
               <td>Username</td>
               <td>Edit</td>
             </tr>
+			
 <?php
-
 $user = $_SESSION['SESS_USERNAME'];
 $key = $_SESSION['SESS_AUTH_KEY'];
 $request = "http://localhost/emis/emis-dev3/viewPatientREST.php?u=" 
@@ -64,26 +62,24 @@ xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 
 
 
+
+
 $numrows = $wsResponse[$wsIndices['PATIENTCOUNT'][0]]['value'];
 $currRow = 0;
 
 while ($currRow < $numrows)
 {
 	$UserName = $wsResponse[$wsIndices['USERNAME'][$currRow]]['value'];
-	$FirstName = $wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'];
-	$LastName = $wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'];
-	$Sex = $wsResponse[$wsIndices['SEX'][$currRow]]['value'];
-	$Birthday = $wsResponse[$wsIndices['BIRTHDAY'][$currRow]]['value'];
-	$SSN = $wsResponse[$wsIndices['SSN'][$currRow]]['value'];
-	$Email = $wsResponse[$wsIndices['EMAIL'][$currRow]]['value'];
-	$PhoneNumber = $wsResponse[$wsIndices['PHONENUMBER'][$currRow]]['value'];
-	$CompanyName = $wsResponse[$wsIndices['COMPANYNAME'][$currRow]]['value'];
-	$PlanType = $wsResponse[$wsIndices['PLANTYPE'][$currRow]]['value'];
-	$PlanNum = $wsResponse[$wsIndices['PLANNUM'][$currRow]]['value'];
-	$CoveragePercent = $wsResponse[$wsIndices['COVERAGEPERCENT'][$currRow]]['value'];
-	$CoPay = $wsResponse[$wsIndices['COPAY'][$currRow]]['value'];
-	$CoverageStart = $wsResponse[$wsIndices['COVERAGESTART'][$currRow]]['value'];
-	$CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][$currRow]]['value'];
+	if (!isset($wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'])) {
+		//print $currRow;
+	}
+	else
+		$FirstName = $wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'];
+	if (!isset($wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'])) {
+		//print $currRow;
+	}
+	else
+		$LastName = $wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'];
 	
 	echo "<tr>\n";
 	echo "<td>",$FirstName,"</td>\n";
