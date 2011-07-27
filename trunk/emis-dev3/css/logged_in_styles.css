@@ -6,6 +6,7 @@ body {
 	background-image:url(../img/internal_pagebg.png);
 	background-repeat: repeat-x;
 	background-color: #484848;
+	font: Arial, Helvetica, sans-serif;
 }
 
 .container {
