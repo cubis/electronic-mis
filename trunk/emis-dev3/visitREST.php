@@ -42,8 +42,7 @@ if (isset($_POST['type'])) {
 else
     $output = doServiceView($db);
 */
-$output = doServiceView($db);
-print($output);
+
 
 function outputXML($errNum, $errMsgArr, $db) {
 
@@ -144,14 +143,11 @@ function doService($db) {
         }
 
         if ($med && $dos && $sdate && $edate) {
-            //get the patient id from visit key for the recently entered row
-            //$patIDPrep = $db->prepare("SELECT * FROM Appointment WHERE PK_APPTID = '" . $id . "'");
-            //$getIDSuccess = $memIDPrep->execute();
             $medPrep = $db->prepare("SELECT * FROM Appointment WHERE PK_AppID = '" . $id . "'");
             $medSuccess = $medPrep->execute();
             $meds = $medPrep->fetch(PDO::FETCH_ASSOC);
             $insertMedPrep = $db->prepare("INSERT INTO Medications (FK_PatientID, Medication, Dosage, StartDate, EndDate)
-												VALUSE( '" . $meds['FK_PatientID'] . "', :med, :dos, :sdate, :edate)");
+												VALUES( '" . $meds['FK_PatientID'] . "', :med, :dos, :sdate, :edate)");
             $vals2 = array(
                 ':med' => $med,
                 ':dos' => $dos,
@@ -173,5 +169,8 @@ function doService($db) {
 
     return $retVal;
 }
+
+$output = doServiceView($db);
+print($output);
 
 ?>
