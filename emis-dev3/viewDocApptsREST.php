@@ -110,7 +110,7 @@ function doService($level) {
     $currKey = $memberInfo['CurrentKey'];
     $trustString = "xolJXj25jlk56LJkk5677LS";
     $trustedKey = md5($currKey . $trustString);
-*/
+
 
     if ($recKey == $trustedKey || $recKey == $currKey) {
         if (isset($_GET['pat']) && $memberInfo['Type'] >= $level) {
@@ -118,7 +118,7 @@ function doService($level) {
         } else {
             $target = $_GET['u'];
         }
-
+*/
         $qry = "Select * From Appointment INNER JOIN Patient WHERE Appointment.FK_DoctorID = 
                             (Select PK_DoctorID FROM Doctor WHERE FK_member_id = 
                             (SELECT PK_member_id FROM Users WHERE UserName = '".$_GET['u']."')) 
@@ -130,11 +130,11 @@ function doService($level) {
             $qry .= " WHERE UserName = :target";
         }
         $patientInfoPrep = $db->prepare($qry);
-        //$patientInfoSuccess = $patientInfoPrep->execute(array(":target" => $target));
+        /*//$patientInfoSuccess = $patientInfoPrep->execute(array(":target" => $target));
         if (!$patientInfoSuccess) {
             $errMsgArr[] = "DATABASE ERROR TWO";
             $errNum++;
-        }
+        }*/
         if (errNum == 0) {
             $retVal = outputXML($errNum, $errMsgArr, $patientInfoPrep);
             //print($patientInfoPrep->rowCount());
