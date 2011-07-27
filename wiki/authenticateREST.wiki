@@ -15,7 +15,7 @@ require_once('bootstrapREST.php');  //link information
   *   result  {{{[0 or 1]}}}  if user and pass is correct<br>
   *   key     {{{[hashed key]}}} validate auth was performed on this WS<br>
 <br>
-Example Output:<br>
+*Example Output:*<br>
   {{{
 <?xml version="1.0"?>
       <result>    1       </result>
@@ -23,6 +23,28 @@ Example Output:<br>
       <userID>    12345   </userID>
       <AccessType>400     </type>
 }}}
-
+<br>
+<br>
+==Functions==
+*Function:*
+{{{
+function doService()
+}}}
+*Description:*<br>
+Authenticates user, returns error if unsuccessful, and makes note of the result.<br>
+<br>
+<br>
+*Function:*
+{{{
+function outputXML($errNum, $errMsgArr, $memberInfo)
+}}}
+*Description:*<br>
+Outputs authentication result in XML. Calls
+{{{
+logToDB()
+}}}
+to log the result.
+<br>
+<br>
 
 [http://code.google.com/p/electronic-mis/wiki/API API]
