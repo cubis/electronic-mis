@@ -24,7 +24,6 @@ require_once('bootstrapREST.php');  //link information
       <AccessType>400     </type>
 }}}
 <br>
-<br>
 ==Functions==
 *Function:*
 {{{
