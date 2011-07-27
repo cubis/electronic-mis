@@ -11,6 +11,7 @@ using System.Xml;
 using System.IO;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Diagnostics;
 
 namespace Electronic_MIS
 {
@@ -79,31 +80,38 @@ namespace Electronic_MIS
             try
             {
                 WebResponse response = request.GetResponse();
+
+                /*
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                Debug.WriteLine("");
+                Debug.WriteLine("LOGIN XML:");
+                Debug.WriteLine(reader.ReadToEnd());
+
+                response = request.GetResponse();
+                //*/
+
                 XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
-                
-                //TextReader response = new StringReader(Properties.Resources.AppointmentXMLSample);                
-                //XmlTextReader xmlReader = new XmlTextReader(response);
-                
+
                 while (xmlReader.Read())
                 {
                     switch (xmlReader.NodeType)
                     {
                         case XmlNodeType.Element:
-                            if (xmlReader.Name == "appointment")
+                            if (xmlReader.Name == "Appointment")
                             {
                                 Appointment newAppt = new Appointment();
                                 StringBuilder sb = new StringBuilder();
                                 xmlReader.Read();
-                                while (xmlReader.Name != "appointment")
+                                while (xmlReader.Name != "Appointment")
                                 {
                                     xmlReader.Read();
                                     switch (xmlReader.Name)
                                     {
-                                        case "date":
+                                        case "DATE":
                                             sb.Append(xmlReader.ReadElementContentAsString() + " ");
                                             break;
                                         
-                                        case "time":
+                                        case "TIME":
                                             sb.Append(xmlReader.ReadElementContentAsString());
                                             break;
                                         
@@ -111,12 +119,20 @@ namespace Electronic_MIS
                                             newAppt.Doctor = xmlReader.ReadElementContentAsString();
                                             break;
 
-                                        case "reason":
+                                        case "REASON":
                                             newAppt.Reason = xmlReader.ReadElementContentAsString();
                                             break;
 
                                         case "remind":
-                                            newAppt.Remind = xmlReader.ReadElementContentAsBoolean();
+                                            string x = xmlReader.ReadElementContentAsString();
+                                            if (x == "asdf")
+                                            {
+                                                newAppt.Remind = false;
+                                            }
+                                            else
+                                            {
+                                                newAppt.Remind = true;
+                                            }
                                             break;
 
                                         default:
