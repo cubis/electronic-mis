@@ -99,7 +99,7 @@ require_once('bootstrap.php');  //link information
                                     //$appt = $docListPrep->execute();
                                     // while ($row1 = $appt->fetch(PDO::FETCH_ASSOC)){
                                     //      echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
-                                     }
+                                     //}
                                     ?>
                                 </select>
 
