@@ -42,7 +42,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
     $outputString .= "<?xml version=\"1.0\"?>\n";
     $outputString .= "<content><errNum>" . $errNum . "</errNum>\n";
     if ($errNum == 0) {
-        $outputString .= "<appcount>" . $patientInfoPrep->rowCount() . "</appcount>\n";
+        $outputString .= "<APPTCOUNT>" . $patientInfoPrep->rowCount() . "</APPTCOUNT>\n";
         while ($patientInfo = $patientInfoPrep->fetch(PDO::FETCH_ASSOC)) {
             $outputString .= "<Appointment>";
             $outputString .= "<APPTID>" . $patientInfo['PK_AppID'] . "</APPTID>\n";
@@ -120,7 +120,7 @@ function doService($level) {
 
         $qry = "Select * From Appointment INNER JOIN Patient WHERE Appointment.FK_DoctorID = 
                             (Select PK_DoctorID FROM Doctor WHERE FK_member_id = 
-                            (SELECT PK_member_id FROM Users WHERE UserName = 'docj')) 
+                            (SELECT PK_member_id FROM Users WHERE UserName = '".$_GET['u'].')) 
                             AND Appointment.FK_PatientID = Patient.PK_PatientID";
 
         //$qry = "SELECT * FROM Users LEFT JOIN Patient ON Users.PK_member_id = Patient.FK_member_id
