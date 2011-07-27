@@ -29,3 +29,4 @@
 <?php endif; ?>
 	<div class="navlist"><a href="changePassView.php">Change Password</a></div>
     <div class="navlist"><a href="logoutExec.php">Logout</a></div>
+    <div class="navlist"><a href="memberProfileView.php">My Profile</a></div>
