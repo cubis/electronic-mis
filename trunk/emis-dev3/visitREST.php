@@ -26,7 +26,8 @@ require_once('bootstrapREST.php');  //link information
 //type1 =  insert (create)
 //type 2 = update (execute)
 //type 3 = reschedule;
-//Type 4 = View all infotmation
+//Type 4 = View all infotmat0ion
+/*
 if (isset($_POST['type'])) {
     if ($_POST['type'] == 1) {
         $output = doServiceAp($db);
@@ -40,7 +41,8 @@ if (isset($_POST['type'])) {
 }
 else
     $output = doServiceView($db);
-
+*/
+$output = doServiceView($db);
 print($output);
 
 function outputXML($errNum, $errMsgArr, $db) {
@@ -72,60 +74,8 @@ function outputXML($errNum, $errMsgArr, $db) {
 
 //Used when visit happend
 //Type 1 service
-function doServiceAp($db) {
-    //NOTE: GET WITH MU TO SEE WHAT HE USING TO POST
-    $errMsgArr = array();
-    $errNum = 0;
-    $doc = $_POST['doctor'];
-    $uname = $_POST['u'];
-    //$pat = $_POST[''];
-    $year = $_POST['day'];
-    $month = $_POST['month'];
-    $day = $_POST['day'];
-
-    $time = $_POST['year'];
-    $status = 'created';
-    $reason = $_POST['reason'];
-    $reminder = $_POST['reminder'];
-
-
-
-    $date = $year . "-" . $month . "-" . $day;
-    $time .= ":00";
-    if ($errNum == 0) {
-        //set up and insert values into the appointment table
-        $addApptPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason, Reminder) 
-                                        VALUES(:doc, :pat, :date, :time, :address, :status, :reason, :reminder);");
-        //$tableType = '';
-
-        $vals = array(
-            ':doc' => $doc,
-            ':pat' => $pat,
-            ':date' => $date,
-            ':time' => $time,
-            ':address' => $address,
-            ':status' => $status,
-            ':reason' => $reason,
-            ':reminder' => $reminder
-        );
-        $insertApptSuccess = $addApptPrep->execute($vals);
-
-        if (!$insertApptSuccess) {
-            $errMsgArr[] = 'update visit failed';
-            $errNum += 1;
-        }
-
-        $retVal = outputXML($errNum, $errMsgArr, $db);
-    } else {
-        $retVal = outputXML($errNum, $errMsgArr, $db);
-    }
-
-
-    return $retVal;
-}
-
 //Type 2 Service
-function doServiceVi($db) {
+function doService($db) {
     $errMsgArr = array();
     $errNum = 0;
     $id = $_POST['id'];
@@ -219,104 +169,6 @@ function doServiceVi($db) {
     } else {
         $retVal = outputXML($errNum, $errMsgArr, $db);
     }
-
-
-    return $retVal;
-}
-
-/* //Type 3 service Not being used
-  function doServiceUp($db) {
-  //NOTE: GET WITH MU TO SEE WHAT HE USING TO POST
-  $errMsgArr = array();
-  $errNum = 0;
-  $id = $_POST[''];
-  $doc = $_POST[''];
-  $pat = $_POST[''];
-  $date = $_POST[''];
-  $time = $_POST[''];
-  $address = $_POST[''];
-  $status = $_POST[''];
-  $reason = $_POST[''];
-
-  if ($errNum == 0) {
-  //set up and insert values into the appointment table
-  $upApptPrep = $db->prepare("UPDATE Appointment SET FK_DoctorID = :doc, FK_PatientID = :pat, Date = :date, Time = :time,
-  Address = :address, Status = :status, Reason = :reason WHERE PK_AppID = :id");
-  //$tableType = '';
-  $vals = array(
-  ':doc' => $doc,
-  ':pat' => $pat,
-  ':date' => $date,
-  ':time' => $time,
-  ':address' => $address,
-  ':status' => $status,
-  ':reason' => $reason,
-  ':id' => $id
-  );
-  $insertApptSuccess = $upApptPrep->execute($vals);
-
-  if (!$insertApptSuccess) {
-  $errMsgArr[] = 'update visit failed';
-  $errNum += 1;
-  }
-
-  $retVal = outputXML($errNum, $errMsgArr, $db);
-  } else {
-  $retVal = outputXML($errNum, $errMsgArr, $db);
-  }
-
-
-  return $retVal;
-  }
- */
-
-//Type 4 Service (get appts)
-function doServiceView($db) {
-    $errMsgArr = array();
-    $errNum = 0;
-    $uname = $_GET['u'];
-    //$pid = $_POST['pid'];
-    //test to see if doc or pat
-    //$userTypePrep = $db->prepare("SELECT * FROM Users WHERE PK_APPID = :pid");
-    //Select * From Appointment WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = $uname))
-    //end
-    if ($errNum == 0) {
-        //all appointments per for user
-
-        $appoint = $db->prepare("Select * From Appointment INNER JOIN Doctor WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = 'bsattler')) AND Appointment.FK_DoctorID = Doctor.PK_DoctorID");
-
-
-        $vals = array(
-            ':uname' => $uname
-        );
-        $apptSuc = $appoint->execute($vals);
-
-        if (!$apptSuc) {
-            $errMsgArr[] = 'Gather Appoint failed';
-            $errNum += 1;
-        }
-    } else {
-        $retVal = outputXML($errNum, $errMsgArr, $db);
-    }
-    //Not going to use method
-    $outputString .= "<?xml version=\"1.0\"?>\n";
-    $outputString .= "<content>\n";
-    while ($appt = $appoint->fetch(PDO::FETCH_ASSOC)) {
-        //$outputString = ''; //start empty
-        $outputString .= "<apptcount>".$numrows."<apptcount>\n";
-        //count for pat &doc
-        $outputString .= "<appointment>\n";
-        
-        $outputString .= "<apptID>" . $appt['PK_AppID'] . "</apptID>\n";
-        $outputString .= "<date>" . $appt['Date'] . "</date>\n";
-        $outputString .= "<time>" . $appt['Time'] . "</time>\n";
-        $outputString .= "<doctor>" . $appt['DocName'] . "</doctor>\n";
-        $outputString .= "<reason>" . $appt['Reason'] . "</reason>\n";
-        $outputString .= "<remind>" . $appt['Reminder'] . "</remind>\n";
-        $outputString .= "</appointment>\n";
-    }
-    $outputString .= "</content>\n";
-    $retVal = $outputString;
 
 
     return $retVal;
