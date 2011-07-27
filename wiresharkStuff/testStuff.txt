@@ -1,0 +1,41 @@
+JPEG changs algorithm
+BPCS hiding techniques.
+Water Marking section
+
+1. Capacity and security
+2.significant
+3.
+4.
+5.crop the Jpeg
+6.2 times
+7.information Hiding
+8.Low Entrophy
+9.Entropy
+10.patterens
+11.Encrytped
+12. 200
+13.higher
+14 independance
+   irreproducablity
+   Uncertanty
+15 capacity
+16 High
+17 Active
+18 low aplitude echos
+19 echo hiding
+20 No
+21 1 
+22 NONE zero..
+26. because once u encrypt it. The data becomes randomized. U compress first to make it small then encrypt it.
+
+27. 
+
+29.get 8x8 then apply dct coeffient then entropy coding
+
+31. BPCS. CGC step. Go to 8x8 blocks. Measure it if is complex. If it is then hide data. If not skip. If we hide mark the block. then put the output in and when u reverse it slice the blocks to 8x8. 
+
+32.which has no color. Both dogs and the mouse.
+33.mouse and domation on couch
+34. make those colors be exactly the same. All the black.
+35
+
