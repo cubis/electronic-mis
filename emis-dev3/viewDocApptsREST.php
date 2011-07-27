@@ -142,11 +142,13 @@ function doService($level) {
         } else {
             $retVal = outputXML($errNum, $errMsgArr, '');
         }
+        /*
     } else {
         $errMsgArr[] = "Unauthorized to view information";
         $errNum++;
         $retVal = outputXML($errNum, $errMsgArr, '');
-    }
+    }*/
+    
     return $retVal;
 }
 
