@@ -128,7 +128,8 @@ namespace Electronic_MIS
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message, "Yeah...we didn't plan for this", MessageBoxButtons.OK);
+                Debug.WriteLine(exp.Message);
+                MessageBox.Show("Program encountered an error.  Please try again later", "Yeah...we didn't plan for this", MessageBoxButtons.OK);
                 Application.Exit();
             }
 
@@ -172,6 +173,11 @@ namespace Electronic_MIS
             // trust any certificate!!!    
             System.Console.WriteLine("Warning, trust any certificate");    
             return true;
+        }
+
+        private void LoginTab_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

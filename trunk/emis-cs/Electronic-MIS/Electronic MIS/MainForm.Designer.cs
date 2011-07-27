@@ -39,18 +39,18 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.navigationTree = new System.Windows.Forms.TreeView();
             this.tabViewer = new System.Windows.Forms.TabControl();
-            this.Welcome = new System.Windows.Forms.TabPage();
-            this.welcomeTab1 = new Electronic_MIS.WelcomeTab();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.closeThisTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Welcome = new System.Windows.Forms.TabPage();
+            this.welcomeTab1 = new Electronic_MIS.WelcomeTab();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabViewer.SuspendLayout();
-            this.Welcome.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.Welcome.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -76,21 +76,21 @@
             // loginToolStripMenuItem
             // 
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.loginToolStripMenuItem.Text = "Login";
             this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -116,6 +116,7 @@
             // 
             // navigationTree
             // 
+            this.navigationTree.BackColor = System.Drawing.SystemColors.Control;
             this.navigationTree.Location = new System.Drawing.Point(0, 3);
             this.navigationTree.Name = "navigationTree";
             treeNode1.Name = "WelcomeNode";
@@ -128,6 +129,7 @@
             this.navigationTree.Size = new System.Drawing.Size(258, 455);
             this.navigationTree.TabIndex = 0;
             this.navigationTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.navigationTree_AfterSelect);
+            this.navigationTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.navigationTree_NodeMouseClick);
             // 
             // tabViewer
             // 
@@ -139,6 +141,20 @@
             this.tabViewer.SelectedIndex = 0;
             this.tabViewer.Size = new System.Drawing.Size(615, 465);
             this.tabViewer.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.closeThisTabToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(146, 26);
+            // 
+            // closeThisTabToolStripMenuItem
+            // 
+            this.closeThisTabToolStripMenuItem.Name = "closeThisTabToolStripMenuItem";
+            this.closeThisTabToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.closeThisTabToolStripMenuItem.Text = "Close this tab";
+            this.closeThisTabToolStripMenuItem.Click += new System.EventHandler(this.closeThisTabToolStripMenuItem_Click);
             // 
             // Welcome
             // 
@@ -153,29 +169,17 @@
             // 
             // welcomeTab1
             // 
+            this.welcomeTab1.BackColor = System.Drawing.SystemColors.Control;
             this.welcomeTab1.Location = new System.Drawing.Point(0, 0);
             this.welcomeTab1.Name = "welcomeTab1";
             this.welcomeTab1.Size = new System.Drawing.Size(615, 465);
             this.welcomeTab1.TabIndex = 0;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.closeThisTabToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
-            // 
-            // closeThisTabToolStripMenuItem
-            // 
-            this.closeThisTabToolStripMenuItem.Name = "closeThisTabToolStripMenuItem";
-            this.closeThisTabToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.closeThisTabToolStripMenuItem.Text = "Close this tab";
-            this.closeThisTabToolStripMenuItem.Click += new System.EventHandler(this.closeThisTabToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(884, 485);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
@@ -189,8 +193,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabViewer.ResumeLayout(false);
-            this.Welcome.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
+            this.Welcome.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

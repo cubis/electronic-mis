@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -61,12 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Appointments.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Appointments.Designer.cs">
-      <DependentUpon>Appointments.cs</DependentUpon>
-    </Compile>
     <Compile Include="AppointmentTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,9 +94,6 @@
     <Compile Include="WelcomeTab.Designer.cs">
       <DependentUpon>WelcomeTab.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Appointments.resx">
-      <DependentUpon>Appointments.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AppointmentTab.resx">
       <DependentUpon>AppointmentTab.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,6 +119,7 @@
     <EmbeddedResource Include="WelcomeTab.resx">
       <DependentUpon>WelcomeTab.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -141,7 +133,9 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\AppointmentXMLSample.txt" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
