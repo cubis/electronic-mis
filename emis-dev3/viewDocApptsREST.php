@@ -95,6 +95,7 @@ function doService($level) {
 
 
     //USE CREDENTIALS AND AUTHENTICATE
+    /*
     $user = $_GET['u'];
     $recKey = $_GET['key'];
     $userInfoPrep = $db->prepare("SELECT * FROM Users WHERE UserName = :user;");
@@ -109,7 +110,7 @@ function doService($level) {
     $currKey = $memberInfo['CurrentKey'];
     $trustString = "xolJXj25jlk56LJkk5677LS";
     $trustedKey = md5($currKey . $trustString);
-
+*/
 
     if ($recKey == $trustedKey || $recKey == $currKey) {
         if (isset($_GET['pat']) && $memberInfo['Type'] >= $level) {
