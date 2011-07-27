@@ -3,9 +3,9 @@
 
 body {
 	margin: 0 auto;
-	background-image:url(../img/internal_bg.png);
+	background-image:url(../img/internal_pagebg.png);
 	background-repeat: repeat-x;
-	background-color: #e5e5e5;
+	background-color: #484848;
 }
 
 .container {
@@ -98,7 +98,7 @@ body {
 	
 .page_content {
 	padding: 20px;
-	background-color: white;
+	background-color: #F5F5F5;
 	font: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
@@ -110,6 +110,7 @@ body {
 .footer {
 	font-size: 12px;
 	text-align: center;
+	color: white;
 }
 
 .black_button {
