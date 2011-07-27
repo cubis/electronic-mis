@@ -40,8 +40,11 @@ WHERE Appointment.FK_PatientID = Patient.PK_PatientID
 AND Patient.FK_member_id = Users.PK_member_id
 AND Appointment.Date+0 <= CURDATE() + 1
 AND Appointment.Reminder = 1";
-    //test
-        
+
+    $result=mysql_query($qry);
+    foreach($row as mysql_fetch_array($result)){
+        echo $row;
+    }
      
 
     switch( $_GET['method']){
@@ -68,6 +71,7 @@ AND Appointment.Reminder = 1";
         $message = "this should work, Hello! This is a simple email message.\n no action required!";
         $from = "cpe-67-10-181-224.satx.res.rr.com";
         $headers = "From:" . $from;
+
 
         if( mail($to,$subject,$message,$headers)){
             echo "<p>Mail Sent. to $to</p>";
