@@ -1,0 +1,25 @@
+#summary authenticateREST.php
+#labels authenticate,REST,authenticateREST,php,API
+
+=authenticateREST.php=
+
+==Files Included==
+require_once('configREST.php');     //sql connection information<br>
+require_once('bootstrapREST.php');  //link information<br>
+<br>
+Input: https://[URL]/Authenticate.php?u=[username]&password=[pass]<br>
+Output: XML
+  *   result  {{{[0 or 1]}}}  if user and pass is correct<br>
+  *   key     {{{[hashed key]}}} validate auth was performed on this WS<br>
+<br>
+Example Output:<br>
+  {{{
+<?xml version="1.0"?>
+      <result>    1       </result>
+      <key>       fb504a91465213203ae7c3866bbf3cf4</key>
+      <userID>    12345   </userID>
+      <AccessType>400     </type>
+}}}
+
+
+[http://code.google.com/p/electronic-mis/wiki/API API]
