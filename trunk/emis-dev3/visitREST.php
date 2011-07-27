@@ -82,15 +82,15 @@ function doServiceAp($db) {
     $year = $_POST['day'];
     $month = $_POST['month'];
     $day = $_POST['day'];
-    
+
     $time = $_POST['year'];
     $status = 'created';
     $reason = $_POST['reason'];
     $reminder = $_POST['reminder'];
-    
-    
-    
-    $date = $year."-".$month."-".$day;
+
+
+
+    $date = $year . "-" . $month . "-" . $day;
     $time .= ":00";
     if ($errNum == 0) {
         //set up and insert values into the appointment table
@@ -224,51 +224,52 @@ function doServiceVi($db) {
     return $retVal;
 }
 
-/*//Type 3 service Not being used
-function doServiceUp($db) {
-    //NOTE: GET WITH MU TO SEE WHAT HE USING TO POST
-    $errMsgArr = array();
-    $errNum = 0;
-    $id = $_POST[''];
-    $doc = $_POST[''];
-    $pat = $_POST[''];
-    $date = $_POST[''];
-    $time = $_POST[''];
-    $address = $_POST[''];
-    $status = $_POST[''];
-    $reason = $_POST[''];
+/* //Type 3 service Not being used
+  function doServiceUp($db) {
+  //NOTE: GET WITH MU TO SEE WHAT HE USING TO POST
+  $errMsgArr = array();
+  $errNum = 0;
+  $id = $_POST[''];
+  $doc = $_POST[''];
+  $pat = $_POST[''];
+  $date = $_POST[''];
+  $time = $_POST[''];
+  $address = $_POST[''];
+  $status = $_POST[''];
+  $reason = $_POST[''];
 
-    if ($errNum == 0) {
-        //set up and insert values into the appointment table
-        $upApptPrep = $db->prepare("UPDATE Appointment SET FK_DoctorID = :doc, FK_PatientID = :pat, Date = :date, Time = :time, 
-											Address = :address, Status = :status, Reason = :reason WHERE PK_AppID = :id");
-        //$tableType = '';
-        $vals = array(
-            ':doc' => $doc,
-            ':pat' => $pat,
-            ':date' => $date,
-            ':time' => $time,
-            ':address' => $address,
-            ':status' => $status,
-            ':reason' => $reason,
-            ':id' => $id
-        );
-        $insertApptSuccess = $upApptPrep->execute($vals);
+  if ($errNum == 0) {
+  //set up and insert values into the appointment table
+  $upApptPrep = $db->prepare("UPDATE Appointment SET FK_DoctorID = :doc, FK_PatientID = :pat, Date = :date, Time = :time,
+  Address = :address, Status = :status, Reason = :reason WHERE PK_AppID = :id");
+  //$tableType = '';
+  $vals = array(
+  ':doc' => $doc,
+  ':pat' => $pat,
+  ':date' => $date,
+  ':time' => $time,
+  ':address' => $address,
+  ':status' => $status,
+  ':reason' => $reason,
+  ':id' => $id
+  );
+  $insertApptSuccess = $upApptPrep->execute($vals);
 
-        if (!$insertApptSuccess) {
-            $errMsgArr[] = 'update visit failed';
-            $errNum += 1;
-        }
+  if (!$insertApptSuccess) {
+  $errMsgArr[] = 'update visit failed';
+  $errNum += 1;
+  }
 
-        $retVal = outputXML($errNum, $errMsgArr, $db);
-    } else {
-        $retVal = outputXML($errNum, $errMsgArr, $db);
-    }
+  $retVal = outputXML($errNum, $errMsgArr, $db);
+  } else {
+  $retVal = outputXML($errNum, $errMsgArr, $db);
+  }
 
 
-    return $retVal;
-}
-*/
+  return $retVal;
+  }
+ */
+
 //Type 4 Service (get appts)
 function doServiceView($db) {
     $errMsgArr = array();
@@ -282,7 +283,7 @@ function doServiceView($db) {
     if ($errNum == 0) {
         //all appointments per for user
 
-        $appoint = $db->prepare("Appointment INNER JOIN Doctor WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = 'bsattler')) AND Appointment.FK_DoctorID = Doctor.PK_DoctorID");
+        $appoint = $db->prepare("Select * From Appointment INNER JOIN Doctor WHERE FK_PatientID = (Select PK_PatientID FROM Patient WHERE FK_member_id = (SELECT PK_member_id FROM Users WHERE UserName = 'bsattler')) AND Appointment.FK_DoctorID = Doctor.PK_DoctorID");
 
 
         $vals = array(
@@ -301,8 +302,11 @@ function doServiceView($db) {
     $outputString .= "<?xml version=\"1.0\"?>\n";
     $outputString .= "<content>\n";
     while ($appt = $appoint->fetch(PDO::FETCH_ASSOC)) {
-        $outputString = ''; //start empty
+        //$outputString = ''; //start empty
+        $outputString .= "<apptcount>".$numrows."<apptcount>\n";
+        //count for pat &doc
         $outputString .= "<appointment>\n";
+        
         $outputString .= "<apptID>" . $appt['PK_AppID'] . "</apptID>\n";
         $outputString .= "<date>" . $appt['Date'] . "</date>\n";
         $outputString .= "<time>" . $appt['Time'] . "</time>\n";
