@@ -127,7 +127,7 @@ if ($errflag) {
     header("location: visit.php");
     exit();
 } else {
-    header("location: visitSuccess.php");
+    header("location: memberProfileView.php");
     exit();
 }
 ?>
