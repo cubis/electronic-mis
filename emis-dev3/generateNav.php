@@ -19,7 +19,7 @@
 	<div class="navlist"><a href="editMemberView.php">Edit Profile</a></div>
 <?php elseif ($_SESSION['SESS_TYPE'] == 1): // Logged in user is a patient ?>
 	<div class="nav_title">Patient</div>
-	<div class="navlist"><a href="#">Set Up Appointments</a></div>
+	<div class="navlist"><a href="appointment.php?u=<?php echo $_SESSION['SESS_USERNAME'] ?>">Set Up Appointments</a></div>
 	<div class="navlist"><a href="editMemberView.php?u=<?php echo $_SESSION['SESS_USERNAME'] ?>">Edit Profile Information</a></div>
 	<div class="navlist"><a href="patientInfoView.php">View Medical Information</a></div>
 <?php else: ?>
