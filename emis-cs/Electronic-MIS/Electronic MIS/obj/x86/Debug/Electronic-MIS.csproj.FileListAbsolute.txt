@@ -1,7 +1,6 @@
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\bin\Debug\Electronic MIS.exe
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\bin\Debug\Electronic MIS.pdb
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.Appointments.resources
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.AppointmentTab.resources
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.LoginTab.resources
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Debug\Electronic_MIS.MainForm.resources

@@ -67,8 +67,8 @@ namespace Electronic_MIS
         {
             StringBuilder data = new StringBuilder();
             data.Append(server);
-            data.Append("authenticateREST.php");
-            data.Append("u=" + WebUtility.HtmlEncode(sessionManager.User));
+            data.Append("viewPatApptsREST.php");
+            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.User));
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
 
             string url = data.ToString();
