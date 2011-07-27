@@ -137,7 +137,8 @@ namespace Electronic_MIS
         {
             sessionManager = e.Session;
             activeServer = e.Server;
-            tabViewer.TabPages.RemoveByKey("Login");
+            if(sessionManager.IsLoggedIn)
+                tabViewer.TabPages.RemoveByKey("Login");
             updateNavTree();
         }
 
@@ -145,8 +146,8 @@ namespace Electronic_MIS
             if (sessionManager.IsLoggedIn)
             {
                 navigationTree.Nodes.RemoveByKey("LoginNode");
-                navigationTree.Nodes.Add("PatientInfoNode", "View Your Patient Info");
                 navigationTree.Nodes.Add("AppointmentNode", "View Your Appointments");
+                navigationTree.Nodes.Add("PatientInfoNode", "View Your Patient Info");
                 navigationTree.Nodes.Add("LogoutNode", "Logout");
                 navigationTree.SelectedNode = navigationTree.Nodes[0];
             }
@@ -185,6 +186,96 @@ namespace Electronic_MIS
         private void closeThisTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabViewer.TabPages.Remove(tabViewer.SelectedTab);
+        }
+
+        private void navigationTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Name == "LoginNode")
+            {
+                if (!tabViewer.TabPages.ContainsKey("Login"))
+                {
+
+                    tabViewer.TabPages.Add("Login", "Login");
+                    int index = tabViewer.TabPages.IndexOfKey("Login");
+
+                    LoginTab login = new LoginTab();
+                    login.LoginEvent += new LoginTab.LoginEventHandler(login_LoginEvent);
+
+                    tabViewer.TabPages[index].Controls.Add(login);
+                }
+                tabViewer.SelectTab("Login");
+            }
+            else if (e.Node.Name == "PatientInfoNode")
+            {
+                if (tabViewer.TabPages.ContainsKey("Welcome"))
+                {
+                    tabViewer.TabPages.RemoveByKey("Welcome");
+                }
+
+                if (!tabViewer.TabPages.ContainsKey("PatientInfo"))
+                {
+
+                    tabViewer.TabPages.Add("PatientInfo", "PatientInfo");
+                    int index = tabViewer.TabPages.IndexOfKey("PatientInfo");
+
+                    PatientInfoTab patientTab = new PatientInfoTab(sessionManager, activeServer);
+
+                    tabViewer.TabPages[index].Controls.Add(patientTab);
+                }
+                tabViewer.SelectTab("PatientInfo");
+            }
+            else if (e.Node.Name == "AppointmentNode")
+            {
+                if (tabViewer.TabPages.ContainsKey("Welcome"))
+                {
+                    tabViewer.TabPages.RemoveByKey("Welcome");
+                }
+                if (!tabViewer.TabPages.ContainsKey("Appointments"))
+                {
+
+                    tabViewer.TabPages.Add("Appointments", "Appointments");
+                    int index = tabViewer.TabPages.IndexOfKey("Appointments");
+
+                    AppointmentTab appTab = new AppointmentTab(sessionManager, activeServer);
+
+                    tabViewer.TabPages[index].Controls.Add(appTab);
+                }
+                tabViewer.SelectTab("Appointments");
+            }
+            else if (e.Node.Name == "WelcomeNode")
+            {
+                if (!tabViewer.TabPages.ContainsKey("Welcome"))
+                {
+
+                    tabViewer.TabPages.Add("Welcome", "Welcome");
+                    int index = tabViewer.TabPages.IndexOfKey("Welcome");
+
+                    WelcomeTab appTab = new WelcomeTab();
+
+                    tabViewer.TabPages[index].Controls.Add(appTab);
+                }
+                tabViewer.SelectTab("Welcome");
+            }
+            else if (e.Node.Name == "LogoutNode")
+            {
+
+                DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.OKCancel);
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    sessionManager = new SessionManager();
+                    sessionManager.User = "";
+                    sessionManager.Key = "";
+                    tabViewer.TabPages.Clear();
+
+                    tabViewer.TabPages.Add("Welcome", "Welcome");
+                    int index = tabViewer.TabPages.IndexOfKey("Welcome");
+
+                    WelcomeTab welcomeTab = new WelcomeTab();
+                    tabViewer.TabPages[index].Controls.Add(welcomeTab);
+
+                    updateNavTree();
+                }
+            }
         }
     }
 }

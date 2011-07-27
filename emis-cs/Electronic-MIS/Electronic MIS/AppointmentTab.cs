@@ -31,6 +31,8 @@ namespace Electronic_MIS
 
         private void AppointmentTab_Load(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             getAppointments();
 
             appointments.Sort();
@@ -42,6 +44,8 @@ namespace Electronic_MIS
             }
 
             calAppointments.UpdateBoldedDates();
+
+            Cursor.Current = Cursors.Arrow;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,15 +128,7 @@ namespace Electronic_MIS
                                             break;
 
                                         case "remind":
-                                            string x = xmlReader.ReadElementContentAsString();
-                                            if (x == "asdf")
-                                            {
-                                                newAppt.Remind = false;
-                                            }
-                                            else
-                                            {
-                                                newAppt.Remind = true;
-                                            }
+                                            newAppt.Remind = xmlReader.ReadElementContentAsBoolean();
                                             break;
 
                                         default:
@@ -157,7 +153,8 @@ namespace Electronic_MIS
                 }
                 else
                 {
-                    MessageBox.Show(exp.Message, "Yeah... We didn't plan for this.", MessageBoxButtons.OK);
+                    Debug.WriteLine(exp.Message);
+                    MessageBox.Show("The program encountered an error.\n  Please try again later.", "Yeah... We didn't plan for this.", MessageBoxButtons.OK);
                 }
             }
         }
