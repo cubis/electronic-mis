@@ -30,7 +30,7 @@
 
             <?php
             $url = "http://localhost/emis/emis-dev3/viewDocApptsREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
-
+            echo "<p>another test</p>";
 
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
