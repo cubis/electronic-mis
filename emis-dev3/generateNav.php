@@ -22,6 +22,7 @@
 	<div class="navlist"><a href="appointment.php?u=<?php echo $_SESSION['SESS_USERNAME'] ?>">Set Up Appointments</a></div>
 	<div class="navlist"><a href="editMemberView.php?u=<?php echo $_SESSION['SESS_USERNAME'] ?>">Edit Profile Information</a></div>
 	<div class="navlist"><a href="patientInfoView.php">View Medical Information</a></div>
+    <div class="navlist"><a href="appointmentView.php">View Appointments</a></div>
 <?php else: ?>
 	<div class="nav_title">Access Denied</div>
 	<div class="navlist"><a href="accessDeniedView.php">Home</a></div>
