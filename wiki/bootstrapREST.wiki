@@ -3,7 +3,17 @@
 
 =bootstrapREST.php=
 
-= Details =
+==Description==
+This file should be included anytime you want to log an action.
+
+==Functions==
+
+===Function===
+{{{
+logToDB($actionDescription, $userID, $sentName)
+}}}
+
+
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
