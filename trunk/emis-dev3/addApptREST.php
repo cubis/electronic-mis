@@ -78,8 +78,8 @@ function doService($db) {
                                         VALUES(:doc, :pat, :date, :time, :address, :status, :reason, :reminder);");
         //$tableType = '';
         $status = "scheduled";
-        $date = $year."-".$month."-".$day;
-        $time = $hour."00:00" ;
+        $date = $year . "-" . $month . "-" . $day;
+        $time = $hour . "00:00";
         $vals = array(
             ':doc' => $doctor,
             ':pat' => $pat,
