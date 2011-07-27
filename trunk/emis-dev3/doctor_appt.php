@@ -2,6 +2,13 @@
 session_start();
 ?>
 <html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Electronic Medical Information System - User Profile</title>
+    <link href="css/logged_in_styles.css" rel="stylesheet" type="text/css" />
+</head>
+
     <?php
     if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) > 0) {
         echo '<ul class="err">';
@@ -12,8 +19,35 @@ session_start();
         unset($_SESSION['ERRMSG_ARR']);
     }
     ?>
-    <body>
-        <h1>Doctor - Appointments</h1>
+<body>
+	<script type="text/javascript">
+		function submitform()
+		{
+			document.forms["loginForm"].submit();
+		}
+	</script>
+    <div class="container">
+        <div class="header">
+            <div class="logo"><img src="img/horizontal_logo.png" /></div>
+            <div class="welcome_text">
+                <h1>Welcome,
+                <?php
+                    echo $_SESSION['SESS_FIRST_NAME']; 
+                ?></h1>
+            </div>
+        </div>
+        <div class="contentwrap">
+            <div class="navigation">
+                <div class="nav_content">
+					<?php
+                    	include_once "generateNav.php"; // This will generate a navigation menu according to the user's role.
+					?>
+                </div>
+            </div>
+            <div class="page_display">
+                <div class="page_title">Doctor Appointment</div>
+                <div class="page_content">
+                <!-- PAGE CONTENT STARTS HERE -->
         <!--Create table to display patients that the doctor is not attached to -->
         <table>
             <tr>
@@ -68,7 +102,14 @@ $currRow = 0;
 ?>
 
         </table>
-    </body>
+<!-- END OF PAGE CONTENT -->
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+        	<p>Electronic Medical Information System. Copyright &copy; 2011 Team B. The University of Texas at San Antonio.</p>
+        </div>
+	</div>
 </html>
 
 
