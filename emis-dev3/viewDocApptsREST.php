@@ -126,10 +126,11 @@ function doService($level) {
 
         //$qry = "SELECT * FROM Users LEFT JOIN Patient ON Users.PK_member_id = Patient.FK_member_id
         //		LEFT JOIN Insurance ON Insurance.FK_PatientID = Patient.PK_PatientID";
-        if ($target != "all") {
-            $qry .= " WHERE UserName = :target";
-        }
+        //if ($target != "all") {
+        //    $qry .= " WHERE UserName = :target";
+        //}
         $patientInfoPrep = $db->prepare($qry);
+        $patientInfoSuccess = $patientInfoPrep->execute();
         /*//$patientInfoSuccess = $patientInfoPrep->execute(array(":target" => $target));
         if (!$patientInfoSuccess) {
             $errMsgArr[] = "DATABASE ERROR TWO";
