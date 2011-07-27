@@ -20,7 +20,7 @@ function clean($str) {
 }
 
 //Sanitize the POST values
-$type = 2;
+//$type = 2;
 //$appid = $_GET['ID'];
 ///////test to make sure get_id works -->might need to find a way to get to work
 $id = $_GET['ID'];
@@ -45,7 +45,6 @@ $url = "http://localhost/emis/emis-dev3/visitREST.php";
 $fields = array(
     'u' => urlencode($_SESSION['SESS_USERNAME']),
     'key' => urlencode($_SESSION['SESS_AUTH_KEY']),
-    'type' => urlencode($type),
     'id' => urlencode($id),
     'bp' => urlencode($bp),
     'weight' => urlencode($weight),
