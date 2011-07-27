@@ -5,6 +5,7 @@
 
 This page describes the inputs and outputs of each service as well as what functions they perform.
 
-[http://code.google.com/p/electronic-mis/wiki/authenticateREST authenticateREST]
+[http://code.google.com/p/electronic-mis/wiki/authenticateREST authenticateREST]<br>
+[http://code.google.com/p/electronic-mis/wiki/configREST configREST]
 
 [http://code.google.com/p/electronic-mis/wiki/Table_Of_Contents Table of Contents]
