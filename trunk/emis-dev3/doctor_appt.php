@@ -60,6 +60,7 @@ session_start();
                     $ID = urlencode($wsResponse[$wsIndices['APPTID'][$currRow]]['value']);
                     echo "<td><a href='visit.php?ID=$ID'>Visit</a></td>";
                     echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['PATID'], "</td>";
+                    echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['PATID'], "</td>";
                     //echo "<td>", $wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'], "</td>";
                     echo "<td>", $wsResponse[$wsIndices['REASON'][$currRow]]['value'], "</td>";
                     echo "<td>", $wsResponse[$wsIndices['DATE'][$currRow]]['value'], "</td>";
