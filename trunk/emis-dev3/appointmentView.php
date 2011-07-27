@@ -1,9 +1,10 @@
 <?php
+// require_once('config.php');
 require_once('bootstrap.php');
 
 $userName = $_SESSION['SESS_USERNAME'];
 
-$request = "http://localhost/emis/emis-dev3/visitREST.php?";
+$request = "http://localhost/emis/emis-dev3/viewPatApptsREST.php?";
 $request .= "u=" . urlencode($userName);
 $request .= "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
 
@@ -17,24 +18,30 @@ $RESToutput = curl_exec($ch); //send URL Request to RESTServer... returns string
 curl_close($ch); //string from server has been returned <XML> closethe channel
 
 if( $RESToutput == ''){
-	die("CONNECTION ERROR");
+  die("CONNECTION ERROR");
 }
 
 //parse return string
 $parser = xml_parser_create();	
 xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
+xml_parser_free($p);
 
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 if ($errNum != 0) {
-	die("FUCK!" . $wsResponse[$wsIndices['ERROR'][0]]['value']);
+  echo "fuck";
+  die("FUCK!" . $wsResponse[$wsIndices['ERROR'][0]]['value']);
 }
-
-$aid = $wsResponse[$wsIndices['appointment'][0]]['value'];
-$adate = $wsResponse[$wsIndices['date'][0]]['value'];
-$atime = $wsResponse[$wsIndices['time'][0]]['value'];
-$adoctor = $wsResponse[$wsIndices['doctor'][0]]['value'];
-$areason = $wsResponse[$wsIndices['reason'][0]]['value'];
-$aremind = $wsResponse[$wsIndices['remind'][0]]['value'];
+$numRows = $wsResponse[$wsIndices['APPTCOUNT'][0]]['value'];
+$appointments = array();
+for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointments
+  $aid = $wsResponse[$wsIndices['APPTID'][$x]]['value'];
+  $adoctor = $wsResponse[$wsIndices['DOCTOR'][$x]]['value'];
+  $atime = $wsResponse[$wsIndices['REASON'][$x]]['value'];
+  $adate = $wsResponse[$wsIndices['DATE'][$x]]['value'];
+  $areason = $wsResponse[$wsIndices['TIME'][$x]]['value'];
+  $aremind = $wsResponse[$wsIndices['REMIND'][$x]]['value'];
+  $appointments[$x] = array($aid, $adate, $atime, $adoctor, $areason, $aremind);
+}
 
 ?>
 
@@ -48,7 +55,7 @@ $aremind = $wsResponse[$wsIndices['remind'][0]]['value'];
 
     <body>
       <?php
-	
+ 	
       ?>
       <center><h1 style="color: white; margin-top: 50px;">Appointment View</h1></center>
         <div style="width: 400px; margin-left: auto; margin-right: auto;">
@@ -75,24 +82,26 @@ $aremind = $wsResponse[$wsIndices['remind'][0]]['value'];
                         }
                         ?>
 			<div class="dashed_line"></div>
-			<table  align="center" >
-			  <tr><td><label><strong></strong></label></td></tr>
-			  <tr>
-			    <td><strong>Date:</strong></td>
-			    <td>[DATE]</td>
-			  </tr>
-			  <tr>
-			    <td><strong>Time:</strong></td>
-			    <td>[TIME]</td>
-			  </tr>
-			  <tr>
-			    <td><strong>Doctor:</strong></td>
-			    <td>[DOCTOR]</td>
-			  </tr>
-			  <tr>
-			    <td><strong>Reason:</strong></td>
-			    <td>[REASON]</td>
-			  </tr>
+			<table>
+			<tr><td><label><strong></strong></label></td></tr>
+			<tr>
+			  <td><strong>Date:</strong></td>
+			  <td><strong>Time:</strong></td>
+			  <td><strong>Doctor:</strong></td>
+			  <td><strong>Reason:</strong></td>
+			</tr>
+			<?php
+			  foreach($appointments as &$app) {
+			    echo "<tr>";
+			    $date = DateTime::createFromFormat('Y-m-d', $app[1]);
+			    echo "<td>" . $date->format('D, M dS, Y') . "</td>";
+			    $date = DateTime::createFromFormat('H:i:s', $app[4]);
+			    echo "<td>" . $date->format('H:ia') . "</td>";
+			    echo "<td>$app[3]</td>";
+			    echo "<td>$app[2]</td>";
+			    echo "</tr>";
+			    }
+			?>
 			</table>
                 </div>
             </div>
