@@ -129,7 +129,15 @@ namespace Electronic_MIS
                                             break;
 
                                         case "REMIND":
-                                            newAppt.Remind = xmlReader.ReadElementContentAsBoolean();
+                                            int remind = int.Parse(xmlReader.ReadElementContentAsString());
+                                            if (remind == 0)
+                                            {
+                                                newAppt.Remind = false;
+                                            }
+                                            else
+                                            {
+                                                newAppt.Remind = true;
+                                            }
                                             break;
 
                                         default:
