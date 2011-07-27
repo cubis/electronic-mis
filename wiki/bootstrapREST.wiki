@@ -10,6 +10,28 @@ This file should be included anytime you want to log an action.
 
 *Function*
 {{{
+if (!isset($_SESSION['SESS_MEMBER_ID']))   // start session if it hasn't been
+    session_start();
+}}}
+*Description*<br>
+Pretty Obvious
+
+<br>
+*Function*
+{{{
+try {
+	$db = new PDO("mysql:dbname=".DB_DATABASE.";
+        host=".DB_HOST,DB_USER,DB_PASSWORD);
+} catch (PDOException $e) {
+        die("Database Connection Failed: " . $e->getMessage());
+}
+}}}
+*Description*<br>
+Tries connecting to the database and returns error if fails.
+
+<br>
+*Function*
+{{{
 logToDB($actionDescription, $userID, $sentName)
 }}}
 *Description*<br>
