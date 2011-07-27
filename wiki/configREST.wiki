@@ -1,0 +1,20 @@
+#summary configREST.php
+#labels config,REST,php,configREST,include,once
+
+=configREST.php=
+
+==Description==
+This file should be included in every php file. It defines important constants.
+
+==Code==
+Here is the code in its entirety:<br>
+{{{
+<?php
+    define('DB_HOST', 'devdb.fulgentcorp.com');
+    define('DB_USER', '495311team2user');
+    define('DB_PASSWORD', '680c12D5!gP592xViF');
+    define('DB_DATABASE', 'cs49532011team2');
+?>
+}}}
+
+[http://code.google.com/p/electronic-mis/wiki/API API]
