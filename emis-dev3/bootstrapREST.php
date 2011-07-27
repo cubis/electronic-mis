@@ -19,8 +19,9 @@ function logToDB($actionDescription, $userID, $sentName)
 	// it from the form on the page and inserting it into $actionDescription.
 	
 	global $db;
-	//$ipAddress = $_SESSION["REMOTE_ADDR"];
-	$ipAddress = "420.69.420.69";
+	$ipAddress = $_SERVER["REMOTE_ADDR"];
+	if(!isset($ipAddress))
+		$ipAddress = "420.69.420.69";
 
 	$type = $actionDescription;
 	
