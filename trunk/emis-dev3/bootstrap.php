@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_SESSION['SESS_MEMBER_ID']))   // start session if it hasn't been
+
     session_start();
 
 

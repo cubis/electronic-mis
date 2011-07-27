@@ -31,20 +31,21 @@
 		die("CONNECTION ERROR");
 	}	
 
-	
-	//print "OUTPUT: $output\n";
-	
-
-
 	//parse return string
 	$parser = xml_parser_create();	
 	xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 	
-	
+	//print( "OUTPUT|$output|\n");
+	//print "<pre>";
+	//print_r($wsResponse);
+	//print_r($wsIndices);
+	//print "</pre>";
+		
 	//create trusted key from the given auth key and trusted string
 	$trustedKey = "xolJXj25jlk56LJkk5677LS";
 	$key = md5($wsResponse[$wsIndices['KEY'][0]]['value'].$trustedKey);
-
+	
+	//print("KEY: " . $wsResponse[$wsIndices['KEY'][0]]['value']);
 	$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 	//print("OUTPUT = ".$output);
 	
@@ -53,11 +54,12 @@
 		//Login Successful
 		//if member profile locked send to proper screen
 		
+		//die("NO ERRORS");
 		
-		if($wsResponse[$wsIndices['KEY'][0]]['value'] == "MEMBER PROFILE LOCKED"){
+		if($wsResponse[$wsIndices['KEY'][0]]['value'] == "MEMBER PROFILE LOCKED") {
 			header("location: blockUserView.php");
-		} else {
-		
+		} 
+		else {
 			///set up session variables
 			//SESS_PERSONAL_ID is like doctor id nurse id .....depending on type
 			session_regenerate_id();		
@@ -69,10 +71,9 @@
 			$_SESSION['SESS_NEED_APPROVAL'] = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
 			$_SESSION['SESS_PERSONAL_ID'] = $wsResponse[$wsIndices['PERSONALID'][0]]['value'];
 			$_SESSION['SESS_AUTH_KEY'] = $key;
-			session_write_close();
+			//session_write_close();
 			//print($output);
 			header("location: memberProfileView.php");
-		
 		}
 		exit();
 		//Login failed
