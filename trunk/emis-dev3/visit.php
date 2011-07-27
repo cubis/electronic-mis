@@ -1,4 +1,17 @@
 <?php
+session_start();
+?>
+<?php
+if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) > 0) {
+    echo '<ul class="err">';
+    foreach ($_SESSION['ERRMSG_ARR'] as $msg) {
+        echo '<li>', $msg, '</li>';
+    }
+    echo '</ul>';
+    unset($_SESSION['ERRMSG_ARR']);
+}
+?>
+<?php
 require_once('auth.php');
 //require_once('configREST.php');     //sql connection information
 require_once('bootstrap.php');  //link information
@@ -95,12 +108,12 @@ require_once('bootstrap.php');  //link information
                                 <th>Referal Docotor</th>
                                 <!--<select name ="rd" id="rd">
                                     <option value =""></option>-->
-                                    <?php
-                                    //$appt = $docListPrep->execute();
-                                    // while ($row1 = $appt->fetch(PDO::FETCH_ASSOC)){
-                                    //      echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
-                                     //}
-                                    ?>
+                                <?php
+                                //$appt = $docListPrep->execute();
+                                // while ($row1 = $appt->fetch(PDO::FETCH_ASSOC)){
+                                //      echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
+                                //}
+                                ?>
                                 </select>
 
                                 <td><input name="rd" type="text" class="textfield" id="rd" /></td>
