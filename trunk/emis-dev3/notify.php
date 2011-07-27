@@ -11,11 +11,39 @@ plan:
             -required info {apointmentDate, Time, Doctor}
         - send notification e-mail, on success set notify=false
             -succesful notifaction makes action log entry
+            
+            
+            
+            
+            
+            
+            
+SELECT Appointment.PK_AppID, Appointment.Date, Appointment.Time, Appointment.Reminder, Users.Email, Users.FirstName, Users.LastName
+FROM Appointment, Patient, Users
+WHERE
+    Appointment.FK_PatientID = Patient.PK_PatientID
+AND Patient.FK_member_id = Users.PK_member_id
+AND Appointment.Date+0 <= CURDATE() + 1
+AND Appointment.Reminder = 1;
+
+
+
 */
 
     echo "<p>starting</p>";
     echo "<p>method = ".$_GET['mail']."</p>";
-   
+    
+    $qry = "
+SELECT Appointment.PK_AppID, Appointment.Date, Appointment.Time, Appointment.Reminder, Users.Email, Users.FirstName, Users.LastName
+FROM Appointment, Patient, Users
+WHERE Appointment.FK_PatientID = Patient.PK_PatientID
+AND Patient.FK_member_id = Users.PK_member_id
+AND Appointment.Date+0 <= CURDATE() + 1
+AND Appointment.Reminder = 1";
+    //test
+        
+     
+
     switch( $_GET['method']){
         case "talk":
             print "<p> Hello! </p>\n";
