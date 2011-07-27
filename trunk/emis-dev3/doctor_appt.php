@@ -3,7 +3,6 @@ session_start();
 ?>
 <html>
     <?php
-    
     if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) > 0) {
         echo '<ul class="err">';
         foreach ($_SESSION['ERRMSG_ARR'] as $msg) {
@@ -11,9 +10,7 @@ session_start();
         }
         echo '</ul>';
         unset($_SESSION['ERRMSG_ARR']);
-      
-    }     
-
+    }
     ?>
     <body>
         <h1>Doctor - Appointments</h1>
@@ -30,50 +27,47 @@ session_start();
 
             </tr>
 
-            <?php
-            $url = "http://localhost/emis/emis-dev3/viewDocApptsREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
+<?php
+$url = "http://localhost/emis/emis-dev3/viewDocApptsREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
 
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 8);
-            curl_setopt($ch, CURLOPT_HEADER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $output = curl_exec($ch);
-            curl_close($ch);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+curl_setopt($ch, CURLOPT_HEADER, false);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$output = curl_exec($ch);
+curl_close($ch);
 
-            $parser = xml_parser_create();
-            //modify
-            xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
-            echo $output;
-            $numRows = $wsResponse[$wsIndices['APPTCOUNT'][0]]['value'];
-            echo $numrows;
-            $currRow = 0;
-            echo $currRow;
-            while ($currRow < $numRows) {
-                //$doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
-                //$type = $wsResponse[$wsIndices['TYPE'][$currRow]]['value'];
-
-                //if ($_SESSION['SESS_PERSONAL_ID'] == $doc && $type == 1) {
-                    echo "<tr>";
-                    $ID = urlencode($wsResponse[$wsIndices['APPTID'][$currRow]]['value']);
-                    echo "<td><a href='visit.php?ID=$ID'>Visit</a></td>";
-                    echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['value'], "</td>";
-                    echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['value'], "</td>";
-                    //echo "<td>", $wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'], "</td>";
-                    echo "<td>", $wsResponse[$wsIndices['REASON'][$currRow]]['value'], "</td>";
-                    echo "<td>", $wsResponse[$wsIndices['DATE'][$currRow]]['value'], "</td>";
-                    echo "<td>", $wsResponse[$wsIndices['TIME'][$currRow]]['value'], "</td>";
-                    echo "<td>", $wsResponse[$wsIndices['STATUS'][$currRow]]['value'], "</td>";
-                    echo "</tr>";
-                //}
-                $currRow++;
-            }
-            $currRow = 0;
-            
-            ?>
+$parser = xml_parser_create();
+//modify
+xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+//echo $output;
+$numRows = $wsResponse[$wsIndices['APPTCOUNT'][0]]['value'];
+//echo $numrows;
+$currRow = 0;
+echo $currRow;
+while ($currRow < $numRows) {
+    //$doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
+    //$type = $wsResponse[$wsIndices['TYPE'][$currRow]]['value'];
+    //if ($_SESSION['SESS_PERSONAL_ID'] == $doc && $type == 1) {
+    echo "<tr>";
+    $ID = urlencode($wsResponse[$wsIndices['APPTID'][$currRow]]['value']);
+    echo "<td><a href='visit.php?ID=$ID'>Visit</a></td>";
+    echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['value'], "</td>";
+    echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['value'], "</td>";
+    //echo "<td>", $wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'], "</td>";
+    echo "<td>", $wsResponse[$wsIndices['REASON'][$currRow]]['value'], "</td>";
+    echo "<td>", $wsResponse[$wsIndices['DATE'][$currRow]]['value'], "</td>";
+    echo "<td>", $wsResponse[$wsIndices['TIME'][$currRow]]['value'], "</td>";
+    echo "<td>", $wsResponse[$wsIndices['STATUS'][$currRow]]['value'], "</td>";
+    echo "</tr>";
+    //}
+    $currRow++;
+}
+$currRow = 0;
+?>
 
         </table>
-        <p>test2</p>
     </body>
 </html>
 
