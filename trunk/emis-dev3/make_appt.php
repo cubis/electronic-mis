@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('auth.php');
-//require_once('configREST.php');
+require_once('configREST.php');
 require_once('bootstrapREST.php');
 
 
@@ -107,27 +107,25 @@ $parser = xml_parser_create();
 
 xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 
-
-
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
-if ($errNum > 0) {
-    $errflag = true;
-    $ct = 0;
-    while ($ct < $errNum) {
-        $errmsg_arr[] = $wsResponse[$wsIndices['ERROR'][$ct]]['value'];
-        $ct += 1;
-    }
-}
+// if ($errNum > 0) {
+//     $errflag = true;
+//     $ct = 0;
+//     while ($ct < $errNum) {
+//         $errmsg_arr[] = $wsResponse[$wsIndices['ERROR'][$ct]]['value'];
+//         $ct += 1;
+//     }
+// }
 
-//If there are input validations, redirect back to the registration form
-if ($errflag) {
-    $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-    session_write_close();
-    header("location: visit.php");
-    exit();
-} else {
+// //If there are input validations, redirect back to the registration form
+// if ($errflag) {
+//     $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+//     session_write_close();
+//     header("location: visit.php");
+//     exit();
+// } else {
     header("location: memberProfileView.php");
-    exit();
-}
+//     exit();
+// }
 ?>
