@@ -43,6 +43,7 @@
             $parser = xml_parser_create();
             //modify
             xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
+            echo $output;
             $numRows = $wsResponse[$wsIndices['APPTCOUNT'][0]]['value'];
             echo $numrows;
             $currRow = 0;
