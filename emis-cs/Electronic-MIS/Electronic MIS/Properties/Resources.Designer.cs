@@ -69,20 +69,21 @@ namespace Electronic_MIS.Properties {
         ///		&lt;time&gt;09:45&lt;/time&gt;
         ///		&lt;doctor&gt;Gonzalez&lt;/doctor&gt;
         ///		&lt;reason&gt;Standard Checkup&lt;/reason&gt;
+        ///		&lt;remind&gt;1&lt;/remind&gt;
         ///	&lt;/appointment&gt;
         ///	&lt;appointment&gt;
         ///		&lt;apptID&gt;63563&lt;/apptID&gt;
         ///		&lt;date&gt;08/28/2011&lt;/date&gt;
         ///		&lt;time&gt;14:00&lt;/time&gt;
         ///		&lt;doctor&gt;Dre&lt;/doctor&gt;
-        ///		&lt;reason&gt;&lt;/reason&gt;
+        ///		&lt;reason&gt;Drug Test&lt;/reason&gt;
+        ///		&lt;remind&gt;0&lt;/remind&gt;
         ///	&lt;/appointment&gt;
-        ///	&lt;appointment&gt;
-        ///		&lt;apptID&gt;9383&lt;/apptID&gt;
-        ///		&lt;date&gt;09/27/2011&lt;/date&gt;
-        ///		&lt;time&gt;10:00&lt;/time&gt;
-        ///		&lt;doctor&gt;Jekyl&lt;/doctor&gt;
-        ///		&lt;reason&gt;Mental Health analysis&lt;/r [rest of string was truncated]&quot;;.
+        ///		&lt;appointment&gt;
+        ///		&lt;apptID&gt;83498392&lt;/apptID&gt;
+        ///		&lt;date&gt;07/22/2011&lt;/date&gt;
+        ///		&lt;time&gt;14:00&lt;/time&gt;
+        ///		&lt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AppointmentXMLSample {
             get {
