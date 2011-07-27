@@ -73,6 +73,8 @@ function doService($db) {
     $reminder = $_POST['reminder'];
     if ($errNum == 0) {
         //set up and insert values into the user table
+        
+        //getting the patient id from the user table
 
         $addApptPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason, Reminder) 
                                         VALUES(:doc, :pat, :date, :time, :address, :status, :reason, :reminder);");
