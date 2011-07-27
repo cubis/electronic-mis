@@ -59,7 +59,7 @@ $errmsg_arr = array();
 /* header("location: appointment.php"); */
 
 
-$url = "http://localhost/emis/emis-dev3/visitREST.php";
+$url = "http://localhost/emis/emis-dev3/addApptREST.php";
 $doctor = $_POST['doctor'];
 $month = $_POST['month'];
 $day = $_POST['day'];
