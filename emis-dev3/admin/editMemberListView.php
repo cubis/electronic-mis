@@ -9,24 +9,38 @@ require_once('../bootstrapREST.php');
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Administrator Profile</title>
-        <link href="../css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="../css/logged_in_styles.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <center><h1 style="color: white; margin-top: 50px;">Admin Editing</h1></center>
-            <div style="width: 630px; margin-left: auto; margin-right: auto;">
-                <center>
-                    <img src="../img/logo.png" alt="Electronic Medical Information System">
-                </center>
-                <div>
-                    <script type="text/javascript">
-                        function submitform()
-                        {
-                        document.forms["loginForm"].submit();
-                        }
-                    </script>
-        </center>
-        <br>
-        <table border="1">
+	<script type="text/javascript">
+		function submitform()
+		{
+			document.forms["editMemberForm"].submit();
+		}
+	</script>
+    <div class="container">
+        <div class="header">
+            <div class="logo"><img src="../img/horizontal_logo.png" /></div>
+            <div class="welcome_text">
+                <h1>Welcome,
+                <?php
+                    echo $_SESSION['SESS_FIRST_NAME']; 
+                ?></h1>
+            </div>
+        </div>
+        <div class="contentwrap">
+            <div class="navigation">
+                <div class="nav_content">
+					<?php
+                    	include_once "../generateNav.php"; // This will generate a navigation menu according to the user's role.
+					?>
+                </div>
+            </div>
+            <div class="page_display">
+                <div class="page_title">Edit Member Information</div>
+                <div class="page_content">
+                <!-- PAGE CONTENT STARTS HERE -->
+        <table>
             <tr>
               <td>First Name</td>
               <td>Last Name</td>
@@ -92,6 +106,17 @@ while ($currRow < $numrows)
 
 ?>
         </table>
+        <br /><br />
         <a class="black_button" style="margin-right: 295px;"href='../memberProfileView.php'><span>Back</span></a>
-     </body>
+        <br />
+        <br />
+<!-- END OF PAGE CONTENT -->
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+        	<p>Electronic Medical Information System. Copyright &copy; 2011 Team B. The University of Texas at San Antonio.</p>
+        </div>
+	</div>
+</body>
 </html>
