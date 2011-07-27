@@ -1,4 +1,10 @@
 <?php
+session_start();
+?>
+
+
+
+<?php
 
 require_once('auth.php');
 require_once('bootstrap.php');
