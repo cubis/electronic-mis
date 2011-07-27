@@ -75,16 +75,19 @@ function doService($db) {
         //set up and insert values into the user table
         
         //getting the patient id from the user table
-
+        $getPID = $db->prepare("Select PK_PatientID FROM Patient WHERE FK_member_id = (Select PK_member_id From Users where UserName = '".$_GET['u']."');");
+        $succes = $getPID->execute();
+        $member = $getPID->fetch(PDO::FETCH_ASSOC);
+        
         $addApptPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason, Reminder) 
                                         VALUES(:doc, :pat, :date, :time, :address, :status, :reason, :reminder);");
         //$tableType = '';
         $status = "scheduled";
         $date = $year . "-" . $month . "-" . $day;
-        $time = $hour . "00:00";
+        $time = $hour . "";
         $vals = array(
             ':doc' => $doctor,
-            ':pat' => $pat,
+            //':pat' => $pat,
             ':date' => $date,
             ':time' => $time,
             ':address' => $address,
