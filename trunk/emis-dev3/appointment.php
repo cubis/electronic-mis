@@ -23,14 +23,40 @@ require_once('bootstrapREST.php');
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Make Appointment</title>
-    </head>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Electronic Medical Information System</title>
+    <link href="css/logged_in_styles.css" rel="stylesheet" type="text/css" />
+</head>
     <body>
-
-
-        <h1>Make Appointment</h1>
+	<script type="text/javascript">
+		function submitform()
+		{
+			document.forms["loginForm"].submit();
+		}
+	</script>
+    <div class="container">
+        <div class="header">
+            <div class="logo"><img src="img/horizontal_logo.png" /></div>
+            <div class="welcome_text">
+                <h1>Welcome,
+                <?php
+                    echo $_SESSION['SESS_FIRST_NAME']; 
+                ?></h1>
+            </div>
+        </div>
+        <div class="contentwrap">
+            <div class="navigation">
+                <div class="nav_content">
+					<?php
+                    	include_once "generateNav.php"; // This will generate a navigation menu according to the user's role.
+					?>
+                </div>
+            </div>
+            <div class="page_display">
+                <div class="page_title">Make Appointment</div>
+                <div class="page_content">
+                <!-- PAGE CONTENT STARTS HERE -->
 
         <form action="make_appt.php" method="post">
 
@@ -151,5 +177,13 @@ require_once('bootstrapREST.php');
 
 
 ?>
-    </body>
+ <!-- END OF PAGE CONTENT -->
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+        	<p>Electronic Medical Information System. Copyright &copy; 2011 Team B. The University of Texas at San Antonio.</p>
+        </div>
+	</div>
+</body>
 </html>
