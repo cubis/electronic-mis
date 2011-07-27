@@ -129,7 +129,7 @@ function doService($level) {
             $qry .= " WHERE UserName = :target";
         }
         $patientInfoPrep = $db->prepare($qry);
-        $patientInfoSuccess = $patientInfoPrep->execute(array(":target" => $target));
+        //$patientInfoSuccess = $patientInfoPrep->execute(array(":target" => $target));
         if (!$patientInfoSuccess) {
             $errMsgArr[] = "DATABASE ERROR TWO";
             $errNum++;
