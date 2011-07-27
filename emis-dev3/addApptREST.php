@@ -75,7 +75,7 @@ function doService($db) {
         //set up and insert values into the user table
         
         //getting the patient id from the user table
-        $getPID = $db->prepare("Select * FROM Patient WHERE FK_member_id = (Select PK_member_id From Users where UserName = '".$_GET['u']."');");
+        $getPID = $db->prepare("Select * FROM Patient WHERE FK_member_id = (Select PK_member_id From Users where UserName = '".$_POST['u']."');");
         $succes = $getPID->execute();
         $member = $getPID->fetch(PDO::FETCH_ASSOC);
         $pid = $member['PK_PatientID'];
