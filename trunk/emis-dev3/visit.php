@@ -1,9 +1,9 @@
 <?php
 require_once('auth.php');
-require_once('configREST.php');     //sql connection information
+//require_once('configREST.php');     //sql connection information
 require_once('bootstrap.php');  //link information
-$appid = $_GET['ID'];
-$docListPrep = $db->prepare("SELECT * FROM Doctor");
+//$appid = $_GET['ID'];
+//$docListPrep = $db->prepare("SELECT * FROM Doctor");
 //$doclist = "SELECT * FROM Doctor;";
 //$result = mysql_query($doclist) or die(mysql_error());
 ?>
@@ -96,9 +96,9 @@ $docListPrep = $db->prepare("SELECT * FROM Doctor");
                                 <select name ="rd" id="rd">
                                     <option value =""></option>
                                     <?php
-                                    $appt = $docListPrep->execute();
-                                     while ($row1 = $appt->fetch(PDO::FETCH_ASSOC)){
-                                          echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
+                                    //$appt = $docListPrep->execute();
+                                    // while ($row1 = $appt->fetch(PDO::FETCH_ASSOC)){
+                                    //      echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
                                      }
                                     ?>
                                 </select>
