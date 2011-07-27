@@ -68,13 +68,13 @@ $hour = $_POST['hour'];
 $reason = $_POST['reason'];
 $reminder = $_POST['reminder'];
 
-echo 'Doctor: ' . $doctor . '<br />';
-echo 'Month: ' . $month . '<br />';
-echo 'Day: ' . $day . '<br />';
-echo 'Year: ' . $year . '<br />';
-echo 'Hour: ' . $hour . '<br />';
-echo 'Reason: ' . $reason . '<br />';
-echo 'Reminder: ' . $reminder . '<br />';
+// echo 'Doctor: ' . $doctor . '<br />';
+// echo 'Month: ' . $month . '<br />';
+// echo 'Day: ' . $day . '<br />';
+// echo 'Year: ' . $year . '<br />';
+// echo 'Hour: ' . $hour . '<br />';
+// echo 'Reason: ' . $reason . '<br />';
+// echo 'Reminder: ' . $reminder . '<br />';
 
 $fields = array(
     'u' => urlencode($_SESSION['SESS_USERNAME']),
@@ -109,23 +109,23 @@ xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
-// if ($errNum > 0) {
-//     $errflag = true;
-//     $ct = 0;
-//     while ($ct < $errNum) {
-//         $errmsg_arr[] = $wsResponse[$wsIndices['ERROR'][$ct]]['value'];
-//         $ct += 1;
-//     }
-// }
+if ($errNum > 0) {
+    $errflag = true;
+    $ct = 0;
+    while ($ct < $errNum) {
+        $errmsg_arr[] = $wsResponse[$wsIndices['ERROR'][$ct]]['value'];
+        $ct += 1;
+    }
+}
 
-// //If there are input validations, redirect back to the registration form
-// if ($errflag) {
-//     $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-//     session_write_close();
-//     header("location: visit.php");
-//     exit();
-// } else {
+//If there are input validations, redirect back to the registration form
+if ($errflag) {
+    $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+    session_write_close();
+    header("location: visit.php");
+    exit();
+} else {
     header("location: memberProfileView.php");
-//     exit();
-// }
+    exit();
+}
 ?>
