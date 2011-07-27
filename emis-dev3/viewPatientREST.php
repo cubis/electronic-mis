@@ -32,15 +32,15 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
 			$outputString .= "<CompanyName>" . $patientInfo['Company_Name'] . "</CompanyName>\n";
 			$outputString .= "<PlanType>" . $patientInfo['Plan_Type'] . "</PlanType>\n";
 			$outputString .= "<PlanNum>" . $patientInfo['Plan_Num'] . "</PlanNum>\n";
-			$outputString .= "<CoveragePercent>" . $patientInfo['CoveragePercent'] . "</CoveragePercent>\n";
+			$outputString .= "<CoveragePercent>" . $patientInfo['Coverage_Percent'] . "</CoveragePercent>\n";
 			$outputString .= "<CoPay>" . $patientInfo['Co-Pay'] . "</CoPay>\n";
-			$outputString .= "<CoverageStart>" . $patientInfo['CoverageStart'] . "</CoverageStart>\n";
-			$outputString .= "<CoverageEnd>" . $patientInfo['CoverageEnd'] . "</CoverageEnd>\n";
+			$outputString .= "<CoverageStart>" . $patientInfo['Coverage-Start'] . "</CoverageStart>\n";
+			$outputString .= "<CoverageEnd>" . $patientInfo['Coverage-End'] . "</CoverageEnd>\n";
 			$outputString .= "<FKDoctorID>" . $patientInfo['FK_DoctorID'] . "</FKDoctorID>\n";
 			$outputString .= "<Type>" . $patientInfo['Type'] . "</Type>\n";
 			$outputString .= "<PatientID>" . $patientInfo['PK_PatientID'] . "</PatientID>\n";
 			$outputString .= "</Patient>";
-			logToDB($user." access patient info for " . $target, $memberInfo['PK_member_id'], $user); 
+			logToDB($user." access patient info for " . $target, $patientInfo['PK_member_id'], $user); 
 		}			
 	} 
 	else {
@@ -117,7 +117,7 @@ function doService($level) {
 				$errMsgArr[] = "DATABASE ERROR TWO";
 				$errNum++;
 			}
-			if(errNum == 0){
+			if($errNum == 0){
 				$retVal = outputXML($errNum, $errMsgArr, $patientInfoPrep);
 				//print($patientInfoPrep->rowCount());
 			} else {

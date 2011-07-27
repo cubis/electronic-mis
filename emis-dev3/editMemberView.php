@@ -25,6 +25,13 @@ $parser = xml_parser_create();
 xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
 
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
+
+/*print( "OUTPUT|$RESToutput|\n");
+print "<pre>";
+print_r($wsResponse);
+print_r($wsIndices);
+print "</pre>";*/
+
 if ($errNum != 0) {
 	die("FUCK!" . $wsResponse[$wsIndices['ERROR'][0]]['value']);
 }
@@ -67,7 +74,7 @@ $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
 	
 	<table>
 	<tr>
-		<td><h3><?php echo "$user Personal Infomation"; ?></h3></td>
+		<td><h3>Personal Infomation</h3></td>
 	</tr>
 	<tr>
 		<td>First Name:</td>
@@ -92,7 +99,7 @@ $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
 		<td><input type="text" name="SSN" value="<?php echo "$SSN" ?>" /></td>
 	</tr>
 	<tr>
-		<td><h3><div class="dashed_line"></div><?php echo "$user Contact Information";?></h3></tr><tr>
+		<td><h3><div class="dashed_line"></div>Contact Information</h3></tr><tr>
 	</tr>
 	<tr>
 		<td>Email:</td>
@@ -103,7 +110,7 @@ $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
 		<td><input type="text" name="PhoneNumber" value="<?php echo "$PhoneNumber" ?>" /></td>
 	</tr>
 	<tr>
-		<td><h3><div class="dashed_line"></div><?php echo "$user Insurance Information";?></h3></td>
+		<td><h3><div class="dashed_line"></div>Insurance Information</h3></td>
 	</tr>
 	<tr>
 		<td>Insurance Group:</td>
@@ -115,7 +122,7 @@ $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
 	</tr>
 	<tr>
 		<td>Plan Number:</td>
-		<td><input type="text" name="Plan_Num" value="<?php echo "$PlanNumber" ?>" /></td>
+		<td><input type="text" name="Plan_Num" value="<?php echo "$PlanNum" ?>" /></td>
 	</tr>
 	<tr>
 		<td>Co-Pay:</td>
