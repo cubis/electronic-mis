@@ -93,8 +93,8 @@ require_once('bootstrap.php');  //link information
 
                             <tr>
                                 <th>Referal Docotor</th>
-                                <select name ="rd" id="rd">
-                                    <option value =""></option>
+                                <!--<select name ="rd" id="rd">
+                                    <option value =""></option>-->
                                     <?php
                                     //$appt = $docListPrep->execute();
                                     // while ($row1 = $appt->fetch(PDO::FETCH_ASSOC)){
