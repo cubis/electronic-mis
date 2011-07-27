@@ -71,115 +71,17 @@ function doService($db) {
     $hour = $_POST['hour'];
     $reason = $_POST['reason'];
     $reminder = $_POST['reminder'];
-    /*
-      $fname = $_POST['fname'];
-      $lname = $_POST['lname'];
-      $bday = $_POST['bday'];
-      $email = $_POST['email'];
-      $ssn = $_POST['ssn'];
-      $user = $_POST['u'];
-      $password = $_POST['p'];
-      $cpassword = $_POST['cp'];
-      $type = $_POST['type'];
-     */
-    //Input Validations
-    /*
-      if (!isset($_POST['fname']) || $_POST['fname'] == '') {
-      $errMsgArr[] = 'First name missing';
-      $errNum++;
-      }
-      if (!isset($_POST['lname']) || $_POST['lname'] == '') {
-      $errMsgArr[] = 'Last name missing';
-      $errNum++;
-      }
-      //test
-      if (!isset($_POST['bday']) || $_POST['bday'] == '') {
-      $errMsgArr[] = 'birthdate missing';
-      $errNum++;
-      }
-      if (!isset($_POST['email']) || $_POST['email'] == '') {
-      $errMsgArr[] = 'e-mail address missing';
-      $errNum++;
-      }
-      if (!isset($_POST['ssn']) || $_POST['ssn'] == '') {
-      $errMsgArr[] = 'Social Security Number missing';
-      $errNum++;
-      }
-      //end
-      if (!isset($_POST['u']) || $_POST['u'] == '') {
-      $errMsgArr[] = 'Login ID missing';
-      $errNum++;
-      }
-      if (!isset($_POST['p']) || $_POST['p'] == '' || $_POST['p'] == 'd41d8cd98f00b204e9800998ecf8427e') {
-      $errMsgArr[] = 'Password missing';
-      $errNum++;
-      }
-      if (!isset($_POST['cp']) || $_POST['cp'] == '' || $_POST['cp'] == 'd41d8cd98f00b204e9800998ecf8427e') {
-      $errMsgArr[] = 'Confirm password missing';
-      $errNum++;
-      }
-      if (strcmp($password, $cpassword) != 0) {
-      $errMsgArr[] = 'Passwords do not match';
-      $errNum++;
-      }
-      if (!ctype_alnum($password)) {
-      $errMsgArr[] = 'Password should be numbers and digits only';
-      $errNum++;
-      }
-      if (strlen($password) < 7) {
-      $errMsgArr[] = 'Password must be at least 7 chars';
-      $errNum++;
-      }
-      if (strlen($password) > 20) {
-      $errMsgArr[] = 'Password must be at most 20 chars ';
-      $errNum++;
-      }
-      if (!preg_match('`[A-Z]`', $password)) {
-      $errMsgArr[] = 'Password must contain at least one upper case';
-      $errNum++;
-      }
-      if (!preg_match('`[a-z]`', $password)) {
-      $errMsgArr[] = 'Password must contain at least one lower case';
-      $errNum++;
-      }
-      if (!preg_match('`[0-9]`', $password)) {
-      $errMsgArr[] = 'Password must contain at least one digit';
-      $errNum++;
-      }
-
-      $prepUsers = $db->prepare("SELECT * FROM `Users` WHERE UserName = :id ; ");
-
-      if ($prepUsers->execute(array(":id" => $user))) {
-      //IF NAME IS NOT IN USE
-      if ($prepUsers->rowCount() != 0) {
-      $errMsgArr[] = 'Username already in use';
-      $errNum++;
-      }
-      } else {
-      $error = $prepUsers->errorInfo();
-      $errMsgArr[] = $error[2];
-      $errNum++;
-      $retVal = outputXML($errNum, $errMsgArr);
-      }
-     */
-
-
-
-
     if ($errNum == 0) {
-
-
         //set up and insert values into the user table
-        $insertUserPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason, Reminder) 
-                                        VALUES(:doc, :pat, :date, :time, :address, :status, :reason, :reminder);");
-        $tableType = '';
 
         $addApptPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason, Reminder) 
                                         VALUES(:doc, :pat, :date, :time, :address, :status, :reason, :reminder);");
         //$tableType = '';
         $status = "scheduled";
+        $date = $year."-".$month."-".$day;
+        $time = $hour."00:00" ;
         $vals = array(
-            ':doc' => $doc,
+            ':doc' => $doctor,
             ':pat' => $pat,
             ':date' => $date,
             ':time' => $time,
