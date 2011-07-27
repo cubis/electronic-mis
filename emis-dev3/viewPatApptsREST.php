@@ -44,11 +44,11 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
         while ($patientInfo = $patientInfoPrep->fetch(PDO::FETCH_ASSOC)) {
             $outputString .= "<Appointment>";
             $outputString .= "<APPTID>" . $patientInfo['PK_AppID'] . "</APPTID>\n";
-            $outputString .= "<doctor>" . $patientInfo['DocName'] . "</doctor>\n";
+            $outputString .= "<DCOTOR>" . $patientInfo['DocName'] . "</DOCTOR>\n";
             $outputString .= "<REASON>" . $patientInfo['Reason'] . "</REASON>\n";
             $outputString .= "<DATE>" . $patientInfo['Date'] . "</DATE>\n";
             $outputString .= "<TIME>" . $patientInfo['Time'] . "</TIME>\n";
-            $outputString .= "<remind>" . $patientInfo['Remind'] . "</remind>\n";
+            $outputString .= "<REMIND>" . $patientInfo['Remind'] . "</REMIND>\n";
             $outputString .= "</Appointment>";
             logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
         }
