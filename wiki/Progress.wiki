@@ -5,3 +5,5 @@
 
 ==Gantt Chart==
 [http://electronic-mis.googlecode.com/files/emis_gantt_chart_final.PNG http://electronic-mis.googlecode.com/files/emis_gantt_chart_final.PNG]
+
+[http://code.google.com/p/electronic-mis/wiki/API API]
