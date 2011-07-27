@@ -77,6 +77,7 @@ namespace Electronic_MIS
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
 
             string url = data.ToString();
+            Debug.WriteLine(url);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
@@ -198,9 +199,10 @@ namespace Electronic_MIS
             if (comboBox1.Items.Count > 0)
             {
                 comboBox1.SelectedIndex = 0;
+                selectAppointment();
             }
 
-            selectAppointment();
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
