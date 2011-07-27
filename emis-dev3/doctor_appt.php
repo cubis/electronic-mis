@@ -29,7 +29,7 @@
             </tr>
 
             <?php
-            $url = "http://localhost/emis/emis-dev3/visitREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
+            $url = "http://localhost/emis/emis-dev3/viewDocApptsREST.php?u=" . urlencode($_SESSION['SESS_USERNAME']) . "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
 
 
             $ch = curl_init($url);
