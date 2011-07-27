@@ -44,7 +44,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
         while ($patientInfo = $patientInfoPrep->fetch(PDO::FETCH_ASSOC)) {
             $outputString .= "<Appointment>";
             $outputString .= "<APPTID>" . $patientInfo['PK_AppID'] . "</APPTID>\n";
-            $outputString .= "<DCOTOR>" . $patientInfo['DocName'] . "</DOCTOR>\n";
+            $outputString .= "<DOCTOR>" . $patientInfo['DocName'] . "</DOCTOR>\n";
             $outputString .= "<REASON>" . $patientInfo['Reason'] . "</REASON>\n";
             $outputString .= "<DATE>" . $patientInfo['Date'] . "</DATE>\n";
             $outputString .= "<TIME>" . $patientInfo['Time'] . "</TIME>\n";
