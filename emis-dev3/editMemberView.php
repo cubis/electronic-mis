@@ -58,94 +58,123 @@ $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Viewing Information</title>
-	<link href="css/styles.css" rel="stylesheet" type="text/css" />
+	<link href="css/logged_in_styles.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-
-<div style="width: 400px; margin-left: auto; margin-right: auto;">
-<div class="login_box">
-
-	<img src="img/logo.png" alt="Electronic Medical Information System">
-	
-	<form name="editMemberForm" method="post" action="editMemberExec.php">
-	<input type="hidden" name="UserName" value="<?php echo $_GET['u']; ?>" />
-	<input type="hidden" name="AuthKey" value="<?php echo $_SESSION['SESS_AUTH_KEY']; ?>" />
-	<input type="hidden" name="CallingUserName" value="<?php echo $_SESSION['SESS_USERNAME']; ?>" />
-	
-	<table>
-	<tr>
-		<td><h3>Personal Infomation</h3></td>
-	</tr>
-	<tr>
-		<td>First Name:</td>
-		<td>
-			<input type="text" name="FirstName" value="<?php echo "$FirstName" ?>" />
-		</td>
-	</tr>
-	<tr>
-		<td>Last Name:</td>
-		<td><input type="text" name="LastName" value="<?php echo "$LastName" ?>" /></td>
-	</tr>
-	<tr>
-		<td>Sex:</td>
-		<td><input type="text" name="Sex" value="<?php echo "$Sex" ?>" /></td>
-	</tr>
-	<tr>
-		<td>Birthday("YYYY-MM-DD"):</td>
-		<td><input type="text" name="Birthday" value="<?php echo "$Birthday" ?>" /></td>
-	</tr>
-	<tr>
-		<td>SSN:</td>
-		<td><input type="text" name="SSN" value="<?php echo "$SSN" ?>" /></td>
-	</tr>
-	<tr>
-		<td><h3><div class="dashed_line"></div>Contact Information</h3></tr><tr>
-	</tr>
-	<tr>
-		<td>Email:</td>
-		<td><input type="text" name="Email" value="<?php echo "$Email" ?>" /></td>
-	</tr>
-	<tr>
-		<td>Phone Number(###-###-####):</td>
-		<td><input type="text" name="PhoneNumber" value="<?php echo "$PhoneNumber" ?>" /></td>
-	</tr>
-	<tr>
-		<td><h3><div class="dashed_line"></div>Insurance Information</h3></td>
-	</tr>
-	<tr>
-		<td>Insurance Group:</td>
-		<td><input type="text" name="Company_Name" value="<?php echo "$CompanyName" ?>" /></td>
-	</tr>
-	<tr>
-		<td>Plan Type:</td>
-		<td><input type="text" name="Plan_Type" value="<?php echo "$PlanType" ?>" /></td>
-	</tr>
-	<tr>
-		<td>Plan Number:</td>
-		<td><input type="text" name="Plan_Num" value="<?php echo "$PlanNum" ?>" /></td>
-	</tr>
-	<tr>
-		<td>Co-Pay:</td>
-		<td><input type="text" name="Co-Pay" value="<?php echo "$CoPay" ?>" /></td>
-	</tr>
-	<tr>
-		<td>Coverage Start:</td>
-		<td><input type="text" name="Coverage-Start" value="<?php echo "$CoverageStart" ?>" /></td>
-	</tr>
-	<tr>
-		<td>Coverage Ends:</td>
-		<td><input type="text" name="Coverage-End" value="<?php echo "$CoverageEnd" ?>" /></td>
-	</tr>
-	<tr>
-		<td><div class="dashed_line"></div>
-	</tr>
-	</table>
-	</center>
-	<input type="submit" value="Save Changes" />
-	<a class="black_button" style="margin-right: 60px;" href="memberProfileView.php"><span>Back</span></a>
-	</form>
-	
-</div>
-</div>
+	<script type="text/javascript">
+		function submitform()
+		{
+			document.forms["loginForm"].submit();
+		}
+	</script>
+    <div class="container">
+        <div class="header">
+            <div class="logo"><img src="img/horizontal_logo.png" /></div>
+            <div class="welcome_text">
+                <h1>Welcome,
+                <?php
+                    echo $_SESSION['SESS_FIRST_NAME']; 
+                ?></h1>
+            </div>
+        </div>
+        <div class="contentwrap">
+            <div class="navigation">
+                <div class="nav_content">
+					<?php
+                    	include_once "generateNav.php"; // This will generate a navigation menu according to the user's role.
+					?>
+                </div>
+            </div>
+            <div class="page_display">
+                <div class="page_title">Edit Member Information</div>
+                <div class="page_content">
+                <!-- PAGE CONTENT STARTS HERE -->
+                    <form name="editMemberForm" method="post" action="editMemberExec.php">
+                        <input type="hidden" name="UserName" value="<?php echo $_GET['u']; ?>" />
+                        <input type="hidden" name="AuthKey" value="<?php echo $_SESSION['SESS_AUTH_KEY']; ?>" />
+                        <input type="hidden" name="CallingUserName" value="<?php echo $_SESSION['SESS_USERNAME']; ?>" />
+                        
+                        <table>
+							<tr>
+								<td><h3>Personal Infomation</h3></td>
+							</tr>
+                            <tr>
+                                <td>First Name:</td>
+                                <td>
+                                    <input type="text" name="FirstName" value="<?php echo "$FirstName" ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Name:</td>
+                                <td><input type="text" name="LastName" value="<?php echo "$LastName" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Sex:</td>
+                                <td><input type="text" name="Sex" value="<?php echo "$Sex" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Birthday ("YYYY-MM-DD"):</td>
+                                <td><input type="text" name="Birthday" value="<?php echo "$Birthday" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>SSN:</td>
+                                <td><input type="text" name="SSN" value="<?php echo "$SSN" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td><h3><div class="dashed_line"></div>Contact Information</h3></tr><tr>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td><input type="text" name="Email" value="<?php echo "$Email" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Phone Number (###-###-####):</td>
+                                <td><input type="text" name="PhoneNumber" value="<?php echo "$PhoneNumber" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td><h3><div class="dashed_line"></div>Insurance Information</h3></td>
+                            </tr>
+                            <tr>
+                                <td>Insurance Group:</td>
+                                <td><input type="text" name="Company_Name" value="<?php echo "$CompanyName" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Plan Type:</td>
+                                <td><input type="text" name="Plan_Type" value="<?php echo "$PlanType" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Plan Number:</td>
+                                <td><input type="text" name="Plan_Num" value="<?php echo "$PlanNum" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Co-Pay:</td>
+                                <td><input type="text" name="Co-Pay" value="<?php echo "$CoPay" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Coverage Start:</td>
+                                <td><input type="text" name="Coverage-Start" value="<?php echo "$CoverageStart" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td>Coverage Ends:</td>
+                                <td><input type="text" name="Coverage-End" value="<?php echo "$CoverageEnd" ?>" /></td>
+                            </tr>
+                            <tr>
+                                <td><div class="dashed_line"></div>
+                            </tr>
+                            </table>
+							<br /><br />
+							<a class="black_button" style="margin-right: 60px;" href="memberProfileView.php"><span>Cancel</span></a>
+                            <a class="black_button" style="margin-right: 60px;" href="javascript: submitform()"><span>Save Changes</span></a>
+						</form>
+                        <br /><br />
+					<!-- END OF PAGE CONTENT -->
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+        	<p>Electronic Medical Information System. Copyright &copy; 2011 Team B. The University of Texas at San Antonio.</p>
+        </div>
+	</div>
 </body>
 </html>
