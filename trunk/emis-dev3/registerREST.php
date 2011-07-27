@@ -220,6 +220,28 @@ function doService($db) {
 					if( !($insertTypePrep->execute()) ){
 						$errMsgArr[] =  "DATABASE ERORR THREE";
 						$errNum++;
+					}  else if (strcmp($_POST['type'], "patient") == 0){
+						//get the primary key for the recently entered row
+						$patIDPrep = $db->prepare("SELECT * FROM Patient WHERE FK_member_id = '" . $member['PK_member_id'] . "'");
+						$getPatSuccess = $patIDPrep->execute();
+						if( ! $getPatSuccess ){
+							//get member id error
+							$errMsgArr[] = 'DATABASE ERROR FOUR';
+							$errNum++;
+						} else {
+							
+							//add into the proper sub table with the user primary key as the member foreign key
+							$patient = $patIDPrep->fetch(PDO::FETCH_ASSOC);
+							$insertInsPrep = $db->prepare("INSERT INTO Insurance (FK_PatientID) VALUES('" .$patient['PK_PatientID']. "')");
+							//insert into subtable failed
+							if( !($insertInsPrep->execute()) ){
+								$errMsgArr[] =  "DATABASE ERORR FIVE";
+								$errNum++;
+							} 
+						}
+							
+					
+					
 					}
 				}
 			}
