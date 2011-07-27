@@ -90,7 +90,7 @@ curl_close($ch);
 $parser = xml_parser_create();
 
 xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
-
+echo $output;
 
 
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
