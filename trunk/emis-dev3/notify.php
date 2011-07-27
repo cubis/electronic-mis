@@ -33,9 +33,11 @@ function sendReminders(){
         case "notify":
             sendReminders();
             break;
-         
-        default:
-            print "<p> this is a generic response</p>";   
+        case "reset":
+             $rstqry = "Update Appointment set Reminder = '1' ";
+             $mysql_query($qry);
+             echo "<p>Notifications Reset</p>";
+            break;
     }
 
     function sendMail($address, $date, $time){
