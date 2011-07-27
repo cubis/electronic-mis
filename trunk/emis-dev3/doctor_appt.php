@@ -51,7 +51,7 @@ while ($currRow < $numRows) {
     //$type = $wsResponse[$wsIndices['TYPE'][$currRow]]['value'];
     //if ($_SESSION['SESS_PERSONAL_ID'] == $doc && $type == 1) {
     echo "<tr>";
-    $ID = urlencode($wsResponse[$wsIndices['APPTID'][$currRow]]['value']);
+    $ID = $wsResponse[$wsIndices['APPTID'][$currRow]]['value'];
     echo "<td><a href='visit.php?ID=$ID'>Visit</a></td>";
     echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['value'], "</td>";
     echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['value'], "</td>";
