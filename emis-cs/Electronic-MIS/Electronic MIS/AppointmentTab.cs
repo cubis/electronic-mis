@@ -128,7 +128,7 @@ namespace Electronic_MIS
                                             newAppt.Reason = xmlReader.ReadElementContentAsString();
                                             break;
 
-                                        case "remind":
+                                        case "REMIND":
                                             newAppt.Remind = xmlReader.ReadElementContentAsBoolean();
                                             break;
 
