@@ -28,6 +28,5 @@
 	<div class="navlist"><a href="accessDeniedView.php">Home</a></div>
     <div class="navlist"><a href="logout.php">Logout</a></div>
 <?php endif; ?>
-	<div class="nav_title">Navigation</div>
 	<div class="navlist"><a href="changePassView.php">Change Password</a></div>
     <div class="navlist"><a href="logoutExec.php">Logout</a></div>
