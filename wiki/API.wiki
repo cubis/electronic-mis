@@ -9,7 +9,7 @@ This page describes the inputs and outputs of each service as well as what funct
 [http://code.google.com/p/electronic-mis/wiki/bootstrapREST bootstrapREST]<br>
 [http://code.google.com/p/electronic-mis/wiki/configREST configREST]
 
-[http://code.google.com/p/electronic-mis/wiki/Flow_Diagrams Flow Diagrams]
+[http://code.google.com/p/electronic-mis/wiki/Flow_Diagrams Flow Diagrams]<br>
 [http://code.google.com/p/electronic-mis/wiki/State_Diagrams State Diagrams]
 
 [http://code.google.com/p/electronic-mis/wiki/Table_Of_Contents Table of Contents]
