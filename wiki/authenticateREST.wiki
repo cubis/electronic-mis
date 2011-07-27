@@ -40,7 +40,7 @@ function outputXML($errNum, $errMsgArr, $memberInfo)
 *Description:*<br>
 Outputs authentication result in XML. Calls
 {{{
-logToDB()
+logToDB($actionDescription, $userID, $sentName) (located in bootstrapREST.php)
 }}}
 to log the result.
 <br>
