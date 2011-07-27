@@ -44,8 +44,9 @@ require_once('bootstrap.php');  //link information
                     </script>
                     <?php
                     $apptid = $_GET[$ID];
+                    echo '<form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID='.$_GET[$ID].'">';
                     ?>
-                    <form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID=<?php echo $apptid ?>">
+                    <!--<form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID=<?php //echo $_GET[$ID] ?>">-->
                         <center><p><b>Fill in the visit information below.</b></p></center>
                         <?php
                         ?>
