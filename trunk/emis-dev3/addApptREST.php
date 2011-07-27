@@ -80,7 +80,7 @@ function doService($db) {
         $member = $getPID->fetch(PDO::FETCH_ASSOC);
         
         $addApptPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason, Reminder) 
-                                        VALUES(:doc, :pat, :date, :time, :address, :status, :reason, :reminder);");
+                                        VALUES(:doc, '".$member['PK_member_id']."', :date, :time, :address, :status, :reason, :reminder);");
         //$tableType = '';
         $status = "scheduled";
         $date = $year . "-" . $month . "-" . $day;
