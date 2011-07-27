@@ -65,7 +65,7 @@ $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
 	<script type="text/javascript">
 		function submitform()
 		{
-			document.forms["loginForm"].submit();
+			document.forms["editMemberForm"].submit();
 		}
 	</script>
     <div class="container">
