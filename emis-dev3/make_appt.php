@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once('auth.php');
 //require_once('configREST.php');
 require_once('bootstrapREST.php');
@@ -85,7 +85,7 @@ $fields = array(
     'year' => urlencode($year),
     'hour' => urlencode($hour),
     'reason' => urlencode($reason),
-    'reminder' => urlencode($reminder),
+    'reminder' => urlencode($reminder)
 );
 
 foreach ($fields as $key => $value) {
