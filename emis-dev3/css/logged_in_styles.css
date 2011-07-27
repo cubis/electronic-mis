@@ -103,8 +103,15 @@ body {
 	font: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
-.page_content label {
-	font: "Trebuchet MS", Arial, Helvetica, sans-serif;
+.page_content table {
+	border: 0px;
+}
+
+.page_content table tr td {
+    padding-bottom: 15px;
+    width: 300px;
+	padding-top: 15px;
+	border-bottom: 1px solid gray;
 }
 	
 
