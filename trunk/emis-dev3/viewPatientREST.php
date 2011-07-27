@@ -39,6 +39,9 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
 			$outputString .= "<FKDoctorID>" . $patientInfo['FK_DoctorID'] . "</FKDoctorID>\n";
 			$outputString .= "<Type>" . $patientInfo['Type'] . "</Type>\n";
 			$outputString .= "<PatientID>" . $patientInfo['PK_PatientID'] . "</PatientID>\n";
+			$outputString .= "<L>" . $patientInfo['Locked'] . "</L>\n";
+			$outputString .= "<NA>" . $patientInfo['NeedApproval'] . "</NA>\n";
+			
 			$outputString .= "</Patient>";
 			logToDB($user." access patient info for " . $target, $patientInfo['PK_member_id'], $user); 
 		}			
