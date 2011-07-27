@@ -43,26 +43,25 @@
             $parser = xml_parser_create();
             //modify
             xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
-            $numRows = $wsResponse[$wsIndices['PATIENTCOUNT'][0]]['value'];
+            $numRows = $wsResponse[$wsIndices['APPTCOUNT'][0]]['value'];
             $currRow = 0;
 
             while ($currRow < $numRows) {
-                $doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
-                $type = $wsResponse[$wsIndices['TYPE'][$currRow]]['value'];
+                //$doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
+                //$type = $wsResponse[$wsIndices['TYPE'][$currRow]]['value'];
 
-                if ($_SESSION['SESS_PERSONAL_ID'] == $doc && $type == 1) {
+                //if ($_SESSION['SESS_PERSONAL_ID'] == $doc && $type == 1) {
                     echo "<tr>";
                     $ID = urlencode($wsResponse[$wsIndices['APPTID'][$currRow]]['value']);
                     echo "<td><a href='visit.php?ID=$ID'>Visit</a></td>";
-                    $ID = urlencode($wsResponse[$wsIndices['PATIENTID'][$currRow]]['value']);
-                    echo "<td>", $wsResponse[$wsIndices['FIRSTNAME'][$currRow]]['value'], "</td>";
-                    echo "<td>", $wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'], "</td>";
+                    echo "<td>", $wsResponse[$wsIndices['PATID'][$currRow]]['PATID'], "</td>";
+                    //echo "<td>", $wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'], "</td>";
                     echo "<td>", $wsResponse[$wsIndices['REASON'][$currRow]]['value'], "</td>";
                     echo "<td>", $wsResponse[$wsIndices['DATE'][$currRow]]['value'], "</td>";
                     echo "<td>", $wsResponse[$wsIndices['TIME'][$currRow]]['value'], "</td>";
                     echo "<td>", $wsResponse[$wsIndices['STATUS'][$currRow]]['value'], "</td>";
                     echo "</tr>";
-                }
+                //}
                 $currRow++;
             }
             $currRow = 0;
