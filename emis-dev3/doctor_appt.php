@@ -44,8 +44,9 @@
             //modify
             xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
             $numRows = $wsResponse[$wsIndices['APPTCOUNT'][0]]['value'];
+            echo $numrows;
             $currRow = 0;
-
+            echo $currRow;
             while ($currRow < $numRows) {
                 //$doc = $wsResponse[$wsIndices['FKDOCTORID'][$currRow]]['value'];
                 //$type = $wsResponse[$wsIndices['TYPE'][$currRow]]['value'];
