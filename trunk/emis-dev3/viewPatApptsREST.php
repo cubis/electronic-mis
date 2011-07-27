@@ -48,7 +48,7 @@ function outputXML($errNum, $errMsgArr, $patientInfoPrep) {
             $outputString .= "<REASON>" . $patientInfo['Reason'] . "</REASON>\n";
             $outputString .= "<DATE>" . $patientInfo['Date'] . "</DATE>\n";
             $outputString .= "<TIME>" . $patientInfo['Time'] . "</TIME>\n";
-            $outputString .= "<remind>" . $patientInfo['Status'] . "</remind>\n";
+            $outputString .= "<remind>" . $patientInfo['Remind'] . "</remind>\n";
             $outputString .= "</Appointment>";
             logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
         }
