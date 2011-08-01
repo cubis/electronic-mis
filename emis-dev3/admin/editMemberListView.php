@@ -20,7 +20,7 @@ require_once('../bootstrapREST.php');
 	</script>
     <div class="container">
         <div class="header">
-            <div class="logo"><img src="../img/horizontal_logo.png" /></div>
+			<div class="logo"><a href="../memberProfileView.php"><img src="../img/logo.png" /></a></div>
             <div class="welcome_text">
                 <h1>Welcome,
                 <?php

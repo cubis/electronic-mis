@@ -12,15 +12,9 @@
 </head>
 
 <body>
-	<script type="text/javascript">
-		function submitform()
-		{
-			document.forms["loginForm"].submit();
-		}
-	</script>
     <div class="container">
         <div class="header">
-            <div class="logo"><img src="img/horizontal_logo.png" /></div>
+            <div class="logo"><a href="memberProfileView.php"><img src="img/logo.png" /></a></div>
             <div class="welcome_text">
                 <h1>Welcome,
                 <?php
@@ -40,7 +34,8 @@
                 <div class="page_title">Profile</div>
                 <div class="page_content">
                 <!-- PAGE CONTENT STARTS HERE -->
-                	<p>This is where the page content goes.</p>
+                	<h2>Welcome to your profile!</h2>
+                    <p>From here, you may use the navigation menu on the left to access medical records, update information, or edit your account.
                 <!-- END OF PAGE CONTENT -->
                 </div>
             </div>
