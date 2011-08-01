@@ -3,109 +3,143 @@
 
 body {
 	margin: 0 auto;
-	background-image: url(../img/background.png);
-	background-repeat: repeat-x;
-	background-color: #d4d3d3;
-	font: 11px Verdana, Arial, Helvetica, sans-serif;
-	color: #666666;
+	background-image:url(../img/logged_out_bg.png);
+	background-repeat:repeat-x;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+	color: #001c6c;
 }
 
-.login_box {
-	background-image:url(../img/login_box_gradient.png);
-	background-repeat: repeat-x;
-	background-color: #ebeaea;
-	width: 400px;
-	margin-top: 10px;
-	border: 1px solid black;
-	position: absolute;
-	padding: 15px 10px 15px 10px;
+#container {
+	margin: 0 auto;
+	width: 1000px;
+	padding: 0px 20px 0px 20px;
 }
 
-.register_box {
-	background-image:url(../img/login_box_gradient.png);
-	background-repeat: repeat-x;
-	background-color: #ebeaea;
-	width: 960px;
-	margin-top: 10px;
-	border: 1px solid black;
-	position: absolute;
-	padding: 15px 25px 15px 25px;
- 
+#header {
+	height: 82px;
 }
 
-#loginForm label {
-	font: 13px/1.5 "Trebuchet MS", Arial;
-	color: #333;
+#logo {
+	float: left;
+	padding: 14px 0px 13px 0px;
 }
 
-#loginForm p {
-	padding: 10px 15px 0px 15px;
+#loginbox {
+	float: right;
+	padding-top: 6px;
 }
 
-.textfield {
-	padding: 7px;
-	border: 1px solid #999;
-	font-size: 16px;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	color: #333;
-	width: 270px;
-	margin: 5px;
-	background: #FFFFF8;
-}
-
-.dashed_line {
-	padding: 0px 10px 10px 10px;
-	border-bottom: 1px dashed black;
-	margin: 15px 0px 20px 0px;
-}
-
-.black_button {
-	margin: 0px;
-	padding: 0px !important;
-	border: 0px;
-	background: transparent url(../img/button.png) no-repeat scroll top right;
+#loginbox label {
+	font-size: 11px;
 	color: white;
-	display: block;
-	float: right;
-	height: 30px;
-	margin-right: 6px;
-	margin-top: 10px;
-	padding-right: 12px !important;
+	padding: 0px 0px 5px 2px;
+}
+
+#loginbox table tr td {
+    padding: 0 0 0 14px;
+}
+
+#loginbox input {
+    margin: 0;
+    width: 142px;
+	border: 1px solid #141414;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    padding: 3px;
+}
+
+#loginbox a {
+	color: white;
 	text-decoration: none;
-	overflow: hidden;
-	font-size: 12px;
-	outline: none !important;
-	cursor: pointer;
-	font-weight: bold;
-}
-.forms_black_button {
-	margin: 0px;
-	padding: 0px !important;
-	float: right;
-	margin-right: 6px;
 	margin-top: 10px;
-	padding-right: 12px !important;
-	overflow: hidden;
 }
 
-.black_button span {
-	background: url(../img/button_left.png) no-repeat left top;
-	display: block;
-	line-height: 30px;
-	padding: 0px 0px 0px 12px;
-	outline: none !important;
+.inputcheckbox {
+	margin-left: 0px;
+}
+
+#contentwrap {
+	padding: 0px;
+	height: 483px;
+}
+
+#infobox {
+	color: #0c0c0c;
+	font-weight: bold;
+    font-size: 20px;
+    line-height: 29px;
+    margin-top: 20px;
+    width: 450px;
+    word-spacing: -1px;
+	float: left;
+}
+
+#infobox img {
+	padding-top: 15px;
+}
+
+h2 {
+	font-weight: bold;
+	font-size:18px;
+	margin-bottom: 0px;
+}
+
+.h2detail {
+	font-weight: normal;
+	font-size: 15px;
+	margin: 0px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #0c0c0c;
+}
+
+#registerbox {
+ 	color: #0c0c0c;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 29px;
+    margin-top: 15px;
+    width: 450px;
+    word-spacing: -1px;
+}
+
+#registerbox label {
+	font-weight: normal;
+	font-size: 13px;
+}
+
+#registerbox input {
+    font-size: 16px;
+    padding: 6px;
+    width: 250px;
+	border: 1px solid #2e2e2e;
+    margin-top: 2px;
+}
+
+#registerbox table th {
+	text-align: right;
+	padding-right: 10px;
+}
+
+#registerbox table {
+	padding-top: 10px;
 	float: right;
 }
 
-.button {
-	background: url(../img/login.png) no-repeat left top;
-	display: block;
-	line-height: 30px;
-	padding: 0px 0px 0px 12px;
-	outline: none !important;
-	float: right;
+#registerbox select {
+    font-size: 16px;
+    padding: 6px;
+    width: 100px;
+	border: 1px solid #2e2e2e;
+    margin-top: 2px;
 }
 
-.form_fields {
-	margin: 0px 0px 15px 50px;
+#footer {
+	color: #0c0c0c;
+	display: inline-block;
+}
+
+.footerbox {
+	width: 320px;
+	float: left;
 }
