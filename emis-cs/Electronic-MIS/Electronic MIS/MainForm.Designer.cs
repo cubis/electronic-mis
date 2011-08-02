@@ -60,7 +60,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(884, 24);
-            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -113,6 +113,7 @@
             this.splitContainer1.Size = new System.Drawing.Size(884, 461);
             this.splitContainer1.SplitterDistance = 261;
             this.splitContainer1.TabIndex = 1;
+            this.splitContainer1.TabStop = false;
             // 
             // navigationTree
             // 
@@ -127,7 +128,8 @@
             treeNode1,
             treeNode2});
             this.navigationTree.Size = new System.Drawing.Size(258, 455);
-            this.navigationTree.TabIndex = 0;
+            this.navigationTree.TabIndex = 9;
+            this.navigationTree.TabStop = false;
             this.navigationTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.navigationTree_AfterSelect);
             this.navigationTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.navigationTree_NodeMouseClick);
             // 
@@ -140,7 +142,9 @@
             this.tabViewer.Name = "tabViewer";
             this.tabViewer.SelectedIndex = 0;
             this.tabViewer.Size = new System.Drawing.Size(615, 465);
-            this.tabViewer.TabIndex = 0;
+            this.tabViewer.TabIndex = 7;
+            this.tabViewer.TabStop = false;
+            this.tabViewer.SelectedIndexChanged += new System.EventHandler(this.tabViewer_SelectedIndexChanged);
             // 
             // contextMenuStrip1
             // 
@@ -173,7 +177,8 @@
             this.welcomeTab1.Location = new System.Drawing.Point(0, 0);
             this.welcomeTab1.Name = "welcomeTab1";
             this.welcomeTab1.Size = new System.Drawing.Size(615, 465);
-            this.welcomeTab1.TabIndex = 0;
+            this.welcomeTab1.TabIndex = 8;
+            this.welcomeTab1.TabStop = false;
             // 
             // MainForm
             // 

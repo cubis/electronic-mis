@@ -42,7 +42,7 @@
             this.btnLogin.Location = new System.Drawing.Point(278, 166);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(105, 23);
-            this.btnLogin.TabIndex = 8;
+            this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -54,8 +54,9 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(179, 22);
-            this.txtPassword.TabIndex = 7;
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.Text = "A123456z";
+            this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
             // 
             // txtUser
             // 
@@ -63,8 +64,9 @@
             this.txtUser.Location = new System.Drawing.Point(266, 77);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(179, 22);
-            this.txtUser.TabIndex = 4;
+            this.txtUser.TabIndex = 0;
             this.txtUser.Text = "Docj";
+            this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUser_KeyPress);
             // 
             // label2
             // 
@@ -121,6 +123,7 @@
             this.Controls.Add(this.label1);
             this.Name = "LoginTab";
             this.Size = new System.Drawing.Size(615, 465);
+            this.Load += new System.EventHandler(this.LoginTab_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
