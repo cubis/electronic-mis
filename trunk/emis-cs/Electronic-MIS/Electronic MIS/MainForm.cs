@@ -34,19 +34,22 @@ namespace Electronic_MIS
 
         private void navigationTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            int index = 0;
+
             if (e.Node.Name == "LoginNode")
             {
                 if(!tabViewer.TabPages.ContainsKey("Login")){
 
                     tabViewer.TabPages.Add("Login", "Login");
-                    int index = tabViewer.TabPages.IndexOfKey("Login");
-
-                    LoginTab login = new LoginTab();
-                    login.LoginEvent += new LoginTab.LoginEventHandler(login_LoginEvent);
-
-                    tabViewer.TabPages[index].Controls.Add(login);
+                    index = tabViewer.TabPages.IndexOfKey("Login"); 
                 }
                 tabViewer.SelectTab("Login");
+                if (!tabViewer.TabPages[index].HasChildren)
+                {
+                    LoginTab login = new LoginTab();
+                    login.LoginEvent += new LoginTab.LoginEventHandler(login_LoginEvent);
+                    tabViewer.TabPages[index].Controls.Add(login);
+                }
             }
             else if (e.Node.Name == "PatientInfoNode")
             {
@@ -59,7 +62,7 @@ namespace Electronic_MIS
                 {
 
                     tabViewer.TabPages.Add("PatientInfo", "PatientInfo");
-                    int index = tabViewer.TabPages.IndexOfKey("PatientInfo");
+                    index = tabViewer.TabPages.IndexOfKey("PatientInfo");
 
                     PatientInfoTab patientTab = new PatientInfoTab(sessionManager,activeServer);
 
@@ -77,7 +80,7 @@ namespace Electronic_MIS
                 {
 
                     tabViewer.TabPages.Add("Appointments", "Appointments");
-                    int index = tabViewer.TabPages.IndexOfKey("Appointments");
+                    index = tabViewer.TabPages.IndexOfKey("Appointments");
 
                     AppointmentTab appTab = new AppointmentTab(sessionManager,activeServer);
 
@@ -91,7 +94,7 @@ namespace Electronic_MIS
                 {
 
                     tabViewer.TabPages.Add("Welcome", "Welcome");
-                    int index = tabViewer.TabPages.IndexOfKey("Welcome");
+                    index = tabViewer.TabPages.IndexOfKey("Welcome");
 
                     WelcomeTab appTab = new WelcomeTab();
 
@@ -111,7 +114,7 @@ namespace Electronic_MIS
                     tabViewer.TabPages.Clear();
 
                     tabViewer.TabPages.Add("Welcome", "Welcome");
-                    int index = tabViewer.TabPages.IndexOfKey("Welcome");
+                    index = tabViewer.TabPages.IndexOfKey("Welcome");
 
                     WelcomeTab welcomeTab = new WelcomeTab();
                     tabViewer.TabPages[index].Controls.Add(welcomeTab);
@@ -190,20 +193,24 @@ namespace Electronic_MIS
 
         private void navigationTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            int index = 0;
+
             if (e.Node.Name == "LoginNode")
             {
                 if (!tabViewer.TabPages.ContainsKey("Login"))
                 {
 
                     tabViewer.TabPages.Add("Login", "Login");
-                    int index = tabViewer.TabPages.IndexOfKey("Login");
-
-                    LoginTab login = new LoginTab();
-                    login.LoginEvent += new LoginTab.LoginEventHandler(login_LoginEvent);
-
-                    tabViewer.TabPages[index].Controls.Add(login);
+                    index = tabViewer.TabPages.IndexOfKey("Login");
                 }
                 tabViewer.SelectTab("Login");
+                if (!tabViewer.TabPages[index].HasChildren)
+                {
+                    LoginTab login = new LoginTab();
+                    login.LoginEvent += new LoginTab.LoginEventHandler(login_LoginEvent);
+                    tabViewer.TabPages[index].Controls.Add(login);
+                    tabViewer.TabPages[index].Controls[0].Focus();
+                }
             }
             else if (e.Node.Name == "PatientInfoNode")
             {
@@ -216,7 +223,7 @@ namespace Electronic_MIS
                 {
 
                     tabViewer.TabPages.Add("PatientInfo", "PatientInfo");
-                    int index = tabViewer.TabPages.IndexOfKey("PatientInfo");
+                    index = tabViewer.TabPages.IndexOfKey("PatientInfo");
 
                     PatientInfoTab patientTab = new PatientInfoTab(sessionManager, activeServer);
 
@@ -234,7 +241,7 @@ namespace Electronic_MIS
                 {
 
                     tabViewer.TabPages.Add("Appointments", "Appointments");
-                    int index = tabViewer.TabPages.IndexOfKey("Appointments");
+                    index = tabViewer.TabPages.IndexOfKey("Appointments");
 
                     AppointmentTab appTab = new AppointmentTab(sessionManager, activeServer);
 
@@ -248,7 +255,7 @@ namespace Electronic_MIS
                 {
 
                     tabViewer.TabPages.Add("Welcome", "Welcome");
-                    int index = tabViewer.TabPages.IndexOfKey("Welcome");
+                    index = tabViewer.TabPages.IndexOfKey("Welcome");
 
                     WelcomeTab appTab = new WelcomeTab();
 
@@ -268,12 +275,23 @@ namespace Electronic_MIS
                     tabViewer.TabPages.Clear();
 
                     tabViewer.TabPages.Add("Welcome", "Welcome");
-                    int index = tabViewer.TabPages.IndexOfKey("Welcome");
+                    index = tabViewer.TabPages.IndexOfKey("Welcome");
 
                     WelcomeTab welcomeTab = new WelcomeTab();
                     tabViewer.TabPages[index].Controls.Add(welcomeTab);
 
                     updateNavTree();
+                }
+            }
+        }
+
+        private void tabViewer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabViewer.TabPages[tabViewer.SelectedIndex].HasChildren)
+            {
+                if (!tabViewer.TabPages[tabViewer.SelectedIndex].Controls[0].ContainsFocus)
+                {
+                    tabViewer.TabPages[tabViewer.SelectedIndex].Controls[0].Focus();
                 }
             }
         }

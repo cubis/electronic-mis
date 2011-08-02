@@ -177,7 +177,30 @@ namespace Electronic_MIS
 
         private void LoginTab_Load(object sender, EventArgs e)
         {
+            this.Focus();
+            txtUser.Focus();
+        }
 
+        private void txtUser_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13 )
+            {
+                if (txtUser.ContainsFocus)
+                {
+                    txtPassword.Focus();
+                }
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                if (txtPassword.ContainsFocus)
+                {
+                    btnLogin.PerformClick();
+                }
+            }
         }
     }
 
