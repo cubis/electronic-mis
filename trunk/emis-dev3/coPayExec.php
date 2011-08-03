@@ -58,7 +58,7 @@ if ($errNum > 0) {
 if ($errflag) {
     $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
     session_write_close();
-    header("location: appointment.php");
+    header("location: coPay.php");
     exit();
 } else {
     header("location: memberProfileView.php");
