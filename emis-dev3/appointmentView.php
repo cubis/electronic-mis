@@ -106,6 +106,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			  <td><strong>Time:</strong></td>
 			  <td><strong>Doctor:</strong></td>
 			  <td><strong>Reason:</strong></td>
+                          <td><strong>Cancel:</strong></td>
 			</tr>
 			<?php
 			  foreach($appointments as &$app) {
@@ -116,6 +117,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    echo "<td>" . $date->format('H:ia') . "</td>";
 			    echo "<td>$app[3]</td>";
 			    echo "<td>$app[2]</td>";
+                            echo "<td><a href='doctorAddRemovePatientExec.php?ID=$app[0]&do=add'>Add</a></td>";
 			    echo "</tr>";
 			    }
 			?>
