@@ -17,8 +17,15 @@
 require_once('configREST.php');     //sql connection information
 require_once('bootstrapREST.php');  //link information
 
+//cleanPostvalues();
 $output = doService();
 print $output;
+
+function cleanPostValues() {
+	foreach ($_POST as $key => $value) {
+		$_POST[$key] = mysql_real_escape_string($value);
+	}
+}
 
 function doService() {
 	$errMsgArr = array();
@@ -26,6 +33,8 @@ function doService() {
 	$userName = $_POST['UserName'];
 	$authKey = $_POST['AuthKey'];
 	$callingUserName = $_POST['CallingUserName'];
+	
+	global $db;
 	
 	/*// no username supplied, output error and return
 	if(!isset($userName) || $userName == "") {
@@ -55,7 +64,7 @@ function doService() {
 	}
 	return $data;*/
 	
-	$updateSQL = 'UPDATE Users,Insurance SET';
+	$updateSQL = 'UPDATE Users SET';
 	$updateSQL .= " Users.FirstName='" . $_POST['FirstName'];
 	$updateSQL .= "', Users.LastName='" . $_POST['LastName'];
 	$updateSQL .= "', Users.Sex='" . $_POST['Sex'];
@@ -63,15 +72,37 @@ function doService() {
 	$updateSQL .= "', Users.SSN='" . $_POST['SSN'];
 	$updateSQL .= "', Users.Email='" . $_POST['Email'];
 	$updateSQL .= "', Users.PhoneNumber='" . $_POST['PhoneNumber'];
-	$updateSQL .= "', Insurance.Company_Name='" . $_POST['Company_Name'];
+	if ($_POST['Status'] == 'lock')
+		$updateSQL .= "', Users.Locked='1";
+	else
+		$updateSQL .= "', Users.Locked='0";
+	$updateSQL .= "' WHERE Users.UserName='" . $userName . "'";
+	
+	$prep = $db->prepare($updateSQL);
+	if ( $prep->execute() ) {
+	
+	}
+	else {
+		$errorInfoArray = $prep->errorInfo();
+		$errMsgArr[] = $errorInfoArray[2];
+		$errNum++;
+		$xmlOutput = outputXML($errNum, $errMsgArr);
+		return $xmlOutput;
+	}
+	
+	
+	$updateSQL = 'UPDATE Insurance SET';
+	$updateSQL .= " Insurance.Company_Name='" . $_POST['Company_Name'];
 	$updateSQL .= "', Insurance.Plan_Type='" . $_POST['Plan_Type'];
 	$updateSQL .= "', Insurance.Plan_Num='" . $_POST['Plan_Num'];
 	$updateSQL .= "', Insurance.`Co-Pay`='" . $_POST['Co-Pay'];
 	$updateSQL .= "', Insurance.`Coverage-Start`='" . $_POST['Coverage-Start'];
 	$updateSQL .= "', Insurance.`Coverage-End`='" . $_POST['Coverage-End'];
-	$updateSQL .= "' WHERE username='" . $userName . "' AND Users.PK_member_id = Insurance.FK_PatientID";
-		
-	global $db;
+	$updateSQL .= "' WHERE Insurance.FK_PatientID='" . $_POST['PersonalID'] . "'";
+	
+	print $updateSQL;
+	
+
 	$prep = $db->prepare($updateSQL);
 	if ( $prep->execute() ) {
 		$xmlOutput = outputXML($errNum, $errMsgArr);
@@ -84,32 +115,6 @@ function doService() {
 		$xmlOutput = outputXML($errNum, $errMsgArr);
 		return $xmlOutput;
 	}
-	
-	$dbCurrentKey = $result['CurrentKey'];
-	$dbLocked = $result['Locked'];
-	$dbNeedApproval = $result['NeedApproval'];
-	$dbMemberID = $result['PK_member_id'];
-	
-	if ($dbLocked == '1') {
-		$errMsgArr[] = 'Locked user trying to logout';
-		$errNum++;
-		$xmlOutput = outputXML('0', $errNum, $errMsgArr);
-		return $xmlOutput;
-	}
-	
-	$prep = $db->prepare("UPDATE Users SET CurrentKey = NULL WHERE UserName = :u");
-	$prep->execute(array(":u" => $userName));
-	if ($prep->rowCount() != 1) {
-		$error = $prep->errorInfo();
-		$errMsgArr[] = $error[2];
-		$errNum += 1;
-		$xmlOutput = outputXML('0', $errNum, $errMsgArr);
-	}
-	else {	
-		$xmlOutput = outputXML('1', $errNum, $errMsgArr);		
-	}
-	
-	return $xmlOutput;	
 }
 
 function outputXML($errNum, $errMsgArr) {

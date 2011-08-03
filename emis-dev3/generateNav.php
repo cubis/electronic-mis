@@ -12,7 +12,7 @@
 	<div class="navlist"><a href="#">View/Cancel Upcoming Appointments</a></div>
 	<div class="navlist"><a href="#">View/Edit Availability</a></div>
 	<div class="navlist"><a href="doctorAddRemovePatientView.php">Add/Remove Patients</a></div> 
-    <div class="navlist"><a href="editMemberView.php">Edit Profile</a></div>
+    <div class="navlist"><a href="editMemberView.php?u=<?php echo $_SESSION['SESS_USERNAME'] ?>">Edit Profile</a></div>
 	<div class="navlist"><a href="doctor_appt.php">Appointments</a></div>
 <?php elseif ($_SESSION['SESS_TYPE'] == 200): // Logged in user is a nurse ?>
 	<div class="nav_title">Nurse</div>
@@ -29,5 +29,4 @@
     <div class="navlist"><a href="logout.php">Logout</a></div>
 <?php endif; ?>
 	<div class="navlist"><a href="changePassView.php">Change Password</a></div>
-    <div class="navlist"><a href="logoutExec.php">Logout</a></div>
-    <div class="navlist"><a href="memberProfileView.php">My Profile</a></div>
+    <div class="navlist"><a href="http://localhost/emis/emis-dev3/logoutExec.php">Logout</a></div>

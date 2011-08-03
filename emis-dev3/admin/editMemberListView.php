@@ -73,11 +73,6 @@ xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 //print("OUTPUT = ".$output."\n");
 //print("name = ".$wsResponse[$wsIndices['FIRSTNAME'][0]]['value']."\n");
 
-
-
-
-
-
 $numrows = $wsResponse[$wsIndices['PATIENTCOUNT'][0]]['value'];
 $currRow = 0;
 
