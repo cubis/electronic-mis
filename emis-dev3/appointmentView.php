@@ -107,6 +107,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			  <td><strong>Doctor:</strong></td>
 			  <td><strong>Reason:</strong></td>
                           <td><strong>Cancel:</strong></td>
+                          <td><strong>Reschedule:</strong></td>
 			</tr>
 			<?php
 			  foreach($appointments as &$app) {
