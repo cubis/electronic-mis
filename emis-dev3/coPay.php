@@ -55,42 +55,13 @@ require_once('bootstrapREST.php');
                 </div>
             </div>
             <div class="page_display">
-                <div class="page_title">Make Appointment</div>
+                <div class="page_title">Make Co-Payment</div>
                 <div class="page_content">
                 <!-- PAGE CONTENT STARTS HERE -->
 <!-- Include the appoint id in copay-->
         <form action="coPayExec.php" method="post">
 
             <?php
-            // Displays list of doctors
-            //echo 'Doctor: ';
-            
-            //fetches list from database and formats for dropdown box
-            //global $db;
-            /*
-            $prep = $db->prepare('SELECT * FROM Doctor');
-            if($prep->execute())
-            {
-                if($prep->rowCount() >= 1)
-                {
-                    echo '<select name="doctor">
-                    <option value="0">Select Doctor</option>';
-                    $doctors = $prep->fetchAll();
-                    foreach($doctors as &$doc)
-                    {
-                        echo '<option value='. $doc[PK_DoctorID] . '>' . $doc['DocName'] . '</option>';
-                    }
-                }
-                else
-                    echo '<option value="NULL">No Doctors Available!</option>';
-            }
-            echo '</select>';*/
-            /*$result = mysql_query($doclist) or die(mysql_error());
-            echo 'Request appointment with Doctor:
-            <select name="doctor">';
-            while ($row1 = mysql_fetch_assoc($result)) {
-                echo '<option value = "', $row1['PK_DoctorID'], '">', $row1['DocName'], '</option>';
-            }*/
             echo "Amount: ";
             echo "<input name='amount' type ='text' class='textfield' id='amount'/><br/>";
 
