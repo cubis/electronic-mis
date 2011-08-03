@@ -117,7 +117,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    echo "<td>" . $date->format('H:ia') . "</td>";
 			    echo "<td>$app[3]</td>";
 			    echo "<td>$app[2]</td>";
-                            echo "<td><a href='doctorAddRemovePatientExec.php?ID=$app[0]&do=add'>Add</a></td>";
+                            echo "<td><a href='cancelApptExec.php?ID=$app[0]'>Cancel</a></td>";
 			    echo "</tr>";
 			    }
 			?>
