@@ -170,7 +170,7 @@ function doService($db) {
     return $retVal;
 }
 
-$output = doServiceView($db);
+$output = doService($db);
 print($output);
 
 ?>

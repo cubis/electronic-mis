@@ -216,9 +216,10 @@ function doService($db) {
 					//add into the proper sub table with the user primary key as the member foreign key
 					$member = $memIDPrep->fetch(PDO::FETCH_ASSOC);
 					if($tableType == "Doctor"){
-						$insertTypePrep = $db->prepare("INSERT INTO " .$tableType. "(FK_member_id, DocName) VALUES('" .$member['PK_member_id']. "', '" .$member['LastName']. "' )");
-					} else {
-						$insertTypePrep = $db->prepare("INSERT INTO " .$tableType. "(FK_member_id) VALUES('" .$member['PK_member_id']. "')");
+$insertTypePrep = $db->prepare("INSERT INTO " .$tableType. "(FK_member_id, DocName) VALUES('" .$member['PK_member_id']. "', '" .$member['LastName']. "' )");
+}
+else {
+					$insertTypePrep = $db->prepare("INSERT INTO " .$tableType. "(FK_member_id) VALUES('" .$member['PK_member_id']. "')");
 					}
 					//insert into subtable failed
 					if( !($insertTypePrep->execute()) ){

@@ -7,6 +7,7 @@ $request .= "u=" . urlencode($userName);
 $request .= "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
 $request .= "&pat=" . urlencode($_GET['u']);
 
+//die($request);
 //format and send request
 $ch = curl_init($request);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);    
@@ -50,6 +51,8 @@ $CoveragePercent = $wsResponse[$wsIndices['COVERAGEPERCENT'][0]]['value'];
 $CoPay = $wsResponse[$wsIndices['COPAY'][0]]['value'];
 $CoverageStart = $wsResponse[$wsIndices['COVERAGESTART'][0]]['value'];
 $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
+$Locked = $wsResponse[$wsIndices['LOCKED'][0]]['value'];
+$NeedApproval = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
 
 ?>
 
@@ -94,6 +97,8 @@ $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
                         <input type="hidden" name="UserName" value="<?php echo $_GET['u']; ?>" />
                         <input type="hidden" name="AuthKey" value="<?php echo $_SESSION['SESS_AUTH_KEY']; ?>" />
                         <input type="hidden" name="CallingUserName" value="<?php echo $_SESSION['SESS_USERNAME']; ?>" />
+						<input type="hidden" name="PersonalID" value="<?php echo $_SESSION['SESS_PERSONAL_ID']; ?>" />
+						<input type="hidden" name="MemberID" value="<?php echo $_SESSION['SESS_MEMBER_ID']; ?>" />
                         
                         <table>
 							<tr>
@@ -159,9 +164,26 @@ $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
                                 <td>Coverage Ends:</td>
                                 <td><input type="text" name="Coverage-End" value="<?php echo "$CoverageEnd" ?>" /></td>
                             </tr>
-                            <tr>
-                                <td><div class="dashed_line"></div>
-                            </tr>
+                             <?php if ($_SESSION['SESS_TYPE'] >= 400): // Logged in user is waiting approval ?>
+                     <tr>
+								<td><h3>Account Status</h3></td>
+							</tr>
+					 <tr>
+                        <td>Unlocked:</td>
+                        <td>
+                        <input type="radio" name="Status" value="unlock"
+                        <?php if(!$Locked) echo "checked"; ?>  />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>Locked:</td>
+                        <td>
+                        <input type="radio" name="Status" value="lock"
+                        <?php if($Locked) echo "checked"; ?>  />
+                        </td>
+                     </tr>
+                     <?php endif; ?>
+
                             </table>
 							<br /><br />
 							<a class="black_button" style="margin-right: 60px;" href="memberProfileView.php"><span>Cancel</span></a>

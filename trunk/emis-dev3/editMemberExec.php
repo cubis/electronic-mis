@@ -13,12 +13,13 @@ foreach ($_POST as $key => $value) {
 	$fieldString .= $key . "=";
 	$fieldString .= urlencode($value) . "&";
 }
+/*
 $fieldString = rtrim($fieldString, "&");
-//print "$fieldString\n";
+print "$fieldString\n";
 
-//$text = print_r($_POST, true);
-//print "<pre>$text</pre>";
-
+$text = print_r($_POST, true);
+print "<pre>$text</pre>";
+*/
 $request = "http://localhost/emis/emis-dev3/editMemberREST.php";
 //format and send request
 $ch = curl_init($request);
@@ -35,6 +36,7 @@ if( $RESToutput == ''){
 	die("CONNECTION ERROR");
 }	
 
+//die($RESToutput);
 //print $RESToutput;
 //parse return string
 $parser = xml_parser_create();	
@@ -42,12 +44,7 @@ xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
 
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
-if($errNum == 0) {
-	//print "no errors";
-	header("location: memberProfileView.php");
-	exit();
-}
-else {
+if($errNum != 0) {
 	//logout failed...output error to screen
 	$ct = 0;
 	while($ct < $errNum){
@@ -60,6 +57,22 @@ else {
 	header("location: index.php");
 	exit();
 }
-
 ?>
-	
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="refresh" content="1;url=http://localhost/emis/emis-dev3/memberProfileView.php">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link href="css/styles.css" rel="stylesheet" type="text/css" />
+	<title>Success</title>
+</head>
+
+<body>
+<center>
+<div class="login_box">
+<img src="img/logo.png" alt="Electronic Medical Information System">
+<h1> Edit Successful. You will be re-directed in 2 seconds. </h1>
+</div>
+</body>
+</html>

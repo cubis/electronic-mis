@@ -7,7 +7,8 @@ session_start();
 <?php
 
 require_once('auth.php');
-require_once('bootstrap.php');
+require_once('configREST.php');
+require_once('bootstrapREST.php');
 //Start session
 //session_start();
 //Array to store validation errors
