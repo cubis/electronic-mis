@@ -49,12 +49,12 @@ require_once('bootstrap.php');  //link information
                     <!--<form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID=<?php //echo $_GET[$ID] ?>">-->
                         <center><p><b>Fill in the visit information below.</b></p></center>
                         <?php
-                        echo "<p>ID=".$apptid."</p>";
+                        //echo "<p>ID=".$apptid."</p>";
                         ?>
                         <div class="dashed_line"></div>
                         <table width="300" border="0" align="center" cellpadding="2" cellspacing="0">
                             <tr>
-                                <th>Blood Preasure:</th>
+                                <th>Blood Pressure:</th>
                                 <td><input name="bp" type="text" class="textfield" id="bp" /></td>
                             </tr>
 
