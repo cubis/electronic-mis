@@ -45,7 +45,7 @@ function outputXML($errNum, $errMsgArr) {
     $outputString .= "<content>\n";
     $outputString .= "<errNum>" . $errNum . "</errNum>\n";
     if ($errNum == 0) {
-        $outputString .= "<RESULT>SUCCESSFUL ADD APPT!</RESULT>";
+        $outputString .= "<RESULT>SUCCESSFUL ADD COPAY!</RESULT>";
         logToDB($user . " successfuly registered", NULL, $user);
     } else {
         $ct = 0;
