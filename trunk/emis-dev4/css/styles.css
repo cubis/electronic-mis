@@ -1,0 +1,145 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin: 0 auto;
+	background-image:url(../img/logged_out_bg.png);
+	background-repeat:repeat-x;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+	color: #001c6c;
+}
+
+#container {
+	margin: 0 auto;
+	width: 1000px;
+	padding: 0px 20px 0px 20px;
+}
+
+#header {
+	height: 82px;
+}
+
+#logo {
+	float: left;
+	padding: 14px 0px 13px 0px;
+}
+
+#loginbox {
+	float: right;
+	padding-top: 6px;
+}
+
+#loginbox label {
+	font-size: 11px;
+	color: white;
+	padding: 0px 0px 5px 2px;
+}
+
+#loginbox table tr td {
+    padding: 0 0 0 14px;
+}
+
+#loginbox input {
+    margin: 0;
+    width: 142px;
+	border: 1px solid #141414;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    padding: 3px;
+}
+
+#loginbox a {
+	color: white;
+	text-decoration: none;
+	margin-top: 10px;
+}
+
+.inputcheckbox {
+	margin-left: 0px;
+}
+
+#contentwrap {
+	padding: 0px;
+	height: 483px;
+}
+
+#infobox {
+	color: #0c0c0c;
+	font-weight: bold;
+    font-size: 20px;
+    line-height: 29px;
+    margin-top: 20px;
+    width: 450px;
+    word-spacing: -1px;
+	float: left;
+}
+
+#infobox img {
+	padding-top: 15px;
+}
+
+h2 {
+	font-weight: bold;
+	font-size:18px;
+	margin-bottom: 0px;
+}
+
+.h2detail {
+	font-weight: normal;
+	font-size: 15px;
+	margin: 0px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #0c0c0c;
+}
+
+#registerbox {
+ 	color: #0c0c0c;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 29px;
+    margin-top: 15px;
+    width: 450px;
+    word-spacing: -1px;
+}
+
+#registerbox label {
+	font-weight: normal;
+	font-size: 13px;
+}
+
+#registerbox input {
+    font-size: 16px;
+    padding: 6px;
+    width: 250px;
+	border: 1px solid #2e2e2e;
+    margin-top: 2px;
+}
+
+#registerbox table th {
+	text-align: right;
+	padding-right: 10px;
+}
+
+#registerbox table {
+	padding-top: 10px;
+	float: right;
+}
+
+#registerbox select {
+    font-size: 16px;
+    padding: 6px;
+    width: 100px;
+	border: 1px solid #2e2e2e;
+    margin-top: 2px;
+}
+
+#footer {
+	color: #0c0c0c;
+	display: inline-block;
+}
+
+.footerbox {
+	width: 320px;
+	float: left;
+}
