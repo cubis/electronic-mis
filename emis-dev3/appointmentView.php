@@ -119,6 +119,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    echo "<td>$app[3]</td>";
 			    echo "<td>$app[2]</td>";
                             echo "<td><a href='cancelApptExec.php?ID=$app[0]'>Cancel</a></td>";
+                            echo "<td><a href='rescheduleAppt.php?ID=$app[0]'>Cancel</a></td>";
 			    echo "</tr>";
 			    }
 			?>
