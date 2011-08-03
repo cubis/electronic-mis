@@ -72,33 +72,28 @@ function doService($db) {
     if ($errNum == 0) {
         //set up and insert values into the user table
         //getting the patient id from the user table
-        $getPID = $db->prepare("Select * FROM Patient WHERE FK_member_id = (Select PK_member_id From Users where UserName = '" . $_POST['u'] . "');");
-        $succes = $getPID->execute();
-        $member = $getPID->fetch(PDO::FETCH_ASSOC);
-        $pid = $member['PK_PatientID'];
+        //$getPID = $db->prepare("Select * FROM Patient WHERE FK_member_id = (Select PK_member_id From Users where UserName = '" . $_POST['u'] . "');");
+        //$succes = $getPID->execute();
+        //$member = $getPID->fetch(PDO::FETCH_ASSOC);
+        //$pid = $member['PK_PatientID'];
 
-        $addApptPrep = $db->prepare("INSERT INTO Appointment(FK_DoctorID, FK_PatientID, Date, Time, Address, Status, Reason, Reminder) 
-                                        VALUES(:doc, :pid, :date, :time, :address, :status, :reason, :reminder);");
+        $addCoPayPrep = $db->prepare("INSERT INTO Copayment(Amount, Date, FK_AppID) 
+                                        VALUES(:amount, :date, :appID);");
         //$tableType = '';
-        $status = "scheduled";
+        //$status = "scheduled";
         $date = $year . "-" . $month . "-" . $day;
         $time = $hour . "";
         $vals = array(
-            ':doc' => $doctor,
-            ':pid' => $pid,
+            ':amount' => $amount,
             ':date' => $date,
-            ':time' => $time,
-            ':address' => $address,
-            ':status' => $status,
-            ':reason' => $reason,
-            ':reminder' => $reminder
+            ':appID' => $appID
         );
-        $insertApptSuccess = $addApptPrep->execute($vals);
+        $addCoPaytSuccess = $addCoPayPrep->execute($vals);
 
         //$needapproval;
         //$type;
         if (!$insertApptSuccess) {
-            $errMsgArr[] = 'Add Appt failed';
+            $errMsgArr[] = 'Add CoPay failed';
             $errNum += 1;
         }
 
