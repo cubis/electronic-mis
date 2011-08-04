@@ -34,7 +34,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.appointmentListBox = new System.Windows.Forms.ListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbAppointments = new System.Windows.Forms.ComboBox();
+            this.btnReschedule = new System.Windows.Forms.Button();
+            this.btnReciept = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // calAppointments
@@ -49,9 +52,9 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(281, 367);
+            this.CancelButton.Location = new System.Drawing.Point(449, 380);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(144, 23);
+            this.CancelButton.Size = new System.Drawing.Size(153, 23);
             this.CancelButton.TabIndex = 11;
             this.CancelButton.Text = "Cancel This Appointment";
             this.CancelButton.UseVisualStyleBackColor = true;
@@ -63,7 +66,7 @@
             this.remindMeChkBox.AutoSize = true;
             this.remindMeChkBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.remindMeChkBox.Enabled = false;
-            this.remindMeChkBox.Location = new System.Drawing.Point(466, 373);
+            this.remindMeChkBox.Location = new System.Drawing.Point(522, 357);
             this.remindMeChkBox.Name = "remindMeChkBox";
             this.remindMeChkBox.Size = new System.Drawing.Size(80, 17);
             this.remindMeChkBox.TabIndex = 10;
@@ -76,7 +79,7 @@
             this.textBox1.Location = new System.Drawing.Point(284, 82);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(265, 263);
+            this.textBox1.Size = new System.Drawing.Size(318, 263);
             this.textBox1.TabIndex = 9;
             // 
             // label1
@@ -94,24 +97,48 @@
             this.appointmentListBox.FormattingEnabled = true;
             this.appointmentListBox.Location = new System.Drawing.Point(45, 256);
             this.appointmentListBox.Name = "appointmentListBox";
-            this.appointmentListBox.Size = new System.Drawing.Size(227, 134);
+            this.appointmentListBox.Size = new System.Drawing.Size(227, 147);
             this.appointmentListBox.TabIndex = 7;
             this.appointmentListBox.SelectedIndexChanged += new System.EventHandler(this.appointmentListBox_SelectedIndexChanged);
             // 
-            // comboBox1
+            // cmbAppointments
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(285, 49);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(264, 21);
-            this.comboBox1.TabIndex = 12;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cmbAppointments.FormattingEnabled = true;
+            this.cmbAppointments.Location = new System.Drawing.Point(285, 49);
+            this.cmbAppointments.Name = "cmbAppointments";
+            this.cmbAppointments.Size = new System.Drawing.Size(264, 21);
+            this.cmbAppointments.TabIndex = 12;
+            this.cmbAppointments.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // btnReschedule
+            // 
+            this.btnReschedule.Location = new System.Drawing.Point(284, 380);
+            this.btnReschedule.Name = "btnReschedule";
+            this.btnReschedule.Size = new System.Drawing.Size(159, 23);
+            this.btnReschedule.TabIndex = 13;
+            this.btnReschedule.Text = "Reschedule this Appointment";
+            this.btnReschedule.UseVisualStyleBackColor = true;
+            this.btnReschedule.Visible = false;
+            this.btnReschedule.Click += new System.EventHandler(this.btnReschedule_Click);
+            // 
+            // btnReciept
+            // 
+            this.btnReciept.Location = new System.Drawing.Point(366, 380);
+            this.btnReciept.Name = "btnReciept";
+            this.btnReciept.Size = new System.Drawing.Size(158, 23);
+            this.btnReciept.TabIndex = 14;
+            this.btnReciept.Text = "View Your Recipt";
+            this.btnReciept.UseVisualStyleBackColor = true;
+            this.btnReciept.Visible = false;
+            this.btnReciept.Click += new System.EventHandler(this.btnReciept_Click);
             // 
             // AppointmentTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btnReciept);
+            this.Controls.Add(this.btnReschedule);
+            this.Controls.Add(this.cmbAppointments);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.remindMeChkBox);
             this.Controls.Add(this.textBox1);
@@ -134,6 +161,9 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox appointmentListBox;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbAppointments;
+        private System.Windows.Forms.Button btnReschedule;
+        private System.Windows.Forms.Button btnReciept;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

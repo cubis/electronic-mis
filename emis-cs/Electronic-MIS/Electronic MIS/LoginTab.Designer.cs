@@ -65,7 +65,7 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(179, 22);
             this.txtUser.TabIndex = 0;
-            this.txtUser.Text = "Docj";
+            this.txtUser.Text = "bsattler";
             this.txtUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUser_KeyPress);
             // 
             // label2

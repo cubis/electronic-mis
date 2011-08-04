@@ -49,6 +49,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>.\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xtra">
+      <HintPath>.\itextsharp.xtra.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appointmentcs.cs" />
     <Compile Include="AppointmentTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +94,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reschedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reschedule.Designer.cs">
+      <DependentUpon>Reschedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="SessionManager.cs" />
     <Compile Include="WelcomeTab.cs">
       <SubType>UserControl</SubType>
@@ -116,6 +129,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reschedule.resx">
+      <DependentUpon>Reschedule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WelcomeTab.resx">
       <DependentUpon>WelcomeTab.cs</DependentUpon>
     </EmbeddedResource>

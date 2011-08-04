@@ -17,6 +17,10 @@ namespace Electronic_MIS
 {
     public partial class AppointmentTab : UserControl
     {
+        public delegate void PrintEventHandler(object sender, PrintEventArgs e);
+        public event PrintEventHandler PrintEvent;        
+    
+
         SessionManager sessionManager;
         List<Appointment> appointments;
         string server;
@@ -78,9 +82,11 @@ namespace Electronic_MIS
 
             string url = data.ToString();
             Debug.WriteLine(url);
-
+            
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
+
+            request.Timeout = 10000;
 
             try
             {
@@ -109,9 +115,11 @@ namespace Electronic_MIS
                                 xmlReader.Read();
                                 while (xmlReader.Name != "Appointment")
                                 {
-                                    xmlReader.Read();
                                     switch (xmlReader.Name)
                                     {
+                                        case "APPTID":
+                                            newAppt.AppointmentID = xmlReader.ReadElementContentAsString();
+                                            break;
                                         case "DATE":
                                             sb.Append(xmlReader.ReadElementContentAsString() + " ");
                                             break;
@@ -143,6 +151,7 @@ namespace Electronic_MIS
                                         default:
                                             break;
                                     }
+                                    xmlReader.Read();
                                 }
                                 newAppt.AppointmentTime = DateTime.Parse(sb.ToString());
                                 appointments.Add(newAppt);
@@ -170,7 +179,7 @@ namespace Electronic_MIS
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            //TODO: Add in code to change reminder
         }
 
         private void appointmentListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -190,23 +199,25 @@ namespace Electronic_MIS
 
         private void selectAppointmentByDate(DateTime date)
         {
-            comboBox1.Items.Clear();
-            comboBox1.ResetText();
+            cmbAppointments.Items.Clear();
+            cmbAppointments.ResetText();
             textBox1.Clear();
             remindMeChkBox.Visible = false;
             CancelButton.Visible = false;
+            btnReschedule.Visible = false;
+            btnReciept.Visible = false;
 
             foreach (Appointment appt in appointments)
             {
                 if (appt.AppointmentTime.Date == date.Date)
                 {
-                    comboBox1.Items.Add(appt);
+                    cmbAppointments.Items.Add(appt);
                 }
             }
 
-            if (comboBox1.Items.Count > 0)
+            if (cmbAppointments.Items.Count > 0)
             {
-                comboBox1.SelectedIndex = 0;
+                cmbAppointments.SelectedIndex = 0;
                 selectAppointment();
             }
 
@@ -220,7 +231,7 @@ namespace Electronic_MIS
 
         private void selectAppointment()
         {
-            Appointment appt = (Appointment)comboBox1.SelectedItem;
+            Appointment appt = (Appointment)cmbAppointments.SelectedItem;
 
             calAppointments.SetDate(appt.AppointmentTime);
             appointmentListBox.SelectedItem = appt;
@@ -239,8 +250,16 @@ namespace Electronic_MIS
                 remindMeChkBox.CheckState = CheckState.Checked;
             }
 
-            CancelButton.Visible = true;
-            remindMeChkBox.Visible = true;
+            if (appt.AppointmentTime.CompareTo(DateTime.Today) > 0)
+            {
+                CancelButton.Visible = true;
+                btnReschedule.Visible = true;
+                remindMeChkBox.Visible = true;
+            }
+            else
+            {
+                btnReciept.Visible = true;
+            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -254,25 +273,25 @@ namespace Electronic_MIS
 
         private void removeAppointment()
         {
-            Appointment appt = (Appointment)comboBox1.SelectedItem;
+            Appointment appt = (Appointment)cmbAppointments.SelectedItem;
 
             appointments.Remove(appt);
             calAppointments.RemoveBoldedDate(appt.AppointmentTime);
             appointmentListBox.Items.Remove(appt);
-            comboBox1.Items.Remove(appt);
+            cmbAppointments.Items.Remove(appt);
 
-            if (comboBox1.Items.Count > 1)
+            if (cmbAppointments.Items.Count > 1)
             {
-                comboBox1.SelectedIndex = 0;
+                cmbAppointments.SelectedIndex = 0;
                 selectAppointment();
             }
             else
             {
-                comboBox1.SelectedIndex = -1;
+                cmbAppointments.SelectedIndex = -1;
             }
 
             textBox1.Clear();
-            comboBox1.Text = "";
+            cmbAppointments.Text = "";
 
             CancelButton.Visible = false;
             remindMeChkBox.Visible = false;
@@ -294,92 +313,52 @@ namespace Electronic_MIS
             System.Console.WriteLine("Warning, trust any certificate");
             return true;
         }
-  
+
+        private void btnReschedule_Click(object sender, EventArgs e)
+        {
+            DateTime newApptTime;
+            String doctor;
+            Reschedule resched = new Reschedule();
+            resched.ShowDialog();
+
+            newApptTime = resched.newTime;
+            doctor = resched.doctor;
+
+
+            //TODO:  Add in REST call to change appt. time
+        }
+
+        protected virtual void OnPrintEvent(PrintEventArgs e)
+        {
+            if (PrintEvent != null)
+                PrintEvent(this, e);
+        }
+
+        private void btnReciept_Click(object sender, EventArgs e)
+        {
+            PrintEventArgs eventArgs = new PrintEventArgs((Appointment)cmbAppointments.SelectedItem);
+
+            OnPrintEvent(eventArgs);
+        } 
+
+
     }
 
-    class Appointment : IComparable
+    public class PrintEventArgs : EventArgs
     {
-        String doc;
-        String reason;
-        int apptID;
-        bool remind;
-        DateTime appTime;
+        Appointment appt;
 
-        public String Doctor
+        public PrintEventArgs(Appointment appointment)
+        {
+            appt = appointment;
+        }
+
+        public Appointment Appointment
         {
             get
             {
-                return doc;
+                return appt;
             }
-            set
-            {
-                doc = value;
-            }
-
-        }
-
-        public String Reason
-        {
-            get
-            {
-                return reason;
-            }
-            set
-            {
-                reason = value;
-            }
-
-        }
-
-        public int AppointmentID
-        {
-            get
-            {
-                return apptID;
-            }
-            set
-            {
-                apptID = value;
-            }
-
-        }
-
-        public bool Remind
-        {
-            get
-            {
-                return remind;
-            }
-            set
-            {
-                remind = value;
-            }
-
-        }
-
-        public DateTime AppointmentTime
-        {
-            get
-            {
-                return appTime;
-            }
-            set
-            {
-                appTime = value;
-            }
-
-        }
-
-        public override string ToString()
-        {
-            return (AppointmentTime.ToLongDateString() + ", " +AppointmentTime.ToLongTimeString());
-        }
-
-        public int CompareTo(object obj)
-        {
-            Appointment comp = (Appointment)obj;
-
-            return DateTime.Compare(this.AppointmentTime,comp.AppointmentTime);
         }
     }
 }

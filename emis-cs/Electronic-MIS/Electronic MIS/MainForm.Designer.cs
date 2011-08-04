@@ -110,7 +110,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabViewer);
             this.splitContainer1.Panel2.SizeChanged += new System.EventHandler(this.splitContainer1_Panel2_SizeChanged);
-            this.splitContainer1.Size = new System.Drawing.Size(884, 461);
+            this.splitContainer1.Size = new System.Drawing.Size(884, 469);
             this.splitContainer1.SplitterDistance = 261;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.TabStop = false;
@@ -185,7 +185,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(884, 485);
+            this.ClientSize = new System.Drawing.Size(884, 493);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

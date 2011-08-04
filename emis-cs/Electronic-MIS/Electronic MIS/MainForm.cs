@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace Electronic_MIS
 {
@@ -13,7 +16,6 @@ namespace Electronic_MIS
     {
         SessionManager sessionManager;
         string activeServer;
-
         public MainForm()
         {
             InitializeComponent();
@@ -83,6 +85,7 @@ namespace Electronic_MIS
                     index = tabViewer.TabPages.IndexOfKey("Appointments");
 
                     AppointmentTab appTab = new AppointmentTab(sessionManager,activeServer);
+                    appTab.PrintEvent += new AppointmentTab.PrintEventHandler(appTab_PrintEvent);
 
                     tabViewer.TabPages[index].Controls.Add(appTab);
                 }
@@ -122,6 +125,103 @@ namespace Electronic_MIS
                     updateNavTree();
                 }
             }
+        }
+
+        void appTab_PrintEvent(object sender, PrintEventArgs e)
+        {
+
+           createPDF(e.Appointment);
+        }
+
+        /*                  Layout for the table
+                        * 
+                        * 
+                        *       ELECTRONIC MEDICAL INFORMATION SYSTEMS
+                        *      --------------------------------------------
+                        *       Your Recipt for Wednesday, August 3, 2011
+                        * 
+                        * 
+                        * Total Charges:     |$100.00
+                        * Amount Paid  :     | $50.00
+                        *                    ---------
+                        * Remaining Balance: | $50.00
+                        * 
+                        * Your type of payment plan:  Monthly
+                        * 
+                        * */
+        private void createPDF(Appointment appt)
+        {
+            string path = "./test.pdf";
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
+            //Create the Document
+            FileStream fs = File.Create(path);
+            Document document = new Document();
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
+            document.Open();
+
+            //Create the Table to manage layout for the page
+            PdfPTable table = new PdfPTable(1);
+            table.HorizontalAlignment = Element.ALIGN_CENTER;
+
+            //Create the Title
+            Font titleFont = new Font(iTextSharp.text.Font.FontFamily.COURIER, 18.0f);
+            PdfPCell titleCell = new PdfPCell(new Phrase("ELECTRONIC MEDICAL INFORMATION SYSTEMS", titleFont));
+            titleCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            titleCell.BorderWidth = 0;
+            titleCell.BorderWidthBottom = 2f;
+
+            //Create the Subtitle
+            PdfPCell subTitleCell = new PdfPCell(new Phrase("Your Recipt For " + appt.AppointmentTime.ToLongDateString()));
+            subTitleCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            subTitleCell.BorderWidth = 0;
+
+            //Spacer
+            PdfPCell spacer = new PdfPCell();
+            spacer.FixedHeight = 20.0f;
+            spacer.BorderWidth = 0;
+
+            //Create a subtable for the balance summary
+            PdfPTable chargesTable = new PdfPTable(2);
+            PdfPCell labelCell = new PdfPCell();
+            labelCell.AddElement(new Phrase("Total Charges :\n"));
+            labelCell.AddElement(new Phrase("Total Paid    :"));
+            labelCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            labelCell.BorderWidth = 0;
+            PdfPCell amountCell = new PdfPCell();
+            amountCell.AddElement(new Phrase("$100.00"));
+            amountCell.AddElement(new Phrase("$50.00\n"));
+            amountCell.BorderWidth = 0;
+            amountCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            amountCell.BorderWidthBottom = 1f;
+            PdfPCell totalLabel = new PdfPCell();
+            totalLabel.AddElement(new Phrase("Remaining Balance :\n"));
+            totalLabel.HorizontalAlignment = Element.ALIGN_RIGHT;
+            totalLabel.BorderWidth = 0;
+            PdfPCell balance = new PdfPCell();
+            balance.AddElement(new Phrase("$50.00"));
+            balance.HorizontalAlignment = Element.ALIGN_RIGHT;
+            balance.BorderWidth = 0;
+            chargesTable.AddCell(labelCell);
+            chargesTable.AddCell(amountCell);
+            chargesTable.AddCell(totalLabel);
+            chargesTable.AddCell(balance);
+
+
+            table.AddCell(titleCell);
+            table.AddCell(subTitleCell);
+            table.AddCell(spacer);
+            table.AddCell(chargesTable);
+
+
+            document.Add(table);
+
+            document.Close();
+
+            System.Diagnostics.Process.Start(Path.GetDirectoryName(Application.ExecutablePath) + path);
         }
 
         private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
@@ -244,6 +344,7 @@ namespace Electronic_MIS
                     index = tabViewer.TabPages.IndexOfKey("Appointments");
 
                     AppointmentTab appTab = new AppointmentTab(sessionManager, activeServer);
+                    appTab.PrintEvent += new AppointmentTab.PrintEventHandler(appTab_PrintEvent);
 
                     tabViewer.TabPages[index].Controls.Add(appTab);
                 }
@@ -287,6 +388,9 @@ namespace Electronic_MIS
 
         private void tabViewer_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (tabViewer.SelectedIndex == -1)
+                return;
+
             if (tabViewer.TabPages[tabViewer.SelectedIndex].HasChildren)
             {
                 if (!tabViewer.TabPages[tabViewer.SelectedIndex].Controls[0].ContainsFocus)
