@@ -1,9 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Electronic Medical Information System (EMIS)</title>
-    <link type="text/css" rel="stylesheet" href="css/styles.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Electronic Medical Information System (EMIS)</title>
+  <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <?php require('calendar/tc_calendar.php');?>
 </head>
 
 <body OnLoad="document.login_Form.login.focus();">
@@ -55,7 +56,25 @@
                             </tr>
                             <tr>
                                 <th><label>Birthdate:</label></th>
-                                <td><input name="bday" type="date" class="textfield" id="bday" /></td>
+                                <td>
+				  <?php
+				    // Request selected language
+				    $hl = (isset($_POST["hl"])) ? $_POST["hl"] : false;
+				    if(!defined("L_LANG") || L_LANG == "L_LANG")
+				    {
+				    if($hl) define("L_LANG", $hl);
+				    else define("L_LANG", "en_GB");
+				    }
+				    $myCalendar = new tc_calendar("bdate", true, false);
+				    $myCalendar->setIcon("calendar/images/iconCalendar.gif");
+				    $myCalendar->setDate(date('d'), date('m'), date('Y'));
+				    $myCalendar->setPath("calendar/");
+				    $myCalendar->setAlignment('left', 'bottom');
+				    $myCalendar->setYearInterval(1900, 2015);
+				    $myCalendar->setDateFormat('j F Y');
+				    $myCalendar->writeScript();
+				  ?>
+				</td>
                             </tr>
                             <tr>
                                 <th><label>Email:</label></th>
