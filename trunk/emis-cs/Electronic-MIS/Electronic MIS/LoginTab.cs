@@ -86,6 +86,8 @@ namespace Electronic_MIS
             Debug.WriteLine("Connection Request: ");
             Debug.WriteLine(request.RequestUri.OriginalString.ToString());
 
+            request.Timeout = (10000);
+
             try
             {
                 WebResponse response = request.GetResponse();
