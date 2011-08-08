@@ -7,7 +7,7 @@ require_once('bootstrapREST.php');
 
 $errmsg_arr = array();
 
-$url = "http://localhost/emis/emis-dev3/coPayREST.php";
+$url = "http://localhost/emis/emis-dev4/coPayREST.php";
 $amount = $_POST['amount'];
 $month = $_POST['month'];
 $day = $_POST['day'];
