@@ -16,7 +16,7 @@ if (!function_exists('utf_conv'))
 };
 
 $hl = (isset($_REQUEST["hl"])) ? $_REQUEST["hl"] : false;
-if(file_exists("lang/calendar.".($hl ? $hl : L_LANG).".php")) include_once("lang/calendar.".($hl ? $hl : L_LANG).".php");
+if(file_exists("lang/calendar.".($hl ? $hl : "L_LANG").".php")) include_once("lang/calendar.".($hl ? $hl : L_LANG).".php");
 else
 {
 	if(!defined("L_LANG") || L_LANG == "L_LANG")
