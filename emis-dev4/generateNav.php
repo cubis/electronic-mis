@@ -29,4 +29,4 @@
     <div class="navlist"><a href="logout.php">Logout</a></div>
 <?php endif; ?>
 	<div class="navlist"><a href="changePassView.php">Change Password</a></div>
-    <div class="navlist"><a href="http://localhost/emis/emis-dev3/logoutExec.php">Logout</a></div>
+    <div class="navlist"><a href="http://localhost/emis/emis-dev4/logoutExec.php">Logout</a></div>
