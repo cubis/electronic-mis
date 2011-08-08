@@ -61,11 +61,12 @@
             this.PreExCond = new System.Windows.Forms.Label();
             this.PreExCondBox = new System.Windows.Forms.ListBox();
             this.lblCompanyName = new System.Windows.Forms.Label();
+            this.patientbox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(132, 52);
+            this.textBox1.Location = new System.Drawing.Point(132, 108);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 0;
@@ -74,7 +75,7 @@
             // firstname
             // 
             this.firstname.AutoSize = true;
-            this.firstname.Location = new System.Drawing.Point(66, 59);
+            this.firstname.Location = new System.Drawing.Point(66, 115);
             this.firstname.Name = "firstname";
             this.firstname.Size = new System.Drawing.Size(60, 13);
             this.firstname.TabIndex = 1;
@@ -83,7 +84,7 @@
             // lastname
             // 
             this.lastname.AutoSize = true;
-            this.lastname.Location = new System.Drawing.Point(65, 85);
+            this.lastname.Location = new System.Drawing.Point(65, 141);
             this.lastname.Name = "lastname";
             this.lastname.Size = new System.Drawing.Size(61, 13);
             this.lastname.TabIndex = 2;
@@ -91,7 +92,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(132, 78);
+            this.textBox2.Location = new System.Drawing.Point(132, 134);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 3;
@@ -99,7 +100,7 @@
             // sex
             // 
             this.sex.AutoSize = true;
-            this.sex.Location = new System.Drawing.Point(98, 111);
+            this.sex.Location = new System.Drawing.Point(98, 167);
             this.sex.Name = "sex";
             this.sex.Size = new System.Drawing.Size(28, 13);
             this.sex.TabIndex = 4;
@@ -107,14 +108,14 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(132, 104);
+            this.textBox3.Location = new System.Drawing.Point(132, 160);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 5;
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(132, 130);
+            this.textBox5.Location = new System.Drawing.Point(132, 186);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(100, 20);
             this.textBox5.TabIndex = 8;
@@ -122,7 +123,7 @@
             // Birthday
             // 
             this.Birthday.AutoSize = true;
-            this.Birthday.Location = new System.Drawing.Point(78, 137);
+            this.Birthday.Location = new System.Drawing.Point(78, 193);
             this.Birthday.Name = "Birthday";
             this.Birthday.Size = new System.Drawing.Size(48, 13);
             this.Birthday.TabIndex = 9;
@@ -130,7 +131,7 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(132, 156);
+            this.textBox6.Location = new System.Drawing.Point(132, 212);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(100, 20);
             this.textBox6.TabIndex = 10;
@@ -138,7 +139,7 @@
             // SSN
             // 
             this.SSN.AutoSize = true;
-            this.SSN.Location = new System.Drawing.Point(94, 163);
+            this.SSN.Location = new System.Drawing.Point(94, 219);
             this.SSN.Name = "SSN";
             this.SSN.Size = new System.Drawing.Size(32, 13);
             this.SSN.TabIndex = 11;
@@ -180,7 +181,7 @@
             // 
             this.userinfo.AutoSize = true;
             this.userinfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userinfo.Location = new System.Drawing.Point(65, 20);
+            this.userinfo.Location = new System.Drawing.Point(65, 76);
             this.userinfo.Name = "userinfo";
             this.userinfo.Size = new System.Drawing.Size(176, 20);
             this.userinfo.TabIndex = 16;
@@ -337,10 +338,21 @@
             this.lblCompanyName.TabIndex = 36;
             this.lblCompanyName.Text = "Company Name:";
             // 
+            // patientbox
+            // 
+            this.patientbox.FormattingEnabled = true;
+            this.patientbox.Location = new System.Drawing.Point(68, 20);
+            this.patientbox.Name = "patientbox";
+            this.patientbox.Size = new System.Drawing.Size(164, 21);
+            this.patientbox.TabIndex = 37;
+            this.patientbox.Text = "View Patients";
+            this.patientbox.SelectedIndexChanged += new System.EventHandler(this.patientbox_SelectedIndexChanged);
+            // 
             // PatientInfoTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.patientbox);
             this.Controls.Add(this.lblCompanyName);
             this.Controls.Add(this.PreExCondBox);
             this.Controls.Add(this.PreExCond);
@@ -417,6 +429,7 @@
         private System.Windows.Forms.Label PreExCond;
         private System.Windows.Forms.ListBox PreExCondBox;
         private System.Windows.Forms.Label lblCompanyName;
+        private System.Windows.Forms.ComboBox patientbox;
 
     }
 }
