@@ -3,7 +3,7 @@
 	//Start session
 	session_start();
 	require_once("auth.php");
-	require_once("boostrap.php");
+	require_once("bootstrap.php");
 
 
 	//Array to store validation errors
