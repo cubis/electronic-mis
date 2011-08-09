@@ -135,22 +135,26 @@ function doService() {
 				(SELECT Patient.FK_member_id FROM Patient WHERE Patient.PK_PatientID = Appointment.FK_PatientID)";
 			$target = $_GET['doc'];
 		} else {
-			$qry .= "UDoc.PK_member_id = (SELECT Doctor.FK_member_id FROM Doctor WHERE Doctor.PK_DoctorID = Appointment.FK_DoctorID)
+		 	$qry .= "UDoc.PK_member_id = (SELECT Doctor.FK_member_id FROM Doctor WHERE Doctor.PK_DoctorID = Appointment.FK_DoctorID)
 				AND  UPat.PK_member_id = (SELECT Patient.FK_member_id FROM Patient WHERE Patient.PK_PatientID = Appointment.FK_PatientID)";
 			$target = '';
 		}
 		if(isset($_GET['aid']) ){
-			$qry .= " AND Appointment.PK_AppID = :aid";
+			$qry .= " AND Appointment.PK_AppID =:aid";
 		}
 	}
 
         $apptInfoPrep = $db->prepare($qry);
-	$apptArray = array(':user'=>$target);
+	if($target != ''){
+		$apptArray = array(':user'=>$target);
+	}
 	if(isset($_GET['aid']) ){
 		$apptArray[':aid'] = $_GET['aid'];
 	}
         $apptInfoSuccess = $apptInfoPrep->execute( $apptArray );
        if (!$apptInfoSuccess) {
+		$pdoError = $apptInfoPrep->errorInfo();
+		
             $errMsgArr[] = "DATABASE ERROR TWO";
 	   //$errMsgArr[] = ' aid = ' . $apptArray[':aid'];
             $errNum++;
