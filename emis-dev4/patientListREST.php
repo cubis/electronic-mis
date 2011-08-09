@@ -24,7 +24,7 @@ function outputXML($errNum, $errMsgArr, $patientNamePrep) {
         $outputString .= "<PATCOUNT>" . $patientNamePrep->rowCount() . "</PATCOUNT>\n";
         while ($patientName = $patientNamePrep->fetch(PDO::FETCH_ASSOC)) {
             $outputString .= "<Names>";
-	    $outputString .= "<PATID>" . $patientName['PK_DoctorID'] . "</PATID>\n";
+	    $outputString .= "<PATID>" . $patientName['PK_PatientID'] . "</PATID>\n";
             $outputString .= "<FirstName>" . $patientName['FirstName'] . "</FirstName>\n";
 	    $outputString .= "<LastName>" . $patientName['LastName'] . "</LastName>\n";
             $outputString .= "</Names>";
