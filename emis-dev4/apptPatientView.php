@@ -21,6 +21,7 @@ $RESToutput = curl_exec($ch); //send URL Request to RESTServer... returns string
 curl_close($ch); //string from server has been returned <XML> closethe channel
 
 
+
 if( $RESToutput == ''){
   die("CONNECTION ERROR");
 }
@@ -48,7 +49,8 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
   $adate = $wsResponse[$wsIndices['DATE'][$x]]['value'];
   $areason = $wsResponse[$wsIndices['TIME'][$x]]['value'];
   $aremind = $wsResponse[$wsIndices['REMIND'][$x]]['value'];
-  $appointments[$x] = array($aid, $adate, $atime, $adoctor, $areason, $aremind);
+  $status = $wsResponse[$wsIndices['STATUS'][$x]]['value'];
+  $appointments[$x] = array($aid, $adate, $atime, $adoctor, $areason, $aremind, $status);
 }
 
 ?>
@@ -110,6 +112,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			<tr>
 			  <td><strong>Date:</strong></td>
 			  <td><strong>Time:</strong></td>
+			  <td><strong>Status:</strong></td>
 			  <td><strong>Doctor:</strong></td>
 			  <td><strong>Reason:</strong></td>
 			</tr>
@@ -120,12 +123,16 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    echo "<td>" . $date->format('D, M dS, Y') . "</td>";
 			    $date = DateTime::createFromFormat('H:i:s', $app[4]);
 			    echo "<td>" . $date->format('H:ia') . "</td>";
+			    echo "<td>$app[6]</td>";
 			    echo "<td>$app[3]</td>";
 			    echo "<td>$app[2]</td>";
-			    echo "<td><a href='apptEditView.php?appt=$aid'>Edit</a></td>";
+			    echo "<td><a href='apptEditView.php?aid=$app[0]'>Edit</a></td>";
 			    echo "</tr>";
 			    }
 			?>
+			<tr>
+				<td><a href='apptEditView.php'>Add Appt</a></td>
+			</tr>
 			</table>
 <!-- END OF PAGE CONTENT -->
                 </div>

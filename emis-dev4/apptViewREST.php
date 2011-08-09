@@ -28,11 +28,13 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
             $outputString .= "<PatID>" . $apptInfo['FK_PatientID'] . "</PatID>\n";
 	    $outputString .= "<DocID>" . $apptInfo['FK_DoctorID'] . "</DocID>\n";
             $outputString .= "<DocName>" . $apptInfo['DocName'] . "</DocName>\n";
-            $outputString .= "<PatName>" . $apptInfo['PatName'] . "</PatName>\n";	    
+            $outputString .= "<PatFirstName>" . $apptInfo['PatFirstName'] . "</PatFirstName>\n";
+            $outputString .= "<PatLastName>" . $apptInfo['PatLastName'] . "</PatLastName>\n";	    
             $outputString .= "<REASON>" . $apptInfo['Reason'] . "</REASON>\n";
             $outputString .= "<DATE>" . $apptInfo['Date'] . "</DATE>\n";
             $outputString .= "<TIME>" . $apptInfo['Time'] . "</TIME>\n";
             $outputString .= "<STATUS>" . $apptInfo['Status'] . "</STATUS>\n";
+	    $outputString .="<REMINDER>" . $apptInfo['Reminder'] . "</REMINDER>\n";
             $outputString .= "</Appointment>";
             //logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
         }
@@ -98,7 +100,7 @@ function doService() {
 
     if ($recKey == $trustedKey || $recKey == $currKey) {
     
-	$qry = "Select Appointment.*, UDoc.LastName AS DocName, UPat.LastName AS PatName
+	$qry = "Select Appointment.*, UDoc.LastName AS DocName, UPat.FirstName AS PatFirstName, UPat.LastName AS PatLastName
 			From Appointment, Users UDoc, Users UPat WHERE ";
     
 	if( $memberInfo['Type'] == 1 ){
@@ -107,6 +109,9 @@ function doService() {
 		$qry .= "Appointment.FK_PatientID = (SELECT Patient.PK_PatientID FROM Patient WHERE FK_member_id = :user) 
 				AND UPat.PK_member_id = :user AND  UDoc.PK_member_id =
 				(SELECT Doctor.FK_member_id FROM Doctor WHERE Doctor.PK_DoctorID = Appointment.FK_DoctorID)";
+		if(isset($_GET['aid']) ){
+			$qry .= " AND Appointment.PK_AppID = :aid";
+		}
 		$target = $memberInfo['PK_member_id'];
 	} else if ( $memberInfo['Type'] == 300) {    
 	//doctor name is $memberInfo['LastName']
@@ -114,6 +119,9 @@ function doService() {
 		$qry .= "Appointment.FK_DoctorID = (SELECT Doctor.PK_DoctorID FROM Doctor WHERE FK_member_id = :user) 
 				AND UDoc.PK_member_id = :user AND  UPat.PK_member_id =
 				(SELECT Patient.FK_member_id FROM Patient WHERE Patient.PK_PatientID = Appointment.FK_PatientID)";
+		if(isset($_GET['aid']) ){
+			$qry .= " AND Appointment.PK_AppID = :aid";
+		}
 		$target = $memberInfo['PK_member_id'];
 	} else if($memberInfo['Type'] == 400){
 		if( isset($_GET['pat']) ){
@@ -131,12 +139,20 @@ function doService() {
 				AND  UPat.PK_member_id = (SELECT Patient.FK_member_id FROM Patient WHERE Patient.PK_PatientID = Appointment.FK_PatientID)";
 			$target = '';
 		}
+		if(isset($_GET['aid']) ){
+			$qry .= " AND Appointment.PK_AppID = :aid";
+		}
 	}
 
         $apptInfoPrep = $db->prepare($qry);
-        $apptInfoSuccess = $apptInfoPrep->execute( array(':user'=>$target) );
+	$apptArray = array(':user'=>$target);
+	if(isset($_GET['aid']) ){
+		$apptArray[':aid'] = $_GET['aid'];
+	}
+        $apptInfoSuccess = $apptInfoPrep->execute( $apptArray );
        if (!$apptInfoSuccess) {
             $errMsgArr[] = "DATABASE ERROR TWO";
+	   //$errMsgArr[] = ' aid = ' . $apptArray[':aid'];
             $errNum++;
         }
         if ($errNum == 0) {
@@ -145,7 +161,8 @@ function doService() {
             $retVal = outputXML($errNum, $errMsgArr, '');
         }
     } else {
-        $errMsgArr[] = "Unauthorized to view information";
+       // $errMsgArr[] = "Unauthorized to view information";
+       $errMsgArr[] = $trustedKey;
         $errNum++;
         $retVal = outputXML($errNum, $errMsgArr, '');
     }
@@ -160,5 +177,5 @@ function doService() {
 $output = doService();
 
 print($output);
-//print("SHIT = " . $_GET['u']);
+//print("SHIT = " . $_GET['aid']);
 ?>
