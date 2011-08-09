@@ -90,6 +90,8 @@ require_once('bootstrap.php');
 		$time = $wsResponseAppt[$wsIndicesAppt['TIME'][0]]['value']; 
 		list($apptHour, $apptMin, $apptSec) = split(':', $time);
 		
+	//	print($RESToutput);
+		
 	}
 	    
 	    
@@ -140,10 +142,11 @@ require_once('bootstrap.php');
 			echo '<option value="NULL">No Doctors Available!</option>';
 		}
 		echo '</select>';
+		echo "<br />";
+		echo "<br />";
 	}	
 
-	echo "<br />";
-	echo "<br />";	
+		
 	
 	
 	if($_SESSION['SESS_TYPE'] == 200 || $_SESSION['SESS_TYPE'] == 300 || $_SESSION['SESS_TYPE'] == 400){   
@@ -187,7 +190,7 @@ require_once('bootstrap.php');
 					echo '<option value='. $patid . '>' . $last . ', ' . $first . '</option>';
 				}
 				
-				$ct++;			
+				$ct++;
 			}
 			
 		
@@ -197,6 +200,8 @@ require_once('bootstrap.php');
 			echo '<option value="NULL">No Patients Available!</option>';
 		}
 		echo '</select>';
+		echo "<br />";
+		echo "<br />";
 	}
 			
 	

@@ -50,7 +50,8 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
   $areason = $wsResponse[$wsIndices['TIME'][$x]]['value'];
   $aremind = $wsResponse[$wsIndices['REMIND'][$x]]['value'];
   $status = $wsResponse[$wsIndices['STATUS'][$x]]['value'];
-  $appointments[$x] = array($aid, $adate, $atime, $adoctor, $areason, $aremind, $status);
+  $patient = $wsResponse[$wsIndices['PATLASTNAME'][$x]]['value'];
+  $appointments[$x] = array($aid, $adate, $atime, $adoctor, $areason, $aremind, $status, $patient);
 }
 
 ?>
@@ -113,18 +114,40 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			  <td><strong>Date:</strong></td>
 			  <td><strong>Time:</strong></td>
 			  <td><strong>Status:</strong></td>
+			  <?php
+				if($_SESSION['SESS_TYPE']==400){
+					echo "<td><strong>Doctor:</strong></td>";
+					echo "<td><strong>Patient:</strong></td>";
+				} else if($_SESSION['SESS_TYPE']==300){
+					echo "<td><strong>Patient:</strong></td>";
+				} else if($_SESSION['SESS_TYPE']==1){
+					echo "<td><strong>Doctor:</strong></td>";
+				}
+			  ?>
 			  <td><strong>Doctor:</strong></td>
 			  <td><strong>Reason:</strong></td>
 			</tr>
 			<?php
 			  foreach($appointments as &$app) {
+			  
+			  //appoint array  array($aid, $adate, $atime, $adoctor, $areason, $aremind, $status, $patient)
 			    echo "<tr>";
 			    $date = DateTime::createFromFormat('Y-m-d', $app[1]);
+			   //date 
 			    echo "<td>" . $date->format('D, M dS, Y') . "</td>";
 			    $date = DateTime::createFromFormat('H:i:s', $app[4]);
+			    //time
 			    echo "<td>" . $date->format('H:ia') . "</td>";
+			    //status
 			    echo "<td>$app[6]</td>";
-			    echo "<td>$app[3]</td>";
+			    //doctor
+			    if($_SESSION['SESS_TYPE'] == 400 || $_SESSION['SESS_TYPE'] == 1){
+				echo "<td>$app[3]</td>";
+			    }
+			    //patient
+			    if($_SESSION['SESS_TYPE'] == 400 || $_SESSION['SESS_TYPE'] == 300){
+				echo "<td>$app[7]</td>";
+			    }
 			    echo "<td>$app[2]</td>";
 			    echo "<td><a href='apptEditView.php?aid=$app[0]'>Edit</a></td>";
 			    echo "</tr>";

@@ -46,12 +46,13 @@ require_once('bootstrap.php');
 		xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 		
 	//	print("output = " . $output);
-	
+	//	print_r($_POST);
+
 		$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 		
 		
 		if($errNum == 0){
-			$errmsg_arr[] = "Appointements Updated Successfully";
+			$errmsg_arr[] = "Appointment Updated Successfully";
 			$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 			$thisAid = $wsResponse[$wsIndices['APPTID'][0]]['value'];
 			header("location: apptEditView.php?aid=$thisAid"); 

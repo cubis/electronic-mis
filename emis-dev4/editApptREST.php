@@ -128,9 +128,11 @@ function doService() {
 					return outputXML($errNum, $errMsgArr, '');
 				}
 				$docIDArray = $thisDocIDPrep->fetch(PDO::FETCH_ASSOC);
-				$docID = $thisDocIDPrep['PK_DoctorID'];
+				$docID = $docIDArray['PK_DoctorID'];
 				$_POST['doctor'] = $docID;
+				
 			}
+			
 			if(!$needPat){
 				$thisPatIDPrep = $db->prepare("SELECT Patient.PK_PatientID FROM Patient WHERE FK_member_id = :memID;");		
 				$thisPatIDSuccess = $thisPatIDPrep->execute( array(":memID"=>$memberInfo['PK_member_id']) );
@@ -152,7 +154,7 @@ function doService() {
 				$errMsgArr[] = "No patient provided";
 				$errNum++;
 			}
-			
+		
 			//Make sure old password correct
 			$aid = $_POST['aid'];
 			if($_POST['status'] == 'true'){
@@ -197,79 +199,46 @@ function doService() {
 				$errNum++;
 			}
 			
-			//update database with new password
+			//update database with new appt info
 			if($errNum == 0){
 			
 			
-			if($aidIsSet){
-				$str = "UPDATE Appointment SET `FK_DoctorID`='$doctor', FK_PatientID='$patient', `Date`='$date', `Time`='$time', `Address`='$address',
-					`Status`='$status', `Reason`='$reason', `Reminder`='$reminder' WHERE `PK_AppID`='$aid';";
-			//	print($str);
-				$insertAppt = $db->prepare($str);
-				$success = $insertAppt->execute();
-				if(!$success){
-					$sqlError = $insertAppt->errorInfo();
-					$errMsgArr[] = $sqlError[2];
-					$errNum++;
-				}
-			
-			} else {
-				$str = "INSERT INTO Appointment (FK_DoctorID, FK_PatientID, `Date`, `Time`, `Address`, `Status`, `Reason`, `Reminder`)
-					VALUES ('$doctor', '$patient', '$date', '$time', '$address', '$status', '$reason', '$reminder');";
-				$insertAppt = $db->prepare($str);
-				$success = $insertAppt->execute();
-				if(!$success){
-					$sqlError = $insertAppt->errorInfo();
-					$errMsgArr[] = $sqlError[2];
-					$errNum++;
-				} else {
-					$getApptID = $db->prepare("SELECT @@IDENTITY");
-					$apptIDSucc = $getApptID->execute();
-					if(!$apptIDSucc){
+				if($aidIsSet){
+					$str = "UPDATE Appointment SET `FK_DoctorID`='$doctor', FK_PatientID='$patient', `Date`='$date', `Time`='$time', `Address`='$address',
+						`Status`='$status', `Reason`='$reason', `Reminder`='$reminder' WHERE `PK_AppID`='$aid';";
+				//	print($str);
+					$insertAppt = $db->prepare($str);
+					$success = $insertAppt->execute();
+					if(!$success){
 						$sqlError = $insertAppt->errorInfo();
 						$errMsgArr[] = $sqlError[2];
 						$errNum++;
-					} else{
-						$apptIDArray = $getApptID->fetch(PDO::FETCH_ASSOC);
-						$_POST['aid'] = $apptIDArray['@@IDENTITY'];
+					}
+				
+				} else {
+					$str = "INSERT INTO Appointment (FK_DoctorID, FK_PatientID, `Date`, `Time`, `Address`, `Status`, `Reason`, `Reminder`)
+						VALUES ('$doctor', '$patient', '$date', '$time', '$address', '$status', '$reason', '$reminder');";
+					$insertAppt = $db->prepare($str);
+					$success = $insertAppt->execute();
+					if(!$success){
+						$sqlError = $insertAppt->errorInfo();
+						$errMsgArr[] = $sqlError[2];
+						$errNum++;
+					} else {
+						$getApptID = $db->prepare("SELECT @@IDENTITY");
+						$apptIDSucc = $getApptID->execute();
+						if(!$apptIDSucc){
+							$sqlError = $insertAppt->errorInfo();
+							$errMsgArr[] = $sqlError[2];
+							$errNum++;
+						} else{
+							$apptIDArray = $getApptID->fetch(PDO::FETCH_ASSOC);
+							$_POST['aid'] = $apptIDArray['@@IDENTITY'];
+						}
 					}
 				}
-			}
-				//$errMsgArr[] = $str;
-				//$errNum++;
-
-
-			/*	$str = "INSERT INTO Appointment (`FK_DoctorID`, `FK_PatientID`, `Date`, `Time`, `Address`, `Status`, `Reason`, `Reminder`) 
-				VALUES (:doctor, :patient, :date, :time, :address, :status, :reason, :reminder)";
-				$apptParam = array(
-					':reminder' => $reminder,
-					':reason' => $reason,
-					':time' => $time,
-					':date' =>  $date,
-					':doctor' => $doctor,
-					':patient' => $patient,
-					':address' => $address					
-				);
-				if($status){
-					$apptParam[':status'] = "Scheduled";
-				} else {
-					$apptParam[':status'] = "Cancelled";
-				}
-				if($aidIsSet){
-					$str = "UPDATE Appointment SET FK_DoctorID=:doctor FK_PatientID=:patient 
-					Date=:date Time=:time Address=:address Status=:status Reason=:reason WHERE PK_AppID=:aid;";
-					$apptParam[':aid'] = $aid;
-				}
-				$updateAppt = $db->prepare($str);
-				$updateApptSuccess = $updateAppt->execute( $apptParam );
-				if(!$updatePassSuccess){
-			//	if(false){
-					$err = $updateAppt->errorInfo();
-					$errMsgArr[] = $err[2]. " INSERT ERROR ";//'Password update failure';
-					$errNum++;
-				}
 				
-				*/
+	
 			}
 			
 			
@@ -281,6 +250,8 @@ function doService() {
 		
 		$retVal = outputXML($errNum, $errMsgArr, $memberInfo);
 		
+		
+
 		return $retVal;
 	
 }
