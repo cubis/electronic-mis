@@ -7,6 +7,7 @@ session_start();
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Electronic Medical Information System (EMIS) - Registration</title>
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
+	<?php require('calendar/tc_calendar.php');?>
     </head>
 
    <body OnLoad="document.login_Form.login.focus();">
@@ -68,7 +69,25 @@ session_start();
                             </tr>
                             <tr>
                                 <th><label>Birthdate:</label></th>
-                                <td><input name="bday" type="date" class="textfield" id="bday" /></td>
+				<td>
+				<?php
+				    // Request selected language
+				    $hl = (isset($_POST["hl"])) ? $_POST["hl"] : false;
+				    if(!defined("L_LANG") || L_LANG == "L_LANG")
+				    {
+				    if($hl) define("L_LANG", $hl);
+				    else define("L_LANG", "en_GB");
+				    }
+				    $myCalendar = new tc_calendar("bday", true, false);
+				    $myCalendar->setIcon("calendar/images/iconCalendar.gif");
+				    $myCalendar->setDate(date('d'), date('m'), date('Y'));
+				    $myCalendar->setPath("calendar/");
+				    $myCalendar->setAlignment('left', 'bottom');
+				    $myCalendar->setYearInterval(1900, 2015);
+				    $myCalendar->setDateFormat('j F Y');
+				    $myCalendar->writeScript();
+				  ?>
+				</td>
                             </tr>
                             <tr>
                                 <th><label>Email:</label></th>
