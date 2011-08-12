@@ -62,8 +62,11 @@ require_once('bootstrapREST.php');
         <form action="coPayExec.php" method="post">
 
             <?php
-            echo "Amount: ";
+            echo "Total Amount: ";
             echo "<input name='amount' type ='text' class='textfield' id='amount'/><br/>";
+            
+            echo "Amount Inssurace Covers: ";
+            echo "<input name='insCover' type ='text' class='textfield' id='amount'/><br/>";
 
             echo "<br />";
             echo "<br />";

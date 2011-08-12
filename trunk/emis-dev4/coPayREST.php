@@ -65,6 +65,7 @@ function doService($db) {
     $errNum = 0;
 
     $amount = $_POST['amount'];
+    $insCover = $_POST['insCover'];
     $month = $_POST['month'];
     $day = $_POST['day'];
     $year = $_POST['year'];
@@ -77,8 +78,8 @@ function doService($db) {
         //$member = $getPID->fetch(PDO::FETCH_ASSOC);
         //$pid = $member['PK_PatientID'];
 
-        $addCoPayPrep = $db->prepare("INSERT INTO Copayment(Amount, Date, FK_AppID) 
-                                        VALUES(:amount, :date, :appID);");
+        $addCoPayPrep = $db->prepare("INSERT INTO Copayment(Amount, InsCover Date, FK_AppID) 
+                                        VALUES(:amount, :insCover, :date, :appID);");
         //$tableType = '';
         //$status = "scheduled";
         $date = $year . "-" . $month . "-" . $day;
@@ -86,7 +87,8 @@ function doService($db) {
         $vals = array(
             ':amount' => $amount,
             ':date' => $date,
-            ':appID' => $appID
+            ':appID' => $appID,
+            ':insCover' => $insCover,
         );
         $addCoPaytSuccess = $addCoPayPrep->execute($vals);
 
