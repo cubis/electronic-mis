@@ -13,6 +13,7 @@ $month = $_POST['month'];
 $day = $_POST['day'];
 $year = $_POST['year'];
 $appID = $_GET['ID'];
+$insCover = $_GET['insCover'];
 
 $fields = array(
     'u' => urlencode($_SESSION['SESS_USERNAME']),
