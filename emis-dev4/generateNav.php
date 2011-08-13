@@ -17,6 +17,7 @@
 <?php elseif ($_SESSION['SESS_TYPE'] == 200): // Logged in user is a nurse ?>
 	<div class="nav_title">Nurse</div>
 	<div class="navlist"><a href="editMemberView.php">Edit Profile</a></div>
+		<div class="navlist"><a href="apptView.php">Appointments</a></div>	
 <?php elseif ($_SESSION['SESS_TYPE'] == 1): // Logged in user is a patient ?>
 	<div class="nav_title">Patient</div>
 	<div class="navlist"><a href="editMemberView.php?u=<?php echo $_SESSION['SESS_USERNAME'] ?>">Edit Profile Information</a></div>
