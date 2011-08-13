@@ -55,7 +55,8 @@ require_once('bootstrap.php');
 			$errmsg_arr[] = "Appointment Updated Successfully";
 			$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 			$thisAid = $wsResponse[$wsIndices['APPTID'][0]]['value'];
-			header("location: apptEditView.php?aid=$thisAid"); 
+			//header("location: apptEditView.php?aid=$thisAid"); 
+			header("location: apptView.php");
 		} else {
 			$ct = 0;
 			while($ct < $errNum){
