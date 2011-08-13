@@ -6,14 +6,11 @@
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
     </head>
     
-    <body>
-        
-        <form enctype="multipart/form-data" action="uploader.php" method="POST">
-        <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-        Choose a file to upload: <input name="uploadedfile" type="file" /><br />
-        <input type="submit" value="Upload File" />
+    <body>Please choose file to upload:
+        <form enctype="multipart/form-data" action="upload.php" method="post">
+        <!--Please choose a file:--> <input name="uploaded" type="file" /><br />
+        <input type="submit" value="upload" />
         </form>
-        
     </body>
 
 </html>
