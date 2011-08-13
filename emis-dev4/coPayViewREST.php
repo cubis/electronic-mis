@@ -16,26 +16,25 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
         $target = 'all';
     }
 
-
+    $count = 1;
     $outputString = ''; //start empty
     $outputString .= "<?xml version=\"1.0\"?>\n";
     $outputString .= "<content><errNum>" . $errNum . "</errNum>\n";
     if ($errNum == 0) {
-        $outputString .= "<APPTCOUNT>" . $apptInfoPrep->rowCount() . "</APPTCOUNT>\n";
+        $outputString .= "<COPAYCOUNT>" . $apptInfoPrep->rowCount() . "/COPAYCOUNT\n";
+        $outputString .= "<DATE>" .$_POST['date'] . "</DATE>";
         while ($apptInfo = $apptInfoPrep->fetch(PDO::FETCH_ASSOC)) {
-            $outputString .= "<Appointment>";
-            $outputString .= "<APPTID>" . $apptInfo['PK_AppID'] . "</APPTID>\n";
-            $outputString .= "<PatID>" . $apptInfo['FK_PatientID'] . "</PatID>\n";
-            $outputString .= "<DocID>" . $apptInfo['FK_DoctorID'] . "</DocID>\n";
-            $outputString .= "<DocName>" . $apptInfo['DocName'] . "</DocName>\n";
-            $outputString .= "<PatFirstName>" . $apptInfo['PatFirstName'] . "</PatFirstName>\n";
-            $outputString .= "<PatLastName>" . $apptInfo['PatLastName'] . "</PatLastName>\n";
-            $outputString .= "<REASON>" . $apptInfo['Reason'] . "</REASON>\n";
-            $outputString .= "<DATE>" . $apptInfo['Date'] . "</DATE>\n";
-            $outputString .= "<TIME>" . $apptInfo['Time'] . "</TIME>\n";
-            $outputString .= "<STATUS>" . $apptInfo['Status'] . "</STATUS>\n";
-            $outputString .="<REMINDER>" . $apptInfo['Reminder'] . "</REMINDER>\n";
-            $outputString .= "</Appointment>";
+            $outputString .= "<CopayInfo>";
+            $outputString .= "<ID>" . $count . "</ID>\n";
+            $outputString .= "<PatUNAME>" . $apptInfo['FK_PatientID'] . "</PatUNAME>\n";
+            $outputString .= "<ApptID>" . $apptInfo['PK_AppID'] . "</ApptID>\n";
+            $outputString .= "<InsuranceCompany>" . $apptInfo['DocName'] . "</InsuranceCompany>\n";
+            $outputString .= "<PlanName>" . $apptInfo['PatFirstName'] . "</PlanName>\n";
+            $outputString .= "<PlanNo>" . $apptInfo['PatLastName'] . "</PlanNo>\n";
+            $outputString .= "<CoveragePerc>" . $apptInfo['Reason'] . "</CoveragePerc>\n";
+            $outputString .= "<TotalBill>" . $apptInfo['Date'] . "</TotalBill>\n";
+            $outputString .= "</CopayInfo>";
+            $count++;
             //logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
         }
     } else {
