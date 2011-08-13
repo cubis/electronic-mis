@@ -34,8 +34,7 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
             $outputString .= "<CoveragePerc>" . $apptInfo['Coverage_Percent'] . "</CoveragePerc>\n";
             $outputString .= "<TotalBill>" . $apptInfo['Bill'] . "</TotalBill>\n";
             $outputString .= "</CopayInfo>\n";
-            $count++;
-            
+            $count++;                                                  
             //logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
         }
     } else {
