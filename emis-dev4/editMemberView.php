@@ -36,7 +36,7 @@ print_r($wsIndices);
 print "</pre>";*/
 
 if ($errNum != 0) {
-	die("FUCK!" . $wsResponse[$wsIndices['ERROR'][0]]['value']);
+	die("Somethings wrong" . $wsResponse[$wsIndices['ERROR'][0]]['value']);
 }
 
 $FirstName = $wsResponse[$wsIndices['FIRSTNAME'][0]]['value'];
@@ -55,6 +55,7 @@ $CoverageStart = $wsResponse[$wsIndices['COVERAGESTART'][0]]['value'];
 $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
 $Locked = $wsResponse[$wsIndices['LOCKED'][0]]['value'];
 $NeedApproval = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
+$Type = $wsResponse[$wsIndices['TYPE'][0]]['value'];
 
 ?>
 
@@ -97,8 +98,8 @@ $NeedApproval = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
                 <!-- PAGE CONTENT STARTS HERE -->
                     <form name="editMemberForm" method="post" action="editMemberExec.php">
                         <input type="hidden" name="UserName" value="<?php echo $_GET['u']; ?>" />
-                        <input type="hidden" name="AuthKey" value="<?php echo $_SESSION['SESS_AUTH_KEY']; ?>" />
-                        <input type="hidden" name="CallingUserName" value="<?php echo $_SESSION['SESS_USERNAME']; ?>" />
+                        <input type="hidden" name="key" value="<?php echo $_SESSION['SESS_AUTH_KEY']; ?>" />
+                        <input type="hidden" name="u" value="<?php echo $_SESSION['SESS_USERNAME']; ?>" />
 						<input type="hidden" name="PersonalID" value="<?php echo $_SESSION['SESS_PERSONAL_ID']; ?>" />
 						<input type="hidden" name="MemberID" value="<?php echo $_SESSION['SESS_MEMBER_ID']; ?>" />
                         
@@ -139,6 +140,7 @@ $NeedApproval = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
                                 <td>Phone Number (###-###-####):</td>
                                 <td><input type="text" name="PhoneNumber" value="<?php echo "$PhoneNumber" ?>" /></td>
                             </tr>
+			<?php if($Type == 1): ?>
                             <tr>
                                 <td><h3><div class="dashed_line"></div>Insurance Information</h3></td>
                             </tr>
@@ -166,7 +168,10 @@ $NeedApproval = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
                                 <td>Coverage Ends:</td>
                                 <td><input type="text" name="Coverage-End" value="<?php echo "$CoverageEnd" ?>" /></td>
                             </tr>
-                             <?php if ($_SESSION['SESS_TYPE'] >= 400): // Logged in user is waiting approval ?>
+			    
+                             <?php 
+			    endif; 
+			     if ($_SESSION['SESS_TYPE'] >= 400): // Logged in user is waiting approval ?>
                      <tr>
 								<td><h3>Account Status</h3></td>
 							</tr>
@@ -184,7 +189,32 @@ $NeedApproval = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
                         <?php if($Locked) echo "checked"; ?>  />
                         </td>
                      </tr>
+		     
+		     
+		<?php 		
+		if($NeedApproval ){
+			echo '<tr>';
+			echo '<td><h3>Provide Approval</h3></td>';
+			echo '</tr>';
+			echo '<tr>';
+				echo '<td>Approve:</td>';
+				echo '<td>';
+					echo '<input type="radio" name="NeedApproval" value="Approve"/>';
+				echo '</td>';
+			echo '</tr>';
+		} else {
+			echo '<tr>';
+				echo '<td>';
+					echo '<input type="hidden" name="NeedApproval" visible=false value="NOVALUE">';
+				echo '</td>';
+			echo '</tr>';
+		}
+		?>
+		    
+		     
                      <?php endif; ?>
+		     
+		    
 
                             </table>
 							<br /><br />
