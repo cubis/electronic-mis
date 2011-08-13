@@ -16,7 +16,7 @@ plan:
 
     if(isset($_GET['u']) and $_GET['u'] =='basil'){
         echo "<p>user is: ".$_GET['u']."</p>";
-        $to = "basilsattler@gmail.com";
+        $to = "bsattler@cs.utsa.edu";
         $subject = "Test mail from emis";
         $message = "this should work, Hello! This is a simple email message.\n no action required!";
         $from = "cpe-67-10-181-224.satx.res.rr.com";
