@@ -60,8 +60,8 @@ function doService() {
 
     $errMsgArr = array();
     $errNum = 0;
-
-
+    $date = $_POST['date'];
+    
     //MAKE SURE THEY PASSED US CREDENTIALS	
     if (!isset($_GET['u']) || $_GET['u'] == '') {
         $errMsgArr[] = "No username provided for authentication";
@@ -92,10 +92,14 @@ function doService() {
     $currKey = $memberInfo['CurrentKey'];
     $trustString = "xolJXj25jlk56LJkk5677LS";
     $trustedKey = md5($currKey . $trustString);
-
+    //are user credentials going to be used?
 
     if ($recKey == $trustedKey || $recKey == $currKey) {
-        $qry = "SELECT * WHERE Copayment, Appointment, Users"
+        $qry = "SELECT Appointment.PK_AppID, Appointment.Bill, Users.UserName, Insurance.Company_Name, Insurance.Plan_Type, Insurance.Plan_Num
+            FROM Appointment, Users, Insurance
+            WHERE `Appointment`.`Date` = '".$date."'
+            AND Users.PK_member_id=(SELECT Patient.FK_member_id FROM Patient WHERE Patient.PK_PatientID = Appointment.FK_PatientID)
+            AND Insurance.FK_PatientID = Appointment.FK_PatientID";
         
         
         /*
