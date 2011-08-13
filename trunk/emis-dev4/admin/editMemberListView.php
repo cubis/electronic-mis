@@ -1,7 +1,6 @@
 <?php
 require_once('../auth.php');
-require_once('../configREST.php');
-require_once('../bootstrapREST.php');
+require_once('../bootstrap.php');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -49,9 +48,10 @@ require_once('../bootstrapREST.php');
             </tr>
 			
 <?php
+global $currentPath;
 $user = $_SESSION['SESS_USERNAME'];
 $key = $_SESSION['SESS_AUTH_KEY'];
-$request = "http://localhost/emis/emis-dev3/viewPatientREST.php?u=" 
+$request = $currentPath . "viewPatientREST.php?u=" 
 			. urlencode($user) . "&key=" . urlencode($key) . "&pat=all";
 
 //format and send request
@@ -94,7 +94,7 @@ while ($currRow < $numrows)
 	echo "<td style=\"padding: 15px 0px 15px 0px;\">",$FirstName,"</td>\n";
 	echo "<td>",$LastName,"</td>\n";
 	echo "<td>",$UserName,"</td>\n";
-	echo "<td><a href='http://localhost/emis/emis-dev3/editMemberView.php?u=$UserName'>Edit</a></td>\n";
+	echo "<td><a href='" . $currentPath . "editMemberView.php?u=$UserName'>Edit</a></td>\n";
 	echo "</tr>\n";
 	$currRow++;
 }
