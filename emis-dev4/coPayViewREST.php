@@ -26,13 +26,13 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
         while ($apptInfo = $apptInfoPrep->fetch(PDO::FETCH_ASSOC)) {
             $outputString .= "<CopayInfo>";
             $outputString .= "<ID>" . $count . "</ID>\n";
-            $outputString .= "<PatUNAME>" . $apptInfo['FK_PatientID'] . "</PatUNAME>\n";
+            $outputString .= "<PatUNAME>" . $apptInfo['UserName'] . "</PatUNAME>\n";
             $outputString .= "<ApptID>" . $apptInfo['PK_AppID'] . "</ApptID>\n";
-            $outputString .= "<InsuranceCompany>" . $apptInfo['DocName'] . "</InsuranceCompany>\n";
-            $outputString .= "<PlanName>" . $apptInfo['PatFirstName'] . "</PlanName>\n";
-            $outputString .= "<PlanNo>" . $apptInfo['PatLastName'] . "</PlanNo>\n";
-            $outputString .= "<CoveragePerc>" . $apptInfo['Reason'] . "</CoveragePerc>\n";
-            $outputString .= "<TotalBill>" . $apptInfo['Date'] . "</TotalBill>\n";
+            $outputString .= "<InsuranceCompany>" . $apptInfo['Company_Name'] . "</InsuranceCompany>\n";
+            $outputString .= "<PlanName>" . $apptInfo['Plan_Type'] . "</PlanName>\n";
+            $outputString .= "<PlanNo>" . $apptInfo['Plan_Num'] . "</PlanNo>\n";
+            $outputString .= "<CoveragePerc>" . $apptInfo['Coverage_Percent'] . "</CoveragePerc>\n";
+            $outputString .= "<TotalBill>" . $apptInfo['Bill'] . "</TotalBill>\n";
             $outputString .= "</CopayInfo>";
             $count++;
             //logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
@@ -95,7 +95,7 @@ function doService() {
     //are user credentials going to be used?
 
     if ($recKey == $trustedKey || $recKey == $currKey) {
-        $qry = "SELECT Appointment.PK_AppID, Appointment.Bill, Users.UserName, Insurance.Company_Name, Insurance.Plan_Type, Insurance.Plan_Num
+        $qry = "SELECT Appointment.PK_AppID, Appointment.Bill, Users.UserName, Insurance.Company_Name, Insurance.Plan_Type, Insurance.Plan_Num, Insurance.Coverage_Percent
             FROM Appointment, Users, Insurance
             WHERE `Appointment`.`Date` = '".$date."'
             AND Users.PK_member_id=(SELECT Patient.FK_member_id FROM Patient WHERE Patient.PK_PatientID = Appointment.FK_PatientID)
