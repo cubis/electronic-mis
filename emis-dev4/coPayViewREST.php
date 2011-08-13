@@ -35,6 +35,7 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
             $outputString .= "<TotalBill>" . $apptInfo['Bill'] . "</TotalBill>\n";
             $outputString .= "</CopayInfo>\n";
             $count++;
+            
             //logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
         }
     } else {
