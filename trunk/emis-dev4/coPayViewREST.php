@@ -97,7 +97,7 @@ function doService() {
     if ($recKey == $trustedKey || $recKey == $currKey) {
         $qry = "SELECT Appointment.PK_AppID, Appointment.Bill, Users.UserName, Insurance.Company_Name, Insurance.Plan_Type, Insurance.Plan_Num, Insurance.Coverage_Percent
             FROM Appointment, Users, Insurance
-            WHERE `Appointment`.`Date` = '".$date."'
+            WHERE `Appointment`.`Date` = :date
             AND Users.PK_member_id=(SELECT Patient.FK_member_id FROM Patient WHERE Patient.PK_PatientID = Appointment.FK_PatientID)
             AND Insurance.FK_PatientID = Appointment.FK_PatientID";
         
@@ -148,12 +148,7 @@ function doService() {
         }
            */
         $apptInfoPrep = $db->prepare($qry);
-        if ($target != '') {
-            $apptArray = array(':user' => $target);
-        }
-        if (isset($_GET['aid'])) {
-            $apptArray[':aid'] = $_GET['aid'];
-        }
+        $apptArray = array(':date' => $date);
         $apptInfoSuccess = $apptInfoPrep->execute($apptArray);
         if (!$apptInfoSuccess) {
             $pdoError = $apptInfoPrep->errorInfo();
