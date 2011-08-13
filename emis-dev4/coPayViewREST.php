@@ -33,7 +33,7 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
             $outputString .= "<PlanNo>" . $apptInfo['Plan_Num'] . "</PlanNo>\n";
             $outputString .= "<CoveragePerc>" . $apptInfo['Coverage_Percent'] . "</CoveragePerc>\n";
             $outputString .= "<TotalBill>" . $apptInfo['Bill'] . "</TotalBill>\n";
-            $outputString .= "</CopayInfo>";
+            $outputString .= "</CopayInfo>\n";
             $count++;
             //logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
         }
