@@ -155,7 +155,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    }
 			    //patient
 			    if($_SESSION['SESS_TYPE'] == 1){
-			      echo "<td><a href='pdfTest.php?aid=$app[0]'>Export</a></td>";
+			      echo "<td><a href='pdfExport.php?aid=$app[0]'>Export</a></td>";
 			    }
 			    
 			    echo "</tr>";
