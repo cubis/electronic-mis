@@ -124,7 +124,6 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 					echo "<td><strong>Doctor:</strong></td>";
 				}
 			  ?>
-			  <td><strong>Doctor:</strong></td>
 			  <td><strong>Reason:</strong></td>
 			</tr>
 			<?php
@@ -150,7 +149,15 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    }
 			    echo "<td>$app[2]</td>";
 			    echo "<td><a href='apptEditView.php?aid=$app[0]'>Edit</a></td>";
-			    echo "<td><a href='visit.php?aid=$app[0]'>Visit</a></td>";
+			    //doctor
+			    if($_SESSION['SESS_TYPE'] == 400 || $_SESSION['SESS_TYPE'] == 200 || $_SESSION['SESS_TYPE'] == 300){
+			      echo "<td><a href='visit.php?aid=$app[0]'>Visit</a></td>";
+			    }
+			    //patient
+			    if($_SESSION['SESS_TYPE'] == 1){
+			      echo "<td><a href='pdfTest.php?aid=$app[0]'>Export</a></td>";
+			    }
+			    
 			    echo "</tr>";
 			    }
 			?>
@@ -158,7 +165,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 				<td><a href='apptEditView.php'>Add Appt</a></td>
 			</tr>
 			</table>
-<!-- END OF PAGE CONTENT -->
+			<!-- END OF PAGE CONTENT -->
                 </div>
             </div>
         </div>
