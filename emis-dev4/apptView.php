@@ -150,6 +150,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    }
 			    echo "<td>$app[2]</td>";
 			    echo "<td><a href='apptEditView.php?aid=$app[0]'>Edit</a></td>";
+			    echo "<td><a href='visit.php?aid=$app[0]'>Visit</a></td>";
 			    echo "</tr>";
 			    }
 			?>
