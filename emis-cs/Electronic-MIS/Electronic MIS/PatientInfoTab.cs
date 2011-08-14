@@ -30,27 +30,12 @@ namespace Electronic_MIS
             server = activeServer;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Insuranceid_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void PatientInfoTab_Load(object sender, EventArgs e)
         {
             StringBuilder data = new StringBuilder();
             data.Append(server);
             data.Append("viewPatientREST.php");
-            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.User));
+            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.UserName));
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
             data.Append("&pat=all");
 
@@ -179,6 +164,12 @@ namespace Electronic_MIS
                 Application.Exit();
             }
 
+            //patients.Sort();
+
+            foreach (Patient pat in patients)
+            {
+                patientbox.Items.Add(pat);
+            }
             
         }
 
@@ -192,7 +183,12 @@ namespace Electronic_MIS
         //combobox
         private void patientbox_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            refreshLabels((Patient)patientbox.SelectedItem);
+        }
+
+        private void refreshLabels(Patient patient)
+        {
+
         }
 
         
@@ -385,6 +381,11 @@ namespace Electronic_MIS
             {
                 covgend = value;
             }
+        }
+
+        public override string ToString()
+        {
+            return FirstName + LastName;
         }
     }
 
