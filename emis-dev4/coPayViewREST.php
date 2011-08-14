@@ -60,7 +60,7 @@ function doService() {
 
     $errMsgArr = array();
     $errNum = 0;
-    $date = $_POST['date'];
+    $date = $_GET['date'];
     
     //MAKE SURE THEY PASSED US CREDENTIALS	
     if (!isset($_GET['u']) || $_GET['u'] == '') {
