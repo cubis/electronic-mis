@@ -65,7 +65,6 @@
             // 
             this.remindMeChkBox.AutoSize = true;
             this.remindMeChkBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.remindMeChkBox.Enabled = false;
             this.remindMeChkBox.Location = new System.Drawing.Point(522, 357);
             this.remindMeChkBox.Name = "remindMeChkBox";
             this.remindMeChkBox.Size = new System.Drawing.Size(80, 17);
@@ -73,6 +72,7 @@
             this.remindMeChkBox.Text = "Remind Me";
             this.remindMeChkBox.UseVisualStyleBackColor = true;
             this.remindMeChkBox.Visible = false;
+            this.remindMeChkBox.CheckedChanged += new System.EventHandler(this.remindMeChkBox_CheckedChanged);
             // 
             // textBox1
             // 

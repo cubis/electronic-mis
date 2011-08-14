@@ -31,7 +31,8 @@ namespace Electronic_MIS
         private void exitClean()
         {
             sessionManager.Key = "";
-            sessionManager.User = "";
+            sessionManager.UserName = "";
+            sessionManager.UserID = 0;
         }
 
         private void navigationTree_AfterSelect(object sender, TreeViewEventArgs e)
@@ -112,7 +113,7 @@ namespace Electronic_MIS
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     sessionManager = new SessionManager();
-                    sessionManager.User = "";
+                    sessionManager.UserName = "";
                     sessionManager.Key = "";
                     tabViewer.TabPages.Clear();
 
@@ -151,7 +152,7 @@ namespace Electronic_MIS
                         * */
         private void createPDF(Appointment appt)
         {
-            string path = "./test.pdf";
+            string path = "./Appt_" + appt.AppointmentID + ".pdf";
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -181,9 +182,24 @@ namespace Electronic_MIS
 
             //Spacer
             PdfPCell spacer = new PdfPCell();
-            spacer.FixedHeight = 20.0f;
+            spacer.FixedHeight = 100.0f;
             spacer.BorderWidth = 0;
 
+            //Create a table for summary charges
+            PdfPTable summaryTable = new PdfPTable(2);
+            PdfPCell summaryLabel = new PdfPCell(new Phrase("Summary of Charges :"));
+            summaryLabel.HorizontalAlignment = Element.ALIGN_RIGHT;
+            summaryLabel.BorderWidth = 0;
+            PdfPCell chargesCell = new PdfPCell();
+            chargesCell.AddElement(new Phrase("Basic Service Charge:  $50.00"));
+            chargesCell.AddElement(new Phrase("Medical Supply Charge:  $25.00"));
+            chargesCell.AddElement(new Phrase("Medicinal Charge:  $25.00"));
+            chargesCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            chargesCell.BorderWidth = 0;
+            summaryTable.AddCell(summaryLabel);
+            summaryTable.AddCell(chargesCell);
+
+            
             //Create a subtable for the balance summary
             PdfPTable chargesTable = new PdfPTable(2);
             PdfPCell labelCell = new PdfPCell();
@@ -213,6 +229,8 @@ namespace Electronic_MIS
 
             table.AddCell(titleCell);
             table.AddCell(subTitleCell);
+            table.AddCell(spacer);
+            table.AddCell(summaryTable);
             table.AddCell(spacer);
             table.AddCell(chargesTable);
 
@@ -371,7 +389,8 @@ namespace Electronic_MIS
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     sessionManager = new SessionManager();
-                    sessionManager.User = "";
+                    sessionManager.UserName = "";
+                    sessionManager.UserID = 0;
                     sessionManager.Key = "";
                     tabViewer.TabPages.Clear();
 

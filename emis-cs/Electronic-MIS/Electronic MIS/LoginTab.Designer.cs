@@ -101,13 +101,13 @@
             // 
             this.serverSelect.FormattingEnabled = true;
             this.serverSelect.Items.AddRange(new object[] {
-            "https://67.10.181.224/emis/emis-dev3/",
-            "https://robertdiazisabitch.dyndns.org/emis/emis-dev3/"});
+            "https://67.10.181.224/emis/emis-dev4/",
+            "https://robertdiazisabitch.dyndns.org/emis/emis-dev4/"});
             this.serverSelect.Location = new System.Drawing.Point(238, 228);
             this.serverSelect.Name = "serverSelect";
             this.serverSelect.Size = new System.Drawing.Size(218, 21);
             this.serverSelect.TabIndex = 10;
-            this.serverSelect.Text = "https://67.10.181.224/emis/emis-dev3/";
+            this.serverSelect.Text = "https://67.10.181.224/emis/emis-dev4/";
             // 
             // LoginTab
             // 

@@ -7,7 +7,8 @@ namespace Electronic_MIS
 {
     public class SessionManager
     {
-        string user;
+        string userName;
+        int userID;
         string key;
         int permissionLevel;
         bool loggedIn;
@@ -27,22 +28,22 @@ namespace Electronic_MIS
         /// <param name="key">Hashed Key</param>
         public SessionManager(string userName, string key)
         {
-            User = userName;
+            UserName = userName;
             Key = key;
         }
 
         /// <summary>
         /// Get or Set the UserName
         /// </summary>
-        public string User
+        public string UserName
         {
             get
             {
-                return user;
+                return userName;
             }
             set
             {
-                user = value;
+                userName = value;
             }
         }
 
@@ -93,6 +94,22 @@ namespace Electronic_MIS
             {
                 return loggedIn;
             }
+        }
+
+        /// <summary>
+        /// The UserID for the current user
+        /// </summary>
+        public int UserID
+        {
+            get
+            {
+                return userID;
+            }
+            set
+            {
+                userID = value;
+            }
+
         }
     }
 }
