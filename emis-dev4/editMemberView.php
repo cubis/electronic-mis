@@ -55,7 +55,14 @@ $CoverageStart = $wsResponse[$wsIndices['COVERAGESTART'][0]]['value'];
 $CoverageEnd = $wsResponse[$wsIndices['COVERAGEEND'][0]]['value'];
 $Locked = $wsResponse[$wsIndices['LOCKED'][0]]['value'];
 $NeedApproval = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
+
 $Type = $wsResponse[$wsIndices['TYPE'][0]]['value'];
+if($Type == 1){
+	$PatID = $wsResponse[$wsIndices['TYPE'][0]]['value'];
+} else {
+	$PatID = -1;
+}
+
 
 ?>
 
@@ -97,12 +104,15 @@ $Type = $wsResponse[$wsIndices['TYPE'][0]]['value'];
                 <div class="page_content">
                 <!-- PAGE CONTENT STARTS HERE -->
                     <form name="editMemberForm" method="post" action="editMemberExec.php">
-                        <input type="hidden" name="UserName" value="<?php echo $_GET['u']; ?>" />
-                        <input type="hidden" name="key" value="<?php echo $_SESSION['SESS_AUTH_KEY']; ?>" />
-                        <input type="hidden" name="u" value="<?php echo $_SESSION['SESS_USERNAME']; ?>" />
-						<input type="hidden" name="PersonalID" value="<?php echo $_SESSION['SESS_PERSONAL_ID']; ?>" />
-						<input type="hidden" name="MemberID" value="<?php echo $_SESSION['SESS_MEMBER_ID']; ?>" />
-                        
+			<!--     info for the individual requesting information                                      -->
+			<input type="hidden" name="key" value="<?php echo $_SESSION['SESS_AUTH_KEY']; ?>" />
+			<input type="hidden" name="u" value="<?php echo $_SESSION['SESS_USERNAME']; ?>" />
+			<!--	information for the person being requested					 -->
+			<input type="hidden" name="UserName" value="<?php echo $_GET['u']; ?>" />
+			<input type="hidden" name="PersonalID" value="<?php echo $PatID ?>" />
+			<input type="hidden" name="Type" value="<?php echo $Type; ?>" />
+			
+			
                         <table>
 							<tr>
 								<td><h3>Personal Infomation</h3></td>
