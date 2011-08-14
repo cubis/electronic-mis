@@ -12,15 +12,19 @@
  //edit this to indicate where you want to save file
  $savelocation = "upload/" . basename( $_FILES['uploaded']['name']) ; 
  $ok=1;
-  
- if($uploaded_size > 3000000) 
+ 
+ $filetype = $_FILES['uploaded']['type'];
+ $filesize = $_FILES['uploaded']['size'];
+ 
+ if($filesize > 3000000) 
  { 
     echo "Your file is larger than 3 MB!<br />"; 
     $ok=0; 
  } 
- if(($uploaded_type !="image/jpeg") || $uploaded_type !="image/jpg")
+ if(($filetype != "image/jpeg") && ($filetype != "image/pjpeg"))
  {
      echo "You need to upload a jpeg file!<br />";
+     echo "Uploaded filetype: " . $uploaded_type . "<br />";
      $ok=0;
  }
  if($uploaded_type == "text/php")
