@@ -47,7 +47,7 @@ $fname = $_POST['fname'];
 $floc = $_POST['floc'];
 
 
-$url = "http://localhost/emis/emis-dev3/visitREST.php";
+$url = "http://localhost/emis/emis-dev3/visitREST.php"; //this needs to use $currentPath
 
 $fields = array(
     'u' => urlencode($_SESSION['SESS_USERNAME']),

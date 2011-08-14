@@ -19,7 +19,7 @@
 	</script>
     <div class="container">
         <div class="header">
-            <div class="logo"><a href="memberProfileView.php"><img src="img/logo.png" /></a></div>
+            <div class="logo"><a href="memberProfileView.php"><img src="img/logo.png" alt="just a logo" /></a></div>
             <div class="welcome_text">
                 <h1>Welcome,
                 <?php

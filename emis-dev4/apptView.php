@@ -76,7 +76,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 	</script>
     <div class="container">
         <div class="header">
-            <div class="logo"><img src="img/logo.png" /></div>
+            <div class="logo"><img src="img/logo.png" alt="Just a logo" /></div>
             <div class="welcome_text">
                 <h1>Welcome,
                 <?php
