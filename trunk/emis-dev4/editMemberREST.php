@@ -113,7 +113,7 @@ function doService() {
 				$paramArray[":user"] = $userName;
 				
 				$prep = $db->prepare($updateSQL);
-				//$updateSucc = $prep->execute($paramArray);
+				$updateSucc = $prep->execute($paramArray);
 				$updateSucc = true;
 				if (!$updateSucc) {
 					$errorInfoArray = $prep->errorInfo();
@@ -122,37 +122,72 @@ function doService() {
 					return outputXML($errNum, $errMsgArr, $memberInfo);
 				}
 				
-				
-				$updateSQL = 'UPDATE Insurance SET';
-				$updateSQL .= " Insurance.Company_Name=:Company_Name";
-				$updateSQL .= ", Insurance.Plan_Type=:Plan_Type";
-				$updateSQL .= ", Insurance.Plan_Num=:Plan_Num";
-				$updateSQL .= ", Insurance.Co-Pay=:Co-Pay";
-				$updateSQL .= ", Insurance.Coverage-Start=:Coverage-Start";
-				$updateSQL .= ", Insurance.Coverage-End=:Coverage-End";
-				$updateSQL .= " WHERE Insurance.FK_PatientID=:FK_PatientID";
+			if($_POST['Type'] == 1 || $memberInfo['Type']==1){	
+				//$updateSQL = 'UPDATE Insurance SET';
+				//$updateSQL .= " Insurance.`Company_Name`=:Company_Name";
+				//$updateSQL .= ", Insurance.`Plan_Type`=:Plan_Type";
+				//$updateSQL .= ", Insurance.`Plan_Num`=:Plan_Num";
+				//$updateSQL .= ", Insurance.`Co-Pay`=:Co-Pay";
+				//$updateSQL .= ", Insurance.`Coverage-Start`=:Coverage-Start";
+				//$updateSQL .= ", Insurance.`Coverage-End`=:Coverage-End";
+				//$updateSQL .= " WHERE Insurance.`FK_PatientID`=:FK_PatientID";
 				$paramArray = array(
 					":Company_Name" => $_POST['Company_Name'],
 					":Plan_Type" => $_POST['Plan_Type'],
 					":Plan_Num" => $_POST['Plan_Num'],
 					":Co-Pay" => $_POST['Co-Pay'],
 					":Coverage-Start" => $_POST['Coverage-Start'],
-					":Coverage-End" => $_POST['Coverage-End'],
-					":FK_PatientID" => $_POST['FK_PatientID']
+					":Coverage-End" => $_POST['Coverage-End']
 				);
-	
-	
-			//	$updateSucc = $prep->execute($paramArray);
+				
+				
+				
+				$paramArray = array(":Company_Name"=>$_POST['Company_Name'], 
+								":Plan_Type"=>$_POST['Plan_Type'],
+								":Plan_Num"=>$_POST['Plan_Num'],
+								":CoPay"=>$_POST['Co-Pay'], 
+								":CoverageStart"=>$_POST['Coverage-Start'],
+								":CoverageEnd"=>$_POST['Coverage-End']);
+				
+				if($memberInfo['Type'] == 1){
+					$patIDQry = "SELECT Patient.PK_PatientID FROM Patient WHERE Patient.FK_member_id = " . $memberInfo['PK_member_id'];
+					$patIDPrep = $db->prepare($patIDQry);
+					$updateSucc = $patIDPrep->execute();
+					if (!$updateSucc) {
+						$errorInfoArray = $prep->errorInfo();
+						$errMsgArr[] = $errorInfoArray[2];
+						$errNum++;					
+						return outputXML($errNum, $errMsgArr, $memberInfo);
+					}
+					$thisPatID = $patIDPrep->fetch(PDO::FETCH_ASSOC);				
+					$paramArray[":FK_PatientID"] = $thisPatID['PK_PatientID'];
+				} else if($_POST['Type'] == 1){
+					$paramArray[":FK_PatientID"] = $_POST['PersonalID'];
+				}
+				
+				$updateSQL = "UPDATE Insurance SET `Company_Name`=:Company_Name, `Plan_Type`=:Plan_Type, 
+							`Plan_Num`=:Plan_Num, `Co-Pay`=:CoPay, `Coverage-Start`=:CoverageStart, `Coverage-End`=:CoverageEnd
+							WHERE FK_PatientID=:FK_PatientID"; 
+				
+				$prep = $db->prepare($updateSQL);
+				$updateSucc = $prep->execute( $paramArray );
+				print("PARAM---\n");print_r($paramArray);
 				if (!$updateSucc) {
 					$errorInfoArray = $prep->errorInfo();
-					$errMsgArr[] = $errorInfoArray[2];
+					$errMsgArr[] = $errorInfoArray[2] . ": db error for insurance";
 					$errNum++;					
 					return outputXML($errNum, $errMsgArr, $memberInfo);
 				}
 				
+				
+				
+				
+				
+			}
+				
 			}
 			$thin = $_POST['FK_PatientID'];
-			print("_----" . $thin);
+		//	print("_----" . $thin);
 			
 			//return $_POST['FK_PatientID'];
 		} else {
