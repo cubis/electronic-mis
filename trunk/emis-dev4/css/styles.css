@@ -67,11 +67,17 @@ body {
 	padding: 0px;
 	height: 483px;
 }
-
+A, A:hover, A:active, A:visited {
+	text-decoration: none;
+    color: black;
+    font-weight:normal;
+    font-size: 12px;
+	cursor:pointer;
+}
 #infobox {
 	color: #0c0c0c;
 	font-weight: bold;
-    font-size: 20px;
+    font-size: 12px;
     line-height: 29px;
     margin-top: 20px;
     width: 450px;
@@ -147,4 +153,5 @@ h2 {
 .footerbox {
 	width: 320px;
 	float: left;
+    font-size: 12px;
 }

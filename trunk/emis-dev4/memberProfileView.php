@@ -35,7 +35,7 @@
                 <div class="page_content">
                 <!-- PAGE CONTENT STARTS HERE -->
                 	<h2>Welcome to your profile!</h2>
-                    <p>From here, you may use the navigation menu on the left to access medical records, update information, or edit your account.
+                    <p>From here, you may use the navigation menu on the left to access medical records, update information, or edit your account.</p>
                 <!-- END OF PAGE CONTENT -->
                 </div>
             </div>

@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Electronic Medical Information System (EMIS)</title>
-    <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
     <?php require('calendar/tc_calendar.php');?>
 </head>
 
@@ -26,7 +26,7 @@
                     	</tr>
                         <tr>
                         	<td>
-                            	<input type="checkbox" checked="1" name="persistent" id="persistent" value="1" style="width: auto;">
+                            	<input type="checkbox" checked="1" name="persistent" id="persistent" value="1" style="width: auto;"/>
                             	<label for="persistent" style="top: -2px; vertical-align: middle;">Keep me logged in</label>
                             </td>
                         	<td><label><a href="#">Forgot your password?</a></label></td>
@@ -38,8 +38,8 @@
 		</div>
     	<div id="contentwrap">
         	<div id="infobox">
-            	<h2>A core medical system that can be contributed to and shared by primary and secondary healthcare professionals and patients.</h2>
-                <img src="img/infopic.png" />
+            	<p>A core medical system that can be contributed to and shared by primary and secondary healthcare professionals and patients.</p>
+                <img src="img/infopic.png" alt="obligatoryALTtag" />
             </div>
             <div id="registerbox">
             	<h2>Sign Up</h2>
@@ -124,6 +124,7 @@
                 Scott Amble<br />
                 Bradley Gillard<br />
                 Cameron Lopez<br />
+                Hunter Rasco<br />
                 David Gorena</p>
             </div>
 			<div class="footerbox" style="margin-right: 50px; margin-left: 50px;">

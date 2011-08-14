@@ -29,7 +29,7 @@ require_once("bootstrap.php");
 	</script>
     <div class="container">
         <div class="header">
-            <div class="logo"><img src="img/horizontal_logo.png" /></div>
+            <div class="logo"><img src="img/horizontal_logo.png" ALT="just another logo"/></div>
             <div class="welcome_text">
                 <h1>Welcome,
                 <?php

@@ -24,7 +24,7 @@
                     	</tr>
                         <tr>
                         	<td>
-                            	<input type="checkbox" checked="1" name="persistent" id="persistent" value="1" style="width: auto;">
+                            	<input type="checkbox" checked="1" name="persistent" id="persistent" value="1" style="width: auto;"/>
                             	<label for="persistent" style="top: -2px; vertical-align: middle;">Keep me logged in</label>
                             </td>
                         	<td><label><a href="#">Forgot your password?</a></label></td>
@@ -104,6 +104,7 @@
                 Scott Amble<br />
                 Bradley Gillard<br />
                 Cameron Lopez<br />
+                Hunter Rasco<br />
                 David Gorena</p>
             </div>
 			<div class="footerbox" style="margin-right: 50px; margin-left: 50px;">
