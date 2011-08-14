@@ -70,7 +70,7 @@ namespace Electronic_MIS
 
 
             //Set the User for the Session Manager
-            sessionManager.User = txtUser.Text;
+            sessionManager.UserName = txtUser.Text;
 
             string pass = CalculateMD5Hash(txtPassword.Text);
             StringBuilder data = new StringBuilder();
@@ -86,7 +86,7 @@ namespace Electronic_MIS
             Debug.WriteLine("Connection Request: ");
             Debug.WriteLine(request.RequestUri.OriginalString.ToString());
 
-            request.Timeout = (10000);
+            request.Timeout = (50000);
 
             try
             {
@@ -119,6 +119,11 @@ namespace Electronic_MIS
                             {
                                 xmlReader.Read();
                                 sessionManager.Key = xmlReader.Value;
+                            }
+                            else if (xmlReader.Name == "PersonalID")
+                            {
+                                xmlReader.Read();
+                                sessionManager.UserID = int.Parse(xmlReader.Value);
                             }
 
                             break;

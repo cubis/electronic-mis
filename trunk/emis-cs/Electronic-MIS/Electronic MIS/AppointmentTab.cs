@@ -24,6 +24,7 @@ namespace Electronic_MIS
         SessionManager sessionManager;
         List<Appointment> appointments;
         string server;
+        Appointment selectedAppointment;
 
         public AppointmentTab(SessionManager session,string activeServer)
         {
@@ -72,12 +73,27 @@ namespace Electronic_MIS
             Application.Exit();
         }
 
+        /* Example incoming data 
+         * -<Appointment>
+         * <APPTID>9</APPTID> 
+         * <PatID>3</PatID> 
+         * <DocID>1</DocID> <
+         * DocName>J</DocName> 
+         * <PatFirstName>Basil</PatFirstName> 
+         * <PatLastName>Sattler</PatLastName> 
+         * <REASON>Getting out of work sutff 
+         * </REASON> <DATE>2011-07-27</DATE> 
+         * <TIME>09:45:00</TIME> 
+         * <STATUS>Scheduled</STATUS> 
+         * <REMINDER>0</REMINDER> 
+         * </Appointment>
+         */
         private void getAppointments()
         {
             StringBuilder data = new StringBuilder();
             data.Append(server);
-            data.Append("viewPatApptsREST.php");
-            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.User));
+            data.Append("apptViewREST.php");
+            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.UserName.ToString()));
             data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
 
             string url = data.ToString();
@@ -86,7 +102,7 @@ namespace Electronic_MIS
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
 
-            request.Timeout = 10000;
+            request.Timeout = 50000;
 
             try
             {
@@ -120,6 +136,11 @@ namespace Electronic_MIS
                                         case "APPTID":
                                             newAppt.AppointmentID = xmlReader.ReadElementContentAsString();
                                             break;
+
+                                        case "PatID":
+                                            newAppt.PatientID = xmlReader.ReadElementContentAsInt();
+                                            break;
+
                                         case "DATE":
                                             sb.Append(xmlReader.ReadElementContentAsString() + " ");
                                             break;
@@ -127,8 +148,20 @@ namespace Electronic_MIS
                                         case "TIME":
                                             sb.Append(xmlReader.ReadElementContentAsString());
                                             break;
+
+                                        case "PatFirstName":
+                                            newAppt.PatientFirstName = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "PatLastName":
+                                            newAppt.PatientLastName = xmlReader.ReadElementContentAsString();
+                                            break;                                                
+                                            
+                                        case "DocID":
+                                            newAppt.DoctorID = xmlReader.ReadElementContentAsInt();
+                                            break;
                                         
-                                        case "doctor":
+                                        case "DocName":
                                             newAppt.Doctor = xmlReader.ReadElementContentAsString();
                                             break;
 
@@ -136,7 +169,11 @@ namespace Electronic_MIS
                                             newAppt.Reason = xmlReader.ReadElementContentAsString();
                                             break;
 
-                                        case "REMIND":
+                                        case "STATUS": ;
+                                            newAppt.Status = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "REMINDER":
                                             int remind = int.Parse(xmlReader.ReadElementContentAsString());
                                             if (remind == 0)
                                             {
@@ -177,9 +214,56 @@ namespace Electronic_MIS
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void remindMeChkBox_CheckedChanged(object sender, EventArgs e)
         {
-            //TODO: Add in code to change reminder
+            if (remindMeChkBox.Checked == selectedAppointment.Remind)
+            {
+                return;
+            }
+
+            int x;
+            if(remindMeChkBox.Checked == true){
+                x = 1;
+            }else{
+                x = 0;
+            }
+
+            StringBuilder data = new StringBuilder();
+            data.Append(server);
+            data.Append("editApptREST.php");
+            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.UserName));
+            data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
+            data.Append("&aid=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentID));
+            data.Append("&status=" + WebUtility.HtmlEncode(selectedAppointment.Status));
+            String reason = selectedAppointment.Reason.Replace(" ", "%20");
+            reason = reason.Replace("?", "%3f");
+            reason = reason.Replace("\n", "");
+            reason = reason.Replace("\t", "");
+            data.Append("&reason=" + WebUtility.HtmlEncode(reason));
+            data.Append("&time=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentTime.TimeOfDay.TotalHours.ToString()));
+            data.Append(WebUtility.HtmlEncode(":" + selectedAppointment.AppointmentTime.TimeOfDay.Minutes.ToString()));
+            if (selectedAppointment.AppointmentTime.TimeOfDay.Minutes == 0)
+                data.Append("0");
+            data.Append("&date=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentTime.ToShortDateString()));
+            data.Append("&doctor=" + WebUtility.HtmlEncode(selectedAppointment.DoctorID.ToString()));
+            data.Append("&patient=" + WebUtility.HtmlEncode(selectedAppointment.PatientID.ToString()));
+            data.Append("&reminder=" + WebUtility.HtmlEncode(x.ToString()));            
+
+            string url = data.ToString();
+            Debug.WriteLine(url);
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "POST";
+
+            request.Timeout = 50000;
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            request.GetResponse();
+
+            Cursor.Current = Cursors.Arrow;
+
+            refreshTab();
         }
 
         private void appointmentListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -232,6 +316,7 @@ namespace Electronic_MIS
         private void selectAppointment()
         {
             Appointment appt = (Appointment)cmbAppointments.SelectedItem;
+            selectedAppointment = appt;
 
             calAppointments.SetDate(appt.AppointmentTime);
             appointmentListBox.SelectedItem = appt;
@@ -242,6 +327,7 @@ namespace Electronic_MIS
             sb.AppendLine(appt.AppointmentTime.ToLongTimeString());
             sb.AppendLine("Appointment with Dr. " + appt.Doctor);
             sb.AppendLine("Reason: \n\t" + appt.Reason);
+            sb.AppendLine("Appointment Status:\t" + appt.Status);
 
             textBox1.Text = sb.ToString();
 
@@ -339,8 +425,37 @@ namespace Electronic_MIS
             PrintEventArgs eventArgs = new PrintEventArgs((Appointment)cmbAppointments.SelectedItem);
 
             OnPrintEvent(eventArgs);
-        } 
+        }
 
+        private void refreshTab()
+        {
+            appointments = new List<Appointment>();
+            appointmentListBox.Items.Clear();
+            calAppointments.RemoveAllBoldedDates();
+            cmbAppointments.Items.Clear();
+            cmbAppointments.ResetText();
+            textBox1.Clear();
+            remindMeChkBox.Visible = false;
+            CancelButton.Visible = false;
+            btnReciept.Visible = false;
+            btnReschedule.Visible = false;
+            
+            Cursor.Current = Cursors.WaitCursor;
+
+            getAppointments();
+
+            appointments.Sort();
+
+            foreach (Appointment appt in appointments)
+            {
+                calAppointments.AddBoldedDate(appt.AppointmentTime);
+                appointmentListBox.Items.Add(appt);
+            }
+
+            calAppointments.UpdateBoldedDates();
+
+            Cursor.Current = Cursors.Arrow;
+        }
 
     }
 
