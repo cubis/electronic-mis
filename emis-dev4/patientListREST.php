@@ -10,7 +10,7 @@ function outputXML($errNum, $errMsgArr, $patientNamePrep) {
     } else {
         $user = "UNKOWN";
     }
-    if (isset($_GET['p'])) {
+    if (isset($_GET['pat'])) {
         $target = $_GET['pat'];
     } else {
         $target = 'all';
