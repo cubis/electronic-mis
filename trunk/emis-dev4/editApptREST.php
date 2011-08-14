@@ -75,7 +75,7 @@ function doService() {
 		$trustedKey = md5($currKey.$trustString);
 
 		
-		if($recKey == $trustedKey){
+		if($recKey == $trustedKey || $recKey == $currKey){
 			
 			//ENSURE OLD PASS AND TWO NEW PASSWORDS PROVIDED
 			//FIGURE OUT IF WE'RE ADDING A NEW ONE OR OLD
@@ -244,7 +244,7 @@ function doService() {
 			
 			
 		} else {
-			$errMsgArr[] = "Unauthorized to change password";
+			$errMsgArr[] = "Unauthorized to change appointment information";
 			$errNum++;
 		}
 		
