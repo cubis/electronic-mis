@@ -7,7 +7,6 @@ $fsize = $_FILES['uploadfile']['size'];
 $ftype = $_FILES['uploadfile']['type'];
 $apNum = $_GET['ID'];
 //test the type
-  
 $fp = fopen($tmpname,'r');
 $content = fread($fp,filesize($tmpname));
 $content = addslashes($content);
