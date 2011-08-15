@@ -8,7 +8,7 @@ require_once('bootstrap.php');
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Administrator Profile</title>
-        <link href="../css/logged_in_styles.css" rel="stylesheet" type="text/css" />
+        <link href="css/logged_in_styles.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
 	<script type="text/javascript">
@@ -19,7 +19,7 @@ require_once('bootstrap.php');
 	</script>
     <div class="container">
         <div class="header">
-			<div class="logo"><a href="../memberProfileView.php"><img src="../img/logo.png" /></a></div>
+			<div class="logo"><a href="memberProfileView.php"><img src="../img/logo.png" /></a></div>
             <div class="welcome_text">
                 <h1>Welcome,
                 <?php
@@ -31,7 +31,7 @@ require_once('bootstrap.php');
             <div class="navigation">
                 <div class="nav_content">
 					<?php
-                    	include_once "../generateNav.php"; // This will generate a navigation menu according to the user's role.
+                    	include_once "generateNav.php"; // This will generate a navigation menu according to the user's role.
 					?>
                 </div>
             </div>
