@@ -157,11 +157,7 @@ function doService() {
 		
 			//Make sure old password correct
 			$aid = $_POST['aid'];
-			if($_POST['status'] == 'true'){
-				$status = "Scheduled";
-			} else {
-				$status = "Cancelled";
-			}
+			$status = $_POST['status'];
 			if($_POST['reminder'] == 'true'){
 				$reminder = 1;
 			} else {
