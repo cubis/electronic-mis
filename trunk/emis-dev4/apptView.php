@@ -108,29 +108,29 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
                         }
                         ?>
 			<div class="dashed_line"></div>
-			<table>
+			<table style="font-size: 11px; padding: 0px;">
 			<tr><td><label><strong></strong></label></td></tr>
 			<tr>
-			  <td><strong>Date:</strong></td>
-			  <td><strong>Time:</strong></td>
-			  <td><strong>Status:</strong></td>
+			  <td width="125"><strong>Date:</strong></td>
+			  <td width="75"><strong>Time:</strong></td>
+			  <td width="75"><strong>Status:</strong></td>
 			  <?php
 				if($_SESSION['SESS_TYPE']==400){
-					echo "<td><strong>Doctor:</strong></td>";
-					echo "<td><strong>Patient:</strong></td>";
+					echo "<td width=\"75\"><strong>Doctor:</strong></td>";
+					echo "<td width=\"75\"><strong>Patient:</strong></td>";
 				} else if($_SESSION['SESS_TYPE']==300){
-					echo "<td><strong>Patient:</strong></td>";
+					echo "<td width=\"75\"><strong>Patient:</strong></td>";
 				} else if($_SESSION['SESS_TYPE']==1){
-					echo "<td><strong>Doctor:</strong></td>";
+					echo "<td width=\"75\"><strong>Doctor:</strong></td>";
 				}
 			  ?>
-			  <td><strong>Reason:</strong></td>
+			  <td><strong width="100">Reason:</strong></td>
 			</tr>
 			<?php
 			  foreach($appointments as &$app) {
 			  
 			  //appoint array  array($aid, $adate, $atime, $adoctor, $areason, $aremind, $status, $patient)
-			    echo "<tr>";
+			    echo "<tr style=\"height: 25px;\">";
 			    $date = DateTime::createFromFormat('Y-m-d', $app[1]);
 			   //date 
 			    echo "<td>" . $date->format('D, M dS, Y') . "</td>";
