@@ -15,6 +15,7 @@ $password = "A123456z";
 $epw = md5($password); // encrypt password to lame ass md5 for t-fer
 global $currentPath;
 $request = $currentPath . "authenticateREST.php?u=" . urlencode($login) . "&p=" . urlencode($epw);
+
 //format and send request
 $ch = curl_init($request);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
@@ -58,8 +59,6 @@ if ($errNum == 0) {
         print("<p>login success!</p>");
 
         ////////////////////////////////////// insert autoproc code here ///////////////////////////////////////////
-
-
         print("<p>autoproc start</p>");
         print("<p>autoproc after header</p>");
 
@@ -69,12 +68,11 @@ if ($errNum == 0) {
 
         function doCopay() {
 
-
             global $currentPath;
             $request = $currentPath . "coPayViewREST.php?";
-            $request .= "u=" . urlencode($userName);
+            $request .= "u=" . urlencode($_SESSION['SESS_USERNAME']);
             $request .= "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
-            $request .= "&d=" . urlencode($_GET['date']);
+            $request .= "&date=" . urlencode($_GET['date']);
 
             $ch = curl_init($request);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
@@ -84,7 +82,9 @@ if ($errNum == 0) {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $RESToutput = curl_exec($ch); //send URL Request to RESTServer... returns string
             curl_close($ch); //string from server has been returned <XML> closethe channel
-
+            
+            print("<p>print curl output:</p>");
+            print("$RESToutput");
             if ($RESToutput == '') {
                 die("CONNECTION ERROR");
             }
@@ -156,7 +156,7 @@ if ($errNum == 0) {
                 if( $_GET['date'] ){ //don't even bother doing the call if date isn't provided
                     doCopay();
                 }
-                echo "<p>Notifications have all been canceled</p>";
+                echo "<p>end of copay routine</p>";
                 break;
         }
     }
