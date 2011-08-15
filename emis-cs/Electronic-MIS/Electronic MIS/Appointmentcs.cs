@@ -13,7 +13,7 @@ namespace Electronic_MIS
 
     public class Appointment : IComparable
     {
-        String doc;
+        Doctor doc;
         String reason;
         String apptID;
         bool remind;
@@ -25,7 +25,7 @@ namespace Electronic_MIS
         String patLast;
 
 
-        public String Doctor
+        public Doctor Doctor
         {
             get
             {

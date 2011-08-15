@@ -12,7 +12,7 @@ namespace Electronic_MIS
     public partial class Reschedule : Form
     {
         public DateTime newTime;
-        public String doctor;
+        public Doctor doctor;
 
         public Reschedule()
         {
@@ -27,11 +27,7 @@ namespace Electronic_MIS
                 timeEntry = timeEntry.AddMinutes(15);
             }
 
-            cmbDocs.Items.Add("Any");
-            foreach (string dr in getDoctors())
-            {
-                cmbDocs.Items.Add(dr);
-            }
+            //Add code to get doctor
         }
 
         private void Reschedule_Load(object sender, EventArgs e)
@@ -64,14 +60,14 @@ namespace Electronic_MIS
 
             newTime = dtDate.Value;
             newTime.Add(DateTime.Parse(cmbTimes.SelectedItem.ToString()).TimeOfDay);
-            doctor = cmbDocs.SelectedItem.ToString();
+            doctor = (Doctor)cmbDocs.SelectedItem;
             Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             newTime = new DateTime();
-            doctor = "";
+            doctor = null;
             Close();
         }
     }
