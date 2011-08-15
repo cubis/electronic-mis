@@ -23,6 +23,7 @@ namespace Electronic_MIS
         string server;
         string doc;
         string docnum;
+        int sessionid;
 
         public PatientInfoTab(SessionManager manager, string activeServer)
         {
@@ -164,12 +165,29 @@ namespace Electronic_MIS
                             //to put their certain patients on the combo
 
                             //hiding the patientbox if user is logged on as a patient
-                            int sessionid = sessionManager.UserPermissionLevel;
+                            sessionid = sessionManager.UserPermissionLevel;
                             if (sessionid == 1)
                             {
                                 patientbox.Hide();
                             }
 
+                            if (sessionid == 300)
+                            {
+                                this.textBox1.Text = "";
+                                this.textBox2.Text = "";
+                                this.textBox3.Text = "";
+                                this.textBox5.Text = "";
+                                this.textBox6.Text = "";
+                                this.textBox7.Text = "";
+                                this.textBox8.Text = "";
+                                this.textBox9.Text = "";
+                                this.textBox10.Text = "";
+                                this.textBox11.Text = "";
+                                this.textBox12.Text = "";
+                                this.textBox13.Text = "";
+                                this.textBox14.Text = "";
+                                this.textBox15.Text = "";
+                            }
                             break;
                         default:
                             break;
@@ -182,6 +200,18 @@ namespace Electronic_MIS
                 MessageBox.Show(exp.Message, "Yeah...we didn't plan for this", MessageBoxButtons.OK);
                 Application.Exit();
             }
+
+
+            if (patients.Count == 0 && sessionid == 300)
+            {
+                MessageBox.Show("You don't have any patients, GET TO WORK SON!!!!", "doK", MessageBoxButtons.OK);
+
+            }
+
+
+
+
+
 
             int num = 0;
             foreach (Patient pat in patients)
