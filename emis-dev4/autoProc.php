@@ -2,6 +2,7 @@
 
 //Include database connection details
 require_once('bootstrap.php');
+//require_once('config.php');
 
 //Array to store validation errors
 $errmsg_arr = array();
@@ -31,6 +32,7 @@ if ($output == '') {
 
 //parse return string
 $parser = xml_parser_create();
+
 xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 
 //create trusted key from the given auth key and trusted string
@@ -43,7 +45,6 @@ $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
 
 if ($errNum == 0) {
-
     if ($wsResponse[$wsIndices['KEY'][0]]['value'] == "MEMBER PROFILE LOCKED") {
         print("<p>You are locked out</p>");
     } else {
@@ -56,11 +57,11 @@ if ($errNum == 0) {
         $_SESSION['SESS_NEED_APPROVAL'] = $wsResponse[$wsIndices['NEEDAPPROVAL'][0]]['value'];
         $_SESSION['SESS_PERSONAL_ID'] = $wsResponse[$wsIndices['PERSONALID'][0]]['value'];
         $_SESSION['SESS_AUTH_KEY'] = $key;
-        print("<p>login success!</p>");
+        //print("<p>login success!</p>");
 
         ////////////////////////////////////// insert autoproc code here ///////////////////////////////////////////
-        print("<p>autoproc start</p>");
-        print("<p>autoproc after header</p>");
+       // print("<p>autoproc start</p>");
+        //print("<p>autoproc after header</p>");
 
 // I had to add this, quick fix my connection string is not working... please refactor
         $connection = @mysql_connect("devdb.fulgentcorp.com", "495311team2user", "680c12D5!gP592xViF") or die(mysql_error());
@@ -82,34 +83,34 @@ if ($errNum == 0) {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $RESToutput = curl_exec($ch); //send URL Request to RESTServer... returns string
             curl_close($ch); //string from server has been returned <XML> closethe channel
-            $RESToutput ="<?XML version=\"1.0\"?><COPAYCOUNT>2</COPAYCOUNT>";
-            print("<p>print curl output:</p>");
-            print("$RESToutput");
+           // print("<p>print curl output:</p>");
+           //die ($RESToutput);
             if ($RESToutput == '') {
                 die("CONNECTION ERROR");
             }
+                        
+            $wsResponse = array();
+            $wsIndices = array();
+                     
+            $parser = null;
+            $parser = xml_parser_create();    
             
+            $parse_result = xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
+            //die(  xml_error_string(xml_get_error_code($parser))  );
             
-            //$parser = xml_parser_create();
-            //xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);          
-            $parser = xml_parser_create();
-            xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
-
-            print_r($wsResponse);
-            
+            /*if ( is_null($wsIndices) )
+                print "null\n";
+            else
+                print "not null\n";*/
+            $numrows=0;
             $numrows = $wsResponse[$wsIndices['COPAYCOUNT'][0]]['value'];
+            
             if(isset($numrows)){
                 print("<p>numrows=$numrows</p>");
             }
+            
             $currRow = 0;
-
-            while ($currRow < $numrows){
-                $company = $wsResponse[$wsIndices['InsuranceCompany'][$currRow]]['value'];
-                $planName = $wsResponse[$wsIndices['PlanName'][$currRow]]['value'];
-                $planNo = $wsResponse[$wsIndices['PlanNo'][$currRow]]['value'];
-                $coverage = $wsResponse[$wsIndices['CoveragePerc'][$currRow]]['value'];
-                $totalBill = $wsResponse[$wsIndices['TotalBill'][$currRow]]['value'];
-               //headers
+            echo "<table width='100%'>";
                 echo "<tr style=\"border-bottom: 1px solid black;\">\n";
                 echo "<td>Company</td>\n";
                 echo "<td>Plan</td>\n";
@@ -117,6 +118,14 @@ if ($errNum == 0) {
                 echo "<td>Coverage %</td>\n";
                 echo "<td>Total Bill</td>\n";
                 echo "</tr>\n";
+            while ($currRow < $numrows){
+                $company = $wsResponse[$wsIndices['INSURANCECOMPANY'][$currRow]]['value'];
+                $planName = $wsResponse[$wsIndices['PLANNAME'][$currRow]]['value'];
+                $planNo = $wsResponse[$wsIndices['PLANO'][$currRow]]['value'];
+                $coverage = $wsResponse[$wsIndices['COVERAGEPERC'][$currRow]]['value'];
+                $totalBill = $wsResponse[$wsIndices['TOTALBILL'][$currRow]]['value'];
+               //headers
+
                 
                 echo "<tr style=\"border-bottom: 1px solid black;\">\n";
                 echo "<td>",$company,"</td>\n";
@@ -127,6 +136,7 @@ if ($errNum == 0) {
                 echo "</tr>\n";
                 $currRow++;
             }
+            echo "</table>";
         }
 
 
