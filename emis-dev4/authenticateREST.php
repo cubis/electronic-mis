@@ -233,6 +233,7 @@ function doService() {
 	return $retVal;	
 }
 	
+	clean(&$_GET);
 	
 	$output = doService();
 	
