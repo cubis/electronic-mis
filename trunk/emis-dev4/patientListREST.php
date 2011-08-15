@@ -121,6 +121,7 @@ function doService() {
 //8758e4c115ba4669e13a574464488496xolJXj25jlk56LJkk5677LS
 //AUTH KEY 40fc9157068b426ea62b1134d57be6ce
 // set up some useful variables
+clean(&$_GET);
 $output = doService();
 
 print($output);
