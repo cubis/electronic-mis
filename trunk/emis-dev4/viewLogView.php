@@ -8,8 +8,8 @@ $userName = $_SESSION['SESS_USERNAME'];
 
 global $currentPath;
 $request = $currentPath . "viewLogREST.php?";
-$request .= "u=" . urlencode($userName);
-$request .= "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
+$request .= "p=" . urlencode($userName);
+$request .= "&pat=" . urlencode($_SESSION['SESS_AUTH_KEY']);
 
 //format and send request
 $ch = curl_init($request);
@@ -63,15 +63,6 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
     </head>
 
       <body>
-      <?php
- 	
-      ?>
-	<script type="text/javascript">
-		function submitform()
-		{
-			document.forms["loginForm"].submit();
-		}
-	</script>
     <div class="container">
         <div class="header">
             <div class="logo"><img src="img/logo.png" /></div>
