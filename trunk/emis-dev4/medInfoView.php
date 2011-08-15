@@ -22,7 +22,7 @@ require_once('bootstrap.php');
 	</script>
     <div class="container">
         <div class="header">
-            <div class="logo"><img src="img/horizontal_logo.png" /></div>
+            <div class="logo"><img src="img/logo.png" /></div>
             <div class="welcome_text">
                 <h1>Welcome,
                 <?php
@@ -140,8 +140,9 @@ require_once('bootstrap.php');
 		?>
 		<tr>
 		<?php
+		if($_SESSION['SESS_TYPE'] > 1){
 			echo "<td><a href='editMedicationView.php?pat=" . $_GET['pat'] . "'>Add Medication</a></td>";
-			
+			}
 		?>
 		</tr>
 		</table>
@@ -171,8 +172,9 @@ require_once('bootstrap.php');
 		?>
 		<tr>
 		<?php
+		if($_SESSION['SESS_TYPE'] > 1){
 			echo "<td><a href='editPrecView.php?pat=" . $_GET['pat'] . "'>Add Precondition</a></td>";
-			
+			}
 		?>
 		</tr>
 		</table>
