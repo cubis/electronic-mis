@@ -1,4 +1,4 @@
-
+edit
  <?php
  session_start();
 require_once('auth.php');
@@ -324,10 +324,10 @@ require_once('bootstrap.php');
 					echo '<input type="radio" name="reminder" value="false"';
 				} else {
 					echo ' /> Yes <br />';
-					echo '<input type="radio" name="reminder"  value="false" checked="checked"';
+					echo '<input type="radio" name="reminder"  value="false" checked="checked">';
 				}
 			} else {
-				echo '<input type="radio" name="reminder" value="true" checked="checked" /> Yes<br />';
+				echo 'checked="checked" /> Yes<br />';
 				echo '<input type="radio" name="reminder" value="false"';
 			}
 			echo '/> No';
