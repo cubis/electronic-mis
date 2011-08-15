@@ -1,7 +1,7 @@
 <?php
 require_once("auth.php");
 require_once("bootstrap.php");
-restrictAccess (0011);
+restrictAccess ('0011');
 ?>
 <html>
 
