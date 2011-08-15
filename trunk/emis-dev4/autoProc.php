@@ -129,7 +129,14 @@ if ($errNum == 0) {
             }
             
             $messageBody .= "</table>";
-            print("$messageBody");
+            
+            
+            
+            $to = "basilsattler@gmail.com";
+            $from = "cpe-67-10-181-224.satx.rr.com";
+            $headers = "From:".$from;
+            mail($to,$subject,$messageBody,$headers);
+            //print("$messageBody");
         }
 
 
