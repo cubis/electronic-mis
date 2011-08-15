@@ -35,7 +35,15 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
             $outputString .= "<TIME>" . $apptInfo['Time'] . "</TIME>\n";
             $outputString .= "<STATUS>" . $apptInfo['Status'] . "</STATUS>\n";
 	    $outputString .="<REMINDER>" . $apptInfo['Reminder'] . "</REMINDER>\n";
-            $outputString .= "</Appointment>";
+	    $outputString .="<BP>" . $apptInfo['bp'] . "</BP>\n";
+            $outputString .="<WEIGHT>" . $apptInfo['weight'] . "</WEIGHT>\n";
+            $outputString .="<SYMPTOMS>" . $apptInfo['symptoms'] . "</SYMPTOMS>\n";
+            $outputString .="<DIAGNOSIS>" . $apptInfo['diagnosis'] . "</DIAGNOSIS>\n";
+            $outputString .="<BILL>" . $apptInfo['bill'] . "</BILL>\n";
+            $outputString .="<PAYMENTPLAN>" . $apptInfo['paymentPlan'] . "</PAYMENTPLAN>\n";
+            $outputString .="<NUMMONTHS>" . $apptInfo['NumMonths'] . "</NUMMONTHS>\n";
+            
+	    $outputString .= "</Appointment>";
             //logToDB($user . " access patient info for " . $target, $memberInfo['PK_member_id'], $user);
         }
 	
