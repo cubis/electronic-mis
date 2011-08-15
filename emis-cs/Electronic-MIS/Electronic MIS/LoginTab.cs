@@ -53,7 +53,6 @@ namespace Electronic_MIS
                 return;
             }
 
-
             Cursor.Current = Cursors.WaitCursor;
 
             //Form Validation
@@ -130,6 +129,16 @@ namespace Electronic_MIS
                             {
                                 xmlReader.Read();
                                 sessionManager.UserPermissionLevel = int.Parse(xmlReader.Value);
+                            }
+                            else if (xmlReader.Name == "FirstName")
+                            {
+                                xmlReader.Read();
+                                sessionManager.FirstName = xmlReader.Value;
+                            }
+                            else if (xmlReader.Name == "LastName")
+                            {
+                                xmlReader.Read();
+                                sessionManager.LastName = xmlReader.Value;
                             }
                             break;
                         default:
