@@ -100,8 +100,6 @@ if ($errNum == 0) {
            
             $currRow = 0;
             $messageBody = "";
-            $messageBody .= "Content-Type: text/html; charset=\"iso-8859-1\"";
-            $messageBody .= "Content-Transfer-Encoding: 7bit";
                 $messageBody .= "<table width='100%'>";
                 $messageBody .= "<tr style=\"border-bottom: 1px solid black;\">\n";
                 $messageBody .= "<td>Company</td>\n";
@@ -136,7 +134,13 @@ if ($errNum == 0) {
             
             $to = "basilsattler@gmail.com";
             $from = "cpe-67-10-181-224.satx.rr.com";
-            $headers = "From:".$from;
+            
+            $headers = "From:".$from."\r\n";
+            $headers  .= 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            
+            
+            
             mail($to,$subject,$messageBody,$headers);
             //print("$messageBody");
         }
