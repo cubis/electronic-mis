@@ -6,7 +6,7 @@ require_once('bootstrap.php');
 
 		
 	$errmsg_arr = array();
-	$uploaddir = 'C:\\xampp\\htdocs\\emis\\upload\\';
+	$uploaddir = '/var/www/emis/upload/';
 	$uploadfile = $uploaddir . basename($_FILES['uploadfile']['name']);
 	$filesize = $_FILES['uploadfile']['size'];
 
@@ -68,7 +68,7 @@ require_once('bootstrap.php');
 
 	//	print("output = " . $output);
 	//	print_r($_POST);
-	die($output);
+	//die($output);
 
 	$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
@@ -77,7 +77,7 @@ require_once('bootstrap.php');
 		$errmsg_arr[] = "Appointment Updated Successfully";
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		$thisAid = $wsResponse[$wsIndices['APPTID'][0]]['value'];
-		header("location: apptEditView.php?aid=$thisAid"); 
+		header("location: apptView.php"); 
 	} else {
 		$ct = 0;
 		while($ct < $errNum){

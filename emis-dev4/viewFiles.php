@@ -64,18 +64,18 @@ $path_to_file = $memberInfo['fileLocation'];
 $path_to_file = rawurldecode($path_to_file);
 
 //SEND HEADER
-@ob_end_clean();
-@ini_set('zlib.output_compression', 'Off');
-header('Pragma: public');
-header('Last-Modified: '.gmdate('D, d M Y H:i:s') . ' GMT'); 
-header('Cache-Control: no-store, no-cache, must-revalidate'); // HTTP/1.1 
-header('Cache-Control: pre-check=0, post-check=0, max-age=0'); // HTTP/1.1 
+//@ob_end_clean();
+//@ini_set('zlib.output_compression', 'Off');
+//header('Pragma: public');
+//header('Last-Modified: '.gmdate('D, d M Y H:i:s') . ' GMT'); 
+//header('Cache-Control: no-store, no-cache, must-revalidate'); // HTTP/1.1 
+//header('Cache-Control: pre-check=0, post-check=0, max-age=0'); // HTTP/1.1 
 header("Content-type: image/jpeg");
-header('Content-Disposition: inline; filename="' . basename($path_to_file) . '"');
-header("Content-length: $file_size");
+//header('Content-Disposition: inline; filename="' . basename($path_to_file) . '"');
+//header("Content-length: $file_size");
 
 //SEND FILE DATA
-$file = fopen($path_to_file, "rb");
+/*$file = fopen($path_to_file, "rb");
 if ($file) {
   while(!feof($file)) {
     print(fread($file, 8192));
@@ -86,9 +86,10 @@ if ($file) {
     }
   }
   fclose($file);
-}
+}*/
 
-
+$content = file_get_contents($path_to_file = rawurldecode($path_to_file));
+print($content);
 
 		
     } else {

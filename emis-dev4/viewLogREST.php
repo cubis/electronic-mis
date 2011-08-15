@@ -2,8 +2,7 @@
 require_once('configREST.php');     //sql connection information
 require_once('bootstrapREST.php');  //link information
 
-$output = doService();
-print($output);
+
 
 function doService() {
     global $db;
@@ -113,9 +112,14 @@ function outputXML($errNum, $errMsgArr, $doctorNamePrep) {
     }
     
     
-clean(&$_GET);
+
+
 
     $outputString .= "</content>";
     return $outputString; 
 }
+
+    clean(&$_GET);
+    $output = doService();
+    print($output);
 ?>

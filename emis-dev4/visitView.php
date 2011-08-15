@@ -272,7 +272,7 @@ $urlR .= "&aid=" . urlencode($aid);
 					}
 				</script>
 				
-<form name="visitForm" enctype="multipart/form-data" method="post" action="visitExec.php">';
+<form name="visitForm" enctype="multipart/form-data" method="post" action="visitExec.php">
 <input type="hidden" name="aid" value="<?php echo $aid; ?>" />
 
 <!--<form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID=<?php //echo $_GET[$ID] ?>">-->
