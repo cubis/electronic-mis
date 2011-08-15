@@ -107,7 +107,7 @@ function doService($db) {
 
     return $retVal;
 }
-
+clean(&$_POST);
 $output = doService($db);
 
 print($output);
