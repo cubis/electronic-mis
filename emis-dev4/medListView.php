@@ -4,6 +4,7 @@
 require_once('auth.php');
 require_once('bootstrap.php');
 
+restrictAccess ('0111');
 $userName = $_SESSION['SESS_USERNAME'];
 
 global $currentPath;
