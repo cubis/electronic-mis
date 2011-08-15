@@ -2,6 +2,7 @@
 require_once('configREST.php');     //sql connection information
 require_once('bootstrapREST.php');  //link information
 
+clean(&$_POST);
 $output = doService();
 print($output);
 
