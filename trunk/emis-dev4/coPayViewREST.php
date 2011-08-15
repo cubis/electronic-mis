@@ -15,14 +15,14 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
     } else {
         $target = 'all';
     }
-	echo "date: ".$_GET['date'];
+
     $count = 1;
-    $outputString = ''; //start empty
-    $outputString .= "<?xml version=\"1.0\"?>\n";
+    $outputString = ""; //start empty
+    $outputString .= "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
     $outputString .= "<content><errNum>" . $errNum . "</errNum>\n";
-/*    if ($errNum == 0) {
+    if ($errNum == 0) {
         $outputString .= "<COPAYCOUNT>" . $apptInfoPrep->rowCount() . "</COPAYCOUNT>\n";
-        $outputString .= "<DATE>" .$_GET['date'] . "</DATE>\n";
+        $outputString .= "<myDATE>" .$_GET['date'] . "</myDATE>\n";
         while ($apptInfo = $apptInfoPrep->fetch(PDO::FETCH_ASSOC)) {
             $outputString .= "<CopayInfo>";
             $outputString .= "<ID>" . $count . "</ID>\n";
@@ -48,7 +48,7 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
         } else {
             //logToDB($user . " failed to access user info for " . $target, $memberInfo['PK_member_id'], $user);
         }
-    }*/
+    }
 
     $outputString .= "</content>";
     return $outputString;
