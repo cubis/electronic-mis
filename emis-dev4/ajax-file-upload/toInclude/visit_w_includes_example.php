@@ -12,9 +12,9 @@ if (isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count
 }
 ?>
 <?php
-require_once('auth.php');
+require_once('../../auth.php');
 //require_once('configREST.php');     //sql connection information
-require_once('bootstrap.php');  //link information
+require_once('../../bootstrap.php');  //link information
 //$appid = $_GET['ID'];
 //$docListPrep = $db->prepare("SELECT * FROM Doctor");
 //$doclist = "SELECT * FROM Doctor;";
@@ -28,8 +28,40 @@ require_once('bootstrap.php');  //link information
         <link href="css/styles.css" rel="stylesheet" type="text/css" />
 		<?php
 		//include the script stuff
-		require_once('script.html');
+		//include('script.html');
 		?>
+        <script type="text/javascript" src="js/jquery-1.3.2.js" ></script>
+<script type="text/javascript" src="js/ajaxupload.3.5.js" ></script>
+<link rel="stylesheet" type="text/css" href="./styles.css" />
+<script type="text/javascript" >
+	$(function(){
+		var btnUpload=$('#upload');
+		var status=$('#status');
+		new AjaxUpload(btnUpload, {
+			action: 'upload-file.php',
+			name: 'uploadfile',
+			onSubmit: function(file, ext){
+				 if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){ 
+                    // extension is not allowed 
+					status.text('Only JPG, PNG or GIF files are allowed');
+					return false;
+				}
+				status.text('Uploading...');
+			},
+			onComplete: function(file, response){
+				//On completion clear the status
+				status.text('');
+				//Add uploaded file to list
+				if(response==="success"){
+					$('<li></li>').appendTo('#files').html('<img src="./uploads/'+file+'" alt="" /><br />'+file).addClass('success');
+				} else{
+					$('<li></li>').appendTo('#files').text(file).addClass('error');
+				}
+			}
+		});
+		
+	});
+</script>
     </head>
 
     <body bgcolor="#aaaaff">
@@ -143,8 +175,13 @@ require_once('bootstrap.php');  //link information
                                 <td>
 									<?php 
 										//include button for uploading
-										require_once('button.html');
+										//include('button.html');
 									?>
+                                    <div id="mainbody" >
+		<!-- Upload Button, use any id you wish-->
+		<div id="upload" ><span>Upload File<span></div><span id="status" ></span>
+		<ul id="files" ></ul>
+</div>
 								</td>
                             </tr>
 
