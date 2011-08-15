@@ -111,6 +111,9 @@ function outputXML($errNum, $errMsgArr, $doctorNamePrep) {
         }
 	
     }
+    
+    
+clean(&$_GET);
 
     $outputString .= "</content>";
     return $outputString; 
