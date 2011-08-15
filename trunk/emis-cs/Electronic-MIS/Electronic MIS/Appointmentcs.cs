@@ -22,6 +22,13 @@ namespace Electronic_MIS
         String status;
         String patFirst;
         String patLast;
+        String bp;
+        String weight;
+        String symptoms;
+        String diag;
+        String bill;
+        String paymentPlan;
+        String numMonths;
 
         public Appointment()
         {
@@ -148,6 +155,98 @@ namespace Electronic_MIS
         {
             return (AppointmentTime.ToLongDateString() + ", " + AppointmentTime.ToLongTimeString());
         }
+
+        public String BloodPressure
+        {
+            get
+            {
+                return bp;
+            }
+            set
+            {
+                bp = value;
+            }
+
+        }
+
+        public String Weight
+        {
+            get
+            {
+                return weight;
+            }
+            set
+            {
+                weight = value;
+            }
+
+        }
+
+        public String Symptoms
+        {
+            get
+            {
+                return symptoms;
+            }
+            set
+            {
+                symptoms = value;
+            }
+
+        }
+        
+        public String Diagnosis
+        {
+            get
+            {
+                return diag;
+            }
+            set
+            {
+                diag = value;
+            }
+
+        }
+
+        public String Bill
+        {
+            get
+            {
+                return bill;
+            }
+            set
+            {
+                bill = value;
+            }
+
+        }
+
+        public String PaymentPlan
+        {
+            get
+            {
+                return paymentPlan;
+            }
+            set
+            {
+                paymentPlan = value;
+            }
+
+        }
+
+        public String NumMonths
+        {
+            get
+            {
+                return numMonths;
+            }
+            set
+            {
+                numMonths = value;
+            }
+
+        }
+
 
         public int CompareTo(object obj)
         {

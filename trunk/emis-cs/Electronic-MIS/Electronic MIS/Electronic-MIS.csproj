@@ -74,6 +74,7 @@
     <Compile Include="AppointmentTab.Designer.cs">
       <DependentUpon>AppointmentTab.cs</DependentUpon>
     </Compile>
+    <Compile Include="Doctor.cs" />
     <Compile Include="LoginTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,6 +87,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Patient.cs" />
     <Compile Include="PatientInfoTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -176,6 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\horizontal_logo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

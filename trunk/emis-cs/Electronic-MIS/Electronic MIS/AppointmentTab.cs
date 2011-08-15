@@ -180,6 +180,34 @@ namespace Electronic_MIS
                                             newAppt.Remind = int.Parse(xmlReader.ReadElementContentAsString());
                                             break;
 
+                                        case "BP":
+                                            newAppt.BloodPressure = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "WEIGHT":
+                                            newAppt.Weight = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "SYMPTOMS":
+                                            newAppt.Symptoms = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "DIAGNOSIS":
+                                            newAppt.Diagnosis = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "BILL":
+                                            newAppt.Bill = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "PAYMENTPLAN":
+                                            newAppt.PaymentPlan = xmlReader.ReadElementContentAsString();
+                                            break;
+
+                                        case "NUMMONTHS":
+                                            newAppt.PaymentPlan = xmlReader.ReadElementContentAsString();
+                                            break;
+
                                         default:
                                             break;
                                     }
@@ -391,7 +419,8 @@ namespace Electronic_MIS
 
         private void btnReciept_Click(object sender, EventArgs e)
         {
-            PrintEventArgs eventArgs = new PrintEventArgs((Appointment)cmbAppointments.SelectedItem);
+            Decimal copayAmount = getCopay();
+            PrintEventArgs eventArgs = new PrintEventArgs((Appointment)cmbAppointments.SelectedItem, copayAmount);
 
             OnPrintEvent(eventArgs);
         }
@@ -511,15 +540,58 @@ namespace Electronic_MIS
             updateAppointment();
         }
 
+        private decimal getCopay()
+        {
+            decimal coPay = new decimal();
+
+            StringBuilder data = new StringBuilder();
+            data.Append(server);
+            data.Append("viewPatientREST.php");
+            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.UserName));
+            data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
+            data.Append("&pat=all");
+
+            //Create the request
+
+            string url = data.ToString();
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "GET";
+
+            try
+            {
+                WebResponse response = request.GetResponse();
+
+
+                XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
+
+                while (xmlReader.Read())
+                {
+                    if (xmlReader.Name == "CoPay")
+                    {
+                        coPay = xmlReader.ReadElementContentAsDecimal();
+                        break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("General Error.  Try again later.", "Error", MessageBoxButtons.OK);
+            }
+
+            return coPay;
+        }
+
     }
 
     public class PrintEventArgs : EventArgs
     {
         Appointment appt;
+        Decimal copayment;
 
-        public PrintEventArgs(Appointment appointment)
+        public PrintEventArgs(Appointment appointment, Decimal copay)
         {
             appt = appointment;
+            copayment = copay;
         }
 
         public Appointment Appointment
@@ -527,6 +599,18 @@ namespace Electronic_MIS
             get
             {
                 return appt;
+            }
+        }
+
+        public Decimal Copay
+        {
+            get
+            {
+                return copayment;
+            }
+            set
+            {
+                copayment = value;
             }
         }
     }
