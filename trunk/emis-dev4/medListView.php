@@ -106,15 +106,15 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			<table>
 			<tr><td><label><strong></strong></label></td></tr>
 			<tr>
-			  <td><strong>Patient ID:</strong></td>
-			  <td><strong>First Name:</strong></td>
-			  <td><strong>Last Name:</strong></td>
+			  <td width="125"><strong>Patient ID:</strong></td>
+			  <td width="125"><strong>First Name:</strong></td>
+			  <td width="125"><strong>Last Name:</strong></td>
 			</tr>
 			<?php
 			  foreach($patients as &$pat) {
 			  
 			  //appoint array  array($aid, $adate, $atime, $adoctor, $areason, $aremind, $status, $patient)
-			    echo "<tr>";
+			    echo "<tr height=\"30\">";
 			    echo "<td>" . $pat['patid']. "</td>";
 			    echo "<td>" . $pat['firstName']. "</td>";
 			    echo "<td>" . $pat['lastName']. "</td>";
