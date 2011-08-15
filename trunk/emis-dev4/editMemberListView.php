@@ -19,7 +19,7 @@ require_once('bootstrap.php');
 	</script>
     <div class="container">
         <div class="header">
-			<div class="logo"><a href="memberProfileView.php"><img src="../img/logo.png" /></a></div>
+			<div class="logo"><a href="memberProfileView.php"><img src="img/logo.png" /></a></div>
             <div class="welcome_text">
                 <h1>Welcome,
                 <?php
@@ -102,7 +102,7 @@ while ($currRow < $numrows)
 ?>
         </table>
         <br /><br />
-        <a class="black_button" style="margin-right: 295px;"href='../memberProfileView.php'><span>Back</span></a>
+        <a class="black_button" style="margin-right: 295px;" href='memberProfileView.php'><span>Back</span></a>
         <br />
         <br />
 <!-- END OF PAGE CONTENT -->
