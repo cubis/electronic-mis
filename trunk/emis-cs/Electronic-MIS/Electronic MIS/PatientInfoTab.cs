@@ -22,6 +22,7 @@ namespace Electronic_MIS
         List<Patient> patients;
         string server;
         string doc;
+        string docnum;
 
         public PatientInfoTab(SessionManager manager, string activeServer)
         {
@@ -73,9 +74,10 @@ namespace Electronic_MIS
                             {
                                 MessageBox.Show(xmlReader.ReadElementContentAsString());
                             }
-                            Patient newpat = new Patient();
+             
                             if (xmlReader.Name == "Patient")
                             {
+                                Patient newpat = new Patient();
                                 xmlReader.Read();
                                 while(xmlReader.Name != "Patient")
                                 {
@@ -142,13 +144,23 @@ namespace Electronic_MIS
                                         case "FKDoctorID":
                                             doc = xmlReader.ReadElementContentAsString(); 
                                             break;
+                                        case "PK_DoctorID":
+                                            docnum = xmlReader.ReadElementContentAsString();
+                                            break;
                                         case "ERROR":
                                             MessageBox.Show(xmlReader.ReadElementContentAsString());
                                             break;
+                                        
                                     }
                                 }
-                                patients.Add(newpat);
-                                int numberdoc = sessionManager.UserID;
+
+                                if (doc == getdocid())
+                                {
+                                    patients.Add(newpat);
+                                }
+
+                                //patients.Add(newpat);
+                                //int numberdoc = sessionManager.UserID;
                             }
                             //adding a patient from doc to the patients list
                             //have to find a way to figure out which doctor is logged on to be able
@@ -161,12 +173,13 @@ namespace Electronic_MIS
                                 patientbox.Hide();
                             }
 
+                            
 
-                            if (doc == "1")
+                            /*if (doc == "1")
                             {
                                 sessionid = sessionManager.UserID;
                                 patients.Add(newpat); 
-                            }
+                            }*/
                             break;
                         default:
                             break;
@@ -202,6 +215,96 @@ namespace Electronic_MIS
         private void patientbox_SelectedIndexChanged(object sender, EventArgs e)
         {
             refreshLabels((Patient)patientbox.SelectedItem);
+        }
+
+
+
+        private string getdocid()
+        {
+            string docname = sessionManager.LastName;
+            List<Doctor> doctors = new List<Doctor>(); 
+            StringBuilder data = new StringBuilder();
+            data.Append(server);
+            data.Append("doctorListREST.php");
+            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.UserName.ToString()));
+            data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
+
+            string url = data.ToString();
+            Debug.WriteLine(url);
+            
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+
+            Debug.WriteLine(request.ToString());
+
+
+            request.Timeout = 50000;
+
+            try
+            {
+                WebResponse response = request.GetResponse();
+
+                XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
+
+                while (xmlReader.Read())
+                {
+                    switch (xmlReader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            if (xmlReader.Name == "Names")
+                            {
+                                Doctor doc = new Doctor();
+                                xmlReader.Read();
+                                while (xmlReader.Name != "Names")
+                                {
+                                    switch (xmlReader.Name)
+                                    {                  
+
+                                        case "DOCID":
+                                            doc.DoctorID = xmlReader.ReadContentAsString();
+                                            break;
+
+                                        case "LastName":
+                                            doc.DoctorName = xmlReader.ReadContentAsString();
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+                                    xmlReader.Read();
+                                }
+                                doctors.Add(doc);
+                            }
+                            break;
+
+                    }
+                }
+
+            }
+            catch (Exception exp)
+            {
+                if (exp.Message.Contains("404"))
+                {
+                    MessageBox.Show("Cannot connect to server.\n  Please try again later.", "Server connection error", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    Debug.WriteLine(exp.Message);
+                    MessageBox.Show("The program encountered an error.\n  Please try again later.", "Yeah... We didn't plan for this.", MessageBoxButtons.OK);
+                }
+            }
+
+
+            foreach (Doctor doc in doctors)
+            {
+                if (doc.DoctorName == docname)
+                {
+                    return doc.DoctorID;
+                }
+            }
+
+            return "";
+        
         }
 
         private void refreshLabels(Patient patient)
