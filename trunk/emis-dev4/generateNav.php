@@ -6,8 +6,8 @@
 <?php elseif ($_SESSION['SESS_TYPE'] >= 400): // Logged in user is an Admin ?>
 	<div class="nav_title">Administrator</div>
 	<div class="navlist"><a href="medicalListView.php">Edit Patient Medical Information</a></div>
-	<div class="navlist"><a href="admin/editMemberListView.php">View/Edit Members</a></div>
-	<!--<div class="navlist"><a href="admin/approveRequestsView.php">View/Approve/Deny Member Request</a></div -->
+	<div class="navlist"><a href="editMemberListView.php">View/Edit Members</a></div>
+	<!--<div class="navlist"><a href="approveRequestsView.php">View/Approve/Deny Member Request</a></div -->
 	<div class="navlist"><a href="apptView.php">Appointments</a></div>
 <?php elseif ($_SESSION['SESS_TYPE'] == 300): // Logged in user is a doctor ?>
 	<div class="nav_title">Doctor</div>
