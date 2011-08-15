@@ -157,10 +157,10 @@ $pdf->Ln();
 $pdf->Cell(18,10,'Status:',0);
 $pdf->Cell(40,10,$status,0);
 $pdf->Ln();
-//doctor
-$pdf->Cell(18,10,'Doctor:',0);
-$pdf->Cell(40,10,$doctor,0);
-$pdf->Ln();
+// //doctor
+// $pdf->Cell(18,10,'Doctor:',0);
+// $pdf->Cell(40,10,$doctor,0);
+// $pdf->Ln();
 //reason
 $pdf->Cell(18,10,'Reason:',0);
 $pdf->Cell(40,10,$reason,0);
@@ -195,25 +195,25 @@ $pdf->Cell(30,10,'Diagnosis:',0);
 $pdf->Cell(60,10,$diagnosis,0);
 $pdf->Ln();
 
-// Medicine
-$pdf->Cell(30,10,'Medicine:',0);
-$pdf->Cell(60,10,"LOL",0);
-$pdf->Ln();
+// // Medicine
+// $pdf->Cell(30,10,'Medicine:',0);
+// $pdf->Cell(60,10,"LOL",0);
+// $pdf->Ln();
 
-// Dosage
-$pdf->Cell(30,10,'Dosage:',0);
-$pdf->Cell(60,10,'LOL',0);
-$pdf->Ln();
+// // Dosage
+// $pdf->Cell(30,10,'Dosage:',0);
+// $pdf->Cell(60,10,'LOL',0);
+// $pdf->Ln();
 
-// Start Date
-$pdf->Cell(30,10,'Start Date:',0);
-$pdf->Cell(60,10,'LOL',0);
-$pdf->Ln();
+// // Start Date
+// $pdf->Cell(30,10,'Start Date:',0);
+// $pdf->Cell(60,10,'LOL',0);
+// $pdf->Ln();
 
-// End Date
-$pdf->Cell(30,10,'End Date:',0);
-$pdf->Cell(60,10,'LOL',0);
-$pdf->Ln();
+// // End Date
+// $pdf->Cell(30,10,'End Date:',0);
+// $pdf->Cell(60,10,'LOL',0);
+// $pdf->Ln();
 
 // Total Bill
 $pdf->Cell(30,10,'Total Bill:',0);
@@ -230,15 +230,15 @@ $pdf->Cell(30,10,'Months:',0);
 $pdf->Cell(60,10,$months,0);
 $pdf->Ln();
 
-// Referal
-$pdf->Cell(30,10,'Referal:',0);
-$pdf->Cell(60,10,'LOL',0);
-$pdf->Ln();
+// // Referal
+// $pdf->Cell(30,10,'Referal:',0);
+// $pdf->Cell(60,10,'LOL',0);
+// $pdf->Ln();
 
-// File Name
-$pdf->Cell(30,10,'File Name:',0);
-$pdf->Cell(60,10,'LOL',0);
-$pdf->Ln();
+// // File Name
+// $pdf->Cell(30,10,'File Name:',0);
+// $pdf->Cell(60,10,'LOL',0);
+// $pdf->Ln();
 
 $pdf->Output();
 ?>
