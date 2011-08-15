@@ -48,7 +48,7 @@ require_once('bootstrap.php');  //link information
                 </div>
             </div>
             <div class="page_display">
-                <div class="page_title">Edit Member Information</div>
+                <div class="page_title">Visitation Record</div>
                 <div class="page_content">
                 <!-- PAGE CONTENT STARTS HERE -->
                     <script type="text/javascript">
