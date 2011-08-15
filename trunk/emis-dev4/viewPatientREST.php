@@ -139,6 +139,7 @@ function doService($level) {
 //AUTH KEY 40fc9157068b426ea62b1134d57be6ce
 
 // set up some useful variables
+clean(&$_GET);
 $output = doService(300);
 
 print($output);
