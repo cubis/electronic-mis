@@ -345,13 +345,13 @@ require_once('bootstrap.php');
 			
 		} else if($aidIsSet){
 			
-			echo '<input type = "radio" name="status" value="true" ';
+			echo '<input type = "radio" name="status" value="Scheduled" ';
 			if( strtoupper($wsResponseAppt[$wsIndicesAppt['STATUS'][0]]['value']) == "SCHEDULED"  ){
 				echo 'checked="checked" /> Scheduled <br />';
-				echo '<input type="radio" name="status" value="false"';
+				echo '<input type="radio" name="status" value="Cancelled"';
 			} else {
 				echo ' /> Scheduled <br />';
-				echo '<input type="radio" name="status"  value="false" checked="checked"';
+				echo '<input type="radio" name="status"  value="Cancelled" checked="checked"';
 			}
 			echo '/> Cancelled';
 			
