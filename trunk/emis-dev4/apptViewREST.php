@@ -34,6 +34,7 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
             $outputString .= "<DATE>" . $apptInfo['Date'] . "</DATE>\n";
             $outputString .= "<TIME>" . $apptInfo['Time'] . "</TIME>\n";
             $outputString .= "<STATUS>" . $apptInfo['Status'] . "</STATUS>\n";
+			$outputString .= "<FILE>" . $apptInfo['fileLocation'] . "</FILE>\n";
 	    $outputString .="<REMINDER>" . $apptInfo['Reminder'] . "</REMINDER>\n";
 	    $outputString .="<BP>" . $apptInfo['bp'] . "</BP>\n";
             $outputString .="<WEIGHT>" . $apptInfo['weight'] . "</WEIGHT>\n";
