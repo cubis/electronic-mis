@@ -59,9 +59,6 @@ if ($errNum == 0) {
         $_SESSION['SESS_AUTH_KEY'] = $key;
         //print("<p>login success!</p>");
 
-        ////////////////////////////////////// insert autoproc code here ///////////////////////////////////////////
-       // print("<p>autoproc start</p>");
-        //print("<p>autoproc after header</p>");
 
 // I had to add this, quick fix my connection string is not working... please refactor
         $connection = @mysql_connect("devdb.fulgentcorp.com", "495311team2user", "680c12D5!gP592xViF") or die(mysql_error());
@@ -73,8 +70,8 @@ if ($errNum == 0) {
             $request = $currentPath . "coPayViewREST.php?";
             $request .= "u=" . urlencode($_SESSION['SESS_USERNAME']);
             $request .= "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
-            $request .= "&date=" . urlencode($_GET['date']);
-
+            $request .= "&date=" . urlencode(date("Y-m-d"));
+		print ("<p>$request</p>");
             $ch = curl_init($request);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
 
@@ -108,16 +105,18 @@ if ($errNum == 0) {
             if(isset($numrows)){
                 print("<p>numrows=$numrows</p>");
             }
-            
+           
             $currRow = 0;
-            echo "<table width='100%'>";
-                echo "<tr style=\"border-bottom: 1px solid black;\">\n";
-                echo "<td>Company</td>\n";
-                echo "<td>Plan</td>\n";
-                echo "<td>Plan#</td>\n";
-                echo "<td>Coverage %</td>\n";
-                echo "<td>Total Bill</td>\n";
-                echo "</tr>\n";
+            $messageBody = "";
+                $messageBody .= "<table width='100%'>";
+                $messageBody .= "<tr style=\"border-bottom: 1px solid black;\">\n";
+                $messageBody .= "<td>Company</td>\n";
+                $messageBody .= "<td>Plan</td>\n";
+                $messageBody .= "<td>Plan#</td>\n";
+                $messageBody .= "<td>Coverage %</td>\n";
+                $messageBody .= "<td>Total Bill</td>\n";
+                $messageBody .= "</tr>\n";
+                
             while ($currRow < $numrows){
                 $company = $wsResponse[$wsIndices['INSURANCECOMPANY'][$currRow]]['value'];
                 $planName = $wsResponse[$wsIndices['PLANNAME'][$currRow]]['value'];
@@ -127,16 +126,18 @@ if ($errNum == 0) {
                //headers
 
                 
-                echo "<tr style=\"border-bottom: 1px solid black;\">\n";
-                echo "<td>",$company,"</td>\n";
-                echo "<td>",$planName,"</td>\n";
-                echo "<td>",$planNo,"</td>\n";
-                echo "<td>",$coverage,"</td>\n";
-                echo "<td>",$totalBill,"</td>\n";
-                echo "</tr>\n";
+                $messageBody = "<tr style=\"border-bottom: 1px solid black;\">\n";
+                $messageBody .= "<td>",$company,"</td>\n";
+                $messageBody .= "<td>",$planName,"</td>\n";
+                $messageBody .= "<td>",$planNo,"</td>\n";
+                $messageBody .= "<td>",$coverage,"</td>\n";
+                $messageBody .= "<td>",$totalBill,"</td>\n";
+                $messageBody .= "</tr>\n";
                 $currRow++;
             }
-            echo "</table>";
+            
+            $messageBody .= "</table>";
+            print("$messageBody");
         }
 
 
@@ -198,9 +199,8 @@ if ($errNum == 0) {
                 break;
             
             case "copay":
-                if( $_GET['date'] ){ //don't even bother doing the call if date isn't provided
-                    doCopay();
-                }
+                print("before copay");
+                doCopay();
                 echo "<p>end of copay routine</p>";
                 break;
         }
