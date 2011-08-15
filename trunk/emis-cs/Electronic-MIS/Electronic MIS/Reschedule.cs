@@ -6,6 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Net;
+using System.Xml;
+using System.IO;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Diagnostics;
 
 namespace Electronic_MIS
 {
@@ -13,10 +19,16 @@ namespace Electronic_MIS
     {
         public DateTime newTime;
         public Doctor doctor;
+        List<Doctor> doctors = new List<Doctor>();
+        string server;
+        SessionManager sessionManager;
 
-        public Reschedule()
+        public Reschedule(string Server, SessionManager session)
         {
             InitializeComponent();
+
+            server = Server;
+            sessionManager = session;
 
             dtDate.Value = DateTime.Today;
 
@@ -27,7 +39,82 @@ namespace Electronic_MIS
                 timeEntry = timeEntry.AddMinutes(15);
             }
 
-            //Add code to get doctor
+            StringBuilder data = new StringBuilder();
+            data.Append(server);
+            data.Append("doctorListREST.php");
+            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.UserName.ToString()));
+            data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
+
+            string url = data.ToString();
+            Debug.WriteLine(url);
+            
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+
+            Debug.WriteLine(request.ToString());
+
+
+            request.Timeout = 50000;
+
+            try
+            {
+                WebResponse response = request.GetResponse();
+
+                XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
+
+                while (xmlReader.Read())
+                {
+                    switch (xmlReader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            if (xmlReader.Name == "Names")
+                            {
+                                Doctor doc = new Doctor();
+                                xmlReader.Read();
+                                while (xmlReader.Name != "Names")
+                                {
+                                    switch (xmlReader.Name)
+                                    {                  
+
+                                        case "DOCID":
+                                            doc.DoctorID = xmlReader.ReadContentAsString();
+                                            break;
+
+                                        case "LastName":
+                                            doc.DoctorName = xmlReader.ReadContentAsString();
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+                                    xmlReader.Read();
+                                }
+                                doctors.Add(doc);
+                            }
+                            break;
+
+                    }
+                }
+
+            }
+            catch (Exception exp)
+            {
+                if (exp.Message.Contains("404"))
+                {
+                    MessageBox.Show("Cannot connect to server.\n  Please try again later.", "Server connection error", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    Debug.WriteLine(exp.Message);
+                    MessageBox.Show("The program encountered an error.\n  Please try again later.", "Yeah... We didn't plan for this.", MessageBoxButtons.OK);
+                }
+            }
+
+
+            foreach (Doctor doc in doctors)
+            {
+                cmbDocs.Items.Add(doc);
+            }
         }
 
         private void Reschedule_Load(object sender, EventArgs e)

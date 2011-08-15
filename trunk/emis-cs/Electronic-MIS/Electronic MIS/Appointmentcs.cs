@@ -19,11 +19,15 @@ namespace Electronic_MIS
         bool remind;
         DateTime appTime;
         int patID;
-        int docID;
         String status;
         String patFirst;
         String patLast;
 
+        public Appointment()
+        {
+            appTime = new DateTime();
+            doc = new Doctor();
+        }
 
         public Doctor Doctor
         {
@@ -99,18 +103,6 @@ namespace Electronic_MIS
             set
             {
                 patID = value;
-            }
-        }
-
-        public int DoctorID
-        {
-            get
-            {
-                return docID;
-            }
-            set
-            {
-                docID = value;
             }
         }
 

@@ -102,6 +102,9 @@ namespace Electronic_MIS
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
 
+            Debug.WriteLine(request.ToString());
+
+
             request.Timeout = 50000;
 
             try
@@ -359,7 +362,7 @@ namespace Electronic_MIS
         {
             DateTime newApptTime;
             Doctor doctor;
-            Reschedule resched = new Reschedule();
+            Reschedule resched = new Reschedule(server,sessionManager);
             resched.ShowDialog();
 
             newApptTime = resched.newTime;
@@ -416,11 +419,6 @@ namespace Electronic_MIS
 
         private void updateAppointment()
         {
-            if (remindMeChkBox.Checked == selectedAppointment.Remind)
-            {
-                return;
-            }
-
             int x;
             if (remindMeChkBox.Checked == true)
             {
@@ -453,7 +451,7 @@ namespace Electronic_MIS
             string dateFormat = "yyyy-MM-dd";
             string formattedDate = selectedAppointment.AppointmentTime.Date.ToString(dateFormat);
             data.Append("&date=" + WebUtility.HtmlEncode(formattedDate));
-            data.Append("&doctor=" + WebUtility.HtmlEncode(selectedAppointment.DoctorID.ToString()));
+            data.Append("&doctor=" + WebUtility.HtmlEncode(selectedAppointment.Doctor.DoctorID));
             data.Append("&patient=" + WebUtility.HtmlEncode(selectedAppointment.PatientID.ToString()));
             data.Append("&reminder=" + WebUtility.HtmlEncode(x.ToString()));
 

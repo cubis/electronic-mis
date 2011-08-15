@@ -120,7 +120,7 @@ namespace Electronic_MIS
                                 xmlReader.Read();
                                 sessionManager.Key = xmlReader.Value;
                             }
-                            else if (xmlReader.Name == "userID")
+                            else if (xmlReader.Name == "PersonalID")
                             {
                                 xmlReader.Read();
                                 sessionManager.UserID = int.Parse(xmlReader.Value);
