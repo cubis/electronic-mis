@@ -82,16 +82,51 @@ if ($errNum == 0) {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $RESToutput = curl_exec($ch); //send URL Request to RESTServer... returns string
             curl_close($ch); //string from server has been returned <XML> closethe channel
-            
+            $RESToutput ="<?XML version=\"1.0\"?><COPAYCOUNT>2</COPAYCOUNT>";
             print("<p>print curl output:</p>");
             print("$RESToutput");
             if ($RESToutput == '') {
                 die("CONNECTION ERROR");
             }
-
+            
+            
+            //$parser = xml_parser_create();
+            //xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);          
             $parser = xml_parser_create();
-
             xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
+
+            print_r($wsResponse);
+            
+            $numrows = $wsResponse[$wsIndices['COPAYCOUNT'][0]]['value'];
+            if(isset($numrows)){
+                print("<p>numrows=$numrows</p>");
+            }
+            $currRow = 0;
+
+            while ($currRow < $numrows){
+                $company = $wsResponse[$wsIndices['InsuranceCompany'][$currRow]]['value'];
+                $planName = $wsResponse[$wsIndices['PlanName'][$currRow]]['value'];
+                $planNo = $wsResponse[$wsIndices['PlanNo'][$currRow]]['value'];
+                $coverage = $wsResponse[$wsIndices['CoveragePerc'][$currRow]]['value'];
+                $totalBill = $wsResponse[$wsIndices['TotalBill'][$currRow]]['value'];
+               //headers
+                echo "<tr style=\"border-bottom: 1px solid black;\">\n";
+                echo "<td>Company</td>\n";
+                echo "<td>Plan</td>\n";
+                echo "<td>Plan#</td>\n";
+                echo "<td>Coverage %</td>\n";
+                echo "<td>Total Bill</td>\n";
+                echo "</tr>\n";
+                
+                echo "<tr style=\"border-bottom: 1px solid black;\">\n";
+                echo "<td>",$company,"</td>\n";
+                echo "<td>",$planName,"</td>\n";
+                echo "<td>",$planNo,"</td>\n";
+                echo "<td>",$coverage,"</td>\n";
+                echo "<td>",$totalBill,"</td>\n";
+                echo "</tr>\n";
+                $currRow++;
+            }
         }
 
 
