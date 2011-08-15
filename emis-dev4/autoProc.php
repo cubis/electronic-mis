@@ -1,5 +1,4 @@
 <?php
-
 //Include database connection details
 require_once('bootstrap.php');
 //require_once('config.php');
@@ -59,7 +58,6 @@ if ($errNum == 0) {
         $_SESSION['SESS_AUTH_KEY'] = $key;
         //print("<p>login success!</p>");
 
-
 // I had to add this, quick fix my connection string is not working... please refactor
         $connection = @mysql_connect("devdb.fulgentcorp.com", "495311team2user", "680c12D5!gP592xViF") or die(mysql_error());
         $database = @mysql_select_db("cs49532011team2", $connection) or die(mysql_error());
@@ -93,12 +91,6 @@ if ($errNum == 0) {
             $parser = xml_parser_create();    
             
             $parse_result = xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
-            //die(  xml_error_string(xml_get_error_code($parser))  );
-            
-            /*if ( is_null($wsIndices) )
-                print "null\n";
-            else
-                print "not null\n";*/
             $numrows=0;
             $numrows = $wsResponse[$wsIndices['COPAYCOUNT'][0]]['value'];
             
@@ -126,12 +118,12 @@ if ($errNum == 0) {
                //headers
 
                 
-                $messageBody = "<tr style=\"border-bottom: 1px solid black;\">\n";
-                $messageBody .= "<td>",$company,"</td>\n";
-                $messageBody .= "<td>",$planName,"</td>\n";
-                $messageBody .= "<td>",$planNo,"</td>\n";
-                $messageBody .= "<td>",$coverage,"</td>\n";
-                $messageBody .= "<td>",$totalBill,"</td>\n";
+                $messageBody .= "<tr style=\"border-bottom: 1px solid black;\">\n";
+                $messageBody .= "<td>".$company."</td>\n";
+                $messageBody .= "<td>".$planName."</td>\n";
+                $messageBody .= "<td>".$planNo."</td>\n";
+                $messageBody .= "<td>".$coverage."</td>\n";
+                $messageBody .= "<td>".$totalBill."</td>\n";
                 $messageBody .= "</tr>\n";
                 $currRow++;
             }
