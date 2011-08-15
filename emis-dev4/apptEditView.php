@@ -330,7 +330,7 @@ require_once('bootstrap.php');
 				echo 'checked="checked" /> Yes<br />';
 				echo '<input type="radio" name="reminder" value="false"';
 			}
-			echo '/> No';
+			echo ' /> No';
 	       }
 	       ?>
             </p>
