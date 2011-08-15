@@ -34,7 +34,7 @@ xml_parse_into_struct($parser, $output, $wsResponse, $wsIndices);
 $errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
 
 if($errNum == 0) {
-	header("location: successPatientAddView.php");
+	header("location: doctorAddRemovePatientView.php");
 	//print "OUTPUT = " . $output;
 	exit();
 }
@@ -47,7 +47,7 @@ else {
 	}		
 	$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 	session_write_close();
-	header("location: failPatientAddView.php");
+	header("location: doctorAddRemovePatientView.php");
 	exit();
 }
 
