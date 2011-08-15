@@ -36,13 +36,14 @@ function logToDB($actionDescription, $userID, $sentName)
 }
 
 function clean($myArray) {
-		foreach($myArray as $key=>$val){
-			$myVal = @trim($val);
-			if (get_magic_quotes_gpc ()) {
-				$myVal = stripslashes($myVal);
-			}
-			$myArray[$key] = htmlspecialchars($myVal);
+	foreach($myArray as $key=>$val){
+		$myVal = @trim($val);
+		if (get_magic_quotes_gpc ()) {
+			$myVal = stripslashes($myVal);
 		}
+		$myVal = preg_replace("/[<>*&]/", "", $myVal);
+		$myArray[$key] = htmlspecialchars($myVal);
 	}
+}
 
 ?>
