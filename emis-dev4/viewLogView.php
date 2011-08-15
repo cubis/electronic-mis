@@ -8,8 +8,8 @@ $userName = $_SESSION['SESS_USERNAME'];
 
 global $currentPath;
 $request = $currentPath . "viewLogREST.php?";
-$request .= "p=" . urlencode($userName);
-$request .= "&pat=" . urlencode($_SESSION['SESS_AUTH_KEY']);
+$request .= "u=" . urlencode($userName);
+$request .= "&key=" . urlencode($_SESSION['SESS_AUTH_KEY']);
 
 //format and send request
 $ch = curl_init($request);
