@@ -100,6 +100,8 @@ if ($errNum == 0) {
            
             $currRow = 0;
             $messageBody = "";
+            $messageBody .= "Content-Type: text/html; charset=\"iso-8859-1\"";
+            $messageBody .= "Content-Transfer-Encoding: 7bit";
                 $messageBody .= "<table width='100%'>";
                 $messageBody .= "<tr style=\"border-bottom: 1px solid black;\">\n";
                 $messageBody .= "<td>Company</td>\n";
