@@ -1,6 +1,7 @@
 <?php
 require_once('auth.php');
 require_once('bootstrap.php');
+restrictAccess('1000');
 
 $userName = $_SESSION['SESS_USERNAME'];
 
@@ -66,7 +67,7 @@ class PDF extends FPDF
     // Move to the right
     $this->Cell(70);
     // Title
-    $this->Cell(56,10,'Appointment Receipt',0,0,'C');
+    $this->Cell(52,10,'Appointment Receipt',0,0,'C');
     // Line break
     $this->Ln(20);
   }
@@ -80,26 +81,6 @@ class PDF extends FPDF
     $this->SetFont('Arial','I',8);
     // Page number
     $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-  }
-
-  function Table($header, $data) {
-    // Column widths
-    $w = array(40, 35, 40, 45);
-    // Header
-    for($i=0;$i<count($header);$i++)
-      $this->Cell($w[$i],7,$header[$i],1,0,'C');
-    $this->Ln();
-    // Data
-    foreach($data as $row)
-      {
-        $this->Cell($w[0],6,$row[0],'LR');
-        $this->Cell($w[1],6,$row[1],'LR');
-        $this->Cell($w[2],6,number_format($row[2]),'LR',0,'R');
-        $this->Cell($w[3],6,number_format($row[3]),'LR',0,'R');
-        $this->Ln();
-      }
-    // Closing line
-    $this->Cell(array_sum($w),0,'','T');
   }
 }
 
@@ -133,7 +114,89 @@ foreach($appointments as &$app) {
     //reason
     $pdf->Cell(18,10,'Reason:',0);
     $pdf->Cell(40,10,$app[2],0);
+
   }
+  
+  // visit
+  $pdf->Ln(20);
+  // Move to the right
+  $pdf->Cell(70);
+  $pdf->SetFont('Arial','B',15);
+  $pdf->Cell(52,10,'Visit',0,0,'C');
+  $pdf->Ln();
+  
+  $pdf->SetFont('Arial','B',10);
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Weight
+  $pdf->Cell(30,10,'Weight:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+  
+  // Symptoms
+  $pdf->Cell(30,10,'Symptoms:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Diagnosis
+  $pdf->Cell(30,10,'Diagnosis:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Medicine
+  $pdf->Cell(30,10,'Medicine:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Dosage
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+
+  // Blood Pressure
+  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(60,10,'LOL',0);
+  $pdf->Ln();
+  
   $pdf->Output();
   
 }
