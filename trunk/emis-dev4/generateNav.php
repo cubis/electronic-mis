@@ -7,6 +7,7 @@
 	<div class="nav_title">Administrator</div>
 	<div class="navlist"><a href="medListView.php">Edit Patient Medical Information</a></div>
 	<div class="navlist"><a href="editMemberListView.php">View/Edit Members</a></div>
+    <div class="navlist"><a href="viewLogView.php">Activity Log</a></div>
 	<!--<div class="navlist"><a href="approveRequestsView.php">View/Approve/Deny Member Request</a></div -->
 	<div class="navlist"><a href="apptView.php">Appointments</a></div>
 <?php elseif ($_SESSION['SESS_TYPE'] == 300): // Logged in user is a doctor ?>
