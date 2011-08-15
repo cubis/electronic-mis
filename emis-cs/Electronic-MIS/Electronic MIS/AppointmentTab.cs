@@ -177,15 +177,7 @@ namespace Electronic_MIS
                                             break;
 
                                         case "REMINDER":
-                                            int remind = int.Parse(xmlReader.ReadElementContentAsString());
-                                            if (remind == 0)
-                                            {
-                                                newAppt.Remind = false;
-                                            }
-                                            else
-                                            {
-                                                newAppt.Remind = true;
-                                            }
+                                            newAppt.Remind = int.Parse(xmlReader.ReadElementContentAsString());
                                             break;
 
                                         default:
@@ -219,7 +211,7 @@ namespace Electronic_MIS
 
         private void remindMeChkBox_CheckedChanged(object sender, EventArgs e)
         {
-            updateAppointment();
+
         }
 
         private void appointmentListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -287,7 +279,7 @@ namespace Electronic_MIS
 
             textBox1.Text = sb.ToString();
 
-            if (appt.Remind)
+            if (appt.Remind != 0)
             {
                 remindMeChkBox.CheckState = CheckState.Checked;
             }
@@ -313,6 +305,7 @@ namespace Electronic_MIS
             }
 
             updateAppointment();
+            selectAppointment();
         }
 
         private void removeAppointment()
@@ -363,15 +356,31 @@ namespace Electronic_MIS
             DateTime newApptTime;
             Doctor doctor;
             Reschedule resched = new Reschedule(server,sessionManager);
-            resched.ShowDialog();
+            if (resched.ShowDialog() == DialogResult.OK)
+            {
 
-            newApptTime = resched.newTime;
-            doctor = resched.doctor;
+                newApptTime = resched.newTime;
+                doctor = resched.doctor;
 
-            selectedAppointment.AppointmentTime = newApptTime;
-            selectedAppointment.Doctor = resched.doctor;
+                selectedAppointment.AppointmentTime = newApptTime;
+                selectedAppointment.Doctor = resched.doctor;
+                selectedAppointment.Status = "Scheduled";
 
-            updateAppointment();
+                if (selectedAppointment.AppointmentTime.CompareTo(DateTime.Now) > 0)
+                {
+                    updateAppointment();
+                }
+                else
+                {
+                    MessageBox.Show("You must reschedule an appointment for a date later than today.", "Error", MessageBoxButtons.OK);
+                }
+
+                refreshTab();
+            }
+            else
+            {
+
+            }
         }
 
         protected virtual void OnPrintEvent(PrintEventArgs e)
@@ -419,15 +428,6 @@ namespace Electronic_MIS
 
         private void updateAppointment()
         {
-            int x;
-            if (remindMeChkBox.Checked == true)
-            {
-                x = 1;
-            }
-            else
-            {
-                x = 0;
-            }
 
             StringBuilder url = new StringBuilder();
             url.Append(server);
@@ -443,17 +443,34 @@ namespace Electronic_MIS
             reason = reason.Replace("\n", "");
             reason = reason.Replace("\t", "");
             data.Append("&reason=" + WebUtility.HtmlEncode(reason));
-            data.Append("&time=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentTime.TimeOfDay.TotalHours.ToString()));
-            data.Append(WebUtility.HtmlEncode(":" + selectedAppointment.AppointmentTime.TimeOfDay.Minutes.ToString()));
-            if (selectedAppointment.AppointmentTime.TimeOfDay.Minutes == 0)
-                data.Append("0");
-
+            StringBuilder timeString = new StringBuilder();
+            if (selectedAppointment.AppointmentTime.Hour < 10)
+            {
+                timeString.Append("0");
+            }
+            timeString.Append(selectedAppointment.AppointmentTime.Hour);
+            timeString.Append(":");
+            if (selectedAppointment.AppointmentTime.Minute < 10)
+            {
+                timeString.Append("0");
+            }
+            timeString.Append(selectedAppointment.AppointmentTime.Minute);
+            data.Append("&time=" + WebUtility.HtmlEncode(timeString.ToString()));
             string dateFormat = "yyyy-MM-dd";
             string formattedDate = selectedAppointment.AppointmentTime.Date.ToString(dateFormat);
             data.Append("&date=" + WebUtility.HtmlEncode(formattedDate));
             data.Append("&doctor=" + WebUtility.HtmlEncode(selectedAppointment.Doctor.DoctorID));
             data.Append("&patient=" + WebUtility.HtmlEncode(selectedAppointment.PatientID.ToString()));
-            data.Append("&reminder=" + WebUtility.HtmlEncode(x.ToString()));
+            data.Append("&reminder=");
+
+            if (selectedAppointment.Remind == 1)
+            {
+                data.Append("true");
+            }
+            else
+            {
+                data.Append("false");
+            }
 
             Debug.WriteLine(url);
 
@@ -479,8 +496,19 @@ namespace Electronic_MIS
             response.Close();
 
             Cursor.Current = Cursors.Arrow;
+        }
 
-            refreshTab();
+        private void remindMeChkBox_Click(object sender, EventArgs e)
+        {
+            if (remindMeChkBox.CheckState == CheckState.Checked)
+            {
+                selectedAppointment.Remind = 1;
+            }
+            else
+            {
+                selectedAppointment.Remind = 0;
+            }
+            updateAppointment();
         }
 
     }

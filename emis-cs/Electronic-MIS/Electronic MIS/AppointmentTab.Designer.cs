@@ -73,6 +73,7 @@
             this.remindMeChkBox.UseVisualStyleBackColor = true;
             this.remindMeChkBox.Visible = false;
             this.remindMeChkBox.CheckedChanged += new System.EventHandler(this.remindMeChkBox_CheckedChanged);
+            this.remindMeChkBox.Click += new System.EventHandler(this.remindMeChkBox_Click);
             // 
             // textBox1
             // 

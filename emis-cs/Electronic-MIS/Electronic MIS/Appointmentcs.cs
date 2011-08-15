@@ -16,7 +16,7 @@ namespace Electronic_MIS
         Doctor doc;
         String reason;
         String apptID;
-        bool remind;
+        int remind;
         DateTime appTime;
         int patID;
         String status;
@@ -68,7 +68,7 @@ namespace Electronic_MIS
 
         }
 
-        public bool Remind
+        public int Remind
         {
             get
             {
