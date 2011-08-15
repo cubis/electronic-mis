@@ -118,10 +118,10 @@ require_once('bootstrap.php');
 		<table>
 			<tr><td><label><strong></strong></label></td></tr>
 			<tr>
-			  <td><strong>Medication:</strong></td>
-			  <td><strong>Dosage:</strong></td>
-			  <td><strong>Start Date:</strong></td>
-			  <td><strong>End Date:</strong></td>
+			  <td width="150"><strong>Medication:</strong></td>
+			  <td width="150"><strong>Dosage:</strong></td>
+			  <td width="150"><strong>Start Date:</strong></td>
+			  <td width="150"><strong>End Date:</strong></td>
 			</tr>
 		<?php
 			  foreach($medications as &$med) {
@@ -153,8 +153,8 @@ require_once('bootstrap.php');
 		<table>
 			<tr><td><label><strong></strong></label></td></tr>
 			<tr>
-			  <td><strong>Precondition ID:</strong></td>
-			  <td><strong>Description:</strong></td>
+			  <td width="150"><strong>Precondition ID:</strong></td>
+			  <td width="150"><strong>Description:</strong></td>
 			</tr>
 		<?php
 			  foreach($preconditions as &$prec) {
