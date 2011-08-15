@@ -17,6 +17,8 @@
 require_once('configREST.php');     //sql connection information
 require_once('bootstrapREST.php');  //link information
 
+clean(&$_GET);
+
 $output = doService();
 print($output);
 
