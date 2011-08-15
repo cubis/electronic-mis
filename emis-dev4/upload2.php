@@ -59,10 +59,10 @@ require_once('bootstrapREST.php');
  
  $content = file_get_contents($savelocation);
 
-$appid = 293847;
+$aid = $_GET['aid'];
 
 $qry = $db->prepare('INSERT INTO Files (Name, Size, Type, Content, FK_ApptID) VALUES (?, ?, ?, ?, ?)');
-$qryStatus = $qry->execute(array($fname, $filesize, $filetype, $content, $appid));
+$qryStatus = $qry->execute(array($fname, $filesize, $filetype, $content, $aid));
  
 
 ?>
