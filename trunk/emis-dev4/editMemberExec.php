@@ -1,3 +1,4 @@
+header
 <?php
 require_once("auth.php");
 require_once('bootstrap.php');	// Include database connection details
@@ -44,9 +45,7 @@ if( $RESToutput == ''){
 $parser = xml_parser_create();	
 xml_parse_into_struct($parser, $RESToutput, $wsResponse, $wsIndices);
 
-$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];
-
-//print $RESToutput;
+$errNum = $wsResponse[$wsIndices['ERRNUM'][0]]['value'];//print $RESToutput;
 
 
 if($errNum != 0) {
@@ -68,7 +67,7 @@ if($errNum != 0) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="refresh" content="1;url=http://localhost/emis/emis-dev4/memberProfileView.php">
+	<?php echo '<meta http-equiv="refresh" content="1;url='.$currentPath.'/memberProfileView.php">';?>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<link href="css/styles.css" rel="stylesheet" type="text/css" />
 	<title>Success</title>
