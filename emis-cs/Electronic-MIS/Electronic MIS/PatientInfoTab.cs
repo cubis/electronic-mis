@@ -21,6 +21,7 @@ namespace Electronic_MIS
         SessionManager sessionManager;
         List<Patient> patients;
         string server;
+        string doc;
 
         public PatientInfoTab(SessionManager manager, string activeServer)
         {
@@ -32,6 +33,7 @@ namespace Electronic_MIS
 
         private void PatientInfoTab_Load(object sender, EventArgs e)
         {
+            
             StringBuilder data = new StringBuilder();
             data.Append(server);
             data.Append("viewPatientREST.php");
@@ -62,9 +64,6 @@ namespace Electronic_MIS
 
                 XmlTextReader xmlReader = new XmlTextReader(response.GetResponseStream());
 
-                //testing to put input inside textbox1, first name textbox
-                //textBox1.Text = "juan";
-
                 while (xmlReader.Read())
                 {
                     switch (xmlReader.NodeType)
@@ -74,12 +73,13 @@ namespace Electronic_MIS
                             {
                                 MessageBox.Show(xmlReader.ReadElementContentAsString());
                             }
+                            Patient newpat = new Patient();
                             if (xmlReader.Name == "Patient")
                             {
                                 xmlReader.Read();
                                 while(xmlReader.Name != "Patient")
                                 {
-                                    Patient newpat = new Patient();
+                                    //Patient newpat = new Patient();
                                     xmlReader.Read();
                                     switch (xmlReader.Name)
                                     {
@@ -139,17 +139,33 @@ namespace Electronic_MIS
                                             newpat.CoverageEnd = xmlReader.ReadElementContentAsString();
                                             textBox15.Text = newpat.CoverageEnd;
                                             break;
+                                        case "FKDoctorID":
+                                            doc = xmlReader.ReadElementContentAsString(); 
+                                            break;
                                         case "ERROR":
                                             MessageBox.Show(xmlReader.ReadElementContentAsString());
                                             break;
                                     }
-
-                                    //adding a new patient to the patients list
-                                    patients.Add(newpat);
-
-                                    //checking if the patient has docj as their doctor
-                                    //add that patient to the combobox
                                 }
+                                patients.Add(newpat);
+                                int numberdoc = sessionManager.UserID;
+                            }
+                            //adding a patient from doc to the patients list
+                            //have to find a way to figure out which doctor is logged on to be able
+                            //to put their certain patients on the combo
+
+                            //hiding the patientbox if user is logged on as a patient
+                            int sessionid = sessionManager.UserPermissionLevel;
+                            if (sessionid == 1)
+                            {
+                                patientbox.Hide();
+                            }
+
+
+                            if (doc == "1")
+                            {
+                                sessionid = sessionManager.UserID;
+                                patients.Add(newpat); 
                             }
                             break;
                         default:
@@ -160,16 +176,18 @@ namespace Electronic_MIS
             }
             catch (Exception exp)
             {
+                
                 MessageBox.Show(exp.Message, "Yeah...we didn't plan for this", MessageBoxButtons.OK);
                 Application.Exit();
             }
 
-            //patients.Sort();
-
+            int num = 0;
             foreach (Patient pat in patients)
             {
-                patientbox.Items.Add(pat);
+                    patientbox.Items.Add(pat);
+                    Console.WriteLine(num++);
             }
+            
             
         }
 
@@ -177,8 +195,8 @@ namespace Electronic_MIS
         private void loadPatient(Patient patient)
         {
            patientbox.Items.Add(patient);
-
         }
+
 
         //combobox
         private void patientbox_SelectedIndexChanged(object sender, EventArgs e)
@@ -188,10 +206,24 @@ namespace Electronic_MIS
 
         private void refreshLabels(Patient patient)
         {
-
+            // fill out the forms with patient information
+            // when a certain patient is clicked on in the dropbox
+         
+            this.textBox1.Text = (patient.FirstName);
+            this.textBox2.Text = (patient.LastName);
+            this.textBox3.Text = (patient.Sex);
+            this.textBox5.Text = (patient.Birthday);
+            this.textBox6.Text = (patient.SSN);
+            this.textBox7.Text = (patient.Email);
+            this.textBox8.Text = (patient.phone);
+            this.textBox9.Text = (patient.Company);
+            this.textBox10.Text = (patient.PlanType);
+            this.textBox11.Text = (patient.PlanNum);
+            this.textBox12.Text = (patient.CoveragePercent);
+            this.textBox13.Text = (patient.CoPay);
+            this.textBox14.Text = (patient.CoverageStart);
+            this.textBox15.Text = (patient.CoverageEnd);
         }
-
-        
 
         
 
@@ -213,6 +245,7 @@ namespace Electronic_MIS
         String copay;
         String covgstart;
         String covgend;
+        String doctornum;
 
 
         public String FirstName
@@ -383,9 +416,23 @@ namespace Electronic_MIS
             }
         }
 
+        public string Doctor
+        {
+            get
+            {
+                return doctornum;
+            }
+            set
+            {
+                doctornum = value;
+            }
+        }
+
+
+
         public override string ToString()
         {
-            return FirstName + LastName;
+            return FirstName + " " + LastName + "\n";
         }
     }
 
