@@ -84,6 +84,12 @@ function doService() {
 				 Visit.Dosage, Visit.StartDate, Visit.EndDate, Visit.Bill)';
 				$updateSQL .= ' VALUES (:aid, :BP, :Weight, :Reason, :Diagnosis, :Symptoms, 
 				:Medicine, :Dosage, :StartDate, :EndDate, :Bill)';
+				
+				$updateSQL2 = "UPDATE Appointment SET Status='Completed',
+							bp = :BP, weight = :Weight, symptoms = :Symptoms,
+							diagnosis = :Diagnosis, bill = :Bill
+							WHERE PK_AppID = :aid";
+				
 				$paramArray = array(
 					":aid" => $_POST['aid'],
 					":BP" => $_POST['bp'],
@@ -95,8 +101,17 @@ function doService() {
 					":Dosage" => $_POST['dosage'],
 					":StartDate" => $_POST['startDate'],
 					":EndDate" => $_POST['endDate'],
-					":Bill" => $_POST['bill']
+					":Bill" => $_POST['totalBill']
 				);
+				
+				$prep2 = $db->prepare($updateSQL2);
+				$updateSucc = $prep2->execute($paramArray);
+				if (!$updateSucc) {
+					$errorInfoArray = $prep->errorInfo();
+					$errMsgArr[] = $errorInfoArray[2];
+					$errNum++;					
+					return outputXML($errNum, $errMsgArr, $memberInfo);
+				}
 				
 				$prep = $db->prepare($updateSQL);
 				$updateSucc = $prep->execute($paramArray);
@@ -106,6 +121,48 @@ function doService() {
 					$errNum++;					
 					return outputXML($errNum, $errMsgArr, $memberInfo);
 				}
+				//upload file
+				$updateSQL3 = "INSERT INTO Files(Name, Size, Type, Content, FK_ApptID)
+								VALUES(:fname,:fsize,:ftype,:content,:aid)";
+				
+				$paramArray2 = array(
+					":fname" => $_POST['fname'],
+					":fsize" => $_POST['fsize'],
+					":ftype" => $_POST['ftype'],
+					":content" => $_POST['content'],
+					":aid" => $_POST['aid']
+				);
+				
+				$prep3 = $db->prepare($updateSQL3);
+				$updateSucc = $prep->execute($paramArray2);
+				if (!$updateSucc) {
+					$errorInfoArray = $prep->errorInfo();
+					$errMsgArr[] = $errorInfoArray[2];
+					$errNum++;					
+					return outputXML($errNum, $errMsgArr, $memberInfo);
+				}
+				
+				$updateSQL4 = "INSERT INTO Medications(FK_PatientID, Medication, Dosage)
+								VALUES(:pid,:Medicine,:Dosage)";
+				
+				$pidq = "SELECT FK_PatientID FROM Appointment WHERE PK_AppID = '".$_POST['aid']."'";
+				$pid = mysql_query($pidq);
+
+				$paramArray3 = array(
+					":Medicine" => $_POST['medicine'],
+					":Dosage" => $_POST['dosage'],
+					":pid" => $pid
+				);
+				
+				$prep4 = $db->prepare($updateSQL4);
+				$updateSucc = $prep->execute($paramArray3);
+				if (!$updateSucc) {
+					$errorInfoArray = $prep->errorInfo();
+					$errMsgArr[] = $errorInfoArray[2];
+					$errNum++;					
+					return outputXML($errNum, $errMsgArr, $memberInfo);
+				}
+				
 				
 				$qry = "UPDATE Appointment SET Status='Completed' WHERE PK_AppID = :aid";
 	
@@ -125,6 +182,8 @@ function doService() {
 			$errNum++;
 			
 		}
+		
+		//do file stuff
 		
 		$retVal = outputXML($errNum, $errMsgArr, $memberInfo);
 

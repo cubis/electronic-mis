@@ -8,6 +8,24 @@ require_once('bootstrap.php');
 		$errmsg_arr = array();
 		global $currentPath;
 		$url = $currentPath . "visitREST.php";
+		//formating stuff for array;
+		$fname;
+		$fname = $_FILES['uploadfile']['name'];
+		$tmpname = $_FILES['uploadfile']['tmp_name'];
+		$fsize = $_FILES['uploadfile']['size'];
+		$ftype = $_FILES['uploadfile']['type'];
+		//$fname = addslashes($fname);
+		//$apNum = $_GET['ID'];
+		//test the type
+		$fp = fopen($tmpname,'rb');
+		$content = fread($fp,filesize($tmpname));
+		$content = addslashes($content);
+		//$fclose($fp);
+
+		if(!get_magic_quotes_gpc()){
+			$fname = addslashes($fname);
+		}
+		//put stuff in array
 		$fields = array(
 			'u' => urlencode($_SESSION['SESS_USERNAME']),
 			'key' => urlencode($_SESSION['SESS_AUTH_KEY']),
@@ -20,7 +38,11 @@ require_once('bootstrap.php');
 			'dosage' => urlencode($_POST['Dosage']),
 			'startDate' => urlencode($_POST['StartDate']),
 			'endDate' => urlencode($_POST['EndDate']),
-			'totalBill' => urlencode($_POST['Bill'])
+			'totalBill' => urlencode($_POST['Bill']),
+			'fname' => urlencode($fname),
+			'fsize' => urlencode($fsize),
+			'ftype' => urlencode($ftype),
+			'content' => urlencode($content)
 		);
 		
 		if(isset($_POST['aid'])){
