@@ -15,7 +15,7 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
     } else {
         $target = 'all';
     }
-
+	echo "date: ".$_GET['date'];
     $count = 1;
     $outputString = ''; //start empty
     $outputString .= "<?xml version=\"1.0\"?>\n";
