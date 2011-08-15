@@ -137,6 +137,7 @@ function doService() {
 	
 }
 	
+clean(&$_GET);
 	
 	$output = doService();
 	
