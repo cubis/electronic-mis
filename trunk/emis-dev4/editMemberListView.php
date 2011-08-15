@@ -41,10 +41,10 @@ require_once('bootstrap.php');
                 <!-- PAGE CONTENT STARTS HERE -->
         <table>
             <tr>
-              <td style="width: 200px;">First Name</td>
-              <td style="width: 200px;">Last Name</td>
-              <td style="width: 200px;">Username</td>
-              <td style="width: 200px;">Edit</td>
+              <td style="width: 200px;"><strong>First Name</strong></td>
+              <td style="width: 200px;"><strong>Last Name</strong></td>
+              <td style="width: 200px;"><strong>Username</strong></td>
+              <td style="width: 200px;"><strong>Edit</strong></td>
             </tr>
 			
 <?php
@@ -91,7 +91,7 @@ while ($currRow < $numrows)
 		$LastName = $wsResponse[$wsIndices['LASTNAME'][$currRow]]['value'];
 	
 	echo "<tr style=\"border-bottom: 1px solid black;\">\n";
-	echo "<td style=\"padding: 15px 0px 15px 0px;\">",$FirstName,"</td>\n";
+	echo "<td style=\"padding: 15px 0px 0px 0px;\">",$FirstName,"</td>\n";
 	echo "<td>",$LastName,"</td>\n";
 	echo "<td>",$UserName,"</td>\n";
 	echo "<td><a href='" . $currentPath . "editMemberView.php?u=$UserName'>Edit</a></td>\n";
