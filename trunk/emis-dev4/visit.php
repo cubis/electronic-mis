@@ -44,7 +44,7 @@ require_once('bootstrap.php');  //link information
                     </script>
                     <?php
                     $apptid = $_GET['ID'];
-                    echo '<form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID='.$apptid.'">';
+                    echo '<form id="visitForm" name="visitForm" enctype="multipart/form-data" method="post" action="visitExec.php?ID='.$apptid.'">';
                     ?>
                     <!--<form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID=<?php //echo $_GET[$ID] ?>">-->
                         <center><p><b>Fill in the visit information below.</b></p></center>
@@ -134,6 +134,9 @@ require_once('bootstrap.php');  //link information
                                 <td><input name="floc" type="text" class="textfield" id="floc" /></td>
                             </tr>
                             
+							<tr>
+								<th>File To Upload</th>
+								<th><input name="uploadfile" type="file" id="uploadfile" /></th>
                             
 
                             <tr>
