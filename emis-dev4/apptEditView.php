@@ -324,7 +324,7 @@ restrictAccess ("1111");
 					echo '<input type="radio" name="reminder" value="false"';
 				} else {
 					echo ' /> Yes <br />';
-					echo '<input type="radio" name="reminder"  value="false" checked="checked">';
+					echo '<input type="radio" name="reminder"  value="false" checked="checked"';
 				}
 			} else {
 				echo 'checked="checked" /> Yes<br />';
