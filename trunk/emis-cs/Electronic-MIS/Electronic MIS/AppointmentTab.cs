@@ -158,11 +158,11 @@ namespace Electronic_MIS
                                             break;                                                
                                             
                                         case "DocID":
-                                            newAppt.DoctorID = xmlReader.ReadElementContentAsInt();
+                                            newAppt.Doctor.DoctorID = xmlReader.ReadElementContentAsString();
                                             break;
                                         
                                         case "DocName":
-                                            newAppt.Doctor = xmlReader.ReadElementContentAsString();
+                                            newAppt.Doctor.DoctorName = xmlReader.ReadElementContentAsString();
                                             break;
 
                                         case "REASON":
@@ -216,54 +216,7 @@ namespace Electronic_MIS
 
         private void remindMeChkBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (remindMeChkBox.Checked == selectedAppointment.Remind)
-            {
-                return;
-            }
-
-            int x;
-            if(remindMeChkBox.Checked == true){
-                x = 1;
-            }else{
-                x = 0;
-            }
-
-            StringBuilder data = new StringBuilder();
-            data.Append(server);
-            data.Append("editApptREST.php");
-            data.Append("?u=" + WebUtility.HtmlEncode(sessionManager.UserName));
-            data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
-            data.Append("&aid=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentID));
-            data.Append("&status=" + WebUtility.HtmlEncode(selectedAppointment.Status));
-            String reason = selectedAppointment.Reason.Replace(" ", "%20");
-            reason = reason.Replace("?", "%3f");
-            reason = reason.Replace("\n", "");
-            reason = reason.Replace("\t", "");
-            data.Append("&reason=" + WebUtility.HtmlEncode(reason));
-            data.Append("&time=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentTime.TimeOfDay.TotalHours.ToString()));
-            data.Append(WebUtility.HtmlEncode(":" + selectedAppointment.AppointmentTime.TimeOfDay.Minutes.ToString()));
-            if (selectedAppointment.AppointmentTime.TimeOfDay.Minutes == 0)
-                data.Append("0");
-            data.Append("&date=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentTime.ToShortDateString()));
-            data.Append("&doctor=" + WebUtility.HtmlEncode(selectedAppointment.DoctorID.ToString()));
-            data.Append("&patient=" + WebUtility.HtmlEncode(selectedAppointment.PatientID.ToString()));
-            data.Append("&reminder=" + WebUtility.HtmlEncode(x.ToString()));            
-
-            string url = data.ToString();
-            Debug.WriteLine(url);
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "POST";
-
-            request.Timeout = 50000;
-
-            Cursor.Current = Cursors.WaitCursor;
-
-            request.GetResponse();
-
-            Cursor.Current = Cursors.Arrow;
-
-            refreshTab();
+            updateAppointment();
         }
 
         private void appointmentListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -353,8 +306,10 @@ namespace Electronic_MIS
             if (DialogResult.Yes == MessageBox.Show("Are you sure you want to cancel this appointment?",
                 "Confirm Cancel", MessageBoxButtons.YesNo))
             {
-                removeAppointment();
+                selectedAppointment.Status = "Canceled";
             }
+
+            updateAppointment();
         }
 
         private void removeAppointment()
@@ -403,15 +358,17 @@ namespace Electronic_MIS
         private void btnReschedule_Click(object sender, EventArgs e)
         {
             DateTime newApptTime;
-            String doctor;
+            Doctor doctor;
             Reschedule resched = new Reschedule();
             resched.ShowDialog();
 
             newApptTime = resched.newTime;
             doctor = resched.doctor;
 
+            selectedAppointment.AppointmentTime = newApptTime;
+            selectedAppointment.Doctor = resched.doctor;
 
-            //TODO:  Add in REST call to change appt. time
+            updateAppointment();
         }
 
         protected virtual void OnPrintEvent(PrintEventArgs e)
@@ -429,7 +386,7 @@ namespace Electronic_MIS
 
         private void refreshTab()
         {
-            appointments = new List<Appointment>();
+            appointments.Clear();
             appointmentListBox.Items.Clear();
             calAppointments.RemoveAllBoldedDates();
             cmbAppointments.Items.Clear();
@@ -455,6 +412,77 @@ namespace Electronic_MIS
             calAppointments.UpdateBoldedDates();
 
             Cursor.Current = Cursors.Arrow;
+        }
+
+        private void updateAppointment()
+        {
+            if (remindMeChkBox.Checked == selectedAppointment.Remind)
+            {
+                return;
+            }
+
+            int x;
+            if (remindMeChkBox.Checked == true)
+            {
+                x = 1;
+            }
+            else
+            {
+                x = 0;
+            }
+
+            StringBuilder url = new StringBuilder();
+            url.Append(server);
+            url.Append("editApptREST.php?");
+
+            StringBuilder data = new StringBuilder();
+            data.Append("u=" + WebUtility.HtmlEncode(sessionManager.UserName));
+            data.Append("&key=" + WebUtility.HtmlEncode(sessionManager.Key));
+            data.Append("&aid=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentID));
+            data.Append("&status=" + WebUtility.HtmlEncode(selectedAppointment.Status));
+            String reason = selectedAppointment.Reason.Replace(" ", "%20");
+            reason = reason.Replace("?", "%3f");
+            reason = reason.Replace("\n", "");
+            reason = reason.Replace("\t", "");
+            data.Append("&reason=" + WebUtility.HtmlEncode(reason));
+            data.Append("&time=" + WebUtility.HtmlEncode(selectedAppointment.AppointmentTime.TimeOfDay.TotalHours.ToString()));
+            data.Append(WebUtility.HtmlEncode(":" + selectedAppointment.AppointmentTime.TimeOfDay.Minutes.ToString()));
+            if (selectedAppointment.AppointmentTime.TimeOfDay.Minutes == 0)
+                data.Append("0");
+
+            string dateFormat = "yyyy-MM-dd";
+            string formattedDate = selectedAppointment.AppointmentTime.Date.ToString(dateFormat);
+            data.Append("&date=" + WebUtility.HtmlEncode(formattedDate));
+            data.Append("&doctor=" + WebUtility.HtmlEncode(selectedAppointment.DoctorID.ToString()));
+            data.Append("&patient=" + WebUtility.HtmlEncode(selectedAppointment.PatientID.ToString()));
+            data.Append("&reminder=" + WebUtility.HtmlEncode(x.ToString()));
+
+            Debug.WriteLine(url);
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url.ToString());
+            request.ContentLength = Encoding.ASCII.GetByteCount(data.ToString());
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            request.Timeout = 50000;
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(Encoding.ASCII.GetBytes(data.ToString()), 0, Encoding.ASCII.GetByteCount(data.ToString()));
+            requestStream.Close();
+
+            WebResponse response = request.GetResponse();
+
+            Debug.WriteLine("Response:");
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            Debug.WriteLine(reader.ReadToEnd());
+
+            response.Close();
+
+            Cursor.Current = Cursors.Arrow;
+
+            refreshTab();
         }
 
     }
