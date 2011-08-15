@@ -77,11 +77,11 @@ namespace Electronic_MIS
                                     {                  
 
                                         case "DOCID":
-                                            doc.DoctorID = xmlReader.ReadContentAsString();
+                                            doc.DoctorID = xmlReader.ReadElementContentAsString();
                                             break;
 
                                         case "LastName":
-                                            doc.DoctorName = xmlReader.ReadContentAsString();
+                                            doc.DoctorName = xmlReader.ReadElementContentAsString();
                                             break;
 
                                         default:
@@ -146,8 +146,17 @@ namespace Electronic_MIS
             }
 
             newTime = dtDate.Value;
-            newTime.Add(DateTime.Parse(cmbTimes.SelectedItem.ToString()).TimeOfDay);
+
+            //string time = cmbTimes.SelectedItem.ToString().Replace(" AM", "");
+            //time = time.Replace(" PM", "");
+            DateTime timeObj;
+            timeObj = DateTime.Parse(cmbTimes.SelectedItem.ToString());
+
+            newTime = newTime.AddHours(timeObj.TimeOfDay.Hours);
+            newTime = newTime.AddMinutes(timeObj.TimeOfDay.Minutes);
+
             doctor = (Doctor)cmbDocs.SelectedItem;
+            DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
         }
 
@@ -155,6 +164,7 @@ namespace Electronic_MIS
         {
             newTime = new DateTime();
             doctor = null;
+            DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
         }
     }

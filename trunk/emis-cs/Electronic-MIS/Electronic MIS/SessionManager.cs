@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Electronic_MIS
 {
+
     public class SessionManager
     {
         string userName;
@@ -12,6 +13,8 @@ namespace Electronic_MIS
         string key;
         int permissionLevel;
         bool loggedIn;
+        string fname;
+        string lname;
 
         /// <summary>
         /// Create a new SessionManager object
@@ -110,6 +113,31 @@ namespace Electronic_MIS
                 userID = value;
             }
 
+        }
+
+        public String FirstName
+        {
+            get
+            {
+                return fname;
+            }
+            set
+            {
+                fname = value;
+            }
+
+        }
+
+        public String LastName
+        {
+            get
+            {
+                return lname;
+            }
+            set
+            {
+                lname = value;
+            }
         }
     }
 }
