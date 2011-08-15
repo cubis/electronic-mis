@@ -22,7 +22,7 @@ function outputXML($errNum, $errMsgArr, $apptInfoPrep) {
     $outputString .= "<content><errNum>" . $errNum . "</errNum>\n";
     if ($errNum == 0) {
         $outputString .= "<COPAYCOUNT>" . $apptInfoPrep->rowCount() . "</COPAYCOUNT>\n";
-        $outputString .= "<DATE>" .$_GET['date'] . "</DATE>";
+        $outputString .= "<DATE>" .$_GET['date'] . "</DATE>\n";
         while ($apptInfo = $apptInfoPrep->fetch(PDO::FETCH_ASSOC)) {
             $outputString .= "<CopayInfo>";
             $outputString .= "<ID>" . $count . "</ID>\n";
