@@ -58,8 +58,6 @@
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.CoverageStart = new System.Windows.Forms.Label();
             this.CoverageEnd = new System.Windows.Forms.Label();
-            this.PreExCond = new System.Windows.Forms.Label();
-            this.PreExCondBox = new System.Windows.Forms.ListBox();
             this.lblCompanyName = new System.Windows.Forms.Label();
             this.patientbox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -198,35 +196,35 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(451, 52);
+            this.textBox9.Location = new System.Drawing.Point(458, 108);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(100, 20);
             this.textBox9.TabIndex = 18;
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(451, 78);
+            this.textBox10.Location = new System.Drawing.Point(458, 134);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(100, 20);
             this.textBox10.TabIndex = 19;
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(451, 104);
+            this.textBox11.Location = new System.Drawing.Point(458, 160);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(100, 20);
             this.textBox11.TabIndex = 20;
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(451, 130);
+            this.textBox12.Location = new System.Drawing.Point(458, 186);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(100, 20);
             this.textBox12.TabIndex = 21;
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(451, 156);
+            this.textBox13.Location = new System.Drawing.Point(458, 212);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(100, 20);
             this.textBox13.TabIndex = 22;
@@ -235,7 +233,7 @@
             // 
             this.Insuranceinfo.AutoSize = true;
             this.Insuranceinfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Insuranceinfo.Location = new System.Drawing.Point(345, 20);
+            this.Insuranceinfo.Location = new System.Drawing.Point(355, 76);
             this.Insuranceinfo.Name = "Insuranceinfo";
             this.Insuranceinfo.Size = new System.Drawing.Size(186, 20);
             this.Insuranceinfo.TabIndex = 23;
@@ -244,7 +242,7 @@
             // Plantype
             // 
             this.Plantype.AutoSize = true;
-            this.Plantype.Location = new System.Drawing.Point(387, 85);
+            this.Plantype.Location = new System.Drawing.Point(394, 141);
             this.Plantype.Name = "Plantype";
             this.Plantype.Size = new System.Drawing.Size(58, 13);
             this.Plantype.TabIndex = 25;
@@ -253,7 +251,7 @@
             // PlanNum
             // 
             this.PlanNum.AutoSize = true;
-            this.PlanNum.Location = new System.Drawing.Point(374, 111);
+            this.PlanNum.Location = new System.Drawing.Point(381, 167);
             this.PlanNum.Name = "PlanNum";
             this.PlanNum.Size = new System.Drawing.Size(71, 13);
             this.PlanNum.TabIndex = 26;
@@ -262,7 +260,7 @@
             // CoveragePerent
             // 
             this.CoveragePerent.AutoSize = true;
-            this.CoveragePerent.Location = new System.Drawing.Point(349, 137);
+            this.CoveragePerent.Location = new System.Drawing.Point(356, 193);
             this.CoveragePerent.Name = "CoveragePerent";
             this.CoveragePerent.Size = new System.Drawing.Size(96, 13);
             this.CoveragePerent.TabIndex = 27;
@@ -271,7 +269,7 @@
             // CoPay
             // 
             this.CoPay.AutoSize = true;
-            this.CoPay.Location = new System.Drawing.Point(401, 163);
+            this.CoPay.Location = new System.Drawing.Point(408, 219);
             this.CoPay.Name = "CoPay";
             this.CoPay.Size = new System.Drawing.Size(44, 13);
             this.CoPay.TabIndex = 28;
@@ -279,14 +277,14 @@
             // 
             // textBox14
             // 
-            this.textBox14.Location = new System.Drawing.Point(451, 183);
+            this.textBox14.Location = new System.Drawing.Point(458, 239);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(100, 20);
             this.textBox14.TabIndex = 29;
             // 
             // textBox15
             // 
-            this.textBox15.Location = new System.Drawing.Point(451, 210);
+            this.textBox15.Location = new System.Drawing.Point(458, 266);
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(100, 20);
             this.textBox15.TabIndex = 30;
@@ -294,7 +292,7 @@
             // CoverageStart
             // 
             this.CoverageStart.AutoSize = true;
-            this.CoverageStart.Location = new System.Drawing.Point(364, 186);
+            this.CoverageStart.Location = new System.Drawing.Point(371, 242);
             this.CoverageStart.Name = "CoverageStart";
             this.CoverageStart.Size = new System.Drawing.Size(81, 13);
             this.CoverageStart.TabIndex = 31;
@@ -303,34 +301,16 @@
             // CoverageEnd
             // 
             this.CoverageEnd.AutoSize = true;
-            this.CoverageEnd.Location = new System.Drawing.Point(367, 213);
+            this.CoverageEnd.Location = new System.Drawing.Point(374, 269);
             this.CoverageEnd.Name = "CoverageEnd";
             this.CoverageEnd.Size = new System.Drawing.Size(78, 13);
             this.CoverageEnd.TabIndex = 32;
             this.CoverageEnd.Text = "Coverage End:";
             // 
-            // PreExCond
-            // 
-            this.PreExCond.AutoSize = true;
-            this.PreExCond.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PreExCond.Location = new System.Drawing.Point(349, 251);
-            this.PreExCond.Name = "PreExCond";
-            this.PreExCond.Size = new System.Drawing.Size(194, 20);
-            this.PreExCond.TabIndex = 34;
-            this.PreExCond.Text = "Pre Existing Conditions";
-            // 
-            // PreExCondBox
-            // 
-            this.PreExCondBox.FormattingEnabled = true;
-            this.PreExCondBox.Location = new System.Drawing.Point(352, 287);
-            this.PreExCondBox.Name = "PreExCondBox";
-            this.PreExCondBox.Size = new System.Drawing.Size(190, 134);
-            this.PreExCondBox.TabIndex = 35;
-            // 
             // lblCompanyName
             // 
             this.lblCompanyName.AutoSize = true;
-            this.lblCompanyName.Location = new System.Drawing.Point(360, 59);
+            this.lblCompanyName.Location = new System.Drawing.Point(367, 115);
             this.lblCompanyName.Name = "lblCompanyName";
             this.lblCompanyName.Size = new System.Drawing.Size(85, 13);
             this.lblCompanyName.TabIndex = 36;
@@ -352,8 +332,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.patientbox);
             this.Controls.Add(this.lblCompanyName);
-            this.Controls.Add(this.PreExCondBox);
-            this.Controls.Add(this.PreExCond);
             this.Controls.Add(this.CoverageEnd);
             this.Controls.Add(this.CoverageStart);
             this.Controls.Add(this.textBox15);
@@ -424,8 +402,6 @@
         private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.Label CoverageStart;
         private System.Windows.Forms.Label CoverageEnd;
-        private System.Windows.Forms.Label PreExCond;
-        private System.Windows.Forms.ListBox PreExCondBox;
         private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.ComboBox patientbox;
 
