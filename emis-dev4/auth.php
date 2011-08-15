@@ -15,6 +15,7 @@ if ( !isset($_SESSION['SESS_MEMBER_ID']) || trim($_SESSION['SESS_MEMBER_ID']) ==
 
 // Usage: #### (Patient Nurse Doctor Admin)
 // ex: 0001 = Only Admin has Access
+// 0 = No Access, 1 = Has Access
 function restrictAccess ($access) {	
   session_start();
   $currentAccess = $_SESSION['SESS_TYPE'];
