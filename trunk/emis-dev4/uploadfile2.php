@@ -7,7 +7,8 @@
     </head>
     
     <body>Please choose file to upload:
-        <form enctype="multipart/form-data" action="upload2.php" method="post">
+        <?php $id = $_GET['aid']; ?>
+        <form enctype="multipart/form-data" action="upload2.php?aid=<?php echo $id; ?>" method="post">
         <!--Please choose a file:--> <input name="uploaded" type="file" /><br />
         <input type="submit" value="upload" />
         </form>
