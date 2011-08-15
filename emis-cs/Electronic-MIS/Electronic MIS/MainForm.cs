@@ -9,6 +9,10 @@ using iTextSharp;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using System.Net;
+using System.Security;
+using System.Diagnostics;
+using System.Xml;
 
 namespace Electronic_MIS
 {
@@ -130,8 +134,7 @@ namespace Electronic_MIS
 
         void appTab_PrintEvent(object sender, PrintEventArgs e)
         {
-
-           createPDF(e.Appointment);
+           createPDF(e.Appointment, e.Copay);
         }
 
         /*                  Layout for the table
@@ -150,7 +153,7 @@ namespace Electronic_MIS
                         * Your type of payment plan:  Monthly
                         * 
                         * */
-        private void createPDF(Appointment appt)
+        private void createPDF(Appointment appt, Decimal copay)
         {
             string path = "./Appt_" + appt.AppointmentID + ".pdf";
             if (File.Exists(path))
@@ -168,15 +171,22 @@ namespace Electronic_MIS
             PdfPTable table = new PdfPTable(1);
             table.HorizontalAlignment = Element.ALIGN_CENTER;
 
+            //Add the logo
+            Image logo = Image.GetInstance(Electronic_MIS.Properties.Resources.horizontal_logo, System.Drawing.Imaging.ImageFormat.Bmp);
+            logo.Alignment = Image.ALIGN_CENTER;
+            document.Add(logo);
+
+            /*
             //Create the Title
             Font titleFont = new Font(iTextSharp.text.Font.FontFamily.COURIER, 18.0f);
             PdfPCell titleCell = new PdfPCell(new Phrase("ELECTRONIC MEDICAL INFORMATION SYSTEMS", titleFont));
             titleCell.HorizontalAlignment = Element.ALIGN_CENTER;
             titleCell.BorderWidth = 0;
             titleCell.BorderWidthBottom = 2f;
+             */ 
 
             //Create the Subtitle
-            PdfPCell subTitleCell = new PdfPCell(new Phrase("Your Recipt For " + appt.AppointmentTime.ToLongDateString()));
+            PdfPCell subTitleCell = new PdfPCell(new Phrase("Your Recipt For " + appt.AppointmentTime.ToLongDateString() + " at " + appt.AppointmentTime.ToShortTimeString()));
             subTitleCell.HorizontalAlignment = Element.ALIGN_CENTER;
             subTitleCell.BorderWidth = 0;
 
@@ -185,31 +195,60 @@ namespace Electronic_MIS
             spacer.FixedHeight = 100.0f;
             spacer.BorderWidth = 0;
 
+            //Create a table for Appointment Summary
+            PdfPTable appointmentSummaryTable = new PdfPTable(2);
+            PdfPCell summaryLabelCell = new PdfPCell();
+            summaryLabelCell.AddElement(new Phrase("Blood Pressure :"));
+            summaryLabelCell.AddElement(new Phrase("Weight :"));
+            summaryLabelCell.AddElement(new Phrase("Symptoms :"));
+            summaryLabelCell.AddElement(new Phrase("Diagnosis :"));
+            summaryLabelCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            summaryLabelCell.Border = 0;
+            PdfPCell summaryDataCell = new PdfPCell();
+            summaryDataCell.AddElement(new Phrase(appt.BloodPressure));
+            summaryDataCell.AddElement(new Phrase(appt.Weight));
+            summaryDataCell.AddElement(new Phrase(appt.Symptoms));
+            summaryDataCell.AddElement(new Phrase(appt.Diagnosis));
+            summaryDataCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            summaryDataCell.Border = 0;
+            appointmentSummaryTable.AddCell(summaryLabelCell);
+            appointmentSummaryTable.AddCell(summaryDataCell);
+
+            decimal bill;
+            if(appt.Bill != "")
+            {
+                bill = decimal.Parse(appt.Bill);
+            }
+            else
+            {
+                bill = 0;
+            }
             //Create a table for summary charges
-            PdfPTable summaryTable = new PdfPTable(2);
+            PdfPTable chargesSummaryTable = new PdfPTable(2);
             PdfPCell summaryLabel = new PdfPCell(new Phrase("Summary of Charges :"));
-            summaryLabel.HorizontalAlignment = Element.ALIGN_RIGHT;
+            summaryLabel.HorizontalAlignment = Element.ALIGN_LEFT;
             summaryLabel.BorderWidth = 0;
             PdfPCell chargesCell = new PdfPCell();
-            chargesCell.AddElement(new Phrase("Basic Service Charge:  $50.00"));
-            chargesCell.AddElement(new Phrase("Medical Supply Charge:  $25.00"));
-            chargesCell.AddElement(new Phrase("Medicinal Charge:  $25.00"));
+            chargesCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            chargesCell.AddElement(new Phrase("Basic Service Charge:  " + String.Format("{0:C}",(bill/2))));
+            chargesCell.AddElement(new Phrase("Medical Supply Charge:  " + String.Format("{0:C}",(bill /4))));
+            chargesCell.AddElement(new Phrase("Medicinal Charge:  " + String.Format("{0:C}",(bill /4))));
             chargesCell.HorizontalAlignment = Element.ALIGN_RIGHT;
             chargesCell.BorderWidth = 0;
-            summaryTable.AddCell(summaryLabel);
-            summaryTable.AddCell(chargesCell);
-
+            chargesSummaryTable.AddCell(summaryLabel);
+            chargesSummaryTable.AddCell(chargesCell);
+            
             
             //Create a subtable for the balance summary
             PdfPTable chargesTable = new PdfPTable(2);
             PdfPCell labelCell = new PdfPCell();
             labelCell.AddElement(new Phrase("Total Charges :\n"));
-            labelCell.AddElement(new Phrase("Total Paid    :"));
+            labelCell.AddElement(new Phrase("Copay Amount  :\n"));
             labelCell.HorizontalAlignment = Element.ALIGN_RIGHT;
             labelCell.BorderWidth = 0;
             PdfPCell amountCell = new PdfPCell();
-            amountCell.AddElement(new Phrase("$100.00"));
-            amountCell.AddElement(new Phrase("$50.00\n"));
+            amountCell.AddElement(new Phrase(String.Format("{0:C}",bill)));
+            amountCell.AddElement(new Phrase(String.Format("{0:C}",copay)));
             amountCell.BorderWidth = 0;
             amountCell.HorizontalAlignment = Element.ALIGN_RIGHT;
             amountCell.BorderWidthBottom = 1f;
@@ -218,7 +257,7 @@ namespace Electronic_MIS
             totalLabel.HorizontalAlignment = Element.ALIGN_RIGHT;
             totalLabel.BorderWidth = 0;
             PdfPCell balance = new PdfPCell();
-            balance.AddElement(new Phrase("$50.00"));
+            balance.AddElement(new Phrase(String.Format("{0:C}",copay)));
             balance.HorizontalAlignment = Element.ALIGN_RIGHT;
             balance.BorderWidth = 0;
             chargesTable.AddCell(labelCell);
@@ -227,11 +266,12 @@ namespace Electronic_MIS
             chargesTable.AddCell(balance);
 
 
-            table.AddCell(titleCell);
+            //table.AddCell(titleCell);
             table.AddCell(subTitleCell);
+            table.AddCell(appointmentSummaryTable);
             table.AddCell(spacer);
-            table.AddCell(summaryTable);
-            table.AddCell(spacer);
+            table.AddCell(chargesSummaryTable);
+            table.AddCell(spacer); 
             table.AddCell(chargesTable);
 
 
@@ -418,5 +458,6 @@ namespace Electronic_MIS
                 }
             }
         }
+
     }
 }

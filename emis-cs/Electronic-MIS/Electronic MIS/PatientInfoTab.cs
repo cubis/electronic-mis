@@ -35,6 +35,7 @@ namespace Electronic_MIS
 
         private void PatientInfoTab_Load(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             
             StringBuilder data = new StringBuilder();
             data.Append(server);
@@ -48,6 +49,9 @@ namespace Electronic_MIS
             string url = data.ToString();
             WebRequest request = WebRequest.Create(url);
             request.Method = "GET";
+
+            Debug.WriteLine(request.ToString());
+
             string docID = getdocid();
 
             try
@@ -208,18 +212,15 @@ namespace Electronic_MIS
 
             }
 
-
-
-
-
-
             int num = 0;
             foreach (Patient pat in patients)
             {
                     patientbox.Items.Add(pat);
                     Console.WriteLine(num++);
-            }         
-            
+            }
+
+
+            Cursor.Current = Cursors.Arrow;
         }
 
 
