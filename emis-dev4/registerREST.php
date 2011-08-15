@@ -262,6 +262,7 @@ else {
 	
 }
 	
+clean(&$_POST);
 	
 	$output = doService($db);
 	
