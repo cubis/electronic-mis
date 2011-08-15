@@ -35,11 +35,14 @@ function logToDB($actionDescription, $userID, $sentName)
 	
 }
 
-function clean($str) {
-    $str = @trim($str);
-    if (get_magic_quotes_gpc ()) {
-        $str = stripslashes($str);
-    }
-    return mysql_real_escape_string($str);
-}
+function clean($myArray) {
+		foreach($myArray as $key=>$val){
+			$myVal = @trim($val);
+			if (get_magic_quotes_gpc ()) {
+				$myVal = stripslashes($myVal);
+			}
+			$myArray[$key] = htmlspecialchars($myVal);
+		}
+	}
+
 ?>
