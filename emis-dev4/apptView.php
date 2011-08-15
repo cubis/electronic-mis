@@ -151,7 +151,7 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    echo "<td><a href='apptEditView.php?aid=$app[0]'>Edit</a></td>";
 			    //doctor
 			    if($_SESSION['SESS_TYPE'] == 400 || $_SESSION['SESS_TYPE'] == 200 || $_SESSION['SESS_TYPE'] == 300){
-			      echo "<td><a href='visit.php?aid=$app[0]'>Visit</a></td>";
+			      echo "<td><a href='visitView.php?aid=$app[0]'>Visit</a></td>";
 			    }
 			    //patient
 			    if($_SESSION['SESS_TYPE'] == 1){
