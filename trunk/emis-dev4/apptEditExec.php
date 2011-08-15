@@ -20,6 +20,7 @@ require_once('bootstrap.php');
 			'patient' => urlencode($_POST['patient'])
 		);
 		
+		//die($_POST['status']);
 		if(isset($_POST['aid'])){
 			$fields['aid'] = urlencode($_POST['aid']);
 		}
