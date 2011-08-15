@@ -1,5 +1,7 @@
 <?php
 	require_once('auth.php');
+	
+restrictAccess ('1111');
 	//session_start()
 ?>
 
