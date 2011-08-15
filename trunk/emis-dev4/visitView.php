@@ -119,7 +119,7 @@ $apptStatus = $wsResponse[$wsIndices['STATUS'][0]]['value'];
 					}
 				</script>
 				
-<form id="visitForm" name="visitForm" method="post" action="visitExec.php">';
+<form id="visitForm" name="visitForm" enctype="multipart/form-data" method="post" action="visitExec.php">';
 <input type="hidden" name="aid" value="<?php echo $aid; ?>" />
 
 <!--<form id="visitForm" name="visitForm" method="post" action="visitExec.php?ID=<?php //echo $_GET[$ID] ?>">-->
@@ -178,7 +178,12 @@ $apptStatus = $wsResponse[$wsIndices['STATUS'][0]]['value'];
 		<th>Total Bill:</th>
 		<td><input name="Bill" type="text" class="textfield" /></td>
 	</tr>
+	<tr>
+		<th>File To Upload</th>
+		<th><input name="uploadfile" type="file" id="uploadfile" /></th>
+	
 
+	</tr>
 	<tr>
 		<td>&nbsp;</td>
 		<td><input type="submit" /> </td>
