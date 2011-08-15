@@ -153,50 +153,45 @@ foreach($appointments as &$app) {
   $pdf->Ln();
 
   // Dosage
-  $pdf->Cell(30,10,'Blood Pressure:',0);
+  $pdf->Cell(30,10,'Dosage:',0);
   $pdf->Cell(60,10,'LOL',0);
   $pdf->Ln();
 
-  // Blood Pressure
-  $pdf->Cell(30,10,'Blood Pressure:',0);
+  // Start Date
+  $pdf->Cell(30,10,'Start Date:',0);
   $pdf->Cell(60,10,'LOL',0);
   $pdf->Ln();
 
-  // Blood Pressure
-  $pdf->Cell(30,10,'Blood Pressure:',0);
+  // End Date
+  $pdf->Cell(30,10,'End Date:',0);
   $pdf->Cell(60,10,'LOL',0);
   $pdf->Ln();
 
-  // Blood Pressure
-  $pdf->Cell(30,10,'Blood Pressure:',0);
+  // Total Bill
+  $pdf->Cell(30,10,'Total Bill:',0);
   $pdf->Cell(60,10,'LOL',0);
   $pdf->Ln();
 
-  // Blood Pressure
-  $pdf->Cell(30,10,'Blood Pressure:',0);
+  // Payment Plan
+  $pdf->Cell(30,10,'Payment Plan:',0);
   $pdf->Cell(60,10,'LOL',0);
   $pdf->Ln();
 
-  // Blood Pressure
-  $pdf->Cell(30,10,'Blood Pressure:',0);
+  // Months
+  $pdf->Cell(30,10,'Months:',0);
   $pdf->Cell(60,10,'LOL',0);
   $pdf->Ln();
 
-  // Blood Pressure
-  $pdf->Cell(30,10,'Blood Pressure:',0);
+  // Referal
+  $pdf->Cell(30,10,'Referal:',0);
   $pdf->Cell(60,10,'LOL',0);
   $pdf->Ln();
 
-  // Blood Pressure
-  $pdf->Cell(30,10,'Blood Pressure:',0);
+  // File Name
+  $pdf->Cell(30,10,'File Name:',0);
   $pdf->Cell(60,10,'LOL',0);
   $pdf->Ln();
 
-  // Blood Pressure
-  $pdf->Cell(30,10,'Blood Pressure:',0);
-  $pdf->Cell(60,10,'LOL',0);
-  $pdf->Ln();
-  
   $pdf->Output();
   
 }
