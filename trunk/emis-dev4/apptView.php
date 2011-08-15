@@ -153,6 +153,10 @@ for($x = 0 ; $x < $numRows; $x++) { // For each appointment, add to $appointment
 			    if($_SESSION['SESS_TYPE'] == 400 || $_SESSION['SESS_TYPE'] == 200 || $_SESSION['SESS_TYPE'] == 300){
 			      echo "<td><a href='visitView.php?aid=$app[0]'>Visit</a></td>";
 			    }
+                //doctor files
+			    if($_SESSION['SESS_TYPE'] == 400 || $_SESSION['SESS_TYPE'] == 200 || $_SESSION['SESS_TYPE'] == 300){
+			      echo "<td><a href='viewFile.php?aid=$app[0]'>File</a></td>";
+			    }
 			    //patient
 			    if($_SESSION['SESS_TYPE'] == 1){
 			      echo "<td><a href='pdfExport.php?aid=$app[0]'>Export</a></td>";
