@@ -25,17 +25,32 @@ require_once('bootstrap.php');  //link information
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Electronic Medical Information System (EMIS) - Visit</title>
-        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="css/logged_in_styles.css" rel="stylesheet" type="text/css" />
     </head>
 
-    <body bgcolor="#aaaaff">
-        <center><h1 style="color: white; margin-top: 50px;">Visit</h1></center>
-        <div style="width: 400px; margin-left: auto; margin-right: auto;">
-            <div class="login_box">
-                <center>
-                    <img src="img/logo.png" alt="Electronic Medical Information System" />
-                </center>
-                <div>
+<body>
+    <div class="container">
+        <div class="header">
+			<div class="logo"><a href="memberProfileView.php"><img src="img/logo.png" /></a></div>
+            <div class="welcome_text">
+                <h1>Welcome,
+                <?php
+                    echo $_SESSION['SESS_FIRST_NAME']; 
+                ?></h1>
+            </div>
+        </div>
+        <div class="contentwrap">
+            <div class="navigation">
+                <div class="nav_content">
+					<?php
+                    	include_once "generateNav.php"; // This will generate a navigation menu according to the user's role.
+					?>
+                </div>
+            </div>
+            <div class="page_display">
+                <div class="page_title">Edit Member Information</div>
+                <div class="page_content">
+                <!-- PAGE CONTENT STARTS HERE -->
                     <script type="text/javascript">
                         function submitform()
                         {
@@ -146,8 +161,13 @@ require_once('bootstrap.php');  //link information
                             </tr>
                         </table>
                     </form>
+<!-- END OF PAGE CONTENT -->
                 </div>
             </div>
         </div>
-    </body>
+        <div class="footer">
+        	<p>Electronic Medical Information System. Copyright &copy; 2011 Team B. The University of Texas at San Antonio.</p>
+        </div>
+	</div>
+</body>
 </html>
