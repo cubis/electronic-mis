@@ -3,6 +3,7 @@ edit
  session_start();
 require_once('auth.php');
 require_once('bootstrap.php');
+restrictAccess (1111);
 
 ?>
 
