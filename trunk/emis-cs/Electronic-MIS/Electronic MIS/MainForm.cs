@@ -155,6 +155,8 @@ namespace Electronic_MIS
                         * */
         private void createPDF(Appointment appt, Decimal copay)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             string path = "./Appt_" + appt.AppointmentID + ".pdf";
             if (File.Exists(path))
             {
@@ -280,6 +282,8 @@ namespace Electronic_MIS
             document.Close();
 
             System.Diagnostics.Process.Start(Path.GetDirectoryName(Application.ExecutablePath) + path);
+
+            Cursor.Current = Cursors.Arrow;
         }
 
         private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
