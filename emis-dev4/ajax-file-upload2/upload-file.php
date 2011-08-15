@@ -21,8 +21,8 @@ $ftype = $_FILES['uploadfile']['type'];
 //$apNum = $_GET['ID'];
 //test the type
 $fp = fopen($fname,'rb');
-$content = fread($fp,filesize($fname));
-$content = addslashes($content);
+//$content = fread($fp,filesize($fname));
+//$content = addslashes($content);
 
 $name = $fname;
 $size = $fsize;
@@ -30,9 +30,20 @@ $type = $ftype;
 //$content = "011010";
 //$appid = 106;
 
+$content = file_get_contents($fname);
+
 $qry = $db->prepare('INSERT INTO Files (Name, Size, Type, Content, FK_ApptID) VALUES (?, ?, ?, ?, ?)');
 $qryStatus = $qry->execute(array($name, $size, $type, $content, $appid));
 
+?>
+
+<script language=javascript>
+var jsvar;
+
+jsvar = <?php echo $content;?>
+</script> 
+
+<?php 
 if(!$qryStatus) echo "error";
 else echo "success";
 

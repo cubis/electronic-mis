@@ -1,4 +1,7 @@
 <?php
+
+//this is under upload1
+
 //$uploaddir = './uploads/'; 
 //$file = $uploaddir . basename($_FILES['uploadfile']['name']); 
 $fname = $_FILES['uploadfile']['name'];
