@@ -1,6 +1,6 @@
 <?php
-//$uploaddir = './uploads/'; 
-//$file = $uploaddir . basename($_FILES['uploadfile']['name']); 
+$uploaddir = './uploads/'; 
+$file = $uploaddir . basename($_FILES['uploadfile']['name']); 
 $fname = $_FILES['uploadfile']['name'];
 $tmpname = $_FILES['uploadfile']['tmp_name'];
 $fsize = $_FILES['uploadfile']['size'];
