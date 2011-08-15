@@ -44,15 +44,14 @@ namespace Electronic_MIS
 
             //Create the request
 
-
             string url = data.ToString();
             WebRequest request = WebRequest.Create(url);
             request.Method = "GET";
+            string docID = getdocid();
 
             try
             {
                 WebResponse response = request.GetResponse();
-
 
                 /*
                 StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -154,13 +153,11 @@ namespace Electronic_MIS
                                     }
                                 }
 
-                                if (doc == getdocid())
+                                if (doc == docID)
                                 {
                                     patients.Add(newpat);
                                 }
 
-                                //patients.Add(newpat);
-                                //int numberdoc = sessionManager.UserID;
                             }
                             //adding a patient from doc to the patients list
                             //have to find a way to figure out which doctor is logged on to be able
@@ -173,19 +170,11 @@ namespace Electronic_MIS
                                 patientbox.Hide();
                             }
 
-                            
-
-                            /*if (doc == "1")
-                            {
-                                sessionid = sessionManager.UserID;
-                                patients.Add(newpat); 
-                            }*/
                             break;
                         default:
                             break;
                     }
                 }
-
             }
             catch (Exception exp)
             {
@@ -199,8 +188,7 @@ namespace Electronic_MIS
             {
                     patientbox.Items.Add(pat);
                     Console.WriteLine(num++);
-            }
-            
+            }         
             
         }
 
@@ -210,14 +198,11 @@ namespace Electronic_MIS
            patientbox.Items.Add(patient);
         }
 
-
         //combobox
         private void patientbox_SelectedIndexChanged(object sender, EventArgs e)
         {
             refreshLabels((Patient)patientbox.SelectedItem);
         }
-
-
 
         private string getdocid()
         {
@@ -261,11 +246,11 @@ namespace Electronic_MIS
                                     {                  
 
                                         case "DOCID":
-                                            doc.DoctorID = xmlReader.ReadContentAsString();
+                                            doc.DoctorID = xmlReader.ReadElementContentAsString();
                                             break;
 
                                         case "LastName":
-                                            doc.DoctorName = xmlReader.ReadContentAsString();
+                                            doc.DoctorName = xmlReader.ReadElementContentAsString();
                                             break;
 
                                         default:
@@ -328,215 +313,5 @@ namespace Electronic_MIS
             this.textBox15.Text = (patient.CoverageEnd);
         }
 
-        
-
-    }
-
-    class Patient
-    {
-        String firstn;
-        String lastn;
-        String sex;
-        String bday;
-        String ssn;
-        String email;
-        String phonenum;
-        String compname;
-        String planType;
-        String planNum;
-        String covgPerc;
-        String copay;
-        String covgstart;
-        String covgend;
-        String doctornum;
-
-
-        public String FirstName
-        {
-            get
-            {
-                return firstn;
-            }
-            set
-            {
-                firstn = value;
-            }
-        }
-
-        public String LastName
-        {
-            get
-            {
-                return lastn;
-            }
-            set
-            {
-                lastn = value;
-            }
-        }
-
-        public String Sex
-        {
-            get
-            {
-                return sex;
-            }
-            set
-            {
-                sex = value;
-            }
-        }
-
-        public String Birthday
-        {
-            get
-            {
-                return bday;
-            }
-            set
-            {
-                bday = value;
-            }
-        }
-
-        public String SSN
-        {
-            get
-            {
-                return ssn;
-            }
-            set
-            {
-                ssn = value;
-            }
-        }
-
-        public String Email
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                email = value;
-            }
-        }
-
-        public String phone
-        {
-            get
-            {
-                return phonenum;
-            }
-            set
-            {
-                phonenum = value;
-            }
-        }
-
-        public String Company
-        {
-            get
-            {
-                return compname;
-            }
-            set
-            {
-                compname = value;
-            }
-        }
-
-        public String PlanType
-        {
-            get
-            {
-                return planType;
-            }
-            set
-            {
-                planType = value;
-            }
-        }
-
-        public String PlanNum
-        {
-            get
-            {
-                return planNum;
-            }
-            set
-            {
-                planNum = value;
-            }
-        }
-
-        public String CoveragePercent
-        {
-            get
-            {
-                return covgPerc;
-            }
-            set
-            {
-                covgPerc = value;
-            }
-        }
-
-        public String CoPay
-        {
-            get
-            {
-                return copay;
-            }
-            set
-            {
-                copay = value;
-            }
-        }
-
-        public String CoverageStart
-        {
-            get
-            {
-                return covgstart;
-            }
-            set
-            {
-                covgstart = value;
-            }
-        }
-
-        public String CoverageEnd
-        {
-            get
-            {
-                return covgend;
-            }
-            set
-            {
-                covgend = value;
-            }
-        }
-
-        public string Doctor
-        {
-            get
-            {
-                return doctornum;
-            }
-            set
-            {
-                doctornum = value;
-            }
-        }
-
-
-
-        public override string ToString()
-        {
-            return FirstName + " " + LastName + "\n";
-        }
-    }
-
+    } 
 }
