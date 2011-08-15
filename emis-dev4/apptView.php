@@ -3,7 +3,7 @@
 <?php
 require_once('auth.php');
 require_once('bootstrap.php');
-
+restrictAccess ('1111');
 $userName = $_SESSION['SESS_USERNAME'];
 
 global $currentPath;
