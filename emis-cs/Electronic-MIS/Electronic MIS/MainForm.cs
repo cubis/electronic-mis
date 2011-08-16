@@ -302,8 +302,16 @@ namespace Electronic_MIS
         {
             sessionManager = e.Session;
             activeServer = e.Server;
+
+            if (sessionManager.Key == "MEMBER PROFILE LOCKED")
+            {
+                MessageBox.Show("Your account has been locked.\nPlease contact an administrator.");
+                return;
+            }
+
             if(sessionManager.IsLoggedIn)
                 tabViewer.TabPages.RemoveByKey("Login");
+            this.Text = "Welcome to EMIS " + sessionManager.FirstName;
             updateNavTree();
         }
 
@@ -321,6 +329,7 @@ namespace Electronic_MIS
                 navigationTree.Nodes.Clear();
                 navigationTree.Nodes.Add("WelcomeNode", "Welcome");
                 navigationTree.Nodes.Add("LoginNode", "Login");
+                this.Text = "Welcome to EMIS";
             }
 
 
