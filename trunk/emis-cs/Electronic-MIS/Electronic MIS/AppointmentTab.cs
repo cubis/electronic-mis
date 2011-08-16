@@ -312,7 +312,7 @@ namespace Electronic_MIS
                 remindMeChkBox.CheckState = CheckState.Checked;
             }
 
-            if (appt.AppointmentTime.CompareTo(DateTime.Today) > 0)
+            if (appt.Status != "Completed")
             {
                 CancelButton.Visible = true;
                 btnReschedule.Visible = true;
@@ -575,7 +575,7 @@ namespace Electronic_MIS
             }
             catch (Exception)
             {
-                MessageBox.Show("General Error.  Try again later.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Error retrieving copay information.\n  Reciept may not show correct information.", "Error", MessageBoxButtons.OK);
             }
 
             return coPay;

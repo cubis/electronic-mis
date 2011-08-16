@@ -12,3 +12,6 @@ C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic MIS.exe
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic MIS.pdb
 C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\bin\Release\Electronic MIS.exe.config
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\bin\Release\itextsharp.dll
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\bin\Release\itextsharp.xtra.dll
+C:\Users\David Gorena\Documents\School\CS 4953 - Advanced Software\Team B\Source\trunk\emis-cs\Electronic-MIS\Electronic MIS\obj\x86\Release\Electronic_MIS.Reschedule.resources
