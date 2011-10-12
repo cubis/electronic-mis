@@ -158,3 +158,23 @@ body {
 	margin-bottom: 10px;
 	background: #FFFFF8;
 }
+
+.tiles {
+	margin: 0px;
+	padding: 0px !important;
+	border: 0px;
+	background: transparent url(../img/button.png) no-repeat scroll top right;
+	color: white;
+	display: block;
+	float: left;
+	height: 30px;
+	margin-right: 0px;
+	margin-top: 10px;
+	padding-right: 12px !important;
+	text-decoration: none;
+	overflow: hidden;
+	font-size: 12px;
+	outline: none !important;
+	cursor: pointer;
+	font-weight: bold;
+}
