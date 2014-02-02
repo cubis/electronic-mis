@@ -41,14 +41,14 @@ $numrows = mysql_num_rows($result);
 while ($row = mysql_fetch_assoc($result))
 {
 	echo "<tr>\n";
-	echo "<td>",$row['FirstName'],"</td>\n";
-	echo "<td>",$row['LastName'],"</td>\n";
-	echo "<td>",$row['Sex'],"</td>\n";
-	echo "<td>",$row['UserName'],"</td>\n";
-	echo "<td>",$row['Email'],"</td>\n";
-	echo "<td>",$row['Birthday'],"</td>\n";
-	echo "<td>",$row['PhoneNumber'],"</td>\n";
-	echo "<td>",$row['SSN'],"</td>\n";
+  echo "<td>".$row['FirstName']."</td>\n";
+	echo "<td>".$row['LastName']."</td>\n";
+	echo "<td>".$row['Sex']."</td>\n";
+	echo "<td>".$row['UserName']."</td>\n";
+	echo "<td>".$row['Email']."</td>\n";
+	echo "<td>".$row['Birthday']."</td>\n";
+	echo "<td>".$row['PhoneNumber'."</td>\n";
+	echo "<td>".$row['SSN']."</td>\n";
 	echo "<td><a href='#'>Edit</a></td>\n";
 	echo "</tr>\n";
 }
