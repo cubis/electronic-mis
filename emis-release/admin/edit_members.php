@@ -47,7 +47,7 @@ while ($row = mysql_fetch_assoc($result))
 	echo "<td>".$row['UserName']."</td>\n";
 	echo "<td>".$row['Email']."</td>\n";
 	echo "<td>".$row['Birthday']."</td>\n";
-	echo "<td>".$row['PhoneNumber'."</td>\n";
+	echo "<td>".$row['PhoneNumber']."</td>\n";
 	echo "<td>".$row['SSN']."</td>\n";
 	echo "<td><a href='#'>Edit</a></td>\n";
 	echo "</tr>\n";
